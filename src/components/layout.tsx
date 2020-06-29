@@ -4,6 +4,11 @@ import { Link } from "gatsby"
 import { rhythm, scale } from "../utils/typography"
 import { jsx } from "@emotion/core"
 
+import Amplify, { Auth } from "aws-amplify"
+import awsConfig from "../aws-exports"
+Amplify.configure(awsConfig)
+
+
 const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
   let header
