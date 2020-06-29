@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 
 import { rhythm, scale } from "../utils/typography"
+import { jsx } from '@emotion/core'
 
 const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
@@ -10,14 +11,14 @@ const Layout = ({ location, title, children }) => {
   if (location.pathname === rootPath) {
     header = (
       <h1
-        style={{
+        css={{
           ...scale(1.5),
           marginBottom: rhythm(1.5),
           marginTop: 0,
         }}
       >
         <Link
-          style={{
+          css={{
             boxShadow: `none`,
             color: `inherit`,
           }}
@@ -30,13 +31,13 @@ const Layout = ({ location, title, children }) => {
   } else {
     header = (
       <h3
-        style={{
+        css={{
           fontFamily: `Montserrat, sans-serif`,
           marginTop: 0,
         }}
       >
         <Link
-          style={{
+          css={{
             boxShadow: `none`,
             color: `inherit`,
           }}
@@ -49,7 +50,7 @@ const Layout = ({ location, title, children }) => {
   }
   return (
     <div
-      style={{
+      css={{
         marginLeft: `auto`,
         marginRight: `auto`,
         maxWidth: rhythm(24),

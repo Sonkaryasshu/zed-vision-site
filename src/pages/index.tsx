@@ -1,4 +1,5 @@
 import React from "react"
+import { jsx } from '@emotion/core'
 import { Link, graphql } from "gatsby"
 
 import Bio from "../components/bio"
@@ -20,11 +21,11 @@ const BlogIndex = ({ data, location }) => {
           <article key={node.fields.slug}>
             <header>
               <h3
-                style={{
+                css={{
                   marginBottom: rhythm(1 / 4),
                 }}
               >
-                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
+                <Link css={{ boxShadow: `none` }} to={node.fields.slug}>
                   {title}
                 </Link>
               </h3>

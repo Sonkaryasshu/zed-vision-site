@@ -1,5 +1,6 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
+import { jsx } from '@emotion/core'
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
@@ -20,7 +21,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
       <article>
         <header>
           <h1
-            style={{
+            css={{
               marginTop: rhythm(1),
               marginBottom: 0,
             }}
@@ -28,7 +29,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
             {post.frontmatter.title}
           </h1>
           <p
-            style={{
+            css={{
               ...scale(-1 / 5),
               display: `block`,
               marginBottom: rhythm(1),
@@ -39,7 +40,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
         </header>
         <section dangerouslySetInnerHTML={{ __html: post.html }} />
         <hr
-          style={{
+          css={{
             marginBottom: rhythm(1),
           }}
         />
@@ -50,7 +51,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
 
       <nav>
         <ul
-          style={{
+          css={{
             display: `flex`,
             flexWrap: `wrap`,
             justifyContent: `space-between`,
