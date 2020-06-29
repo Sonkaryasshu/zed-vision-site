@@ -51,7 +51,7 @@
     "@aws-amplify/api-graphql" "^1.1.0"
     "@aws-amplify/api-rest" "^1.1.0"
 
-"@aws-amplify/auth@^3.2.14":
+"@aws-amplify/auth@3.2.14", "@aws-amplify/auth@^3.2.14":
   version "3.2.14"
   resolved "https://registry.yarnpkg.com/@aws-amplify/auth/-/auth-3.2.14.tgz#f78680b8f90da766f7f0da677c4934b26ac470a7"
   integrity sha512-Lr+zZmpG8LgM3GtsahA9cOB1y0pa+vbTvzCl7vVAHjzf1n0SGI/xWtlQZK83CRDAPckgJjQSdPhWSHAMBW/EQw==
@@ -68,7 +68,7 @@
   dependencies:
     "@aws-amplify/core" "^3.4.0"
 
-"@aws-amplify/core@^3.4.0":
+"@aws-amplify/core@3.4.0", "@aws-amplify/core@^3.4.0":
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/@aws-amplify/core/-/core-3.4.0.tgz#714dda1f8998caa8facf8dfb44a05e7e444ac5f9"
   integrity sha512-l5dM0kSf4gs9MZ5KzQ+e93pPJDoVMzx1nDhZ+xEZJrS2V9kot5+TMYslb/fgVi/C5/C3kZDI932NHNqdaxcmGA==
@@ -156,7 +156,7 @@
   dependencies:
     qrcode "^1.4.4"
 
-"@aws-amplify/ui-react@^0.2.9":
+"@aws-amplify/ui-react@0.2.9":
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/@aws-amplify/ui-react/-/ui-react-0.2.9.tgz#f5e1f81f99728d1b2a359cd1435d32402fe9fe9b"
   integrity sha512-Mnlwgz+GdX498FxL3z+vGzmvHz7bCjhbSJ6LviSmCVPpHd35/9/fT6Y6WSaFHbS3byyInA+LKJEHjPzP7+Azkg==
@@ -3995,7 +3995,7 @@ autoprefixer@^9.8.3:
     postcss "^7.0.32"
     postcss-value-parser "^4.1.0"
 
-aws-amplify@^3.0.18:
+aws-amplify@3.0.18:
   version "3.0.18"
   resolved "https://registry.yarnpkg.com/aws-amplify/-/aws-amplify-3.0.18.tgz#d05a71a9c5368c98a97ec6c30b4ade64722ca6c4"
   integrity sha512-WegABxg3fGsynZTdtPlTVbG32DZlS5j7oUYVDnXlwDnU/KvBzgKhmdnGrJU6MdTQIVN6QCDSgTHHOK9iJaXq6A==
