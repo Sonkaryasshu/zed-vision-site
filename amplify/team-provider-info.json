@@ -1,0 +1,15 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-zedgatsby-dev-81420-authRole",
+            "UnauthRoleArn": "arn:aws:iam::209616764690:role/amplify-zedgatsby-dev-81420-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::209616764690:role/amplify-zedgatsby-dev-81420-authRole",
+            "Region": "eu-west-2",
+            "DeploymentBucketName": "amplify-zedgatsby-dev-81420-deployment",
+            "UnauthRoleName": "amplify-zedgatsby-dev-81420-unauthRole",
+            "StackName": "amplify-zedgatsby-dev-81420",
+            "StackId": "arn:aws:cloudformation:eu-west-2:209616764690:stack/amplify-zedgatsby-dev-81420/2823a2c0-b9d8-11ea-a577-064d74357b0e",
+            "AmplifyAppId": "dbxmq53dpegtw"
+        }
+    }
+}
