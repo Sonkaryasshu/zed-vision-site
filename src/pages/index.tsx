@@ -1,5 +1,5 @@
 import React from "react"
-import { jsx } from '@emotion/core'
+import { jsx } from "@emotion/core"
 import { Link, graphql } from "gatsby"
 
 import Bio from "../components/bio"

@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 
 import { rhythm, scale } from "../utils/typography"
-import { jsx } from '@emotion/core'
+import { jsx } from "@emotion/core"
 
 const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
