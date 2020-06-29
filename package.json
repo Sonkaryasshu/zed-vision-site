@@ -8,8 +8,12 @@
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },
   "dependencies": {
+    "@aws-amplify/auth": "^3.2.14",
+    "@aws-amplify/core": "^3.4.0",
+    "@aws-amplify/ui-react": "^0.2.9",
     "@emotion/core": "10.0.28",
     "@emotion/styled": "10.0.27",
+    "aws-amplify": "^3.0.18",
     "gatsby": "2.23.11",
     "gatsby-image": "2.4.9",
     "gatsby-plugin-emotion": "4.3.6",
