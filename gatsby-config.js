@@ -76,7 +76,14 @@ module.exports = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
-    `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-offline`,
+      options: {
+        workboxConfig: {
+          importWorkboxFrom: `cdn`,
+        },
+      },
+    },
     `gatsby-plugin-emotion`,
   ],
 }
