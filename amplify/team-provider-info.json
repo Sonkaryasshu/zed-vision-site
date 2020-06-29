@@ -10,6 +10,14 @@
             "StackName": "amplify-zedgatsby-dev-81420",
             "StackId": "arn:aws:cloudformation:eu-west-2:209616764690:stack/amplify-zedgatsby-dev-81420/2823a2c0-b9d8-11ea-a577-064d74357b0e",
             "AmplifyAppId": "dbxmq53dpegtw"
+        },
+        "categories": {
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "dbxmq53dpegtw",
+                    "type": "cicd"
+                }
+            }
         }
     }
 }
