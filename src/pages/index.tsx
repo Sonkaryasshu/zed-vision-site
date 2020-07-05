@@ -1,5 +1,4 @@
 import React from "react"
-import { jsx } from "@emotion/core"
 import { Link, graphql } from "gatsby"
 
 import Bio from "../components/bio"
@@ -7,7 +6,10 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
 
-const BlogIndex = ({ data, location }) => {
+const BlogIndex: React.FC<{ data: any; location: Location }> = ({
+  data,
+  location,
+}) => {
   const siteTitle = data.site.siteMetadata.title
   const posts = data.allMarkdownRemark.edges
 

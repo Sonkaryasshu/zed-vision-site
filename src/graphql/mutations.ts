@@ -16,7 +16,7 @@ export const createTask = /* GraphQL */ `
       updatedAt
     }
   }
-`;
+`
 export const updateTask = /* GraphQL */ `
   mutation UpdateTask(
     $input: UpdateTaskInput!
@@ -31,7 +31,7 @@ export const updateTask = /* GraphQL */ `
       updatedAt
     }
   }
-`;
+`
 export const deleteTask = /* GraphQL */ `
   mutation DeleteTask(
     $input: DeleteTaskInput!
@@ -46,7 +46,7 @@ export const deleteTask = /* GraphQL */ `
       updatedAt
     }
   }
-`;
+`
 export const createPrivateNote = /* GraphQL */ `
   mutation CreatePrivateNote(
     $input: CreatePrivateNoteInput!
@@ -60,7 +60,7 @@ export const createPrivateNote = /* GraphQL */ `
       owner
     }
   }
-`;
+`
 export const updatePrivateNote = /* GraphQL */ `
   mutation UpdatePrivateNote(
     $input: UpdatePrivateNoteInput!
@@ -74,7 +74,7 @@ export const updatePrivateNote = /* GraphQL */ `
       owner
     }
   }
-`;
+`
 export const deletePrivateNote = /* GraphQL */ `
   mutation DeletePrivateNote(
     $input: DeletePrivateNoteInput!
@@ -88,4 +88,4 @@ export const deletePrivateNote = /* GraphQL */ `
       owner
     }
   }
-`;
+`
