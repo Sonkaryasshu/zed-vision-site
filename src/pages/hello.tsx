@@ -21,7 +21,7 @@ const HelloPage = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
-      <SEO title="Oh hello!" />
+      <SEO title="Oh hello!!!" />
       <AuthHello />
     </Layout>
   )
