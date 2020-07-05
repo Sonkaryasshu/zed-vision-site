@@ -1,0 +1,8 @@
+version: "3.5"
+services:
+  dev:
+    build:
+      target: Dev
+      context: .
+    ports:
+      - 8000:8000
