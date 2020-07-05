@@ -6,3 +6,8 @@ services:
       context: .
     ports:
       - 8000:8000
+    volumes:
+      - .:/app
+      - node_cache:/app/node_modules
+volumes:
+  node_cache: 
