@@ -1,6 +1,6 @@
-ARG parent=a7095a846116746590b3fdb612128b3b997f9ed3
+ARG parent=master
 ARG BASE=https://raw.githubusercontent.com/zed-vision/zed-vision-site/${parent}
-ARG NODE_VERSION=14.5.0
+ARG NODE_VERSION=12
 
 FROM node:${NODE_VERSION}-alpine as dev-base
 WORKDIR /app
@@ -15,8 +15,5 @@ FROM dev-base as Dev
 ADD yarn.lock package.json ./
 RUN yarn
 
-ADD . . 
-
-RUN apk update && apk add bash
 EXPOSE 8000
 CMD [ "yarn", "develop" ]
