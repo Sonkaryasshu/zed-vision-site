@@ -1,0 +1,86 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 2 (0x2)
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: CN=devcert
+        Validity
+            Not Before: Jul  7 10:52:26 2020 GMT
+            Not After : Oct 10 10:52:26 2022 GMT
+        Subject: CN=dev.zed.vision
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                RSA Public-Key: (2048 bit)
+                Modulus:
+                    00:ea:8f:d5:18:df:00:a1:86:1f:b0:d5:29:d2:3a:
+                    07:8d:b4:e8:b9:97:73:d0:40:bc:f5:a5:74:fb:59:
+                    b9:be:fd:a9:ec:4c:4e:c8:25:2b:d6:e4:13:5a:aa:
+                    04:bf:5a:a8:75:e3:44:61:49:44:6f:a8:9d:36:2d:
+                    e1:f7:f5:86:49:94:06:97:8c:47:da:3a:d7:ea:c8:
+                    aa:f4:82:6e:66:f8:e9:af:5c:cb:35:36:d5:aa:45:
+                    c2:f6:7e:58:87:b7:33:e3:3d:8d:11:ea:9b:7f:85:
+                    1a:af:9e:5e:25:2d:83:a8:1a:33:2e:77:68:36:7c:
+                    d8:79:6e:78:bf:32:84:b1:db:e5:b2:0d:cc:fa:67:
+                    7c:1e:3c:26:24:c9:d3:c0:cc:d7:ec:31:00:0c:dd:
+                    b9:f3:c0:b3:8a:0f:89:56:9e:9a:b9:05:01:4c:47:
+                    93:9d:8d:09:ae:93:86:46:fd:91:9a:8b:98:1d:be:
+                    6c:c2:81:20:4a:5e:44:8a:d5:71:4a:ea:fc:46:f7:
+                    4e:ff:30:4f:30:21:f0:a3:53:63:e3:e9:9f:b2:ec:
+                    1d:24:04:ae:02:44:6b:b3:2c:20:e4:fd:81:f3:a1:
+                    65:7f:e3:88:09:a5:b0:92:7f:ea:f1:e5:0d:f0:a6:
+                    bd:67:16:ec:2c:2c:c7:08:73:a2:35:79:36:18:53:
+                    e9:03
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: critical
+                CA:FALSE
+            X509v3 Subject Key Identifier: 
+                A7:7F:E6:C0:2D:45:2B:C9:B2:78:E9:52:88:A1:70:8F:24:5E:5A:61
+            X509v3 Authority Key Identifier: 
+                keyid:37:F1:75:1D:C8:1B:58:B9:77:1E:64:FB:0F:27:37:65:0A:EF:56:1E
+                DirName:/CN=devcert
+                serial:49:6F:CD:6B:1A:05:A8:8A:72:E3:75:93:55:F0:CA:EA:CB:61:A9:D4
+
+            X509v3 Key Usage: critical
+                Digital Signature, Key Encipherment
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication
+            X509v3 Subject Alternative Name: 
+                DNS:dev.zed.vision, DNS:*.dev.zed.vision
+    Signature Algorithm: sha256WithRSAEncryption
+         62:73:73:23:2b:e1:cc:ea:75:87:e4:c2:51:ee:98:c1:72:a8:
+         c4:a8:ce:e5:13:df:ab:ea:73:3d:aa:9a:d3:8a:14:11:fd:67:
+         d7:01:b1:c5:f7:6c:60:80:d4:12:15:15:64:94:e2:69:a6:ec:
+         07:c3:dd:de:25:98:4c:f0:88:82:b8:f7:23:b5:34:c3:40:83:
+         4a:c3:df:8a:52:27:31:85:f1:44:fd:f8:23:05:60:df:3a:a3:
+         b7:3f:85:24:6b:c0:7b:ed:88:2a:88:59:27:ac:67:5d:dd:84:
+         ed:c6:e9:4e:34:50:16:b6:ff:32:ec:0a:7e:30:ef:44:d4:03:
+         a9:fe:0c:01:51:21:2f:68:48:ff:86:a3:d0:74:00:62:bf:1a:
+         5c:f8:e6:9d:53:36:56:51:ed:d7:b9:8a:e2:0a:b2:70:b7:f3:
+         ea:d3:38:eb:31:6e:7f:12:ef:57:a3:cd:f2:44:94:1d:32:dd:
+         d3:84:6d:f4:b1:80:62:41:39:68:e8:0e:50:4d:7e:48:31:04:
+         70:8f:fe:6f:2a:bd:cc:b7:5c:5c:96:50:7b:03:d5:ba:1b:c1:
+         23:cf:89:0b:8b:35:9b:60:cd:a9:fa:3d:6c:dc:b5:ff:5a:fd:
+         3c:64:92:24:a6:0b:70:57:66:cc:03:79:4c:1e:43:d6:4f:91:
+         68:1c:e7:45
+-----BEGIN CERTIFICATE-----
+MIIDeDCCAmCgAwIBAgIBAjANBgkqhkiG9w0BAQsFADASMRAwDgYDVQQDDAdkZXZj
+ZXJ0MB4XDTIwMDcwNzEwNTIyNloXDTIyMTAxMDEwNTIyNlowGTEXMBUGA1UEAwwO
+ZGV2LnplZC52aXNpb24wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDq
+j9UY3wChhh+w1SnSOgeNtOi5l3PQQLz1pXT7Wbm+/ansTE7IJSvW5BNaqgS/Wqh1
+40RhSURvqJ02LeH39YZJlAaXjEfaOtfqyKr0gm5m+OmvXMs1NtWqRcL2fliHtzPj
+PY0R6pt/hRqvnl4lLYOoGjMud2g2fNh5bni/MoSx2+WyDcz6Z3wePCYkydPAzNfs
+MQAM3bnzwLOKD4lWnpq5BQFMR5OdjQmuk4ZG/ZGai5gdvmzCgSBKXkSK1XFK6vxG
+907/ME8wIfCjU2Pj6Z+y7B0kBK4CRGuzLCDk/YHzoWV/44gJpbCSf+rx5Q3wpr1n
+FuwsLMcIc6I1eTYYU+kDAgMBAAGjgdEwgc4wDAYDVR0TAQH/BAIwADAdBgNVHQ4E
+FgQUp3/mwC1FK8myeOlSiKFwjyReWmEwTQYDVR0jBEYwRIAUN/F1HcgbWLl3HmT7
+Dyc3ZQrvVh6hFqQUMBIxEDAOBgNVBAMMB2RldmNlcnSCFElvzWsaBaiKcuN1k1Xw
+yurLYanUMA4GA1UdDwEB/wQEAwIFoDATBgNVHSUEDDAKBggrBgEFBQcDATArBgNV
+HREEJDAigg5kZXYuemVkLnZpc2lvboIQKi5kZXYuemVkLnZpc2lvbjANBgkqhkiG
+9w0BAQsFAAOCAQEAYnNzIyvhzOp1h+TCUe6YwXKoxKjO5RPfq+pzPaqa04oUEf1n
+1wGxxfdsYIDUEhUVZJTiaabsB8Pd3iWYTPCIgrj3I7U0w0CDSsPfilInMYXxRP34
+IwVg3zqjtz+FJGvAe+2IKohZJ6xnXd2E7cbpTjRQFrb/MuwKfjDvRNQDqf4MAVEh
+L2hI/4aj0HQAYr8aXPjmnVM2VlHt17mK4gqycLfz6tM46zFufxLvV6PN8kSUHTLd
+04Rt9LGAYkE5aOgOUE1+SDEEcI/+byq9zLdcXJZQewPVuhvBI8+JC4s1m2DNqfo9
+bNy1/1r9PGSSJKYLcFdmzAN5TB5D1k+RaBznRQ==
+-----END CERTIFICATE-----

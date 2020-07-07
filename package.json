@@ -65,7 +65,8 @@
   },
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop --host=localdev.zed.vision --https --ca-file ./ssl/localdev.pem",
+    "serve:build": "npx http-server public --gzip --cors -a dev.zed.vision -S -C dev.zed.vision.cert -K dev.zed.vision.key",
+    "develop": "gatsby develop --host dev.zed.vision --https --cert-file dev.zed.vision.cert --key-file dev.zed.vision.key",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,yml}\"",
     "lint": "eslint ./src --ext .ts --ext .tsx --fix",
     "start": "npm run develop",
