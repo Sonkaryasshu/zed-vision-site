@@ -65,7 +65,7 @@
   },
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop --host=0.0.0.0",
+    "develop": "gatsby develop --host=localdev.zed.vision --https --ca-file ./ssl/localdev.pem",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,yml}\"",
     "lint": "eslint ./src --ext .ts --ext .tsx --fix",
     "start": "npm run develop",
