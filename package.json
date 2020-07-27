@@ -43,8 +43,14 @@
     "typography-theme-wordpress-2016": "0.16.19"
   },
   "devDependencies": {
+    "@babel/core": "^7.10.5",
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-links": "^5.3.19",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/react": "^5.3.19",
     "@typescript-eslint/eslint-plugin": "3.7.0",
     "@typescript-eslint/parser": "3.7.0",
+    "babel-loader": "^8.1.0",
     "eslint": "7.5.0",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-prettier": "3.1.4",
@@ -64,7 +70,7 @@
     "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
   },
   "scripts": {
-    "build": "gatsby build",
+    "build": "gatsby build && yarn build-storybook",
     "serve:build": "npx http-server public --gzip --cors -a local.dev -S -C local.dev.cert -K local.dev.key",
     "develop": "gatsby develop --host local.dev --https --cert-file local.dev.cert --key-file local.dev.key",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,yml}\"",
@@ -72,6 +78,8 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook -o public/storybook"
   }
 }
