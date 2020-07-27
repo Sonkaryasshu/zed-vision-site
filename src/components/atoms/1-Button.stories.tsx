@@ -1,20 +1,20 @@
 import * as React from "react"
 import { action } from "@storybook/addon-actions"
-import { Button } from "@storybook/react/demo"
+import { BigRedButton } from "./Button"
 
 export default {
   title: "Button",
-  component: Button,
+  component: BigRedButton,
 }
 
 export const Text = () => (
-  <Button onClick={action("clicked")}>Hello Button</Button>
+  <BigRedButton onClick={action("clicked")}>Hello Button</BigRedButton>
 )
 
 export const Emoji = () => (
-  <Button onClick={action("clicked")}>
+  <BigRedButton onClick={action("clicked")}>
     <span role="img" aria-label="so cool">
       😀 😎 👍 💯
     </span>
-  </Button>
+  </BigRedButton>
 )
