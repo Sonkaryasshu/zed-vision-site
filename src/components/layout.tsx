@@ -1,6 +1,15 @@
 import React from "react"
 import { Link } from "gatsby"
 
+import { MDXProvider } from "@mdx-js/react"
+// import { BigRedButton } from "./atoms/Button"
+import { LazyThing } from "./LazyThing"
+
+const sharedComponents = {
+  // BigRedButton,
+  LazyThing,
+}
+
 import { rhythm, scale } from "../utils/typography"
 /** @jsx jsx */ jsx
 import { jsx } from "@emotion/core"
@@ -70,7 +79,9 @@ const Layout: React.FC<Props> = ({ location, title, children }) => {
       }}
     >
       <header>{header}</header>
-      <main>{children}</main>
+      <main>
+        <MDXProvider components={sharedComponents}>{children}</MDXProvider>
+      </main>
       <footer>
         © {new Date().getFullYear()}, Built with
         {` `}
