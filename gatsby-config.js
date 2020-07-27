@@ -139,12 +139,12 @@ module.exports = {
       resolve: `gatsby-plugin-offline`,
       options: {
         importWorkboxFrom: `local`,
-        globDirectory: rootDir,
-        globPatterns,
+        // globDirectory: rootDir,
+        // globPatterns,
         modifyURLPrefix: {
           // If `pathPrefix` is configured by user, we should replace
           // the default prefix with `pathPrefix`.
-          "/": `${pathPrefix}/`,
+          // "/": `${pathPrefix}/`,
         },
         cacheId: `gatsby-plugin-offline`,
         // Don't cache-bust JS or CSS files, and anything in the static directory,
