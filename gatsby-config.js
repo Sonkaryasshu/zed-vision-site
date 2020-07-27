@@ -124,9 +124,59 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Zed Vision - Development experience, Testing, and everything between`,
+        short_name: `ZedVision`,
+        description: "Blog and tech experiments",
+        start_url: `https://zed.vision`,
+        background_color: `#f7f0eb`,
+        theme_color: `#a2466c`,
+        display: `standalone`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-offline`,
+      options: {
+        importWorkboxFrom: `local`,
+        globDirectory: rootDir,
+        globPatterns,
+        modifyURLPrefix: {
+          // If `pathPrefix` is configured by user, we should replace
+          // the default prefix with `pathPrefix`.
+          "/": `${pathPrefix}/`,
+        },
+        cacheId: `gatsby-plugin-offline`,
+        // Don't cache-bust JS or CSS files, and anything in the static directory,
+        // since these files have unique URLs and their contents will never change
+        dontCacheBustURLsMatching: /(\.js$|\.css$|static\/)/,
+        runtimeCaching: [
+          {
+            // Use cacheFirst since these don't need to be revalidated (same RegExp
+            // and same reason as above)
+            urlPattern: /(\.js$|\.css$|static\/)/,
+            handler: `CacheFirst`,
+          },
+          {
+            // page-data.json files are not content hashed
+            urlPattern: /^https?:.*\page-data\/.*\/page-data\.json/,
+            handler: `NetworkFirst`,
+          },
+          {
+            // Add runtime caching of various other page resources
+            urlPattern: /^https?:.*\.(png|jpg|jpeg|webp|svg|gif|tiff|js|woff|woff2|json|css)$/,
+            handler: `StaleWhileRevalidate`,
+          },
+          {
+            // Google Fonts CSS (doesn't end in .css so we need to specify it)
+            urlPattern: /^https?:\/\/fonts\.googleapis\.com\/css/,
+            handler: `StaleWhileRevalidate`,
+          },
+        ],
+        skipWaiting: true,
+        clientsClaim: true,
+      },
     },
     `gatsby-plugin-emotion`,
-    `gatsby-plugin-manifest`,
   ],
 }

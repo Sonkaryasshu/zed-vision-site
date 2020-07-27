@@ -85,6 +85,7 @@
     "domhandler",
     "domready",
     "domutils",
+    "dont",
     "dotall",
     "dotenv",
     "draggable",
