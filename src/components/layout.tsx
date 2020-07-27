@@ -14,10 +14,6 @@ import { rhythm, scale } from "../utils/typography"
 /** @jsx jsx */ jsx
 import { jsx } from "@emotion/core"
 
-import Amplify from "aws-amplify"
-import awsConfig from "../aws-exports"
-Amplify.configure(awsConfig)
-
 interface Props {
   location: Location
   title: string
