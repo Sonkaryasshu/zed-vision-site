@@ -86,3 +86,8 @@ amplifytools.xcconfig
 
 
 local.dev.*
+
+
+cypress/videos
+cypress/report
+cypress/screenshots
