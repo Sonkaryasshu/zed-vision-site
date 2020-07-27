@@ -16,4 +16,4 @@ ADD yarn.lock package.json ./
 RUN yarn
 
 EXPOSE 8000
-CMD [ "yarn", "develop" ]
+CMD [ "yarn", "start" ]

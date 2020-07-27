@@ -85,7 +85,7 @@ amplify-gradle-config.json
 amplifytools.xcconfig
 
 
-local.dev.*
+local.test.*
 
 
 cypress/videos
