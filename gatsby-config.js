@@ -125,12 +125,8 @@ module.exports = {
     },
     {
       resolve: `gatsby-plugin-offline`,
-      options: {
-        workboxConfig: {
-          importWorkboxFrom: `cdn`,
-        },
-      },
     },
     `gatsby-plugin-emotion`,
+    `gatsby-plugin-manifest`,
   ],
 }
