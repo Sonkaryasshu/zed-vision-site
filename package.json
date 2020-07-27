@@ -45,6 +45,7 @@
   "devDependencies": {
     "@babel/core": "7.10.5",
     "@storybook/addon-actions": "5.3.19",
+    "@storybook/addon-info": "^5.3.19",
     "@storybook/addon-links": "5.3.19",
     "@storybook/addons": "5.3.19",
     "@storybook/react": "5.3.19",
@@ -63,6 +64,8 @@
     "mochawesome-merge": "4.1.0",
     "mochawesome-report-generator": "5.1.0",
     "prettier": "2.0.5",
+    "react-docgen-typescript-loader": "^3.7.2",
+    "ts-loader": "^8.0.1",
     "typescript": "3.9.7",
     "wait-on": "5.1.0"
   },

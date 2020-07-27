@@ -10,4 +10,4 @@ services:
       - .:/app
       - node_cache:/app/node_modules
 volumes:
-  node_cache: 
+  node_cache:

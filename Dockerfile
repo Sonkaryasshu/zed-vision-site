@@ -8,12 +8,12 @@ WORKDIR /app
 ENV GITBASE=${BASE}
 
 ADD ${GITBASE}/package.json ${GITBASE}/yarn.lock ./
-RUN yarn 
+RUN yarn --frozen-lockfile
 
 FROM dev-base as Dev
 
 ADD yarn.lock package.json ./
-RUN yarn
+RUN yarn --frozen-lockfile
 
 EXPOSE 8000
 CMD [ "yarn", "start" ]
