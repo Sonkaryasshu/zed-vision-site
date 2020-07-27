@@ -13,7 +13,7 @@ interface Props {
         title: string
       }
     }
-    allMarkdownRemark: {
+    allMdx: {
       edges: {
         node: {
           excerpt: string
@@ -34,7 +34,7 @@ interface Props {
 
 const BlogIndex: React.FC<Props> = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
-  const edges = data.allMarkdownRemark.edges
+  const edges = data.allMdx.edges
 
   return (
     <Layout location={location} title={siteTitle}>
@@ -79,7 +79,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMdx(sort: { fields: [frontmatter___date], order: DESC }) {
       edges {
         node {
           excerpt

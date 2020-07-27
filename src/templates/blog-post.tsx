@@ -5,12 +5,13 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
+import { MDXRenderer } from "gatsby-plugin-mdx"
 
 interface Props {
   data: {
-    markdownRemark: {
-      html: string
+    mdx: {
       excerpt: string
+      body: string
       frontmatter: {
         date: string
         title: string
@@ -55,7 +56,7 @@ interface Props {
 }
 
 const BlogPostTemplate = ({ data, pageContext, location }: Props) => {
-  const post = data.markdownRemark
+  const post = data.mdx
   const siteTitle = data.site.siteMetadata.title
   const { previous, next } = pageContext
 
@@ -85,7 +86,7 @@ const BlogPostTemplate = ({ data, pageContext, location }: Props) => {
             {post.frontmatter.date}
           </p>
         </header>
-        <section dangerouslySetInnerHTML={{ __html: post.html }} />
+        <MDXRenderer>{post.body}</MDXRenderer>
         <hr
           css={{
             marginBottom: rhythm(1),
@@ -135,10 +136,10 @@ export const pageQuery = graphql`
         title
       }
     }
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+    mdx(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)
-      html
+      body
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
