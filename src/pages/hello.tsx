@@ -16,7 +16,18 @@ const Hello = () => (
 
 const AuthHello = withAuthenticator(Hello)
 
-const HelloPage = ({ data, location }) => {
+interface Props {
+  data: {
+    site: {
+      siteMetadata: {
+        title: string
+      }
+    }
+  }
+  location: Location
+}
+
+const HelloPage = ({ data, location }: Props) => {
   const siteTitle = data.site.siteMetadata.title
 
   return (

@@ -7,6 +7,7 @@
 
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
+/** @jsx jsx */ jsx
 import { jsx } from "@emotion/core"
 
 import Image from "gatsby-image"

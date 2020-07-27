@@ -6,18 +6,41 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
 
-const BlogIndex: React.FC<{ data: any; location: Location }> = ({
-  data,
-  location,
-}) => {
+interface Props {
+  data: {
+    site: {
+      siteMetadata: {
+        title: string
+      }
+    }
+    allMarkdownRemark: {
+      edges: {
+        node: {
+          excerpt: string
+          frontmatter: {
+            title: string
+            date: string
+            description: string
+          }
+          fields: {
+            slug: string
+          }
+        }
+      }[]
+    }
+  }
+  location: Location
+}
+
+const BlogIndex: React.FC<Props> = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
-  const posts = data.allMarkdownRemark.edges
+  const edges = data.allMarkdownRemark.edges
 
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="This is Zed vision" />
       <Bio />
-      {posts.map(({ node }) => {
+      {edges.map(({ node }) => {
         const title = node.frontmatter.title || node.fields.slug
         return (
           <article key={node.fields.slug}>

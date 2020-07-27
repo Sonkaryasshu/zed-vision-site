@@ -6,7 +6,55 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 
-const BlogPostTemplate = ({ data, pageContext, location }) => {
+interface Props {
+  data: {
+    markdownRemark: {
+      html: string
+      excerpt: string
+      frontmatter: {
+        date: string
+        title: string
+        description: string
+      }
+    }
+    site: {
+      siteMetadata: {
+        title: string
+      }
+    }
+  }
+  pageContext: {
+    previous: {
+      fields: {
+        slug: string
+      }
+      date: string
+      title: string
+      description: string
+      frontmatter: {
+        date: string
+        title: string
+        description: string
+      }
+    }
+    next: {
+      fields: {
+        slug: string
+      }
+      date: string
+      title: string
+      description: string
+      frontmatter: {
+        date: string
+        title: string
+        description: string
+      }
+    }
+  }
+  location: Location
+}
+
+const BlogPostTemplate = ({ data, pageContext, location }: Props) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata.title
   const { previous, next } = pageContext

@@ -2,13 +2,19 @@ import React from "react"
 import { Link } from "gatsby"
 
 import { rhythm, scale } from "../utils/typography"
+/** @jsx jsx */ jsx
 import { jsx } from "@emotion/core"
 
-import Amplify, { Auth } from "aws-amplify"
+import Amplify from "aws-amplify"
 import awsConfig from "../aws-exports"
 Amplify.configure(awsConfig)
 
-const Layout = ({ location, title, children }) => {
+interface Props {
+  location: Location
+  title: string
+}
+
+const Layout: React.FC<Props> = ({ location, title, children }) => {
   let __PATH_PREFIX__
 
   const rootPath = `${__PATH_PREFIX__}/`
