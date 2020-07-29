@@ -332,6 +332,6 @@
     "zwitch"
   ],
   "mdx-preview.preview.useWhiteBackground": true,
-  "mdx-preview.preview.mdx.customLayoutFilePath": "./zed-vision-site/src/components/atoms/ThemeProvider",
+  "mdx-preview.preview.mdx.customLayoutFilePath": "./src/components/atoms/ThemeProvider",
   "mdx-preview.preview.useVscodeMarkdownStyles": false
 }
