@@ -6,9 +6,14 @@ import Layout from '../../../src/Layout.tsx'
 import Example from "./flex-example.tsx"
 import { State, Observe } from 'mdx-observable';
 import { Button } from "@material-ui/core"
-export default Layout
 
-# Counter in mdx :)
+
+<Layout>  
+
+# Counter in md :)
+
+ROBOTO
+
 
 
 <State initialState={{ count: 0 }} >
@@ -59,11 +64,7 @@ I think you should use an `<addr>` element here instead.
 
 
 ```javascript
-function fancyAlert(arg) {
-  if(arg) {
-    $.facebox({div:'#foo'})
-  }
-}
+const counter = React.useCounter({ count: 1 })
 ```
 
 As Kanye West said:
@@ -84,3 +85,4 @@ text
 
 
 <Example />
+</Layout>

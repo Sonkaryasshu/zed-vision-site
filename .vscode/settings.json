@@ -2,7 +2,7 @@
   "files.autoSave": "onFocusChange",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
-},
+  },
 
   "cSpell.words": [
     "Wordpress",
@@ -279,6 +279,7 @@
     "subtag",
     "svgo",
     "svgr",
+    "synthwave",
     "systemjs",
     "szmarczak",
     "tapable",
@@ -332,7 +333,8 @@
     "zedgatsby",
     "zwitch"
   ],
-  "typescript.suggest.paths": true,
+  "typescript.suggest.paths": false,
   "mdx-preview.build.useSucraseTranspiler": true,
-  "mdx-preview.preview.useWhiteBackground": true
+  "mdx-preview.preview.useWhiteBackground": true,
+  "mdx-preview.preview.security": "disabled"
 }

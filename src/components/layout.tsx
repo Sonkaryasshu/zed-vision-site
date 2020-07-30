@@ -1,18 +1,9 @@
 import React from "react"
 import { Link } from "gatsby"
 
-import { MDXProvider } from "@mdx-js/react"
-import { LazyThing } from "./LazyThing"
-import RebassLayout from "../Layout"
+import CustomLayout from "../Layout"
 
-const sharedComponents = {
-  // BigRedButton,
-  LazyThing,
-}
-
-/** @jsx jsx */ jsx
-import { jsx } from "@emotion/core"
-import { Heading, Box } from "rebass"
+import { Heading } from "rebass"
 
 interface Props {
   location: Location
@@ -27,9 +18,9 @@ const Layout: React.FC<Props> = ({ location, title, children }) => {
 
   if (location.pathname === rootPath) {
     header = (
-      <Heading>
+      <h1>
         <Link to={`/`}>{title}</Link>
-      </Heading>
+      </h1>
     )
   } else {
     header = (
@@ -39,20 +30,11 @@ const Layout: React.FC<Props> = ({ location, title, children }) => {
     )
   }
   return (
-    <RebassLayout>
-      {" "}
-      <Box>
-        <header>{header}</header>
-        <main>
-          <MDXProvider components={sharedComponents}>{children}</MDXProvider>
-        </main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </Box>
-    </RebassLayout>
+    <CustomLayout>
+      <header>{header}</header>
+      <main>{children}</main>
+      <footer>© {new Date().getFullYear()}, Zed vision</footer>
+    </CustomLayout>
   )
 }
 
