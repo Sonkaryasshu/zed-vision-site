@@ -4,8 +4,83 @@ date: "2015-05-06T23:46:37.121Z"
 ---
 import Layout from '../../../src/Layout.tsx'
 import Example from "./flex-example.tsx"
-
+import { State, Observe } from 'mdx-observable';
+import { Button } from "@material-ui/core"
 export default Layout
+
+# Counter in mdx :)
+
+
+<State initialState={{ count: 0 }} >
+
+<Observe>
+{({ setState }) => (
+    <Button onClick={() => setState(s => ({ count: s.count + 1 }))}>
+    Click me
+    </Button>
+    
+)}
+</Observe>
+
+The button has been clicked:
+
+<Observe>
+{ ({...s}) => (<span>{s.count} times</span>) }
+</Observe>
+
+</State>
+
+And lets have some typography
+
+<hr />
+
+# h1 
+## h2 
+### h3
+#### h4 
+##### h5 
+
+
+*This text will be italic*
+
+
+
+
+I think you should use an `<addr>` element here instead.
+
+
+**This text will be bold**
+
+
+- [x] @mentions, #refs, [links](), **formatting**, and <del>tags</del> supported
+- [x] list syntax required (any unordered or ordered list supported)
+- [x] this is a complete item
+- [ ] this is an incomplete item
+
+
+```javascript
+function fancyAlert(arg) {
+  if(arg) {
+    $.facebox({div:'#foo'})
+  }
+}
+```
+
+As Kanye West said:
+
+> We're living the future so
+> the present is our past.
+
+_You **can** combine them_
+
+
+# h1 
+
+## h2 ```code```
+
+text
+```var i=code```
+ 
 
 
 <Example />

@@ -16,8 +16,9 @@ const Layout: React.FC = ({ children }) => (
         content="minimum-scale=1, initial-scale=1, width=device-width"
       />
     </Helmet>
-    <CssBaseline />
-    <ThemeProvider theme={theme}>{children}</ThemeProvider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline /> {children}
+    </ThemeProvider>
   </>
 )
 
