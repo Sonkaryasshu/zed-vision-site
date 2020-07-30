@@ -86,8 +86,3 @@ amplifytools.xcconfig
 
 
 local.test.*
-
-
-cypress/videos
-cypress/report
-cypress/screenshots

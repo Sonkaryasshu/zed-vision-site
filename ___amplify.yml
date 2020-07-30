@@ -20,21 +20,3 @@ frontend:
   cache:
     paths:
       - node_modules/**/*
-test:
-  artifacts:
-    baseDirectory: cypress
-    configFilePath: "**/mochawesome.json"
-    files:
-      - "**/*.png"
-      - "**/*.mp4"
-  phases:
-    preTest:
-      commands:
-        - yarn install --frozen-lockfile
-        - "yarn serve:public & yarn wait-on http://127.0.0.1:8080"
-    test:
-      commands:
-        - 'yarn cypress run --reporter mochawesome --reporter-options "reportDir=cypress/report/mochawesome-report,overwrite=false,html=false,json=true,timestamp=mmddyyyy_HHMMss"'
-    postTest:
-      commands:
-        - yarn mochawesome-merge cypress/report/mochawesome-report/*.json > cypress/report/mochawesome.json
