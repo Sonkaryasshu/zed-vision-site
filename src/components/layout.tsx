@@ -2,17 +2,17 @@ import React from "react"
 import { Link } from "gatsby"
 
 import { MDXProvider } from "@mdx-js/react"
-// import { BigRedButton } from "./atoms/Button"
 import { LazyThing } from "./LazyThing"
+import RebassLayout from "../Layout"
 
 const sharedComponents = {
   // BigRedButton,
   LazyThing,
 }
 
-import { rhythm, scale } from "../utils/typography"
 /** @jsx jsx */ jsx
 import { jsx } from "@emotion/core"
+import { Heading, Box } from "rebass"
 
 interface Props {
   location: Location
@@ -27,63 +27,32 @@ const Layout: React.FC<Props> = ({ location, title, children }) => {
 
   if (location.pathname === rootPath) {
     header = (
-      <h1
-        css={{
-          ...scale(1.5),
-          marginBottom: rhythm(1.5),
-          marginTop: 0,
-        }}
-      >
-        <Link
-          css={{
-            boxShadow: `none`,
-            color: `inherit`,
-          }}
-          to={`/`}
-        >
-          {title}
-        </Link>
-      </h1>
+      <Heading>
+        <Link to={`/`}>{title}</Link>
+      </Heading>
     )
   } else {
     header = (
-      <h3
-        css={{
-          fontFamily: `Montserrat, sans-serif`,
-          marginTop: 0,
-        }}
-      >
-        <Link
-          css={{
-            boxShadow: `none`,
-            color: `inherit`,
-          }}
-          to={`/`}
-        >
-          {title}
-        </Link>
-      </h3>
+      <Heading fontSize={[5, 6, 7]}>
+        <Link to={`/`}>{title}</Link>
+      </Heading>
     )
   }
   return (
-    <div
-      css={{
-        marginLeft: `auto`,
-        marginRight: `auto`,
-        maxWidth: rhythm(24),
-        padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
-      }}
-    >
-      <header>{header}</header>
-      <main>
-        <MDXProvider components={sharedComponents}>{children}</MDXProvider>
-      </main>
-      <footer>
-        © {new Date().getFullYear()}, Built with
-        {` `}
-        <a href="https://www.gatsbyjs.org">Gatsby</a>
-      </footer>
-    </div>
+    <RebassLayout>
+      {" "}
+      <Box>
+        <header>{header}</header>
+        <main>
+          <MDXProvider components={sharedComponents}>{children}</MDXProvider>
+        </main>
+        <footer>
+          © {new Date().getFullYear()}, Built with
+          {` `}
+          <a href="https://www.gatsbyjs.org">Gatsby</a>
+        </footer>
+      </Box>
+    </RebassLayout>
   )
 }
 

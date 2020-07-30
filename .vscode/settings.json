@@ -3,6 +3,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
 },
+
   "cSpell.words": [
     "Wordpress",
     "airbnb",
@@ -333,6 +334,6 @@
   ],
   "typescript.suggest.paths": true,
   "mdx-preview.preview.useWhiteBackground": true,
-  "mdx-preview.build.useSucraseTranspiler": true,
+  "mdx-preview.build.useSucraseTranspiler": false,
   "mdx-preview.preview.useVscodeMarkdownStyles": false
 }
