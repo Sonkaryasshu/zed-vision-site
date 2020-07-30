@@ -331,7 +331,9 @@
     "zedgatsby",
     "zwitch"
   ],
+  "typescript.suggest.paths": true,
   "mdx-preview.preview.useWhiteBackground": true,
-  "mdx-preview.preview.mdx.customLayoutFilePath": "./src/components/atoms/ThemeProvider",
+  "mdx-preview.build.useSucraseTranspiler": true,
+  "mdx-preview.preview.mdx.customLayoutFilePath": "${workspaceFolder:components}/atoms/ThemeProvider",
   "mdx-preview.preview.useVscodeMarkdownStyles": false
 }

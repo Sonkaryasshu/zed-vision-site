@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"name": "components",
+			"path": "./src/components",
+		},
+		
+		{
+			"name": "project",
+			"path": ".",
+		},
+	],
+	"settings": {
+		"files.autoSave": "onFocusChange",
+	}
+}
