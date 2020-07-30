@@ -334,7 +334,7 @@
     "zwitch"
   ],
   "typescript.suggest.paths": false,
-  "mdx-preview.build.useSucraseTranspiler": true,
+  "mdx-preview.build.useSucraseTranspiler": false,
   "mdx-preview.preview.useWhiteBackground": true,
   "mdx-preview.preview.security": "disabled"
 }
