@@ -6,37 +6,36 @@ import Graph from "react-graph-vis"
 // // need to import the vis network css in order to show tooltip
 // import "./network.css"
 
-function App() {
-  const getSvg = (div: string) =>
-    '<svg xmlns="http://www.w3.org/2000/svg">' +
-    // '<rect x="0" y="0" width="100%" height="100%" fill="#7890A7" stroke-width="20" stroke="#ffffff" ></rect>' +
-    '<foreignObject x="0" y="0" width="100%" height="100%">' +
-    '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:42px">' +
-    div +
-    "</div>" +
-    "</foreignObject>" +
-    "</svg>"
+const getSvg = (div: string) =>
+  '<svg xmlns="http://www.w3.org/2000/svg">' +
+  // '<rect x="0" y="0" width="100%" height="100%" fill="#7890A7" stroke-width="20" stroke="#ffffff" ></rect>' +
+  '<foreignObject x="0" y="0" width="100%" height="100%">' +
+  '<div xmlns="http://www.w3.org/1999/xhtml" style="font-size:42px; border:1px solid black; text-align:center">' +
+  div +
+  "</div>" +
+  "</foreignObject>" +
+  "</svg>"
 
-  const getUrl = (nb: string) =>
-    "data:image/svg+xml;charset=utf-8," +
-    encodeURIComponent(
-      getSvg("<div><button>+</button>" + nb + "<button>-</button></div>")
-    )
+const getUrl = (div: string) =>
+  "data:image/svg+xml;charset=utf-8," + encodeURIComponent(getSvg(div))
 
+const App: React.FC<{
+  nodes: {
+    id: number
+    image: string
+    shape: string
+  }[]
+  edges: {
+    from: number
+    to: number
+    label: string
+  }[]
+}> = ({ nodes, edges }) => {
+  console.log(nodes)
+  if (!nodes) return <></>
   const graph = {
-    nodes: [
-      { id: 1, image: getUrl("1"), shape: "image" },
-      { id: 2, image: getUrl("2"), shape: "image" },
-      { id: 3, label: "Node 3" },
-      { id: 4, label: "Node 4" },
-      { id: 5, label: "Node 5" },
-    ],
-    edges: [
-      { from: 1, to: 2, label: "inc" },
-      { from: 1, to: 3 },
-      { from: 2, to: 4 },
-      { from: 2, to: 5 },
-    ],
+    nodes,
+    edges,
   }
 
   const options = {
@@ -76,13 +75,23 @@ export const ChangeDetector: React.FC<{
 
   const [lastEvent, setLastEvent] = React.useState("init")
 
+  const [nodes, setNodes] = React.useState([
+    { id: 0, image: "", shape: "image" },
+  ])
+
+  const [edges, setEdges] = React.useState<
+    { from: number; to: number; label: string }[]
+  >([])
+
   const check = (
     comps: string[],
     ev: string,
-    setErr: (d: string[]) => void
+    setErr: (d: string[]) => void,
+    currentHTML: string
   ) => {
-    console.log("check")
     const str = document.getElementById("id1")?.innerHTML || "<div></div>"
+    console.log("LOOOOOOO", str, currentHTML)
+
     let newFn = [...comps, str]
 
     const old = [...comps]
@@ -97,21 +106,33 @@ export const ChangeDetector: React.FC<{
       console.log(num2)
       console.log("render", num1, num2)
       console.log(lastEvent)
+
       setLastEvent(ev)
+      const from = num2.indexOf(currentHTML)
+      const to = num2.indexOf(str)
+
+      setNodes([
+        ...nodes,
+        { id: nodes.length + 1, image: getUrl(str), shape: "image" },
+      ])
+
+      setEdges([...edges, { from, to, label: ev }])
+
       setErr(num2)
-      console.log(num2)
+
       //setTimeout(() => check(num2, (d: string[]) => setError(d)), 100)
     } else {
       /// setTimeout(() => check(num2, (d: string[]) => setError(d)), 100)
     }
   }
 
-  // React.useEffect(() => {
-  //   // console.log("useEffect")
-
-  //   console.log("IN USE EFFECT AGAIN")
-  //   // check(comps, (s: string[]) => setError(s))
-  // }, [])
+  React.useEffect(() => {
+    // console.log("useEffect")
+    const original = document.getElementById("id1")?.innerHTML || ""
+    setTimeout(() =>
+      check(comps, "INIT", (d: string[]) => setError(d), original)
+    )
+  }, [])
 
   const rest = (
     <div>
@@ -131,11 +152,18 @@ export const ChangeDetector: React.FC<{
       <div style={{ margin: "10px", padding: "10px" }}>
         <div id="id1">
           <Comp1
-            onEvent={ev => check(comps, ev, (d: string[]) => setError(d))}
+            onEvent={ev => {
+              const original = document.getElementById("id1")?.innerHTML || ""
+
+              setTimeout(() =>
+                check(comps, ev, (d: string[]) => setError(d), original)
+              )
+            }}
           />
         </div>
-        <App />
+        <App nodes={nodes} edges={edges} />
       </div>
+      <pre>{JSON.stringify(nodes)}</pre>
       {rest}
     </>
   )
