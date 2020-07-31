@@ -1,0 +1,68 @@
+import * as React from "react"
+import { graphql } from "gatsby"
+
+import Layout from "../components/layout"
+import SEO from "../components/seo"
+import { ChangeDetector } from "../components/changeDetector"
+
+interface Props {
+  data: {
+    site: {
+      siteMetadata: {
+        title: string
+      }
+    }
+  }
+  location: Location
+}
+
+const Comp1: React.FC<{ onEvent: (event: string) => void }> = ({ onEvent }) => {
+  const [count, setCount] = React.useState(0)
+  return (
+    <>
+      <button
+        onClick={() => {
+          onEvent("inc")
+          setCount(count + 1)
+        }}
+      >
+        +
+      </button>
+      {count}
+      <button
+        onClick={() => {
+          onEvent("dec")
+          setCount(count - 1)
+        }}
+      >
+        -
+      </button>
+    </>
+  )
+}
+
+const NotFoundPage = ({ data, location }: Props) => {
+  const siteTitle = data.site.siteMetadata.title
+
+  return (
+    <Layout location={location} title={siteTitle}>
+      <SEO title="404: Not Found" />
+
+      <h1>Not Found!!!!</h1>
+      <ChangeDetector Comp1={Comp1}></ChangeDetector>
+      <p>You just hit a route that doesn't exist... the sadness.</p>
+    </Layout>
+  )
+}
+
+export default NotFoundPage
+
+export const pageQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+  }
+`
