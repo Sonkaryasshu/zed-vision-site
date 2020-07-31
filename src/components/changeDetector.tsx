@@ -66,7 +66,7 @@ const App: React.FC<{
   )
 }
 
-export const ChangeDetector: React.FC<{
+const chd: React.FC<{
   Comp1: React.FC<{ onEvent: (s: string) => void }>
 }> = ({ Comp1 }) => {
   const [comps, setError] = React.useState([
@@ -172,3 +172,6 @@ export const ChangeDetector: React.FC<{
 function createMarkup(markup: string) {
   return { __html: markup }
 }
+
+export const ChangeDetector =
+  typeof window !== "undefined" ? chd : () => <div>NO ssr</div>
