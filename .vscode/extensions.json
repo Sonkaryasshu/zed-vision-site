@@ -9,8 +9,7 @@
     "pflannery.vscode-versionlens",
     "silvenon.mdx",
     "xyc.vscode-mdx-preview",
-    "jpoissonnier.vscode-styled-components",
-    "jounqin.vscode-mdx"
+    "jpoissonnier.vscode-styled-components"
   ],
   // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
   "unwantedRecommendations": []
