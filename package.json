@@ -15,7 +15,6 @@
     "@mdx-js/mdx": "1.6.16",
     "@mdx-js/react": "1.6.16",
     "@octokit/rest": "18.0.3",
-    "@storybook/addon-docs": "^6.0.0-rc.30",
     "@types/react-helmet": "6.0.0",
     "@types/typography": "0.16.3",
     "emotion-theming": "^10.0.27",
@@ -52,10 +51,6 @@
   },
   "devDependencies": {
     "@babel/core": "7.11.1",
-    "@storybook/addon-actions": "^6.0.0-rc.30",
-    "@storybook/addon-links": "^6.0.0-rc.30",
-    "@storybook/addons": "^6.0.0-rc.30",
-    "@storybook/react": "^6.0.0-rc.30",
     "@types/mdx-js__react": "1.5.2",
     "@types/react-dom": "16.9.8",
     "@typescript-eslint/eslint-plugin": "3.8.0",
@@ -88,7 +83,7 @@
     "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
   },
   "scripts": {
-    "build": "gatsby build && yarn build-storybook",
+    "build": "gatsby build",
     "serve:build": "http-server public --gzip --cors -a local.test -S -C local.test.cert -K local.test.key",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,yml}\"",
     "lint": "eslint ./src --ext .ts --ext .tsx --fix",
@@ -96,8 +91,6 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "serve:public": "http-server public -p 8080 ",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook -o public/storybook"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   }
 }
