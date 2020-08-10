@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function SignIn() {
+const SignIn: React.FC<{ email?: string }> = ({ email }) => {
   const classes = useStyles()
 
   const SignUpComp = () => (
@@ -47,8 +47,10 @@ export default function SignIn() {
           id="email"
           label="Email Address"
           name="email"
+          onChange={e => console.log("onChange", e.target.value)}
           autoComplete="email"
           autoFocus
+          // {...(!!email ? { value: email } : {})}
         />
         <TextField
           variant="outlined"
@@ -97,3 +99,5 @@ export default function SignIn() {
     </Container>
   )
 }
+
+export default SignIn
