@@ -3,37 +3,10 @@ title: My Second Post!
 date: "2015-05-06T23:46:37.121Z"
 ---
 import Layout from '../../../src/Layout.tsx'
-import Example from "./flex-example.tsx"
-import { State, Observe } from 'mdx-observable';
 import { Button } from "@material-ui/core"
-
 
 <Layout>  
 
-# Counter in md :)
-
-ROBOTO
-
-
-
-<State initialState={{ count: 0 }} >
-
-<Observe>
-{({ setState }) => (
-    <Button onClick={() => setState(s => ({ count: s.count + 1 }))}>
-    Click me
-    </Button>
-    
-)}
-</Observe>
-
-The button has been clicked:
-
-<Observe>
-{ ({...s}) => (<span>{s.count} times</span>) }
-</Observe>
-
-</State>
 
 And lets have some typography
 
@@ -80,9 +53,8 @@ _You **can** combine them_
 ## h2 ```code```
 
 text
+
+
 ```var i=code```
  
-
-
-<Example />
 </Layout>
