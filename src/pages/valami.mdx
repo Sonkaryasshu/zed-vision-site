@@ -1,8 +1,7 @@
-import Layout from "../Layout.tsx"
+import PageLayout from "../Layout.tsx"
 import Valami from "../components/atoms/test.mdx"
-import {Heading} from "rebass"
 
-export default Layout
+export default PageLayout
 
 
 # h1 
@@ -13,8 +12,6 @@ export default Layout
 
 
 *This text will be italic*
-
-
 
 
 I think you should use an `<addr>` element here instead.
@@ -29,7 +26,7 @@ I think you should use an `<addr>` element here instead.
 - [ ] this is an incomplete item
 
 
-```javascript
+```tsx
 function fancyAlert(arg) {
   if(arg) {
     $.facebox({div:'#foo'})

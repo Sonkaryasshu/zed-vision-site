@@ -3,8 +3,6 @@ import { Link } from "gatsby"
 
 import CustomLayout from "../Layout"
 
-import { Heading } from "rebass"
-
 interface Props {
   location: Location
   title: string
@@ -24,9 +22,9 @@ const Layout: React.FC<Props> = ({ location, title, children }) => {
     )
   } else {
     header = (
-      <Heading fontSize={[5, 6, 7]}>
+      <h2>
         <Link to={`/`}>{title}</Link>
-      </Heading>
+      </h2>
     )
   }
   return (
