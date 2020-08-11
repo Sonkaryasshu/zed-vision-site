@@ -38,7 +38,7 @@
     "gatsby-transformer-sharp": "2.5.12",
     "mdx-observable": "^0.2.0",
     "popper.js": "^1.16.1",
-    "prismjs": "1.20.0",
+    "prismjs": "1.21.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-graph-vis": "^1.0.5",
