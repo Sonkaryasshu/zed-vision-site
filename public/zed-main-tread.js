@@ -10,7 +10,7 @@ const load = async () => {
   
     const reload = async() =>{  
       const url = isLocalhost()? "/":`https://raw.githubusercontent.com/zed-vision/mostly-deno/master/`;
-      const filename = await fetch(`${url}.sha256/zed.js`)
+      const filename = await fetch(`${url}.sha256/zed`)
       
       const clientID = await filename.text();
   
