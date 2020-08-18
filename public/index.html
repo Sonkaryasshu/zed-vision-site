@@ -1,6 +1,34 @@
 <!DOCTYPE html>
 <body>
   <script>
-    let worker = new Worker("https://raw.githubusercontent.com/zed-vision/mostly-deno/master/helpers/sha-worker-examle/47b02cfc46fbc658029856fcc2e2b1b56b8a9775c62052531751f71644e54c50.js")
+
+    const load = async ()=>{
+    const res = await fetch('https://raw.githubusercontent.com/zed-vision/mostly-deno/master/helpers/sha-worker-examle/47b02cfc46fbc658029856fcc2e2b1b56b8a9775c62052531751f71644e54c50.js')
+    const response = await response.json()
+
+window.URL = window.URL || window.webkitURL;
+
+// "Server response", used in all examples
+
+var blob;
+try {
+    blob = new Blob([response], {type: 'application/javascript'});
+} catch (e) { // Backwards-compatibility
+    window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder;
+    blob = new BlobBuilder();
+    blob.append(response);
+    blob = blob.getBlob();
+}
+var worker = new Worker(URL.createObjectURL(blob));
+
+// Test, used in all examples:
+worker.onmessage = function(e) {
+    alert('Response: ' + e.data);
+};
+worker.postMessage('Test');
+    }
+
+    load();
+
   </script>
 </body>
