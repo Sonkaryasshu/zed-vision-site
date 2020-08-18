@@ -8,7 +8,10 @@
   <script type="text/javascript">
 
     const load = async () => {
-      const resp = await fetch('https://raw.githubusercontent.com/zed-vision/mostly-deno/master/helpers/sha-worker-examle/0c6b553bb02d0e42eb6ea8d641ac71c7f8c7eed31fee0818e99487d923ceabca.js')
+
+      const clientID = "72e45ce40ff24cfac5ec0ea2cdad957cd28a41b276047125d170a153dade8e37";
+
+      const resp = await fetch('https://raw.githubusercontent.com/zed-vision/mostly-deno/master/.sha256/'+clientID+'.js?'+ Math.random())
       const response = await resp.text()
     
 
