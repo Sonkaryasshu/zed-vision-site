@@ -86,7 +86,7 @@
   "scripts": {
     "build": "echo ok",
     "x": "gatsby build && cp spike public/",
-    "serve:build": "http-server public --gzip --cors -a local.test -S -C local.test.cert -K local.test.key",
+    "serve:build": "http-server public --gzip --cors -a localhost -S -C localhost.cert -K localhost.key",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,yml}\"",
     "lint": "eslint ./src --ext .ts --ext .tsx --fix",
     "start": "gatsby develop --host local.test --https --cert-file local.test.cert --key-file local.test.key",
