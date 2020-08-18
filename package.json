@@ -39,6 +39,7 @@
     "mdx-observable": "0.2.0",
     "popper.js": "1.16.1",
     "prismjs": "1.21.0",
+    "public-ip": "^4.0.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-graph-vis": "1.0.5",
@@ -86,7 +87,7 @@
   "scripts": {
     "build": "echo ok",
     "x": "gatsby build && cp spike public/",
-    "serve:build": "http-server public --gzip --cors -a localhost -S -C localhost.cert -K localhost.key",
+    "serve:build": "http-server public -p 8888 --gzip --cors -a 0.0.0.0 -S -C localhost.cert -K localhost.key",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,yml}\"",
     "lint": "eslint ./src --ext .ts --ext .tsx --fix",
     "start": "gatsby develop --host local.test --https --cert-file local.test.cert --key-file local.test.key",
