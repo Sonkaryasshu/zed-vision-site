@@ -87,6 +87,5 @@ amplify-gradle-config.json
 amplifytools.xcconfig
 
 
-localhost.*
-
+.certs
 public
