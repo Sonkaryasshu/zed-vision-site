@@ -85,8 +85,7 @@
     "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
   },
   "scripts": {
-    "build": "echo ok",
-    "x": "gatsby build && cp spike public/",
+    "build": "gatsby build && cp spike public/",
     "serve:build": "http-server public -p 8888 --gzip --cors -a 0.0.0.0 -S -C localhost.cert -K localhost.key",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,yml}\"",
     "lint": "eslint ./src --ext .ts --ext .tsx --fix",
