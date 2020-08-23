@@ -89,7 +89,7 @@
     "serve:build": "http-server public -p 8888 --gzip --cors -a 0.0.0.0 -S -C localhost.cert -K localhost.key",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,yml}\"",
     "lint": "eslint ./src --ext .ts --ext .tsx --fix",
-    "start": "gatsby develop --host local.test --https --cert-file local.test.cert --key-file local.test.key",
+    "start": "gatsby develop --host localhost --https --cert-file localhost.cert --key-file localhost.key",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "serve:public": "http-server public -p 8080 ",
