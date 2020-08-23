@@ -37,5 +37,5 @@
   "typescript.suggest.paths": false,
   "mdx-preview.build.useSucraseTranspiler": true,
   "mdx-preview.preview.useWhiteBackground": true,
-  "mdx-preview.preview.security": "disabled",
+  "mdx-preview.preview.security": "disabled"
 }
