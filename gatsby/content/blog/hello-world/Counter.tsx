@@ -3,13 +3,17 @@ import * as React from "react"
 
 export const Counter = () => (
   <CodeEditor
-    code={`() => {
+    code={`
+() => {
     const [state, setState] = React.useState({counter: 0})
     
     const actions = {
     increase: ()=>setState({...state, counter: state.counter + 1}),
     }
     
-    return <h3 onClick={actions.increase}>Counter: {state.counter}</h3>}`}
+    return <h3 onClick={actions.increase}>
+        Counter: {state.counter}
+        </h3>
+}`}
   ></CodeEditor>
 )
