@@ -1,4 +1,4 @@
-import { CodeEditor } from "./CodeEditor"
+import { CodeEditor } from "../../../packages/CodeEditor/CodeEditor"
 import * as React from "react"
 
 export const Counter = () => (
