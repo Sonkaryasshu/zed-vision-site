@@ -1,5 +1,6 @@
 {
   "files.autoSave": "onFocusChange",
+  "editor.maxTokenizationLineLength": 60000,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
