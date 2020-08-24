@@ -1,17 +1,15 @@
 {
-    "providers": [
-        "awscloudformation"
-    ],
-    "projectName": "zedgatsby",
-    "version": "3.0",
-    "frontend": "javascript",
-    "javascript": {
-        "framework": "none",
-        "config": {
-            "SourceDir": "gatsby/src",
-            "DistributionDir": "public",
-            "BuildCommand": "npm run-script build",
-            "StartCommand": "npm run-script start"
-        }
+  "providers": ["awscloudformation"],
+  "projectName": "zedgatsby",
+  "version": "3.0",
+  "frontend": "javascript",
+  "javascript": {
+    "framework": "none",
+    "config": {
+      "SourceDir": "gatsby/src",
+      "DistributionDir": "public",
+      "BuildCommand": "npm run-script build",
+      "StartCommand": "npm run-script start"
     }
+  }
 }

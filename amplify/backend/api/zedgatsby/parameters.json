@@ -1,11 +1,8 @@
 {
-    "AppSyncApiName": "zedgatsby",
-    "DynamoDBBillingMode": "PAY_PER_REQUEST",
-    "DynamoDBEnableServerSideEncryption": "false",
-    "AuthCognitoUserPoolId": {
-        "Fn::GetAtt": [
-            "authzedgatsby4705563b",
-            "Outputs.UserPoolId"
-        ]
-    }
+  "AppSyncApiName": "zedgatsby",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": "false",
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": ["authzedgatsby4705563b", "Outputs.UserPoolId"]
+  }
 }

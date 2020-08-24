@@ -1,5 +1,5 @@
 {
-    "tableName": "events",
-    "partitionKeyName": "uuid",
-    "partitionKeyType": "S"
+  "tableName": "events",
+  "partitionKeyName": "uuid",
+  "partitionKeyType": "S"
 }
