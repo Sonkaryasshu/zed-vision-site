@@ -1,5 +1,6 @@
 {
   "name": "zed-vision-mono",
+  "private": true,
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:zed-vision/zed-vision-site.git",
@@ -11,6 +12,7 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,yml}\"",
     "lint": "eslint ./src --ext .ts --ext .tsx --fix"
   },
+  "workspaces": ["gatsby", "gatsby/packages/*"],
   "devDependencies": {
     "eslint": "7.7.0",
     "eslint-config-prettier": "6.11.0",
