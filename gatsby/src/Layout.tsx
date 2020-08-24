@@ -1,7 +1,6 @@
 import * as React from "react"
 import { Helmet } from "react-helmet"
 import CssBaseline from "@material-ui/core/CssBaseline"
-import { getStyle } from "./style-synthwave84"
 
 const Layout: React.FC = ({ children }) => (
   <>
@@ -15,7 +14,6 @@ const Layout: React.FC = ({ children }) => (
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
-        <style type="text/css">{getStyle()}</style>
       </Helmet>
 
       <div style={{ maxWidth: 1024, margin: "auto" }}>{children}</div>
