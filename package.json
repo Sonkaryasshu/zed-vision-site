@@ -1,0 +1,12 @@
+{
+  "name": "zed-vision-mono",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:zed-vision/zed-vision-site.git",
+  "author": "Zoltan Erdos <zolika84@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "echo Do manually pls",
+    "start": "cd gatsby && yarn start"
+  }
+}
