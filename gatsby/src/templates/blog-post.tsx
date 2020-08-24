@@ -5,6 +5,7 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { MDXRenderer } from "gatsby-plugin-mdx"
+import { rhythm, scale } from "../utils/typography"
 
 interface Props {
   data: {
@@ -67,12 +68,32 @@ const BlogPostTemplate = ({ data, pageContext, location }: Props) => {
           description={post.frontmatter.description || post.excerpt}
         />
         <header>
-          <h1>{post.frontmatter.title}</h1>
-          <p>{post.frontmatter.date}</p>
+          <h1
+            style={{
+              marginTop: rhythm(1),
+              marginBottom: 0,
+            }}
+          >
+            {post.frontmatter.title}
+          </h1>{" "}
+          <p
+            style={{
+              ...scale(-1 / 5),
+              display: `block`,
+              marginBottom: rhythm(1),
+            }}
+          >
+            {post.frontmatter.date}
+          </p>
         </header>
       </Layout>
       <MDXRenderer>{post.body}</MDXRenderer>
       <Layout location={location} title={siteTitle}>
+        <hr
+          style={{
+            marginBottom: rhythm(1),
+          }}
+        />
         <footer>
           <Bio />
         </footer>

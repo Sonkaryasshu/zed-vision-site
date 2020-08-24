@@ -10,3 +10,4 @@ const typography = new Typography(Wordpress2016)
 
 export const rhythm = typography.rhythm
 export const scale = typography.scale
+export default typography
