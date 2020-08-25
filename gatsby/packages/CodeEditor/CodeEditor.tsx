@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     cardNoSpace: {
       padding: 0,
+      paddingBottom: "0 !important",
     },
     paper: {
       background: "white",

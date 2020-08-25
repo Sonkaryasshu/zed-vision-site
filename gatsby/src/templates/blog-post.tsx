@@ -4,8 +4,9 @@ import { Link, graphql } from "gatsby"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { MDXRenderer } from "gatsby-plugin-mdx"
 import { rhythm, scale } from "../utils/typography"
+import { MDXRenderer } from "gatsby-plugin-mdx"
+// import { MDXProvider } from "@mdx-js/react"
 
 interface Props {
   data: {
@@ -59,6 +60,7 @@ const BlogPostTemplate = ({ data, pageContext, location }: Props) => {
   const post = data.mdx
   const siteTitle = data.site.siteMetadata.title
   const { previous, next } = pageContext
+  const BlogPost = ()  => <MDXRenderer>{post.body}</MDXRenderer>
 
   return (
     <>
@@ -86,7 +88,7 @@ const BlogPostTemplate = ({ data, pageContext, location }: Props) => {
             {post.frontmatter.date}
           </p>
         </header>
-        <MDXRenderer>{post.body}</MDXRenderer>
+        <BlogPost />
         <hr
           style={{
             marginBottom: rhythm(1),
