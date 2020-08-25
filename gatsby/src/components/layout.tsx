@@ -16,6 +16,8 @@ const CustomLayout: React.FC = ({ children }) => (
     <Helmet>
       <link
         rel="stylesheet"
+        media="none"
+        onLoad={e => (e.target.media = "all")}
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
       />
       <meta

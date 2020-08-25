@@ -177,5 +177,6 @@ module.exports = {
       },
     },
     `gatsby-plugin-emotion`,
+    "gatsby-plugin-preload-link-crossorigin",
   ],
 }
