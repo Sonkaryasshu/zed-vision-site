@@ -3,13 +3,26 @@ title: Hello World
 date: "2020-08-22T22:12:03.284Z"
 description: "Hello World"
 ---
-import {Counter} from "./Counter"
+import Layout from '../../../src/Layout.tsx'
+export default Layout
 
 # Hello world!
 
-<Counter />
+```javascript live=true
+() => {
+    const [state, setState] = React.useState({counter: 0})
+    
+    const actions = {
+    increase: ()=>setState({...state, counter: state.counter + 1}),
+    }
+    
+    return <h3 onClick={actions.increase}>
+        Counter: {state.counter}
+        </h3>
+}
+```
 
-This is my first post on my new fake blog! How exciting!
+This is myFC first post on my new fake blog! How exciting!
 
 I'm sure I'll write a lot more interesting things in the future.
 

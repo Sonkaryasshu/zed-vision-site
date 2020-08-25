@@ -12,6 +12,21 @@ export default PageLayout
 
 
 
+```javascript live=true
+() => {
+    const [state, setState] = React.useState({counter: 0})
+    
+    const actions = {
+    increase: ()=>setState({...state, counter: state.counter + 1}),
+    }
+    
+    return <h3 onClick={actions.increase}>
+        Counter: {state.counter}
+        </h3>
+}
+```
+
+
 *This text will be italic*
 
 

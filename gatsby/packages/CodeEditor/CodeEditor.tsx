@@ -1,6 +1,8 @@
 import * as React from "react"
 import styled, { css } from "styled-components"
 import * as polished from "polished"
+import Highlight, { defaultProps } from "prism-react-renderer"
+import { mdx } from "@mdx-js/react"
 
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live"
 
@@ -104,6 +106,17 @@ const LiveWrapper = styled.div`
     flex-direction: column;
   }
 `
+// @ts-ignore
+const RenderWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 300px) {
+    flex-direction: column;
+  }
+`
 
 const column = css`
   flex-basis: 50%;
@@ -150,16 +163,52 @@ const StyledError = styled(LiveError)`
   font-family: "Source Code Pro", monospace;
 `
 
-export const CodeEditor: React.FC<{ code: string }> = ({ code, children }) => (
-  <Container>
-    <StyledProvider code={code} theme={reactLiveHome}>
-      <LiveWrapper>
-        <StyledEditor>
-          <LiveEditor />
-        </StyledEditor>
-        <StyledPreview />
-      </LiveWrapper>
-      <StyledError />
-    </StyledProvider>
-  </Container>
-)
+export const CodeEditor: React.FC<{
+  live?: boolean
+  render?: boolean
+  className?: string
+}> = ({ children, live, render, className }) =>
+  live ? (
+    <Container>
+      <StyledProvider
+        code={String(children).trim()}
+        transformCode={(code: string) => "/** @jsx mdx */" + code}
+        theme={reactLiveHome}
+        scope={{ mdx }}
+      >
+        <LiveWrapper>
+          <StyledEditor>
+            <LiveEditor />
+          </StyledEditor>
+          <StyledPreview />
+        </LiveWrapper>
+        <StyledError />
+      </StyledProvider>
+    </Container>
+  ) : render ? (
+    <Container>
+      <StyledProvider code={String(children).trim()} scope={{ mdx }}>
+        <RenderWrapper>
+          <StyledPreview />
+        </RenderWrapper>
+      </StyledProvider>
+    </Container>
+  ) : (
+    <Highlight
+      {...defaultProps}
+      code={String(children).trim()}
+      language={className?.replace(/language-/, "") as any}
+    >
+      {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        <pre className={className} style={{ ...style, padding: "20px" }}>
+          {tokens.map((line, i) => (
+            <div key={i} {...getLineProps({ line, key: i })}>
+              {line.map((token, key) => (
+                <span key={key} {...getTokenProps({ token, key })} />
+              ))}
+            </div>
+          ))}
+        </pre>
+      )}
+    </Highlight>
+  )

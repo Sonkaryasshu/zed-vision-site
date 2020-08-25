@@ -86,9 +86,7 @@ const BlogPostTemplate = ({ data, pageContext, location }: Props) => {
             {post.frontmatter.date}
           </p>
         </header>
-      </Layout>
-      <MDXRenderer>{post.body}</MDXRenderer>
-      <Layout location={location} title={siteTitle}>
+        <MDXRenderer>{post.body}</MDXRenderer>
         <hr
           style={{
             marginBottom: rhythm(1),
