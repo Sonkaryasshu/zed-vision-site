@@ -13,9 +13,9 @@ description: "Hello World"
     increase: ()=>setState({...state, counter: state.counter + 1}),
     }
     
-    return <h3 onClick={actions.increase}>
+    return <div onClick={actions.increase}>
         Counter: {state.counter}
-        </h3>
+        </div>
 }
 ```
 
