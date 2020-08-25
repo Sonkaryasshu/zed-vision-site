@@ -70,7 +70,7 @@ module.exports = {
         name: `Zed Vision - Development experience, Testing, and everything between`,
         short_name: `ZedVision`,
         description: "Blog and tech experiments",
-        start_url: `https://www.zed.vision`,
+        start_url: `/`,
         background_color: `#f7f0eb`,
         theme_color: `#a2466c`,
         display: `standalone`,
