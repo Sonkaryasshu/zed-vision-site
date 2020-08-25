@@ -1,7 +1,7 @@
 {
   "name": "zed-vision-site",
   "scripts": {
-    "build": "gatsby build",
+    "build": "gatsby clean && gatsby build && rm -rf ../public && mv ./public ../",
     "serve:build": "http-server public -p 8888 --gzip --cors -a 0.0.0.0 -S -C ./.certs/localhost.cert -K ./.certs/localhost.key",
     "start": "gatsby develop --host localhost --https --cert-file ./.certs/localhost.cert --key-file ./.certs/localhost.key",
     "serve": "gatsby serve",
