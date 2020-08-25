@@ -3,8 +3,50 @@ import styled, { css } from "styled-components"
 import * as polished from "polished"
 import Highlight, { defaultProps } from "prism-react-renderer"
 import { mdx } from "@mdx-js/react"
+import Paper from "@material-ui/core/Paper"
 
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live"
+import Card from "@material-ui/core/Card"
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Button,
+  Box,
+  Grid,
+  makeStyles,
+  Theme,
+  createStyles,
+  CardContent,
+} from "@material-ui/core"
+
+import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline"
+
+import MenuIcon from "@material-ui/icons/Menu"
+import "./themes/prism-synthwave84.css"
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+    },
+    title: {
+      flexGrow: 1,
+    },
+    cardNoSpace: {
+      padding: 0,
+    },
+    paper: {
+      background: "white",
+      padding: theme.spacing(2),
+      minWidth: "200px",
+    },
+  })
+)
 
 export const reactLiveHome = {
   plain: {
@@ -154,6 +196,7 @@ const StyledPreview = styled(LivePreview)`
 const StyledError = styled(LiveError)`
   display: block;
   padding: ${polished.rem(8)};
+  background-color: black;
   padding-bottom: 0;
   background: red;
   color: white;
@@ -167,24 +210,95 @@ export const CodeEditor: React.FC<{
   live?: boolean
   render?: boolean
   className?: string
-}> = ({ children, live, render, className }) =>
-  live ? (
-    <Container>
-      <StyledProvider
-        code={String(children).trim()}
-        transformCode={(code: string) => "/** @jsx mdx */" + code}
-        theme={reactLiveHome}
-        scope={{ mdx }}
-      >
-        <LiveWrapper>
-          <StyledEditor>
-            <LiveEditor />
-          </StyledEditor>
-          <StyledPreview />
-        </LiveWrapper>
-        <StyledError />
-      </StyledProvider>
-    </Container>
+}> = ({ children, live, render, className }) => {
+  const classes = useStyles()
+
+  return live ? (
+    <ScopedCssBaseline>
+      <Paper elevation={10} variant="outlined" square={true}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="menu"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h5" className={classes.title}>
+              Live component editor
+            </Typography>
+            <Button color="inherit">Reset</Button>
+          </Toolbar>
+        </AppBar>
+        <Box>
+          <LiveProvider
+            code={String(children).trim()}
+            transformCode={(code: string) => "/** @jsx mdx */" + code}
+            scope={{ mdx }}
+          >
+            {/* <LiveWrapper> */}
+            <Card>
+              <CardContent className={classes.cardNoSpace}>
+                <Paper
+                  square={true}
+                  style={{
+                    color: "white",
+                    backgroundColor: "transparent !important",
+                    backgroundImage:
+                      "linear-gradient(to right bottom, #34294f 0%, #2a2139 30%)",
+                  }}
+                >
+                  <LiveEditor />
+                </Paper>
+                <Paper
+                  square={true}
+                  style={{
+                    color: "white",
+                    padding: "0",
+                    backgroundColor: "transparent !important",
+                    backgroundImage:
+                      "linear-gradient(to right top, red 0%, #2a2139 30%)",
+                  }}
+                >
+                  <LiveError />
+                </Paper>
+
+                <Paper
+                  square={true}
+                  style={{
+                    color: "black",
+                    padding: "10px",
+                    backgroundColor: "grey",
+                  }}
+                >
+                  <Grid
+                    container
+                    spacing={3}
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                  >
+                    <Grid item xs>
+                      <Paper className={classes.paper}>
+                        <LivePreview />
+                      </Paper>
+                    </Grid>
+
+                    <Grid item xs>
+                      <Paper className={classes.paper}>
+                        <LivePreview style={{ overflow: "hidden" }} />
+                      </Paper>
+                    </Grid>
+                  </Grid>
+                </Paper>
+              </CardContent>
+            </Card>
+          </LiveProvider>
+        </Box>
+      </Paper>
+    </ScopedCssBaseline>
   ) : render ? (
     <Container>
       <StyledProvider code={String(children).trim()} scope={{ mdx }}>
@@ -212,3 +326,4 @@ export const CodeEditor: React.FC<{
       )}
     </Highlight>
   )
+}
