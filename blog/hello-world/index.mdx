@@ -5,17 +5,17 @@ description: "Hello World"
 ---
 # Hello world!
 
-```javascript live=true
+```javascript live=true title=Counter
 () => {
-    const [state, setState] = React.useState({counter: 0})
-    
-    const actions = {
-    increase: ()=>setState({...state, counter: state.counter + 1}),
-    }
-    
-    return <div onClick={actions.increase}>
-        Counter: {state.counter}
-        </div>
+  const [state, setState] = React.useState({ counter: 0 })
+
+  const actions = {
+    increase: () => setState({ ...state, counter: state.counter + 1 }),
+  }
+
+  return <div onClick={actions.increase}>
+    Counter: {state.counter}
+  </div>
 }
 ```
 
