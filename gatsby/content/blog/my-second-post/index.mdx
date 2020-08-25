@@ -2,11 +2,7 @@
 title: My Second Post!
 date: "2015-05-06T23:46:37.121Z"
 ---
-import Layout from '../../../src/Layout.tsx'
 import { Button } from "@material-ui/core"
-
-<Layout>  
-
 
 And lets have some typography
 
@@ -36,8 +32,22 @@ I think you should use an `<addr>` element here instead.
 - [ ] this is an incomplete item
 
 
-```javascript
-const counter = React.useCounter({ count: 1 })
+```javascript live=true
+//
+//  Counter.tsx
+//
+
+() => {
+    const [state, setState] = React.useState({counter: 0})
+    
+    const actions = {
+    increase: ()=>setState({...state, counter: state.counter + 1}),
+    }
+    
+    return <h3 onClick={actions.increase}>
+        Counter: {state.counter}
+        </h3>
+}
 ```
 
 As Kanye West said:
@@ -57,4 +67,3 @@ text
 
 ```var i=code```
  
-</Layout>

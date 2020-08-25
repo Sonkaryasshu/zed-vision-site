@@ -1,7 +1,33 @@
-import React from "react"
 import { Link } from "gatsby"
+import * as React from "react"
+import { Helmet } from "react-helmet"
+import { MDXProvider } from "@mdx-js/react"
+import { CodeEditor } from "../../packages/CodeEditor/CodeEditor"
 
-import CustomLayout from "../Layout"
+const components = {
+  pre: function PreComp(props: any) {
+    return <div {...props} />
+  },
+  code: CodeEditor,
+}
+
+const CustomLayout: React.FC = ({ children }) => (
+  <>
+    <Helmet>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      />
+      <meta
+        name="viewport"
+        content="minimum-scale=1, initial-scale=1, width=device-width"
+      />
+    </Helmet>
+    <MDXProvider components={components}>
+      <div style={{ maxWidth: 1024, margin: "auto" }}>{children}</div>
+    </MDXProvider>
+  </>
+)
 
 interface Props {
   location: Location
@@ -12,9 +38,13 @@ const Layout: React.FC<Props> = ({ location, title, children }) => {
   let __PATH_PREFIX__
 
   const rootPath = `${__PATH_PREFIX__}/`
-  let header
-
-  if (location.pathname === rootPath) {
+  let header = (
+    <h1>
+      <Link to={`/`}>{title}</Link>
+    </h1>
+  )
+  if (!(location && location.pathname)) header = <React.Fragment />
+  else if (location.pathname === rootPath) {
     header = (
       <h1>
         <Link to={`/`}>{title}</Link>
