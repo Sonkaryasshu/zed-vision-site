@@ -210,7 +210,8 @@ export const CodeEditor: React.FC<{
   live?: boolean
   render?: boolean
   className?: string
-}> = ({ children, live, render, className }) => {
+  title?: string
+}> = ({ children, live, render, className, title = "Example" }) => {
   const classes = useStyles()
 
   return live ? (
@@ -227,7 +228,7 @@ export const CodeEditor: React.FC<{
               <MenuIcon />
             </IconButton>
             <Typography variant="h5" className={classes.title}>
-              Live component editor
+              {title}
             </Typography>
             <Button color="inherit">Reset</Button>
           </Toolbar>
