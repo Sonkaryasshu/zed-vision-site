@@ -66,6 +66,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
+        icon: `../assets/gatsby-icon.png`,
         name: `Zed Vision - Development experience, Testing, and everything between`,
         short_name: `ZedVision`,
         description: "Blog and tech experiments",
@@ -118,6 +119,5 @@ module.exports = {
       },
     },
     `gatsby-plugin-emotion`,
-    "gatsby-plugin-preload-link-crossorigin",
   ],
 }
