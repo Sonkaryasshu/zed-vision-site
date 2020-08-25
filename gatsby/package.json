@@ -44,7 +44,7 @@
     "gatsby-transformer-sharp": "2.5.13",
     "mdx-observable": "0.2.0",
     "popper.js": "1.16.1",
-    "public-ip": "^4.0.2",
+    "public-ip": "4.0.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-graph-vis": "1.0.5",
