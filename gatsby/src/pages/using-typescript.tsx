@@ -5,10 +5,7 @@ import { PageProps, Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const UsingTypescript: React.FC<PageProps> = ({
-  path,
-  location,
-}) => (
+const UsingTypescript: React.FC<PageProps> = ({ path, location }) => (
   <Layout title="Using TypeScript" location={location}>
     <SEO title="Using TypeScript" />
     <h1>Gatsby supports TypeScript by default!</h1>
@@ -21,9 +18,7 @@ const UsingTypescript: React.FC<PageProps> = ({
       For type checking you'll want to install <em>typescript</em> via npm and
       run <em>tsc --init</em> to create a <em>.tsconfig</em> file.
     </p>
-    <p>
-      You're currently on the page "{path}" 
-    </p>
+    <p>You're currently on the page "{path}"</p>
     <Link to="/">Go back to the homepage</Link>
   </Layout>
 )

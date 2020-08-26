@@ -60,7 +60,7 @@ const BlogPostTemplate = ({ data, pageContext, location }: Props) => {
   const post = data.mdx
   const siteTitle = data.site.siteMetadata.title
   const { previous, next } = pageContext
-  const BlogPost = ()  => <MDXRenderer>{post.body}</MDXRenderer>
+  const BlogPost = () => <MDXRenderer>{post.body}</MDXRenderer>
 
   return (
     <>
