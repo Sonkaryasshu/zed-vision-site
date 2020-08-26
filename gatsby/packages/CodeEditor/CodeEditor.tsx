@@ -247,6 +247,7 @@ export const CodeEditor: React.FC<{
                   square={true}
                   style={{
                     color: "white",
+                    fontSize: "large",
                     backgroundColor: "transparent !important",
                     backgroundImage:
                       "linear-gradient(to right bottom, #34294f 0%, #2a2139 30%)",

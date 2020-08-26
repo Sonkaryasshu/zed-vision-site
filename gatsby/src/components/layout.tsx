@@ -16,11 +16,11 @@ const CustomLayout: React.FC = ({ children }) => (
     <Helmet>
       <meta
         name="viewport"
-        content="minimum-scale=1, initial-scale=1, width=device-width"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
       />
     </Helmet>
     <MDXProvider components={components}>
-      <div style={{ maxWidth: 1024, margin: "auto" }}>{children}</div>
+      <div style={{ maxWidth: 1140, margin: "auto" }}>{children}</div>
     </MDXProvider>
   </>
 )
