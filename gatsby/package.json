@@ -61,15 +61,14 @@
   },
   "browserslist": {
     "production": [
-      "> 5%",
-      "ie 11"
+      "> 5%"
     ],
     "modern": [
       "last 1 chrome version",
       "last 1 firefox version"
     ],
     "ssr": [
-      "node 12"
+      "node 14"
     ]
   }
 }
