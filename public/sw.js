@@ -11,8 +11,7 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts("workbox-v4.3.1/workbox-sw.js");
-workbox.setConfig({modulePathPrefix: "workbox-v4.3.1"});
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 workbox.core.setCacheNameDetails({prefix: "gatsby-plugin-offline"});
 
@@ -39,11 +38,11 @@ self.__precacheManifest = [
     "url": "framework-523e2e54c91ee2d89382.js"
   },
   {
-    "url": "app-48ff432df4b404b3bc79.js"
+    "url": "app-88b7375d760426460002.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "71a26adb3afdc7ed59ab629c6881d38a"
+    "revision": "75334202e1d91a49393983705afed5d9"
   },
   {
     "url": "bac1b955-83f0157401ecfd4a14fa.js"
@@ -59,7 +58,7 @@ self.__precacheManifest = [
   },
   {
     "url": "manifest.webmanifest",
-    "revision": "b982320ea5a9964ee92f4505e9b7efed"
+    "revision": "f8a18ddf8edfe47267ccf7f37ad8c568"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
@@ -151,7 +150,7 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
   // Check for resources + the app bundle
   // The latter may not exist if the SW is updating to a new version
   const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`/app-48ff432df4b404b3bc79.js`))) {
+  if (!resources || !(await caches.match(`/app-88b7375d760426460002.js`))) {
     return await fetch(event.request)
   }
 
