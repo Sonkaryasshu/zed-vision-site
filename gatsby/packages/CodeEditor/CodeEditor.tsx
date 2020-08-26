@@ -275,13 +275,7 @@ export const CodeEditor: React.FC<{
                     backgroundColor: "grey",
                   }}
                 >
-                  <Grid
-                    container
-                    spacing={3}
-                    direction="row"
-                    justify="center"
-                    alignItems="center"
-                  >
+                  <Grid container={true} spacing={3} direction="row">
                     <Grid item xs>
                       <Paper className={classes.paper}>
                         <LivePreview />
