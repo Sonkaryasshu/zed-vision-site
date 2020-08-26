@@ -44,6 +44,7 @@
     "gatsby-transformer-sharp": "2.5.13",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "guess-webpack": "0.4.19",
     "react-graph-vis": "1.0.5",
     "react-helmet": "6.1.0",
     "react-typography": "0.16.19",
