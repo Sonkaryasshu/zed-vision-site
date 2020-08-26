@@ -1,18 +1,21 @@
-/**
- * Bio component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-/** @jsx jsx */ jsx
-import { jsx } from "@emotion/core"
-
-import Image from "gatsby-image"
+import styled from "styled-components"
+import GatsbyImage from "gatsby-image"
 
 import { rhythm } from "../utils/typography"
+
+const Container = styled.div`
+  display: flex;
+  margin-bottom: ${rhythm(2.5)};
+`
+
+const StyledImage = styled(GatsbyImage)`
+  margin-right: ${rhythm(1 / 2)};
+  margin-bottom: 0;
+  min-width: 50;
+  border-radius: "100%";
+`
 
 const Bio = () => {
   const data = useStaticQuery(graphql`
@@ -40,21 +43,11 @@ const Bio = () => {
 
   const { author, social } = data.site.siteMetadata
   return (
-    <div
-      css={{
-        display: `flex`,
-        marginBottom: rhythm(2.5),
-      }}
-    >
-      <Image
-        fixed={data.avatar.childImageSharp.fixed}
+    <Container>
+      <StyledImage
         alt={author.name}
-        css={{
-          marginRight: rhythm(1 / 2),
-          marginBottom: 0,
-          minWidth: 50,
-          borderRadius: `100%`,
-        }}
+        //@ts-ignore
+        fixed={data.avatar.childImageSharp.fixed}
         imgStyle={{
           borderRadius: `50%`,
         }}
@@ -66,7 +59,7 @@ const Bio = () => {
           You should follow him on Twitter
         </a>
       </p>
-    </div>
+    </Container>
   )
 }
 

@@ -17,8 +17,6 @@
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },
   "dependencies": {
-    "@emotion/core": "10.0.35",
-    "@emotion/styled": "10.0.27",
     "@material-ui/core": "next",
     "@material-ui/icons": "next",
     "@mdx-js/mdx": "next",
@@ -51,7 +49,7 @@
     "typography-theme-wordpress-2016": "0.16.19",
     "vfile-message": "2.0.4"
   },
-  "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
+  "homepage": "https://www.zed.vision",
   "keywords": [
     "gatsby"
   ],

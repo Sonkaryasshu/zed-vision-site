@@ -5,6 +5,15 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm } from "../utils/typography"
+import styled from "styled-components"
+
+const StyledLink = styled(Link)`
+  box-shadow: "none";
+`
+
+const H3 = styled.h3`
+  margin-bottom: ${rhythm(1 / 4)};
+`
 
 interface Props {
   data: {
@@ -45,15 +54,9 @@ const BlogIndex: React.FC<Props> = ({ data, location }) => {
         return (
           <article key={node.fields.slug}>
             <header>
-              <h3
-                css={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
-                <Link css={{ boxShadow: `none` }} to={node.fields.slug}>
-                  {title}
-                </Link>
-              </h3>
+              <H3>
+                <StyledLink to={node.fields.slug}>{title}</StyledLink>
+              </H3>
               <small>{node.frontmatter.date}</small>
             </header>
             <section>
