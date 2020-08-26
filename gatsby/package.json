@@ -61,6 +61,19 @@
   "main": "n/a",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+    "url": "git+https://github.com/zed-vision/zed-vision-site.git"
+  },
+  "browserslist": {
+    "production": [
+      "> 5%",
+      "ie 11"
+    ],
+    "modern": [
+      "last 1 chrome version",
+      "last 1 firefox version"
+    ],
+    "ssr": [
+      "node 12"
+    ]
   }
 }
