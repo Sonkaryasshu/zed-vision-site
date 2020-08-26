@@ -5,14 +5,7 @@ import { PageProps, Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-type DataProps = {
-  site: {
-    buildTime: string
-  }
-}
-
-const UsingTypescript: React.FC<PageProps<DataProps>> = ({
-  data,
+const UsingTypescript: React.FC<PageProps> = ({
   path,
   location,
 }) => (
@@ -29,15 +22,7 @@ const UsingTypescript: React.FC<PageProps<DataProps>> = ({
       run <em>tsc --init</em> to create a <em>.tsconfig</em> file.
     </p>
     <p>
-      You're currently on the page "{path}" which was built on{" "}
-      {data.site.buildTime}.
-    </p>
-    <p>
-      To learn more, head over to our{" "}
-      <a href="https://www.gatsbyjs.org/docs/typescript/">
-        documentation about TypeScript
-      </a>
-      .
+      You're currently on the page "{path}" 
     </p>
     <Link to="/">Go back to the homepage</Link>
   </Layout>
@@ -45,10 +30,4 @@ const UsingTypescript: React.FC<PageProps<DataProps>> = ({
 
 export default UsingTypescript
 
-export const query = graphql`
-  {
-    site {
-      buildTime(formatString: "YYYY-MM-DD hh:mm a z")
-    }
-  }
-`
+export const query = null
