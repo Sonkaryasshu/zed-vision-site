@@ -1,7 +1,3 @@
-// custom typefaces
-require("typeface-montserrat")
-require("typeface-merriweather")
-
 exports.disableCorePrefetching = () => true
 
 const gatsbyBrowser = {
