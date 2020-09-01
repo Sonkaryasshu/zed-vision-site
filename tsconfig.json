@@ -11,6 +11,7 @@
     "incremental": true,
     "isolatedModules": true,
     "moduleResolution": "node",
+    
     "baseUrl": "gatsby/src",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
@@ -24,5 +25,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "types": ["react"]
-  }
+  },
+  "include": ["gatsby/**/*.ts", "gatsby/**/*.tsx"]
 }

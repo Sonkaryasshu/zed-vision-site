@@ -7,8 +7,10 @@
   "author": "Zoltan Erdos <zolika84@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "postinstall": "deno install --allow-net --allow-read https://deno.land/std@0.67.0/http/file_server.ts",
     "build": "echo Do manually pls",
     "start": "cd gatsby && yarn start",
+    "serve": "file_server --cert .certs/localhost.cert --key .certs/localhost.key --host localhost public",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,yml}\"",
     "lint": "eslint ./gatsby --ext .ts --ext .tsx --fix"
   },
