@@ -14,7 +14,7 @@
   },
   "workspaces": [
     "gatsby",
-    "gatsby/packages/*"
+    "gatsby/packages/**"
   ],
   "devDependencies": {
     "@babel/core": "7.11.5",
