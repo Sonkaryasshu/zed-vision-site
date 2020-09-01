@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es5",
-    "lib": ["es5", "es6", "es7", "es2017", "DOM"],
+    "target": "es2018",
+    "lib": [ "es2020", "DOM"],
     "downlevelIteration": true,
     "sourceMap": true,
     "allowJs": false,
@@ -11,7 +11,6 @@
     "incremental": true,
     "isolatedModules": true,
     "moduleResolution": "node",
-    
     "baseUrl": "gatsby/src",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
