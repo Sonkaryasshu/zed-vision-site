@@ -253,7 +253,7 @@ export const CodeEditor: React.FC<{
                       "linear-gradient(to right bottom, #34294f 0%, #2a2139 30%)",
                   }}
                 >
-                  <LiveEditor />
+                  <LiveEditor onChange={d => console.log(d)} />
                 </Paper>
                 <Paper
                   square={true}
@@ -329,19 +329,6 @@ const EventCaptureBox: React.FC = ({ children }) => {
       }}
     >
       {children}
-      {/* <hr /> */}
-      {/* <EventReplayBox events={events}> {children}</EventReplayBox> */}
-      {/* <ul>
-        {events.map((e: MouseEvent, i) => {
-          console.log(e)
-          return (
-            <li key={i}>
-              {" "}
-              {e.layerX}=={e.layerY}{" "}
-            </li>
-          )
-        })}
-      </ul> */}
     </div>
   )
 }
