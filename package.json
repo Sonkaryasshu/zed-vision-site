@@ -7,7 +7,7 @@
   "author": "Zoltan Erdos <zolika84@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "postinstall": "deno install --allow-net --allow-read https://deno.land/std@0.67.0/http/file_server.ts",
+    "postinstall": "which file_server || deno install --allow-net --allow-read https://deno.land/std@0.67.0/http/file_server.ts",
     "build": "echo Do manually pls",
     "start": "cd gatsby && yarn start",
     "serve": "file_server --cert .certs/localhost.cert --key .certs/localhost.key --host localhost public",
@@ -28,7 +28,7 @@
     "@typescript-eslint/eslint-plugin": "4.0.1",
     "@typescript-eslint/parser": "4.0.1",
     "babel-loader": "8.1.0",
-    "eslint": "7.8.0",
+    "eslint": "7.8.1",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-prettier": "3.1.4",
     "eslint-plugin-react": "7.20.6",
