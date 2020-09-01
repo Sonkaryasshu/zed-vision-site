@@ -1,23 +1,16 @@
----
-title: Hello World
-date: "2020-08-22T22:12:03.284Z"
-description: "Hello World"
----
-I was always fascianted about how can we get more productive as developers.
-Shall we follow the TDD practices? What we gain if we do? What we lose if we don't?
+import * as React from "react"
 
-Is there any better way to develop software and maintain high quality?
+interface CounterState {
+  counter: number
+}
 
-Lets see an example, a classic Counter app. 
-
-```javascript live=true title=Counter
-() => {
+export const Counter = () => {
   const [events, setEvents] = React.useState([])
 
   const defaultState = def => events.reduce((state, ev) => ev(state), def)
   const dispatch = e => setEvents([...events, e])
 
-  const CounterExample = (dispatch) => {
+  const CounterExample = dispatch => {
     const state = defaultState({ counter: 0 })
 
     const actions = {
@@ -38,5 +31,3 @@ Lets see an example, a classic Counter app.
   }
   return CounterExample(dispatch)
 }
-
-```

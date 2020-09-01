@@ -268,28 +268,7 @@ export const CodeEditor: React.FC<{
                   <LiveError />
                 </Paper>
 
-                <Paper
-                  square={true}
-                  style={{
-                    color: "black",
-                    padding: "10px",
-                    backgroundColor: "grey",
-                  }}
-                >
-                  <Grid container={true} spacing={3} direction="row">
-                    <Grid item xs>
-                      <Paper className={classes.paper}>
-                        <LivePreview />
-                      </Paper>
-                    </Grid>
-
-                    <Grid item xs>
-                      <Paper className={classes.paper}>
-                        <LivePreview style={{ overflow: "hidden" }} />
-                      </Paper>
-                    </Grid>
-                  </Grid>
-                </Paper>
+                {PreviewComponent(classes)}
               </CardContent>
             </Card>
           </LiveProvider>
@@ -322,5 +301,81 @@ export const CodeEditor: React.FC<{
         </pre>
       )}
     </Highlight>
+  )
+}
+
+// const EventReplayBox: React.FC<{ events: Event[] }> = ({ children }) => {
+//   const [events, addEvents] = React.useState<Event[]>([])
+//   const App = <div>{children}</div>
+
+//   React.useEffect(){
+//       document.getElementById("ddddddd")?.dispatchEvent(
+//       })
+//   }
+
+//   return (
+//      <div id="ddddddd">{children}</div>
+//   )
+// }
+
+const EventCaptureBox: React.FC = ({ children }) => {
+  const [events, addEvents] = React.useState<Event[]>([])
+
+  return (
+    <div
+      onClick={e => {
+        e.persist()
+        addEvents([...events, e.nativeEvent])
+      }}
+    >
+      {children}
+      {/* <hr /> */}
+      {/* <EventReplayBox events={events}> {children}</EventReplayBox> */}
+      {/* <ul>
+        {events.map((e: MouseEvent, i) => {
+          console.log(e)
+          return (
+            <li key={i}>
+              {" "}
+              {e.layerX}=={e.layerY}{" "}
+            </li>
+          )
+        })}
+      </ul> */}
+    </div>
+  )
+}
+
+function PreviewComponent(
+  classes: Record<
+    "title" | "root" | "menuButton" | "cardNoSpace" | "paper",
+    string
+  >
+) {
+  return (
+    <Paper
+      square={true}
+      style={{
+        color: "black",
+        padding: "10px",
+        backgroundColor: "grey",
+      }}
+    >
+      <Grid container={true} spacing={3} direction="row">
+        <Grid item xs>
+          <Paper className={classes.paper}>
+            <EventCaptureBox>
+              <LivePreview />
+            </EventCaptureBox>
+          </Paper>
+        </Grid>
+
+        <Grid item xs>
+          <Paper className={classes.paper}>
+            <LivePreview id="live-copy" style={{ overflow: "hidden" }} />
+          </Paper>
+        </Grid>
+      </Grid>
+    </Paper>
   )
 }
