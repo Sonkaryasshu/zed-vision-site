@@ -6,12 +6,12 @@ ARG DENO_VERSION=1.3.2
 FROM node:${NODE_VERSION}-buster-slim as dev-base
 
 RUN apt-get update && apt-get install --yes \
-        curl \
-        unzip \
-        git \
-        libnss3-dev \
-        sudo && \
-    apt-get clean
+  curl \
+  unzip \
+  git \
+  libnss3-dev \
+  sudo && \
+  apt-get clean
 
 
 RUN adduser node sudo \
@@ -37,7 +37,7 @@ RUN yarn --frozen-lockfile --ignore-scripts
 
 FROM dev-base as Dev
 
-ADD --chown=node yarn.lock package.json public ./
+ADD --chown=node yarn.lock package.json public/ ./
 RUN yarn --frozen-lockfile --ignore-scripts
 
 EXPOSE 8000
@@ -46,4 +46,5 @@ EXPOSE 4507
 CMD [ "yarn", "start" ] 
 
 FROM Dev as Build
+RUN ls -la
 CMD ["yarn", "build"]
