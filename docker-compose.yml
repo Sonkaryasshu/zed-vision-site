@@ -10,8 +10,6 @@ services:
     user: 1000:1000
     volumes:
       - .:/app
-      - certs:/app/.certs
-      - node_cache:/app/node_modules
   build:
     build:
       target: Build
@@ -19,8 +17,3 @@ services:
     user: 1000:1000
     volumes:
       - .:/app
-      - certs:/app/.certs
-      - node_cache:/app/node_modules
-volumes:
-  node_cache: 
-  certs:

@@ -3,7 +3,7 @@ ARG BASE=https://raw.githubusercontent.com/zed-vision/zed-vision-site/${parent}
 ARG NODE_VERSION=14.9.0
 ARG DENO_VERSION=1.3.2
 
-FROM node:${NODE_VERSION}-buster-slim as dev-base
+FROM node:${NODE_VERSION}-buster-slim as Dev
 
 RUN apt-get update && apt-get install --yes \
   curl \
@@ -32,12 +32,11 @@ RUN sudo chown node /app
 ENV GITBASE=${BASE}
 
 RUN sudo npm i -g devcert-cli
+
 ADD --chown=node ${GITBASE}/package.json ${GITBASE}/yarn.lock ./
-RUN yarn --frozen-lockfile --ignore-scripts
+ADD --chown=node ${GITBASE}/packages/gatsby/package.json  ./packages/gatsby/
+ADD --chown=node ${GITBASE}/packages/code-editor/package.json ./packages/code-editor/
 
-FROM dev-base as Dev
-
-ADD --chown=node yarn.lock package.json public/ ./
 RUN yarn --frozen-lockfile --ignore-scripts
 
 EXPOSE 8000
