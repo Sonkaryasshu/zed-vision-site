@@ -31,13 +31,14 @@ RUN sudo chown node /app
 
 ENV GITBASE=${BASE}
 
+RUN sudo npm i -g devcert-cli
 ADD --chown=node ${GITBASE}/package.json ${GITBASE}/yarn.lock ./
-RUN yarn --frozen-lockfile
+RUN yarn --frozen-lockfile --ignore-scripts
 
 FROM dev-base as Dev
 
-ADD --chown=node yarn.lock package.json public .certs ./
-RUN yarn --frozen-lockfile
+ADD --chown=node yarn.lock package.json public ./
+RUN yarn --frozen-lockfile --ignore-scripts
 
 EXPOSE 8000
 EXPOSE 4507

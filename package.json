@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "postinstall": "yarn install:devCerts && yarn install:fileServer",
-    "install:devCerts": "test -f .certs/localhost.cert || mkdir .certs && cd .certs && npx devcert-cli generate localhost",
+    "install:devCerts": "test -f .certs/localhost.cert || mkdir .certs && cd .certs && devcert generate localhost",
     "install:fileServer": "which file_server || deno install --allow-net --allow-read https://deno.land/std@0.67.0/http/file_server.ts",
     "build": "cd packages/gatsby && yarn build",
     "start": "yarn && ((cd packages/gatsby && yarn start) | yarn serve)",
