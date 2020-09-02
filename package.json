@@ -20,6 +20,7 @@
   ],
   "devDependencies": {
     "@babel/core": "7.11.5",
+    "@babel/plugin-syntax-jsx": "^7.10.4",
     "@types/mdx-js__react": "1.5.2",
     "@types/react-dom": "16.9.8",
     "@types/react-helmet": "6.1.0",
@@ -36,5 +37,10 @@
     "prettier": "2.1.1",
     "ts-loader": "8.0.3",
     "typescript": "4.0.2"
+  },
+  "dependencies": {
+    "@babel/standalone": "^7.11.5",
+    "@types/babel__core": "^7.1.9",
+    "@types/babel__standalone": "^7.1.2"
   }
 }

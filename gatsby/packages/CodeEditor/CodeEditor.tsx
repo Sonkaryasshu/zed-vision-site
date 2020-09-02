@@ -4,6 +4,7 @@ import * as polished from "polished"
 import Highlight, { defaultProps } from "prism-react-renderer"
 import { mdx } from "@mdx-js/react"
 import Paper from "@material-ui/core/Paper"
+import ReactDOMServer from "react-dom/server"
 
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live"
 import Card from "@material-ui/core/Card"
@@ -253,7 +254,12 @@ export const CodeEditor: React.FC<{
                       "linear-gradient(to right bottom, #34294f 0%, #2a2139 30%)",
                   }}
                 >
-                  <LiveEditor onChange={d => console.log(d)} />
+                  <LiveEditor
+                    onChange={d => {
+                      console.log(d)
+                      console.log(ReactDOMServer.renderToString(<h1>Ello</h1>))
+                    }}
+                  />
                 </Paper>
                 <Paper
                   square={true}

@@ -12,31 +12,34 @@ Lets see an example, a classic Counter app.
 
 ```javascript live=true title=Counter
 () => {
-  const [events, setEvents] = React.useState([])
+const [events, setEvents] = React.useState([])
 
   const defaultState = def => events.reduce((state, ev) => ev(state), def)
-  const dispatch = e => setEvents([...events, e])
 
-  const CounterExample = (dispatch) => {
-    const state = defaultState({ counter: 0 })
-
-    const actions = {
-      decrease: state => ({ ...state, counter: state.counter - 1 }),
-      double: state => ({ ...state, counter: state.counter * 2 }),
-      increase: state => ({ ...state, counter: state.counter + 1 }),
+  const actions = {
+      decrease: state => ({  counter: state.counter - 1 }),
+      double: state => ({ counter: state.counter * 2 }),
+      increase: state => ( {counter: state.counter + 1 }),
     }
 
-    return (
-      <div>
-        <button onClick={() => dispatch(actions.decrease)}>-</button>
-        <button onClick={() => dispatch(actions.double)}> x 2</button>
+
+
+  const x = e => {
+    console.log(e.target.parentNode.innerHTML)
+    const action = e.target.getAttribute("data-action")
+    setEvents([...events, actions[action]])
+  }
+
+   const state = defaultState({ counter: 0 })
+  
+  return <div>
+        <button data-action="decrease" onClick={x}>-</button>
+        <button data-action="double" onClick={x}> x 2</button>
         Counter:
         <span>{state.counter}</span>
-        <button onClick={() => dispatch(actions.increase)}>+</button>
+        <button data-action="increase" onClick={x}>+</button>
       </div>
-    )
-  }
-  return CounterExample(dispatch)
+    
 }
 
 ```

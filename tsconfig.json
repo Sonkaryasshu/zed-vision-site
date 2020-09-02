@@ -2,7 +2,7 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es2018",
-    "lib": [ "es2020", "DOM"],
+    "lib": [ "es2020", "DOM", "ES2020.Promise"],
     "downlevelIteration": true,
     "sourceMap": true,
     "allowJs": false,
