@@ -12,21 +12,34 @@ Lets see an example, a classic Counter app.
 
 ```javascript live=true title=Counter
 () => {
-  const [state, setState] = React.useState({ counter: 0 })
+const [events, setEvents] = React.useState([])
+
+  const defaultState = def => events.reduce((state, ev) => ev(state), def)
 
   const actions = {
-    decrease: () => setState({ ...state, counter: state.counter - 1 }),
-    increase: () => setState({ ...state, counter: state.counter + 1 }),
+      decrease: state => ({  counter: state.counter - 1 }),
+      double: state => ({ counter: state.counter * 2 }),
+      increase: state => ( {counter: state.counter + 1 }),
+    }
+
+
+
+  const x = e => {
+    console.log(e.target.parentNode.innerHTML)
+    const action = e.target.getAttribute("data-action")
+    setEvents([...events, actions[action]])
   }
 
-  return (
-    <div>
-      <button onClick={actions.decrease}>-</button>
+   const state = defaultState({ counter: 0 })
+  
+  return <div>
+        <button data-action="decrease" onClick={x}>-</button>
+        <button data-action="double" onClick={x}> x 2</button>
         Counter:
         <span>{state.counter}</span>
-      <button onClick={actions.increase}>+</button>
-    </div>
-  )
+        <button data-action="increase" onClick={x}>+</button>
+      </div>
+    
 }
 
 ```
