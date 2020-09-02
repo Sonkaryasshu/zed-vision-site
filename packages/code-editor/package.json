@@ -1,7 +1,8 @@
 {
-  "name": "hello-world",
+  "name": "@zed-vision/code-editor",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "CodeEditor.tsx",
+  "private": "false",
   "license": "MIT",
   "dependencies": {
     "polished": "^3.6.6",

@@ -2,7 +2,7 @@ import { Link } from "gatsby"
 import * as React from "react"
 import { Helmet } from "react-helmet"
 import { MDXProvider } from "@mdx-js/react"
-import { CodeEditor } from "../../packages/CodeEditor/CodeEditor"
+import { CodeEditor } from "@zed-vision/code-editor/CodeEditor"
 
 const components = {
   pre: function PreComp(props: any) {

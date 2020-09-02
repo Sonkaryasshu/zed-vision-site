@@ -9,14 +9,13 @@
   "scripts": {
     "postinstall": "which file_server || deno install --allow-net --allow-read https://deno.land/std@0.67.0/http/file_server.ts",
     "build": "echo Do manually pls",
-    "start": "cd gatsby && yarn start",
+    "start": "cd packages/gatsby && yarn start",
     "serve": "file_server --cert .certs/localhost.cert --key .certs/localhost.key --host localhost public",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,yml}\"",
     "lint": "eslint ./gatsby --ext .ts --ext .tsx --fix"
   },
   "workspaces": [
-    "gatsby",
-    "gatsby/packages/**"
+    "packages/*"
   ],
   "devDependencies": {
     "@babel/core": "7.11.5",
@@ -33,7 +32,6 @@
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-prettier": "3.1.4",
     "eslint-plugin-react": "7.20.6",
-    "http-server": "0.12.3",
     "prettier": "2.1.1",
     "ts-loader": "8.0.3",
     "typescript": "4.0.2"
