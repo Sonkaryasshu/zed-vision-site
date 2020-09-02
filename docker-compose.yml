@@ -7,12 +7,12 @@ services:
     ports:
       - 8000:8000
       - 4507:4507
-    user: 1000
+    user: 1000:1000
     volumes:
       - .:/app
       - certs:/app/.certs
-      - node_cache:/app/
-  dev:
+      - node_cache:/app/node_modules
+  build:
     build:
       target: Build
       context: .
@@ -22,5 +22,5 @@ services:
       - certs:/app/.certs
       - node_cache:/app/node_modules
 volumes:
-  node_cache:
+  node_cache: 
   certs:
