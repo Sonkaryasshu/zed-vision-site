@@ -7,10 +7,12 @@
   "author": "Zoltan Erdos <zolika84@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "postinstall": "which file_server || deno install --allow-net --allow-read https://deno.land/std@0.67.0/http/file_server.ts",
+    "postinstall": "yarn install:devCerts && yarn install:fileServer",
+    "install:devCerts": "test -f .certs/localhost.cert || mkdir .certs && cd .certs && npx devcert-cli generate localhost",
+    "install:fileServer": "which file_server || deno install --allow-net --allow-read https://deno.land/std@0.67.0/http/file_server.ts",
     "build": "cd packages/gatsby && yarn build",
-    "start": "cd packages/gatsby && yarn start",
-    "serve": "file_server --cert .certs/localhost.cert --key .certs/localhost.key --host localhost public",
+    "start": "yarn && ((cd packages/gatsby && yarn start) | yarn serve)",
+    "serve": "file_server --cert .certs/localhost.cert --key .certs/localhost.key --host 0.0.0.0 public",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,yml}\"",
     "lint": "eslint ./gatsby --ext .ts --ext .tsx --fix"
   },

@@ -1,0 +1,26 @@
+version: "3.5"
+services:
+  dev:
+    build:
+      target: Dev
+      context: .
+    ports:
+      - 8000:8000
+      - 4507:4507
+    user: 1000
+    volumes:
+      - .:/app
+      - certs:/app/.certs
+      - node_cache:/app/
+  dev:
+    build:
+      target: Build
+      context: .
+    user: 1000:1000
+    volumes:
+      - .:/app
+      - certs:/app/.certs
+      - node_cache:/app/node_modules
+volumes:
+  node_cache:
+  certs:
