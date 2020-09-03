@@ -38,7 +38,8 @@ workbox.routing.registerRoute(
 workbox.routing.registerRoute(
   ({ url }) =>
     url.origin === "https://fonts.googleapis.com" ||
-    url.origin === "https://fonts.gstatic.com",
+    url.origin === "https://fonts.gstatic.com" ||
+    url.origin === "https://storage.googleapis.com",
   new workbox.strategies.CacheFirst({
     cacheName: "google-fonts",
   })
