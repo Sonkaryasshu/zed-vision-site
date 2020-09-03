@@ -1,4 +1,6 @@
-import * as workbox from "https://storage.googleapis.com/workbox-cdn/releases/5.1.3/workbox-sw.js"
+importScripts(
+  "https://storage.googleapis.com/workbox-cdn/releases/5.1.3/workbox-sw.js"
+)
 
 const { CacheFirst, StaleWhileRevalidate } = workbox.strategies
 const { ExpirationPlugin } = workbox.expiration
