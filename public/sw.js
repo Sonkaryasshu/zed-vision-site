@@ -1,6 +1,10 @@
 importScripts(
   "https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js"
 )
+workbox.loadModule("workbox-strategies")
+workbox.loadModule("workbox-expiration")
+workbox.loadModule("workbox-routing")
+
 // const { precacheAndRoute } = workbox.precaching
 // The plugin will pass the files to cache here
 // workbox.precaching.precacheAndRoute([])
@@ -14,7 +18,7 @@ workbox.routing.registerRoute(
       (pathname.substr(-3) === ".js" || pathname.lastIndexOf(".js?") > 0)
     )
   },
-  new workbox.strategies.CacheOnly({
+  new workbox.strategies.StaleWhileRevalidate({
     cacheName: "hashed js files",
     plugins: [new workbox.expiration.ExpirationPlugin({ maxEntries: 100 })],
   })
@@ -35,9 +39,8 @@ workbox.routing.registerRoute(
   ({ url }) =>
     url.origin === "https://fonts.googleapis.com" ||
     url.origin === "https://fonts.gstatic.com",
-  new workbox.strategies.CacheOnly({
+  new workbox.strategies.CacheFirst({
     cacheName: "google-fonts",
-    plugins: [new workbox.expiration.ExpirationPlugin({ maxEntries: 100 })],
   })
 )
 
