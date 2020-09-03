@@ -13899,6 +13899,7 @@ function CodeEditor_templateObject() {
 
 
 
+ // import html2canvas from "html2canvas"
 
 
 var CodeEditor_useStyles = Object(makeStyles["a" /* default */])(function (theme) {
@@ -13922,7 +13923,23 @@ var CodeEditor_useStyles = Object(makeStyles["a" /* default */])(function (theme
       minWidth: "200px"
     }
   });
-});
+}); // setTimeout(
+//   () =>
+//     html2canvas(document.getElementById("capture")!, {
+//       background: {
+//         type: null,
+//       },
+//       backgroundColor: null,
+//       useCORS: true,
+//       backgroundImage: null,
+//       proxy: "https://cors-anywhere.herokuapp.com/",
+//     }).then((canvas: Element) => {
+//       console.log(canvas)
+//       // document.body.appendChild(canvas)
+//     }),
+//   3000
+// )
+
 var reactLiveHome = {
   plain: {
     color: "#e7d2ed"

@@ -6248,7 +6248,22 @@ function valami_MDXContent(_ref) {
     parentName: "pre"
   }, {
     "className": "language-tsx"
-  }), "function fancyAlert(arg) {\n  if(arg) {\n    $.facebox({div:'#foo'})\n  }\n}\n")), Object(esm["mdx"])("p", null, "As Kanye West said:"), Object(esm["mdx"])("blockquote", null, Object(esm["mdx"])("p", {
+  }), "function fancyAlert(arg) {\n  if(arg) {\n    $.facebox({div:'#foo'})\n  }\n}\n")), Object(esm["mdx"])("div", {
+    className: "glitch-embed-wrap",
+    style: {
+      "height": "420px",
+      "width": "100%"
+    }
+  }, Object(esm["mdx"])("iframe", {
+    src: "https://glitch.com/embed/#!/embed/xkcd-printer?path=script.js&previewSize=0&attributionHidden=true&sidebarCollapsed=true",
+    title: "xkcd-printer on Glitch",
+    allow: "geolocation; microphone; camera; midi; vr; encrypted-media",
+    style: {
+      "height": "100%",
+      "width": "100%",
+      "border": "0"
+    }
+  })), Object(esm["mdx"])("p", null, "As Kanye West said:"), Object(esm["mdx"])("blockquote", null, Object(esm["mdx"])("p", {
     parentName: "blockquote"
   }, "We\u2019re living the future so\nthe present is our past.")), Object(esm["mdx"])("p", null, Object(esm["mdx"])("em", {
     parentName: "p"

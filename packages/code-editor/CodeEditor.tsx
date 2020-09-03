@@ -26,6 +26,7 @@ import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline"
 
 import MenuIcon from "@material-ui/icons/Menu"
 import "./themes/prism-synthwave84.css"
+// import html2canvas from "html2canvas"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,6 +50,23 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 )
+
+// setTimeout(
+//   () =>
+//     html2canvas(document.getElementById("capture")!, {
+//       background: {
+//         type: null,
+//       },
+//       backgroundColor: null,
+//       useCORS: true,
+//       backgroundImage: null,
+//       proxy: "https://cors-anywhere.herokuapp.com/",
+//     }).then((canvas: Element) => {
+//       console.log(canvas)
+//       // document.body.appendChild(canvas)
+//     }),
+//   3000
+// )
 
 export const reactLiveHome = {
   plain: {
@@ -241,7 +259,6 @@ export const CodeEditor: React.FC<{
             transformCode={(code: string) => "/** @jsx mdx */" + code}
             scope={{ mdx }}
           >
-            {/* <LiveWrapper> */}
             <Card>
               <CardContent className={classes.cardNoSpace}>
                 <Paper
