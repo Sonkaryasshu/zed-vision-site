@@ -41,6 +41,7 @@
     "mochawesome",
     "nomodule",
     "octokit",
+    "precache",
     "precaching",
     "preconnect",
     "react",

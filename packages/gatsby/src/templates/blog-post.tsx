@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import { Link, graphql } from "gatsby"
 
 import Bio from "../components/bio"
@@ -6,7 +6,25 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 import { MDXRenderer } from "gatsby-plugin-mdx"
-// import { MDXProvider } from "@mdx-js/react"
+import styled from "styled-components"
+
+const StyledHeader = styled.h1`
+  margin-top: ${rhythm(1)};
+  margin-bottom: 0;
+`
+
+const { fontSize, lineHeight } = scale(1 / 5)
+
+const StyledDate = styled.p`
+  font-size: ${fontSize};
+  line-height: ${lineHeight};
+  display: block;
+  margin-bottom: ${rhythm(1)};
+`
+
+const Hr = styled.hr`
+  margin-bottom: ${rhythm(1)};
+`
 
 interface Props {
   data: {
@@ -70,34 +88,14 @@ const BlogPostTemplate = ({ data, pageContext, location }: Props) => {
           description={post.frontmatter.description || post.excerpt}
         />
         <header>
-          <h1
-            style={{
-              marginTop: rhythm(1),
-              marginBottom: 0,
-            }}
-          >
-            {post.frontmatter.title}
-          </h1>{" "}
-          <p
-            style={{
-              ...scale(-1 / 5),
-              display: `block`,
-              marginBottom: rhythm(1),
-            }}
-          >
-            {post.frontmatter.date}
-          </p>
+          <StyledHeader>{post.frontmatter.title}</StyledHeader>
+          <StyledDate>{post.frontmatter.date}</StyledDate>
         </header>
         <BlogPost />
-        <hr
-          style={{
-            marginBottom: rhythm(1),
-          }}
-        />
+        <Hr />
         <footer>
           <Bio />
         </footer>
-
         <nav>
           <ul>
             {previous && (

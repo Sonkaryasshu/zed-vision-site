@@ -8,7 +8,7 @@ module.exports = {
     description: `A starter blog demonstrating what Gatsby can do.`,
     siteUrl: `https://www.zed.vision/`,
     social: {
-      twitter: `zoltanerdos`,
+      twitter: `ZoltanErdos`,
     },
   },
   plugins: [
@@ -49,13 +49,6 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: `UA-137514306-1`,
-      },
-    },
-
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-typography`,
@@ -65,6 +58,7 @@ module.exports = {
     },
     {
       resolve: `gatsby-plugin-manifest`,
+
       options: {
         icon: `../../assets/gatsby-icon.png`,
         name: `Zed Vision - Development experience, Testing, and everything between`,
@@ -77,7 +71,6 @@ module.exports = {
         cache_busting_mode: "none",
       },
     },
-    "gatsby-plugin-sw",
     `gatsby-plugin-emotion`,
     `gatsby-plugin-no-sourcemaps`,
     `gatsby-plugin-remove-generator`,

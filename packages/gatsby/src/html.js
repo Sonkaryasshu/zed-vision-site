@@ -11,6 +11,7 @@ export default function HTML(props) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
+        <script type="module" defer src="./sw-reg.js" />
         {props.headComponents}
       </head>
       <body {...props.bodyAttributes}>

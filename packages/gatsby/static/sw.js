@@ -1,13 +1,24 @@
-importScripts(
-  "https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js"
-)
+import * as workbox from "https://storage.googleapis.com/workbox-cdn/releases/5.1.3/workbox-sw.js"
 
 const { CacheFirst, StaleWhileRevalidate } = workbox.strategies
 const { ExpirationPlugin } = workbox.expiration
 const { registerRoute } = workbox.routing
-const { precacheAndRoute } = workbox.precaching
+// const { precacheAndRoute } = workbox.precaching
 // The plugin will pass the files to cache here
-workbox.precaching.precacheAndRoute([])
+// workbox.precaching.precacheAndRoute([])
+
+registerRoute(
+  ({ url }) => {
+    return (
+      url.length - url.lastIndexOf("/") > 16 &&
+      (url.endsWidth(".js") || url.lastIndexOf(".js?"))
+    )
+  },
+  new CacheFirst({
+    cacheName: "hashed js files",
+    plugins: [new ExpirationPlugin({ maxEntries: 100 })],
+  })
+)
 
 registerRoute(
   ({ url }) =>
