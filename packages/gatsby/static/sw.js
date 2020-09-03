@@ -30,7 +30,7 @@ workbox.routing.registerRoute(
 
     return pathname.includes("page-data.json")
   },
-  new workbox.strategies.StaleWhileRevalidate(fi
+  new workbox.strategies.StaleWhileRevalidate({
     cacheName: "page-data",
   })
 )
