@@ -7,14 +7,16 @@
   "author": "Zoltan Erdos <zolika84@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "postinstall": "yarn install:devCerts && yarn install:fileServer",
-    "install:devCerts": "test -d .certs || mkdir .certs && cd .certs && devcert generate localhost",
-    "install:fileServer": "which file_server || deno install --allow-net --allow-read https://deno.land/std@0.67.0/http/file_server.ts",
-    "build": "cd packages/gatsby && yarn build",
-    "start": "yarn && ((cd packages/gatsby && yarn start) | yarn serve)",
-    "serve": "file_server --cert .certs/localhost.cert --key .certs/localhost.key --host 0.0.0.0 public",
+    "build": "yarn && cd packages/gatsby && yarn build",
+    "start": "yarn && cd packages/gatsby && yarn start",
+    "serve": "yarn && file_server --cert .certs/localhost.cert --key .certs/localhost.key --host 0.0.0.0 public",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,yml}\"",
-    "lint": "eslint ./gatsby --ext .ts --ext .tsx --fix"
+    "lint": "eslint ./gatsby --ext .ts --ext .tsx --fix",
+    "postinstall": "sh ./scripts/debts.sh",
+    "docker": "docker-compose down && docker-compose up --detach --build gatsby",
+    "docker:build": "docker-compose exec gatsby yarn build",
+    "docker:start": "docker-compose exec gatsby yarn start",
+    "docker:serve": "docker-compose exec gatsby yarn serve"
   },
   "workspaces": [
     "packages/*"
