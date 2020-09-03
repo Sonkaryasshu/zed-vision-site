@@ -7,16 +7,15 @@
   "author": "Zoltan Erdos <zolika84@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "yarn && cd packages/gatsby && yarn build",
-    "start": "yarn && cd packages/gatsby && yarn start",
-    "serve": "yarn && file_server --cert .certs/localhost.cert --key .certs/localhost.key --host 0.0.0.0 public",
+    "build": "cd packages/gatsby && yarn build",
+    "start": "cd packages/gatsby && yarn start",
+    "serve": "file_server --cert .certs/localhost.cert --key .certs/localhost.key --host 0.0.0.0 public",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,yml}\"",
     "lint": "eslint ./gatsby --ext .ts --ext .tsx --fix",
     "postinstall": "sh ./scripts/debts.sh",
-    "docker": "docker-compose down && docker-compose up --detach --build gatsby",
-    "docker:build": "docker-compose exec gatsby yarn build",
-    "docker:start": "docker-compose exec gatsby yarn start",
-    "docker:serve": "docker-compose exec gatsby yarn serve"
+    "docker:start": "docker-compose down && docker-compose up --detach --build gatsby",
+    "docker-yarn": "docker-compose exec gatsby yarn",
+    "docker": "(yarn docker-yarn || (yarn docker:start && yarn docker-yarn)) && yarn docker-yarn"
   },
   "workspaces": [
     "packages/*"
