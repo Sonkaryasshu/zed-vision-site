@@ -1,174 +1,111 @@
-/**
- * Welcome to your Workbox-powered service worker!
- *
- * You'll need to register this file in your web app and you should
- * disable HTTP caching for this file too.
- * See https://goo.gl/nhQhGp
- *
- * The rest of the code is auto-generated. Please don't update this file
- * directly; instead, make changes to your Workbox build configuration
- * and re-run your build process.
- * See https://goo.gl/2aRDsh
- */
+importScripts(
+  "https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js"
+)
 
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
-
-workbox.core.setCacheNameDetails({prefix: "gatsby-plugin-offline"});
-
-workbox.core.skipWaiting();
-
-workbox.core.clientsClaim();
-
-/**
- * The workboxSW.precacheAndRoute() method efficiently caches and responds to
- * requests for URLs in the manifest.
- * See https://goo.gl/S9QRab
- */
-self.__precacheManifest = [
+const { CacheFirst, StaleWhileRevalidate } = workbox.strategies
+const { ExpirationPlugin } = workbox.expiration
+const { registerRoute } = workbox.routing
+const { precacheAndRoute } = workbox.precaching
+// The plugin will pass the files to cache here
+workbox.precaching.precacheAndRoute([
   {
-    "url": "webpack-runtime-a37ca0aa89a0bdbfd7f2.js"
+    "url": "webpack-runtime-5421247ffbb7117344cc.js",
+    "revision": "a4a50adfab66fa52c32beed39305b1bd"
   },
   {
-    "url": "framework-4343dfbf6d82afc9ecac.js"
+    "url": "framework-e99f29961a9a2bb87806.js",
+    "revision": "8768dad65873c85eb7afdddd2fcc9269"
   },
   {
-    "url": "app-2688413731a0d9e7984e.js"
+    "url": "app-30df504f3775e36def23.js",
+    "revision": "c2aba3747b2d65c4a62bca1deb4ec4f3"
+  },
+  {
+    "url": "index.html",
+    "revision": "8b87cf9ca7b2ab769d6ce24c0a73b2be"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "d360fac6fefd2b6418078be4382f8525"
+    "revision": "3478e7141291def517eae654aec73670"
   },
   {
-    "url": "styles.233c9062b20f3955a773.css"
+    "url": "styles.233c9062b20f3955a773.css",
+    "revision": "b5abf53d4e57815312512f8103bf0499"
   },
   {
-    "url": "styles-195070ea59b3395625da.js"
+    "url": "styles-2d82ac8e3afc0c213061.js",
+    "revision": "69b448910449c176093e31b420120873"
   },
   {
-    "url": "09744744-241952380f217543106c.js"
+    "url": "09744744-1d74a476168a54f2e35c.js",
+    "revision": "4495c6d18a3edb425c9a346c4d0222e4"
   },
   {
-    "url": "commons-eeb2e3ec286ead1f80d7.js"
+    "url": "commons-0584b9a824f5061ba17d.js",
+    "revision": "0ff8b632054e26080d95c620d5b68d0f"
   },
   {
-    "url": "component---src-pages-offline-plugin-app-shell-fallback-tsx-f25e6bf27258517339ff.js"
+    "url": "022d3153bf09c36cd784dcdb36ffbd187f9c96d7-7b4653bbef1ea41283cf.js",
+    "revision": "b7ad297d6d679d25410881bf5881f54b"
   },
   {
-    "url": "polyfill-db5624ddd2e6ddb86a92.js"
+    "url": "component---src-pages-index-tsx-c0cdb13c29f8a8ad274b.js",
+    "revision": "ceb1d7b501384ee353c7c2614d5bfc4d"
+  },
+  {
+    "url": "page-data/index/page-data.json",
+    "revision": "142fdd5fab2a92c54020a62bdb8d0b03"
+  },
+  {
+    "url": "page-data/sq/d/1809740707.json",
+    "revision": "19298ee0085fdaa61f01f4c7700379aa"
+  },
+  {
+    "url": "page-data/sq/d/2841359383.json",
+    "revision": "e8d382ecdab48bf580261fbad8ef7f16"
+  },
+  {
+    "url": "page-data/app-data.json",
+    "revision": "9dc5231634199a1bcf8b743a2e1bd549"
+  },
+  {
+    "url": "polyfill-978084d0f22dc1e80173.js",
+    "revision": "11b7a9a3ba67b5e63ccb2091e1bb3674"
+  },
+  {
+    "url": "component---src-pages-404-tsx-e18825b5a3f12ea84772.js",
+    "revision": "fa110ee82f4dbef201df874f3e8a9890"
+  },
+  {
+    "url": "page-data/404.html/page-data.json",
+    "revision": "8c50ee418116a716b0894feba1de3618"
+  },
+  {
+    "url": "component---src-pages-offline-plugin-app-shell-fallback-tsx-4f7be29b4c709ebee006.js",
+    "revision": "c1100be0d6beab039e6b10979afa1755"
+  },
+  {
+    "url": "page-data/offline-plugin-app-shell-fallback/page-data.json",
+    "revision": "f69c50bd4f12f29e823ec359189b8057"
   },
   {
     "url": "manifest.webmanifest",
     "revision": "f8a18ddf8edfe47267ccf7f37ad8c568"
   }
-].concat(self.__precacheManifest || []);
-workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
+])
 
-workbox.routing.registerRoute(/(\.js$|\.css$|static\/)/, new workbox.strategies.CacheFirst(), 'GET');
-workbox.routing.registerRoute(/^https?:.*\/page-data\/.*\.json/, new workbox.strategies.StaleWhileRevalidate(), 'GET');
-workbox.routing.registerRoute(/^https?:.*\.(png|jpg|jpeg|webp|svg|gif|tiff|js|woff|woff2|json|css)$/, new workbox.strategies.StaleWhileRevalidate(), 'GET');
-workbox.routing.registerRoute(/^https?:\/\/fonts\.googleapis\.com\/css/, new workbox.strategies.StaleWhileRevalidate(), 'GET');
-
-/* global importScripts, workbox, idbKeyval */
-importScripts(`idb-keyval-3.2.0-iife.min.js`)
-
-const { NavigationRoute } = workbox.routing
-
-let lastNavigationRequest = null
-let offlineShellEnabled = true
-
-// prefer standard object syntax to support more browsers
-const MessageAPI = {
-  setPathResources: (event, { path, resources }) => {
-    event.waitUntil(idbKeyval.set(`resources:${path}`, resources))
-  },
-
-  clearPathResources: event => {
-    event.waitUntil(idbKeyval.clear())
-  },
-
-  enableOfflineShell: () => {
-    offlineShellEnabled = true
-  },
-
-  disableOfflineShell: () => {
-    offlineShellEnabled = false
-  },
-}
-
-self.addEventListener(`message`, event => {
-  const { gatsbyApi: api } = event.data
-  if (api) MessageAPI[api](event, event.data)
-})
-
-function handleAPIRequest({ event }) {
-  const { pathname } = new URL(event.request.url)
-
-  const params = pathname.match(/:(.+)/)[1]
-  const data = {}
-
-  if (params.includes(`=`)) {
-    params.split(`&`).forEach(param => {
-      const [key, val] = param.split(`=`)
-      data[key] = val
-    })
-  } else {
-    data.api = params
-  }
-
-  if (MessageAPI[data.api] !== undefined) {
-    MessageAPI[data.api]()
-  }
-
-  if (!data.redirect) {
-    return new Response()
-  }
-
-  return new Response(null, {
-    status: 302,
-    headers: {
-      Location: lastNavigationRequest,
-    },
+registerRoute(
+  ({ url }) =>
+    url.origin === "https://fonts.googleapis.com" ||
+    url.origin === "https://fonts.gstatic.com",
+  new StaleWhileRevalidate({
+    cacheName: "google-fonts",
+    plugins: [new ExpirationPlugin({ maxEntries: 20 })],
   })
-}
+)
 
-const navigationRoute = new NavigationRoute(async ({ event }) => {
-  // handle API requests separately to normal navigation requests, so do this
-  // check first
-  if (event.request.url.match(/\/.gatsby-plugin-offline:.+/)) {
-    return handleAPIRequest({ event })
-  }
-
-  if (!offlineShellEnabled) {
-    return await fetch(event.request)
-  }
-
-  lastNavigationRequest = event.request.url
-
-  let { pathname } = new URL(event.request.url)
-  pathname = pathname.replace(new RegExp(`^`), ``)
-
-  // Check for resources + the app bundle
-  // The latter may not exist if the SW is updating to a new version
-  const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`/app-2688413731a0d9e7984e.js`))) {
-    return await fetch(event.request)
-  }
-
-  for (const resource of resources) {
-    // As soon as we detect a failed resource, fetch the entire page from
-    // network - that way we won't risk being in an inconsistent state with
-    // some parts of the page failing.
-    if (!(await caches.match(resource))) {
-      return await fetch(event.request)
-    }
-  }
-
-  const offlineShell = `/offline-plugin-app-shell-fallback/index.html`
-  const offlineShellWithKey = workbox.precaching.getCacheKeyForURL(offlineShell)
-  return await caches.match(offlineShellWithKey)
-})
-
-workbox.routing.registerRoute(navigationRoute)
-
-// this route is used when performing a non-navigation request (e.g. fetch)
-workbox.routing.registerRoute(/\/.gatsby-plugin-offline:.+/, handleAPIRequest)
+registerRoute(
+  ({ request }) =>
+    request.destination === "script" || request.destination === "style",
+  new StaleWhileRevalidate()
+)

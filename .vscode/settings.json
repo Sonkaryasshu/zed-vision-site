@@ -16,6 +16,7 @@
   "cSpell.words": [
     "Kanye",
     "atrule",
+    "browserslist",
     "calt",
     "clig",
     "crossorigin",
@@ -40,6 +41,7 @@
     "mochawesome",
     "nomodule",
     "octokit",
+    "precaching",
     "preconnect",
     "react",
     "react docgen typescript loader",

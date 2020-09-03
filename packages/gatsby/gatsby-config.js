@@ -77,14 +77,7 @@ module.exports = {
         cache_busting_mode: "none",
       },
     },
-    {
-      resolve: `gatsby-plugin-offline`,
-      options: {
-        workboxConfig: {
-          importWorkboxFrom: `cdn`,
-        },
-      },
-    },
+    "gatsby-plugin-sw",
     `gatsby-plugin-emotion`,
     `gatsby-plugin-no-sourcemaps`,
     `gatsby-plugin-remove-generator`,
