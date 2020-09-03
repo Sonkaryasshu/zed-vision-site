@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[8],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[9],{
 
 /***/ "H8eV":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -73,7 +73,7 @@ SEO.defaultProps = {
 
 /***/ }),
 
-/***/ "i6+/":
+/***/ "XL9/":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -97,8 +97,8 @@ var NotFoundPage = function NotFoundPage(_ref) {
     location: location,
     title: siteTitle
   }, Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__[/* jsx */ "a"])(_components_seo__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"], {
-    title: "404: Not Found"
-  }), Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__[/* jsx */ "a"])("h1", null, "Not Found"), Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__[/* jsx */ "a"])("p", null, "You just hit a route that doesn't exist... the sadness."));
+    title: "... offline"
+  }), Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__[/* jsx */ "a"])("h1", null, "Maybe you are offline"), Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__[/* jsx */ "a"])("p", null, "Check your internet connection"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (NotFoundPage);

@@ -55,21 +55,21 @@
 /******/
 /******/ 	// object to store loaded CSS chunks
 /******/ 	var installedCssChunks = {
-/******/ 		5: 0
+/******/ 		4: 0
 /******/ 	}
 /******/
 /******/ 	// object to store loaded and loading chunks
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// Promise = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
-/******/ 		5: 0
+/******/ 		4: 0
 /******/ 	};
 /******/
 /******/ 	var deferredModules = [];
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"0":"commons","1":"framework","2":"09744744","3":"styles","4":"022d3153bf09c36cd784dcdb36ffbd187f9c96d7","6":"2db4dcb9","8":"component---src-pages-404-tsx","9":"component---src-pages-index-tsx","10":"component---src-pages-offline-plugin-app-shell-fallback-tsx","11":"component---src-pages-using-typescript-tsx","12":"component---src-pages-valami-mdx","13":"component---src-pages-zoli-tsx","14":"component---src-templates-blog-post-tsx"}[chunkId]||chunkId) + "-" + {"0":"d456067f924043dfaec1","1":"4b09b28bb902b111a0ee","2":"6170c5a20e5e77dc160e","3":"5b21937564f08ea4c6e1","4":"9d0cf8b51cd7beea3cd4","6":"e008a3414d638835007d","8":"016c13479077edf99b1e","9":"4caea03a65b60afbeb98","10":"c9e8a6b7a2fcaf2fd31e","11":"ce8990eda17fb7bd4e96","12":"1432329d0d3cafea3c92","13":"c644f259967a4cc5ad01","14":"44e76f5318e49c181c5c"}[chunkId] + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"0":"commons","1":"09744744","2":"styles","3":"022d3153bf09c36cd784dcdb36ffbd187f9c96d7","5":"2db4dcb9","7":"component---src-pages-404-tsx","8":"component---src-pages-index-tsx","9":"component---src-pages-offline-plugin-app-shell-fallback-tsx","10":"component---src-pages-using-typescript-tsx","11":"component---src-pages-valami-mdx","12":"component---src-pages-zoli-tsx","13":"component---src-templates-blog-post-tsx"}[chunkId]||chunkId) + "-" + {"0":"eeb2e3ec286ead1f80d7","1":"241952380f217543106c","2":"195070ea59b3395625da","3":"4a0393542c6a9735acb2","5":"18f79dfeecb3d1a33b98","7":"37edefd4ab9b071548aa","8":"f9bd388b916fd4c7f591","9":"f25e6bf27258517339ff","10":"feab88129e1105bce7c3","11":"c1c2de3bf7fd714737cf","12":"629a4aa76fe87ba3cead","13":"5b6dbc9029ef380362e6"}[chunkId] + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -103,11 +103,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"3":1};
+/******/ 		var cssChunks = {"2":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"0":"commons","1":"framework","2":"09744744","3":"styles","4":"022d3153bf09c36cd784dcdb36ffbd187f9c96d7","6":"2db4dcb9","8":"component---src-pages-404-tsx","9":"component---src-pages-index-tsx","10":"component---src-pages-offline-plugin-app-shell-fallback-tsx","11":"component---src-pages-using-typescript-tsx","12":"component---src-pages-valami-mdx","13":"component---src-pages-zoli-tsx","14":"component---src-templates-blog-post-tsx"}[chunkId]||chunkId) + "." + {"0":"31d6cfe0d16ae931b73c","1":"31d6cfe0d16ae931b73c","2":"31d6cfe0d16ae931b73c","3":"233c9062b20f3955a773","4":"31d6cfe0d16ae931b73c","6":"31d6cfe0d16ae931b73c","8":"31d6cfe0d16ae931b73c","9":"31d6cfe0d16ae931b73c","10":"31d6cfe0d16ae931b73c","11":"31d6cfe0d16ae931b73c","12":"31d6cfe0d16ae931b73c","13":"31d6cfe0d16ae931b73c","14":"31d6cfe0d16ae931b73c"}[chunkId] + ".css";
+/******/ 				var href = "" + ({"0":"commons","1":"09744744","2":"styles","3":"022d3153bf09c36cd784dcdb36ffbd187f9c96d7","5":"2db4dcb9","7":"component---src-pages-404-tsx","8":"component---src-pages-index-tsx","9":"component---src-pages-offline-plugin-app-shell-fallback-tsx","10":"component---src-pages-using-typescript-tsx","11":"component---src-pages-valami-mdx","12":"component---src-pages-zoli-tsx","13":"component---src-templates-blog-post-tsx"}[chunkId]||chunkId) + "." + {"0":"31d6cfe0d16ae931b73c","1":"31d6cfe0d16ae931b73c","2":"233c9062b20f3955a773","3":"31d6cfe0d16ae931b73c","5":"31d6cfe0d16ae931b73c","7":"31d6cfe0d16ae931b73c","8":"31d6cfe0d16ae931b73c","9":"31d6cfe0d16ae931b73c","10":"31d6cfe0d16ae931b73c","11":"31d6cfe0d16ae931b73c","12":"31d6cfe0d16ae931b73c","13":"31d6cfe0d16ae931b73c"}[chunkId] + ".css";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

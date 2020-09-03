@@ -12371,10 +12371,6 @@ var Highlight = /*@__PURE__*/function (Component) {
 // EXTERNAL MODULE: /app/node_modules/@material-ui/core/esm/Paper/Paper.js
 var Paper = __webpack_require__("TuTm");
 
-// EXTERNAL MODULE: /app/node_modules/react-dom/server.browser.js
-var server_browser = __webpack_require__("Q/r/");
-var server_browser_default = /*#__PURE__*/__webpack_require__.n(server_browser);
-
 // EXTERNAL MODULE: /app/node_modules/react-simple-code-editor/lib/index.js
 var lib = __webpack_require__("aGk2");
 var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
@@ -13898,7 +13894,6 @@ function CodeEditor_templateObject() {
 
 
 
-
  // import html2canvas from "html2canvas"
 
 
@@ -14053,12 +14048,7 @@ var CodeEditor_CodeEditor = function CodeEditor(_ref) {
       backgroundColor: "transparent !important",
       backgroundImage: "linear-gradient(to right bottom, #34294f 0%, #2a2139 30%)"
     }
-  }, Object(core_browser_esm["a" /* jsx */])(LiveEditor, {
-    onChange: function onChange(d) {
-      console.log(d);
-      console.log(server_browser_default.a.renderToString(Object(core_browser_esm["a" /* jsx */])("h1", null, "Ello")));
-    }
-  })), Object(core_browser_esm["a" /* jsx */])(Paper["a" /* default */], {
+  }, Object(core_browser_esm["a" /* jsx */])(LiveEditor, null)), Object(core_browser_esm["a" /* jsx */])(Paper["a" /* default */], {
     square: true,
     style: {
       color: "white",

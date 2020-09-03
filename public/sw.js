@@ -26,35 +26,35 @@ workbox.core.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "webpack-runtime-b8f3b0bb09869735664b.js"
+    "url": "webpack-runtime-a37ca0aa89a0bdbfd7f2.js"
   },
   {
-    "url": "framework-4b09b28bb902b111a0ee.js"
+    "url": "framework-4343dfbf6d82afc9ecac.js"
   },
   {
-    "url": "app-c7142e936d77a4230a77.js"
+    "url": "app-2688413731a0d9e7984e.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "46a8c16ba1ca770d5b8a112e076f6192"
+    "revision": "d360fac6fefd2b6418078be4382f8525"
   },
   {
     "url": "styles.233c9062b20f3955a773.css"
   },
   {
-    "url": "styles-5b21937564f08ea4c6e1.js"
+    "url": "styles-195070ea59b3395625da.js"
   },
   {
-    "url": "09744744-6170c5a20e5e77dc160e.js"
+    "url": "09744744-241952380f217543106c.js"
   },
   {
-    "url": "commons-d456067f924043dfaec1.js"
+    "url": "commons-eeb2e3ec286ead1f80d7.js"
   },
   {
-    "url": "component---src-pages-offline-plugin-app-shell-fallback-tsx-c9e8a6b7a2fcaf2fd31e.js"
+    "url": "component---src-pages-offline-plugin-app-shell-fallback-tsx-f25e6bf27258517339ff.js"
   },
   {
-    "url": "polyfill-c6e479fa750bf7f564bc.js"
+    "url": "polyfill-db5624ddd2e6ddb86a92.js"
   },
   {
     "url": "manifest.webmanifest",
@@ -150,7 +150,7 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
   // Check for resources + the app bundle
   // The latter may not exist if the SW is updating to a new version
   const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`/app-c7142e936d77a4230a77.js`))) {
+  if (!resources || !(await caches.match(`/app-2688413731a0d9e7984e.js`))) {
     return await fetch(event.request)
   }
 
