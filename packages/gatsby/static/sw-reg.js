@@ -2,8 +2,10 @@
 
 const registerSW = async () => {
   try {
-    await navigator.serviceWorker.ready
-    await navigator.serviceWorker.register("/sw.js", {
+    console.log("waiting to be ready")
+    //  await navigator.serviceWorker.ready
+    console.log("registering now")
+    const reg = await navigator.serviceWorker.register("/sw.js", {
       updateViaCache: "imports",
       scope: "/",
     })
@@ -14,5 +16,6 @@ const registerSW = async () => {
 }
 
 if ("serviceWorker" in navigator) {
-  registerSW()
+  console.log("adding event listener for lad")
+  window.addEventListener("load", () => registerSW())
 }

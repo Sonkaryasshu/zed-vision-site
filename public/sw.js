@@ -1,43 +1,52 @@
 importScripts(
-  "https://storage.googleapis.com/workbox-cdn/releases/5.1.3/workbox-sw.js"
+  "https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js"
 )
-
-const { CacheFirst, StaleWhileRevalidate } = workbox.strategies
-const { ExpirationPlugin } = workbox.expiration
-const { registerRoute } = workbox.routing
 // const { precacheAndRoute } = workbox.precaching
 // The plugin will pass the files to cache here
 // workbox.precaching.precacheAndRoute([])
 
-registerRoute(
+workbox.routing.registerRoute(
   ({ url }) => {
+    const { pathname } = url
+
     return (
-      url.length - url.lastIndexOf("/") > 16 &&
-      (url.endsWidth(".js") || url.lastIndexOf(".js?"))
+      pathname.length - pathname.lastIndexOf("/") > 16 &&
+      (pathname.substr(-3) === ".js" || pathname.lastIndexOf(".js?") > 0)
     )
   },
-  new CacheFirst({
+  new workbox.strategies.CacheOnly({
     cacheName: "hashed js files",
-    plugins: [new ExpirationPlugin({ maxEntries: 100 })],
+    plugins: [new workbox.expiration.ExpirationPlugin({ maxEntries: 100 })],
   })
 )
 
-registerRoute(
+workbox.routing.registerRoute(
+  ({ url }) => {
+    const { pathname } = url
+
+    return pathname.includes("page-data.json")
+  },
+  new workbox.strategies.StaleWhileRevalidate({
+    cacheName: "page-data",
+  })
+)
+
+workbox.routing.registerRoute(
   ({ url }) =>
     url.origin === "https://fonts.googleapis.com" ||
     url.origin === "https://fonts.gstatic.com",
-  new StaleWhileRevalidate({
+  new workbox.strategies.CacheOnly({
     cacheName: "google-fonts",
-    plugins: [new ExpirationPlugin({ maxEntries: 100 })],
+    plugins: [new workbox.expiration.ExpirationPlugin({ maxEntries: 100 })],
   })
 )
 
-registerRoute(
+workbox.routing.registerRoute(
   ({ request }) => request.destination === "image",
-  new CacheFirst({
+  new workbox.strategies.CacheFirst({
     cacheName: "images",
     plugins: [
-      new ExpirationPlugin({
+      new workbox.expiration.ExpirationPlugin({
         maxEntries: 60,
         maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
       }),
@@ -45,10 +54,10 @@ registerRoute(
   })
 )
 
-registerRoute(
+workbox.routing.registerRoute(
   ({ request }) =>
     request.destination === "script" || request.destination === "style",
-  new StaleWhileRevalidate({
+  new workbox.strategies.StaleWhileRevalidate({
     cacheName: "static-resources",
   })
 )
