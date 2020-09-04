@@ -1705,14 +1705,12 @@ critical:_propTypes.default.bool,crossOrigin:_propTypes.default.oneOfType([_prop
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("Vgyk");
 /* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("Wbzz");
-/* harmony import */ var _emotion_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("l1C2");
 /**
  * SEO component that queries for data with
  *  Gatsby's useStaticQuery React hook
  *
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
-
 
 
 
@@ -1727,7 +1725,7 @@ var SEO = function SEO(_ref) {
       site = _useStaticQuery.site;
 
   var metaDescription = description || site.siteMetadata.description;
-  return Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__[/* jsx */ "a"])(react_helmet__WEBPACK_IMPORTED_MODULE_1__[/* Helmet */ "a"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](react_helmet__WEBPACK_IMPORTED_MODULE_1__[/* Helmet */ "a"], {
     htmlAttributes: {
       lang: lang
     },
@@ -1782,7 +1780,6 @@ SEO.defaultProps = {
 /* harmony import */ var gatsby_image__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("6c1n");
 /* harmony import */ var gatsby_image__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(gatsby_image__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _utils_typography__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("rB5o");
-/* harmony import */ var _emotion_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("l1C2");
 
 
 function _templateObject2() {
@@ -1810,7 +1807,6 @@ function _templateObject() {
 
 
 
-
 var Container = styled_components__WEBPACK_IMPORTED_MODULE_3__[/* default */ "b"].div(_templateObject(), Object(_utils_typography__WEBPACK_IMPORTED_MODULE_5__[/* rhythm */ "a"])(2.5));
 var StyledImage = Object(styled_components__WEBPACK_IMPORTED_MODULE_3__[/* default */ "b"])(gatsby_image__WEBPACK_IMPORTED_MODULE_4___default.a)(_templateObject2(), Object(_utils_typography__WEBPACK_IMPORTED_MODULE_5__[/* rhythm */ "a"])(1 / 2));
 
@@ -1819,14 +1815,14 @@ var Bio = function Bio() {
   var _data$site$siteMetada = data.site.siteMetadata,
       author = _data$site$siteMetada.author,
       social = _data$site$siteMetada.social;
-  return Object(_emotion_core__WEBPACK_IMPORTED_MODULE_6__[/* jsx */ "a"])(Container, null, Object(_emotion_core__WEBPACK_IMPORTED_MODULE_6__[/* jsx */ "a"])(StyledImage, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__["createElement"](Container, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__["createElement"](StyledImage, {
     alt: author.name //@ts-ignore
     ,
     fixed: data.avatar.childImageSharp.fixed,
     imgStyle: {
       borderRadius: "50%"
     }
-  }), Object(_emotion_core__WEBPACK_IMPORTED_MODULE_6__[/* jsx */ "a"])("p", null, "Written by ", Object(_emotion_core__WEBPACK_IMPORTED_MODULE_6__[/* jsx */ "a"])("strong", null, author.name), " ", author.summary, " ", Object(_emotion_core__WEBPACK_IMPORTED_MODULE_6__[/* jsx */ "a"])("a", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("p", null, "Written by ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("strong", null, author.name), " ", author.summary, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("a", {
     href: "https://twitter.com/" + social.twitter
   }, "You should follow him on Twitter")));
 };
@@ -2087,3 +2083,4 @@ module.exports = function (lightness, hue, darkBackground) {
 /***/ })
 
 }]);
+//# sourceMappingURL=022d3153bf09c36cd784dcdb36ffbd187f9c96d7-070c08ea3d2f71778638.js.map

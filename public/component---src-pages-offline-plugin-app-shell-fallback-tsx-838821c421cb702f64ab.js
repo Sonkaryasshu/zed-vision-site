@@ -8,14 +8,12 @@
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("Vgyk");
 /* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("Wbzz");
-/* harmony import */ var _emotion_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("l1C2");
 /**
  * SEO component that queries for data with
  *  Gatsby's useStaticQuery React hook
  *
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
-
 
 
 
@@ -30,7 +28,7 @@ var SEO = function SEO(_ref) {
       site = _useStaticQuery.site;
 
   var metaDescription = description || site.siteMetadata.description;
-  return Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__[/* jsx */ "a"])(react_helmet__WEBPACK_IMPORTED_MODULE_1__[/* Helmet */ "a"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](react_helmet__WEBPACK_IMPORTED_MODULE_1__[/* Helmet */ "a"], {
     htmlAttributes: {
       lang: lang
     },
@@ -83,8 +81,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("9Dj+");
 /* harmony import */ var _components_seo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("H8eV");
-/* harmony import */ var _emotion_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("l1C2");
-
 
 
 
@@ -93,12 +89,12 @@ var NotFoundPage = function NotFoundPage(_ref) {
   var data = _ref.data,
       location = _ref.location;
   var siteTitle = data.site.siteMetadata.title;
-  return Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__[/* jsx */ "a"])(_components_layout__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_components_layout__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"], {
     location: location,
     title: siteTitle
-  }, Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__[/* jsx */ "a"])(_components_seo__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_components_seo__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"], {
     title: "... offline"
-  }), Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__[/* jsx */ "a"])("h1", null, "Maybe you are offline"), Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__[/* jsx */ "a"])("p", null, "Check your internet connection"));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("h1", null, "Maybe you are offline"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("p", null, "Check your internet connection"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (NotFoundPage);
@@ -107,3 +103,4 @@ var pageQuery = "3159585216";
 /***/ })
 
 }]);
+//# sourceMappingURL=component---src-pages-offline-plugin-app-shell-fallback-tsx-838821c421cb702f64ab.js.map

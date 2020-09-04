@@ -11,9 +11,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.d(__webpack_exports__, "_frontmatter", function() { return /* binding */ valami_frontmatter; });
 __webpack_require__.d(__webpack_exports__, "default", function() { return /* binding */ valami_MDXContent; });
 
-// EXTERNAL MODULE: /app/node_modules/@babel/runtime/helpers/esm/extends.js
-var esm_extends = __webpack_require__("cxan");
-
 // EXTERNAL MODULE: /app/node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js
 var objectWithoutPropertiesLoose = __webpack_require__("+wNj");
 
@@ -26,6 +23,9 @@ var esm = __webpack_require__("ZVZ0");
 
 // EXTERNAL MODULE: ./src/components/layout.tsx + 33 modules
 var layout = __webpack_require__("9Dj+");
+
+// EXTERNAL MODULE: /app/node_modules/@babel/runtime/helpers/esm/extends.js
+var esm_extends = __webpack_require__("cxan");
 
 // EXTERNAL MODULE: /app/node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js
 var objectWithoutProperties = __webpack_require__("HbGN");
@@ -5998,11 +5998,7 @@ var Container_Container = /*#__PURE__*/react["forwardRef"](function Container(pr
 /* harmony default export */ var esm_Container_Container = (Object(withStyles["a" /* default */])(Container_styles, {
   name: 'MuiContainer'
 })(Container_Container));
-// EXTERNAL MODULE: /app/node_modules/@emotion/core/dist/core.browser.esm.js + 7 modules
-var core_browser_esm = __webpack_require__("l1C2");
-
 // CONCATENATED MODULE: ./src/components/atoms/signIn.tsx
-
 
 
 
@@ -6038,17 +6034,17 @@ var signIn_SignIn = function SignIn(_ref) {
   var classes = useStyles();
 
   var SignUpComp = function SignUpComp() {
-    return Object(core_browser_esm["a" /* jsx */])(Paper["a" /* default */], {
+    return /*#__PURE__*/react["createElement"](Paper["a" /* default */], {
       className: classes.mainPadding,
       elevation: 2
-    }, Object(core_browser_esm["a" /* jsx */])(esm_Avatar_Avatar, {
+    }, /*#__PURE__*/react["createElement"](esm_Avatar_Avatar, {
       className: classes.avatar
-    }, Object(core_browser_esm["a" /* jsx */])(LockOutlined_default.a, null)), Object(core_browser_esm["a" /* jsx */])(Typography["a" /* default */], {
+    }, /*#__PURE__*/react["createElement"](LockOutlined_default.a, null)), /*#__PURE__*/react["createElement"](Typography["a" /* default */], {
       component: "h1",
       variant: "h5"
-    }, "Sign in"), Object(core_browser_esm["a" /* jsx */])("form", {
+    }, "Sign in"), /*#__PURE__*/react["createElement"]("form", {
       noValidate: true
-    }, Object(core_browser_esm["a" /* jsx */])(esm_TextField_TextField, {
+    }, /*#__PURE__*/react["createElement"](esm_TextField_TextField, {
       variant: "outlined",
       margin: "normal",
       required: true,
@@ -6062,7 +6058,7 @@ var signIn_SignIn = function SignIn(_ref) {
       autoComplete: "email",
       autoFocus: true // {...(!!email ? { value: email } : {})}
 
-    }), Object(core_browser_esm["a" /* jsx */])(esm_TextField_TextField, {
+    }), /*#__PURE__*/react["createElement"](esm_TextField_TextField, {
       variant: "outlined",
       margin: "normal",
       required: true,
@@ -6072,43 +6068,42 @@ var signIn_SignIn = function SignIn(_ref) {
       type: "password",
       id: "password",
       autoComplete: "current-password"
-    }), Object(core_browser_esm["a" /* jsx */])(esm_FormControlLabel_FormControlLabel, {
-      control: Object(core_browser_esm["a" /* jsx */])(esm_Checkbox_Checkbox, {
+    }), /*#__PURE__*/react["createElement"](esm_FormControlLabel_FormControlLabel, {
+      control: /*#__PURE__*/react["createElement"](esm_Checkbox_Checkbox, {
         value: "remember",
         color: "primary"
       }),
       label: "Remember me"
-    }), Object(core_browser_esm["a" /* jsx */])(Button["a" /* default */], {
+    }), /*#__PURE__*/react["createElement"](Button["a" /* default */], {
       type: "submit",
       fullWidth: true,
       variant: "contained",
       color: "primary",
       className: classes.submit
-    }, "Sign In"), Object(core_browser_esm["a" /* jsx */])(Grid["a" /* default */], {
+    }, "Sign In"), /*#__PURE__*/react["createElement"](Grid["a" /* default */], {
       container: true
-    }, Object(core_browser_esm["a" /* jsx */])(Grid["a" /* default */], {
+    }, /*#__PURE__*/react["createElement"](Grid["a" /* default */], {
       item: true,
       xs: true
-    }, Object(core_browser_esm["a" /* jsx */])(esm_Link_Link, {
+    }, /*#__PURE__*/react["createElement"](esm_Link_Link, {
       href: "#",
       variant: "body2"
-    }, "Forgot password?")), Object(core_browser_esm["a" /* jsx */])(Grid["a" /* default */], {
+    }, "Forgot password?")), /*#__PURE__*/react["createElement"](Grid["a" /* default */], {
       item: true
-    }, Object(core_browser_esm["a" /* jsx */])(esm_Link_Link, {
+    }, /*#__PURE__*/react["createElement"](esm_Link_Link, {
       href: "#",
       variant: "body2"
     }, "Don't have an account? Sign Up")))));
   };
 
-  return Object(core_browser_esm["a" /* jsx */])(esm_Container_Container, {
+  return /*#__PURE__*/react["createElement"](esm_Container_Container, {
     component: "main",
     maxWidth: "xs"
-  }, Object(core_browser_esm["a" /* jsx */])(CssBaseline["b" /* default */], null), Object(core_browser_esm["a" /* jsx */])(SignUpComp, null));
+  }, /*#__PURE__*/react["createElement"](CssBaseline["b" /* default */], null), /*#__PURE__*/react["createElement"](SignUpComp, null));
 };
 
 /* harmony default export */ var signIn = (signIn_SignIn);
 // CONCATENATED MODULE: ./src/components/atoms/SignInForm.tsx
-
 
 
 
@@ -6119,9 +6114,9 @@ var SignInForm_SignInActioned = function SignInActioned() {
       state = _React$useState[0],
       setState = _React$useState[1];
 
-  return Object(core_browser_esm["a" /* jsx */])(react["Fragment"], null, Object(core_browser_esm["a" /* jsx */])(signIn, {
+  return /*#__PURE__*/react["createElement"](react["Fragment"], null, /*#__PURE__*/react["createElement"](signIn, {
     email: state.email
-  }), Object(core_browser_esm["a" /* jsx */])("br", null), Object(core_browser_esm["a" /* jsx */])("h2", {
+  }), /*#__PURE__*/react["createElement"]("br", null), /*#__PURE__*/react["createElement"]("h2", {
     onClick: function onClick() {
       return setState({
         email: "booo"
@@ -6134,12 +6129,10 @@ var SignInForm_SignInActioned = function SignInActioned() {
 // CONCATENATED MODULE: ./src/components/atoms/README.mdx
 
 
-
 /* @jsx mdx */
 
 
 /* @jsx mdx */
-
 
 
 var _frontmatter = {};
@@ -6151,7 +6144,7 @@ function MDXContent(_ref) {
   var components = _ref.components,
       props = Object(objectWithoutPropertiesLoose["a" /* default */])(_ref, ["components"]);
 
-  return Object(esm["mdx"])(MDXLayout, Object(esm_extends["a" /* default */])({}, layoutProps, props, {
+  return Object(esm["mdx"])(MDXLayout, Object.assign({}, layoutProps, props, {
     components: components,
     mdxType: "MDXLayout"
   }), Object(esm["mdx"])("h3", null, "Sign in Component"), Object(esm["mdx"])(SignInForm, {
@@ -6163,12 +6156,10 @@ MDXContent.isMDXComponent = true;
 // CONCATENATED MODULE: ./src/pages/valami.mdx
 
 
-
 /* @jsx mdx */
 
 
 /* @jsx mdx */
-
 
 
 
@@ -6181,10 +6172,10 @@ function valami_MDXContent(_ref) {
   var components = _ref.components,
       props = Object(objectWithoutPropertiesLoose["a" /* default */])(_ref, ["components"]);
 
-  return Object(esm["mdx"])(valami_MDXLayout, Object(esm_extends["a" /* default */])({}, valami_layoutProps, props, {
+  return Object(esm["mdx"])(valami_MDXLayout, Object.assign({}, valami_layoutProps, props, {
     components: components,
     mdxType: "MDXLayout"
-  }), Object(esm["mdx"])("h1", null, "h1 Heading"), Object(esm["mdx"])("h2", null, "h2 Heading two"), Object(esm["mdx"])("h3", null, "h3"), Object(esm["mdx"])("h4", null, "h4"), Object(esm["mdx"])("h5", null, "h5"), Object(esm["mdx"])("pre", null, Object(esm["mdx"])("code", Object(esm_extends["a" /* default */])({
+  }), Object(esm["mdx"])("h1", null, "h1 Heading"), Object(esm["mdx"])("h2", null, "h2 Heading two"), Object(esm["mdx"])("h3", null, "h3"), Object(esm["mdx"])("h4", null, "h4"), Object(esm["mdx"])("h5", null, "h5"), Object(esm["mdx"])("pre", null, Object(esm["mdx"])("code", Object.assign({
     parentName: "pre"
   }, {
     "className": "language-javascript",
@@ -6198,53 +6189,53 @@ function valami_MDXContent(_ref) {
     parentName: "p"
   }, "This text will be bold")), Object(esm["mdx"])("ul", {
     "className": "contains-task-list"
-  }, Object(esm["mdx"])("li", Object(esm_extends["a" /* default */])({
+  }, Object(esm["mdx"])("li", Object.assign({
     parentName: "ul"
   }, {
     "className": "task-list-item"
-  }), Object(esm["mdx"])("input", Object(esm_extends["a" /* default */])({
+  }), Object(esm["mdx"])("input", Object.assign({
     parentName: "li"
   }, {
     "type": "checkbox",
     "checked": true,
     "disabled": true
-  })), " ", "@mentions, #refs, ", Object(esm["mdx"])("a", Object(esm_extends["a" /* default */])({
+  })), " ", "@mentions, #refs, ", Object(esm["mdx"])("a", Object.assign({
     parentName: "li"
   }, {
     "href": ""
   }), "links"), ", ", Object(esm["mdx"])("strong", {
     parentName: "li"
-  }, "formatting"), ", and ", Object(esm["mdx"])("del", null, "tags"), " supported"), Object(esm["mdx"])("li", Object(esm_extends["a" /* default */])({
+  }, "formatting"), ", and ", Object(esm["mdx"])("del", null, "tags"), " supported"), Object(esm["mdx"])("li", Object.assign({
     parentName: "ul"
   }, {
     "className": "task-list-item"
-  }), Object(esm["mdx"])("input", Object(esm_extends["a" /* default */])({
+  }), Object(esm["mdx"])("input", Object.assign({
     parentName: "li"
   }, {
     "type": "checkbox",
     "checked": true,
     "disabled": true
-  })), " ", "list syntax required (any unordered or ordered list supported)"), Object(esm["mdx"])("li", Object(esm_extends["a" /* default */])({
+  })), " ", "list syntax required (any unordered or ordered list supported)"), Object(esm["mdx"])("li", Object.assign({
     parentName: "ul"
   }, {
     "className": "task-list-item"
-  }), Object(esm["mdx"])("input", Object(esm_extends["a" /* default */])({
+  }), Object(esm["mdx"])("input", Object.assign({
     parentName: "li"
   }, {
     "type": "checkbox",
     "checked": true,
     "disabled": true
-  })), " ", "this is a complete item"), Object(esm["mdx"])("li", Object(esm_extends["a" /* default */])({
+  })), " ", "this is a complete item"), Object(esm["mdx"])("li", Object.assign({
     parentName: "ul"
   }, {
     "className": "task-list-item"
-  }), Object(esm["mdx"])("input", Object(esm_extends["a" /* default */])({
+  }), Object(esm["mdx"])("input", Object.assign({
     parentName: "li"
   }, {
     "type": "checkbox",
     "checked": false,
     "disabled": true
-  })), " ", "this is an incomplete item")), Object(esm["mdx"])("pre", null, Object(esm["mdx"])("code", Object(esm_extends["a" /* default */])({
+  })), " ", "this is an incomplete item")), Object(esm["mdx"])("pre", null, Object(esm["mdx"])("code", Object.assign({
     parentName: "pre"
   }, {
     "className": "language-tsx"
@@ -6271,7 +6262,7 @@ function valami_MDXContent(_ref) {
     parentName: "em"
   }, "can"), " combine them")), Object(esm["mdx"])("h1", null, "h1"), Object(esm["mdx"])("h2", null, "h2 ", Object(esm["mdx"])("inlineCode", {
     parentName: "h2"
-  }, "code")), Object(esm["mdx"])("p", null, "text"), Object(esm["mdx"])("pre", null, Object(esm["mdx"])("code", Object(esm_extends["a" /* default */])({
+  }, "code")), Object(esm["mdx"])("p", null, "text"), Object(esm["mdx"])("pre", null, Object(esm["mdx"])("code", Object.assign({
     parentName: "pre"
   }, {
     "className": "language-javascript"
@@ -6310,3 +6301,4 @@ exports.default = _default;
 /***/ })
 
 }]);
+//# sourceMappingURL=component---src-pages-valami-mdx-393983834f295e2f1e47.js.map

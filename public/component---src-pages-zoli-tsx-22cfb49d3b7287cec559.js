@@ -1601,17 +1601,12 @@ var toConsumableArray = __webpack_require__("fGyu");
 var lib = __webpack_require__("1ou2");
 var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
 
-// EXTERNAL MODULE: /app/node_modules/@emotion/core/dist/core.browser.esm.js + 7 modules
-var core_browser_esm = __webpack_require__("l1C2");
-
 // CONCATENATED MODULE: ./src/components/changeDetector.tsx
 
 
  // import "./styles.css"
 // // need to import the vis network css in order to show tooltip
 // import "./network.css"
-
-
 
 var getSvg = function getSvg(div) {
   return '<svg xmlns="http://www.w3.org/2000/svg">' + // '<rect x="0" y="0" width="100%" height="100%" fill="#7890A7" stroke-width="20" stroke="#ffffff" ></rect>' +
@@ -1626,7 +1621,7 @@ var changeDetector_App = function App(_ref) {
   var nodes = _ref.nodes,
       edges = _ref.edges;
   console.log(nodes);
-  if (!nodes) return Object(core_browser_esm["a" /* jsx */])(react["Fragment"], null);
+  if (!nodes) return /*#__PURE__*/react["createElement"](react["Fragment"], null);
   var graph = {
     nodes: nodes,
     edges: edges
@@ -1649,7 +1644,7 @@ var changeDetector_App = function App(_ref) {
       console.log(edges);
     }
   };
-  return Object(core_browser_esm["a" /* jsx */])(lib_default.a, {
+  return /*#__PURE__*/react["createElement"](lib_default.a, {
     graph: graph,
     options: options,
     events: events,
@@ -1731,9 +1726,8 @@ var changeDetector_chd = function chd(_ref2) {
       }, original);
     });
   }, []);
-
-  var rest = Object(core_browser_esm["a" /* jsx */])("div", null, comps.length && comps.map(function (d) {
-    return Object(core_browser_esm["a" /* jsx */])("div", {
+  var rest = /*#__PURE__*/react["createElement"]("div", null, comps.length && comps.map(function (d) {
+    return /*#__PURE__*/react["createElement"]("div", {
       style: {
         margin: 5,
         display: "inline-block"
@@ -1742,15 +1736,14 @@ var changeDetector_chd = function chd(_ref2) {
       dangerouslySetInnerHTML: createMarkup(d || "uo")
     });
   }));
-
-  return Object(core_browser_esm["a" /* jsx */])(react["Fragment"], null, Object(core_browser_esm["a" /* jsx */])("div", {
+  return /*#__PURE__*/react["createElement"](react["Fragment"], null, /*#__PURE__*/react["createElement"]("div", {
     style: {
       margin: "10px",
       padding: "10px"
     }
-  }, Object(core_browser_esm["a" /* jsx */])("div", {
+  }, /*#__PURE__*/react["createElement"]("div", {
     id: "id1"
-  }, Object(core_browser_esm["a" /* jsx */])(Comp1, {
+  }, /*#__PURE__*/react["createElement"](Comp1, {
     onEvent: function onEvent(ev) {
       var _document$getElementB4;
 
@@ -1761,10 +1754,10 @@ var changeDetector_chd = function chd(_ref2) {
         }, original);
       });
     }
-  })), Object(core_browser_esm["a" /* jsx */])(changeDetector_App, {
+  })), /*#__PURE__*/react["createElement"](changeDetector_App, {
     nodes: nodes,
     edges: edges
-  })), Object(core_browser_esm["a" /* jsx */])("pre", null, JSON.stringify(nodes)), rest);
+  })), /*#__PURE__*/react["createElement"]("pre", null, JSON.stringify(nodes)), rest);
 };
 
 function createMarkup(markup) {
@@ -1774,10 +1767,9 @@ function createMarkup(markup) {
 }
 
 var ChangeDetector = typeof window !== "undefined" ? changeDetector_chd : function () {
-  return Object(core_browser_esm["a" /* jsx */])("div", null, "NO ssr");
+  return /*#__PURE__*/react["createElement"]("div", null, "NO ssr");
 };
 // CONCATENATED MODULE: ./src/pages/zoli.tsx
-
 
 
 
@@ -1790,12 +1782,12 @@ var zoli_Comp1 = function Comp1(_ref) {
       count = _React$useState[0],
       setCount = _React$useState[1];
 
-  return Object(core_browser_esm["a" /* jsx */])(react["Fragment"], null, Object(core_browser_esm["a" /* jsx */])("button", {
+  return /*#__PURE__*/react["createElement"](react["Fragment"], null, /*#__PURE__*/react["createElement"]("button", {
     onClick: function onClick() {
       onEvent("inc");
       setCount(count + 1);
     }
-  }, "+"), count, Object(core_browser_esm["a" /* jsx */])("button", {
+  }, "+"), count, /*#__PURE__*/react["createElement"]("button", {
     onClick: function onClick() {
       onEvent("dec");
       setCount(count - 1);
@@ -1807,14 +1799,14 @@ var zoli_NotFoundPage = function NotFoundPage(_ref2) {
   var data = _ref2.data,
       location = _ref2.location;
   var siteTitle = data.site.siteMetadata.title;
-  return Object(core_browser_esm["a" /* jsx */])(layout["a" /* default */], {
+  return /*#__PURE__*/react["createElement"](layout["a" /* default */], {
     location: location,
     title: siteTitle
-  }, Object(core_browser_esm["a" /* jsx */])(seo["a" /* default */], {
+  }, /*#__PURE__*/react["createElement"](seo["a" /* default */], {
     title: "404: Not Found"
-  }), Object(core_browser_esm["a" /* jsx */])("h1", null, "Not Found!!!!"), Object(core_browser_esm["a" /* jsx */])(ChangeDetector, {
+  }), /*#__PURE__*/react["createElement"]("h1", null, "Not Found!!!!"), /*#__PURE__*/react["createElement"](ChangeDetector, {
     Comp1: zoli_Comp1
-  }), Object(core_browser_esm["a" /* jsx */])("p", null, "You just hit a route that doesn't exist... the sadness."));
+  }), /*#__PURE__*/react["createElement"]("p", null, "You just hit a route that doesn't exist... the sadness."));
 };
 
 /* harmony default export */ var zoli = __webpack_exports__["default"] = (zoli_NotFoundPage);
@@ -2785,14 +2777,12 @@ module.exports = arrayMap;
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("Vgyk");
 /* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("Wbzz");
-/* harmony import */ var _emotion_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("l1C2");
 /**
  * SEO component that queries for data with
  *  Gatsby's useStaticQuery React hook
  *
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
-
 
 
 
@@ -2807,7 +2797,7 @@ var SEO = function SEO(_ref) {
       site = _useStaticQuery.site;
 
   var metaDescription = description || site.siteMetadata.description;
-  return Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__[/* jsx */ "a"])(react_helmet__WEBPACK_IMPORTED_MODULE_1__[/* Helmet */ "a"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](react_helmet__WEBPACK_IMPORTED_MODULE_1__[/* Helmet */ "a"], {
     htmlAttributes: {
       lang: lang
     },
@@ -10000,3 +9990,4 @@ module.exports = clone;
 /***/ })
 
 }]);
+//# sourceMappingURL=component---src-pages-zoli-tsx-22cfb49d3b7287cec559.js.map

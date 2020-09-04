@@ -71,8 +71,5 @@ module.exports = {
         cache_busting_mode: "none",
       },
     },
-    `gatsby-plugin-emotion`,
-    `gatsby-plugin-no-sourcemaps`,
-    `gatsby-plugin-remove-generator`,
   ],
 }

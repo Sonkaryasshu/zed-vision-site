@@ -42,6 +42,7 @@ workbox.routing.registerRoute(
     url.origin === "https://storage.googleapis.com",
   new workbox.strategies.CacheFirst({
     cacheName: "google-fonts",
+    cacheableResponse: { statuses: [0, 200] },
   })
 )
 
