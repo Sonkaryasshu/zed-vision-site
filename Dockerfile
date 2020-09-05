@@ -32,5 +32,6 @@ RUN yarn --frozen-lockfile --ignore-scripts
 
 EXPOSE 8000
 EXPOSE 4507
+EXPOSE 45739
 
 CMD ["tail", "-f", "/dev/null"]

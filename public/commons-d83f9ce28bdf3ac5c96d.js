@@ -13800,7 +13800,7 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { Object(defineProperty["a" /* default */])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _templateObject11() {
-  var data = Object(taggedTemplateLiteralLoose["a" /* default */])(["\n  color: black;\n  padding: 10px;\n  background-color: grey;\n"]);
+  var data = Object(taggedTemplateLiteralLoose["a" /* default */])(["\n  color: black;\n  padding: 10px;\n  background-color: grey !important;\n"]);
 
   _templateObject11 = function _templateObject11() {
     return data;
@@ -13938,7 +13938,6 @@ var CodeEditor_useStyles = Object(makeStyles["a" /* default */])(function (theme
       paddingBottom: "0 !important"
     },
     paper: {
-      background: "white",
       padding: theme.spacing(2),
       minWidth: "200px"
     }
@@ -28630,4 +28629,4 @@ module.exports = set;
 /***/ })
 
 }]);
-//# sourceMappingURL=commons-cf935ba00a479b4d5126.js.map
+//# sourceMappingURL=commons-d83f9ce28bdf3ac5c96d.js.map

@@ -43,7 +43,6 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingBottom: "0 !important",
     },
     paper: {
-      background: "white",
       padding: theme.spacing(2),
       minWidth: "200px",
     },
@@ -241,7 +240,7 @@ const StyledLiveErrorPaper = styled(Paper)`
 const StyledPreviewPaper = styled(Paper)`
   color: black;
   padding: 10px;
-  background-color: grey;
+  background-color: grey !important;
 `
 
 export const CodeEditor: React.FC<{

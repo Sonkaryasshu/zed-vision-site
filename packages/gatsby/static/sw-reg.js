@@ -1,5 +1,3 @@
-"use strict"
-
 const registerSW = async () => {
   try {
     console.log("waiting to be ready")
