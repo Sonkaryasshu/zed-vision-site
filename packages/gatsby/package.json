@@ -19,7 +19,7 @@
     "@material-ui/icons": "4.9.1",
     "@mdx-js/mdx": "1.6.16",
     "@mdx-js/react": "1.6.16",
-    "@octokit/rest": "18.0.4",
+    "@octokit/rest": "18.0.5",
     "@zed-vision/code-editor": "1.0.0",
     "gatsby": "2.24.53",
     "gatsby-image": "2.4.16",
