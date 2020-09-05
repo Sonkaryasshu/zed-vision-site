@@ -225,6 +225,25 @@ const StyledError = styled(LiveError)`
   font-family: "Source Code Pro", monospace;
 `
 
+const StyledEditorPaper = styled(Paper)`
+  color: white;
+  font-size: large;
+  background-color: transparent !important;
+  background-image: linear-gradient(to right bottom, #34294f 0%, #2a2139 30%);
+`
+const StyledLiveErrorPaper = styled(Paper)`
+  color: white;
+  font-size: large;
+  background-color: transparent !important;
+  background-image: linear-gradient(to right top, red 0%, #2a2139 30%);
+`
+
+const StyledPreviewPaper = styled(Paper)`
+  color: black;
+  padding: 10px;
+  background-color: grey;
+`
+
 export const CodeEditor: React.FC<{
   live?: boolean
   render?: boolean
@@ -260,30 +279,12 @@ export const CodeEditor: React.FC<{
           >
             <Card>
               <CardContent className={classes.cardNoSpace}>
-                <Paper
-                  square={true}
-                  style={{
-                    color: "white",
-                    fontSize: "large",
-                    backgroundColor: "transparent !important",
-                    backgroundImage:
-                      "linear-gradient(to right bottom, #34294f 0%, #2a2139 30%)",
-                  }}
-                >
+                <StyledEditorPaper>
                   <LiveEditor />
-                </Paper>
-                <Paper
-                  square={true}
-                  style={{
-                    color: "white",
-                    padding: "0",
-                    backgroundColor: "transparent !important",
-                    backgroundImage:
-                      "linear-gradient(to right top, red 0%, #2a2139 30%)",
-                  }}
-                >
+                </StyledEditorPaper>
+                <StyledLiveErrorPaper>
                   <LiveError />
-                </Paper>
+                </StyledLiveErrorPaper>
 
                 {PreviewComponent(classes)}
               </CardContent>
@@ -357,14 +358,7 @@ function PreviewComponent(
   >
 ) {
   return (
-    <Paper
-      square={true}
-      style={{
-        color: "black",
-        padding: "10px",
-        backgroundColor: "grey",
-      }}
-    >
+    <StyledPreviewPaper>
       <Grid container={true} spacing={3} direction="row">
         <Grid item xs>
           <Paper className={classes.paper}>
@@ -380,6 +374,6 @@ function PreviewComponent(
           </Paper>
         </Grid>
       </Grid>
-    </Paper>
+    </StyledPreviewPaper>
   )
 }

@@ -13799,6 +13799,36 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { Object(defineProperty["a" /* default */])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
+function _templateObject11() {
+  var data = Object(taggedTemplateLiteralLoose["a" /* default */])(["\n  color: black;\n  padding: 10px;\n  background-color: grey;\n"]);
+
+  _templateObject11 = function _templateObject11() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject10() {
+  var data = Object(taggedTemplateLiteralLoose["a" /* default */])(["\n  color: white;\n  font-size: large;\n  background-color: transparent !important;\n  background-image: linear-gradient(to right top, red 0%, #2a2139 30%);\n"]);
+
+  _templateObject10 = function _templateObject10() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject9() {
+  var data = Object(taggedTemplateLiteralLoose["a" /* default */])(["\n  color: white;\n  font-size: large;\n  background-color: transparent !important;\n  background-image: linear-gradient(to right bottom, #34294f 0%, #2a2139 30%);\n"]);
+
+  _templateObject9 = function _templateObject9() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject8() {
   var data = Object(taggedTemplateLiteralLoose["a" /* default */])(["\n  display: block;\n  padding: ", ";\n  background-color: black;\n  padding-bottom: 0;\n  background: red;\n  color: white;\n  white-space: pre-wrap;\n  text-align: left;\n  font-size: 0.9em;\n  font-family: \"Source Code Pro\", monospace;\n"]);
 
@@ -14001,6 +14031,9 @@ var StyledEditor = styled_components_browser_esm["b" /* default */].div(_templat
 var StyledPreview = Object(styled_components_browser_esm["b" /* default */])(LivePreview)(_templateObject7(), column); //@ts-ignore
 
 var StyledError = Object(styled_components_browser_esm["b" /* default */])(LiveError)(_templateObject8(), rem(8));
+var StyledEditorPaper = Object(styled_components_browser_esm["b" /* default */])(Paper["a" /* default */])(_templateObject9());
+var StyledLiveErrorPaper = Object(styled_components_browser_esm["b" /* default */])(Paper["a" /* default */])(_templateObject10());
+var StyledPreviewPaper = Object(styled_components_browser_esm["b" /* default */])(Paper["a" /* default */])(_templateObject11());
 var CodeEditor_CodeEditor = function CodeEditor(_ref) {
   var children = _ref.children,
       live = _ref.live,
@@ -14035,23 +14068,7 @@ var CodeEditor_CodeEditor = function CodeEditor(_ref) {
     }
   }, /*#__PURE__*/react["createElement"](esm_Card_Card, null, /*#__PURE__*/react["createElement"](esm_CardContent_CardContent, {
     className: classes.cardNoSpace
-  }, /*#__PURE__*/react["createElement"](Paper["a" /* default */], {
-    square: true,
-    style: {
-      color: "white",
-      fontSize: "large",
-      backgroundColor: "transparent !important",
-      backgroundImage: "linear-gradient(to right bottom, #34294f 0%, #2a2139 30%)"
-    }
-  }, /*#__PURE__*/react["createElement"](LiveEditor, null)), /*#__PURE__*/react["createElement"](Paper["a" /* default */], {
-    square: true,
-    style: {
-      color: "white",
-      padding: "0",
-      backgroundColor: "transparent !important",
-      backgroundImage: "linear-gradient(to right top, red 0%, #2a2139 30%)"
-    }
-  }, /*#__PURE__*/react["createElement"](LiveError, null)), PreviewComponent(classes))))))) : render ? /*#__PURE__*/react["createElement"](Container, null, /*#__PURE__*/react["createElement"](StyledProvider, {
+  }, /*#__PURE__*/react["createElement"](StyledEditorPaper, null, /*#__PURE__*/react["createElement"](LiveEditor, null)), /*#__PURE__*/react["createElement"](StyledLiveErrorPaper, null, /*#__PURE__*/react["createElement"](LiveError, null)), PreviewComponent(classes))))))) : render ? /*#__PURE__*/react["createElement"](Container, null, /*#__PURE__*/react["createElement"](StyledProvider, {
     code: String(children).trim(),
     scope: {
       mdx: esm["mdx"]
@@ -14114,14 +14131,7 @@ var CodeEditor_EventCaptureBox = function EventCaptureBox(_ref3) {
 };
 
 function PreviewComponent(classes) {
-  return /*#__PURE__*/react["createElement"](Paper["a" /* default */], {
-    square: true,
-    style: {
-      color: "black",
-      padding: "10px",
-      backgroundColor: "grey"
-    }
-  }, /*#__PURE__*/react["createElement"](Grid["a" /* default */], {
+  return /*#__PURE__*/react["createElement"](StyledPreviewPaper, null, /*#__PURE__*/react["createElement"](Grid["a" /* default */], {
     container: true,
     spacing: 3,
     direction: "row"
@@ -28620,4 +28630,4 @@ module.exports = set;
 /***/ })
 
 }]);
-//# sourceMappingURL=commons-c95b292f81cd90d19468.js.map
+//# sourceMappingURL=commons-cf935ba00a479b4d5126.js.map
