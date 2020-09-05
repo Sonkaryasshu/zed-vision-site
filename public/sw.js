@@ -40,7 +40,7 @@ workbox.routing.registerRoute(
     url.origin === "https://fonts.googleapis.com" ||
     url.origin === "https://fonts.gstatic.com" ||
     url.origin === "https://storage.googleapis.com",
-  new workbox.strategies.CacheFirst({
+  new workbox.strategies.StaleWhileRevalidate({
     cacheName: "google-fonts",
     cacheableResponse: { statuses: [0, 200] },
   })
