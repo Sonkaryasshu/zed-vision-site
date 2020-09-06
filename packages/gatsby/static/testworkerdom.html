@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+<body>
+    <h1>yo</h1>
+    <script async type="module">
+
+        console.log("yooooo")
+
+
+        const worker = new Worker("workercomponent.js");
+
+        console.log("yoooo2o")
+
+        worker.postMessage("World")
+        const el = document.createElement("div");
+
+        el.addEventListener("click", ()=>worker.postMessage("click"));
+
+        worker.onmessage = (d)=> {
+            el.innerHTML = d.data
+            console.log(d.data)
+        }
+
+        // setInterval(()=>worker.postMessage("clicked"), 10000);
+        // worker.postMessage
+        document.body.appendChild(el)
+</script>
+</body>
