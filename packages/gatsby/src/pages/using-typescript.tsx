@@ -1,9 +1,8 @@
-// If you don't want to use TypeScript you can delete this file!
 import * as React from "react"
-import { PageProps, Link } from "gatsby"
-
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import { Link, PageProps } from "gatsby"
+// If you don't want to use TypeScript you can delete this file!
 
 const UsingTypescript: React.FC<PageProps> = ({ path, location }) => (
   <Layout title="Using TypeScript" location={location}>

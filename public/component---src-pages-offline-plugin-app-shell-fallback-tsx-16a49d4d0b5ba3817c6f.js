@@ -6,8 +6,11 @@
 "use strict";
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("ERkP");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("Vgyk");
-/* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("Wbzz");
+/* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("Wbzz");
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("Vgyk");
+
+
+
 /**
  * SEO component that queries for data with
  *  Gatsby's useStaticQuery React hook
@@ -15,20 +18,17 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-
-
-
 var SEO = function SEO(_ref) {
   var description = _ref.description,
       lang = _ref.lang,
       meta = _ref.meta,
       title = _ref.title;
 
-  var _useStaticQuery = Object(gatsby__WEBPACK_IMPORTED_MODULE_2__["useStaticQuery"])("2841359383"),
+  var _useStaticQuery = Object(gatsby__WEBPACK_IMPORTED_MODULE_1__["useStaticQuery"])("2841359383"),
       site = _useStaticQuery.site;
 
   var metaDescription = description || site.siteMetadata.description;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](react_helmet__WEBPACK_IMPORTED_MODULE_1__[/* Helmet */ "a"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](react_helmet__WEBPACK_IMPORTED_MODULE_2__[/* Helmet */ "a"], {
     htmlAttributes: {
       lang: lang
     },
@@ -103,4 +103,4 @@ var pageQuery = "3159585216";
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-offline-plugin-app-shell-fallback-tsx-838821c421cb702f64ab.js.map
+//# sourceMappingURL=component---src-pages-offline-plugin-app-shell-fallback-tsx-16a49d4d0b5ba3817c6f.js.map

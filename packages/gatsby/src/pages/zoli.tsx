@@ -1,9 +1,8 @@
-import * as React from "react"
-import { graphql } from "gatsby"
-
 import Layout from "../components/layout"
+import React from "react"
 import SEO from "../components/seo"
 import { ChangeDetector } from "../components/changeDetector"
+import { graphql } from "gatsby"
 
 interface Props {
   data: {

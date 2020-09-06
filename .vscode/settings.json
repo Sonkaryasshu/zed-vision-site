@@ -1,5 +1,10 @@
 {
   "files.autoSave": "onFocusChange",
+"editor.folding": true,
+  "typescript.autoClosingTags": true,
+  "typescript.preferences.includePackageJsonAutoImports": "off",
+  "typescript.extension.sortImports.sortOnSave": true,
+  "typescript.suggest.autoImports": true,
   "editor.maxTokenizationLineLength": 60000,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true

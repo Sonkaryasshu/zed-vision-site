@@ -1585,11 +1585,12 @@ __webpack_require__.r(__webpack_exports__);
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, "pageQuery", function() { return /* binding */ pageQuery; });
 
-// EXTERNAL MODULE: /app/node_modules/react/index.js
-var react = __webpack_require__("ERkP");
-
 // EXTERNAL MODULE: ./src/components/layout.tsx + 33 modules
 var layout = __webpack_require__("9Dj+");
+
+// EXTERNAL MODULE: /app/node_modules/react/index.js
+var react = __webpack_require__("ERkP");
+var react_default = /*#__PURE__*/__webpack_require__.n(react);
 
 // EXTERNAL MODULE: ./src/components/seo.tsx
 var seo = __webpack_require__("H8eV");
@@ -1778,16 +1779,16 @@ var ChangeDetector = typeof window !== "undefined" ? changeDetector_chd : functi
 var zoli_Comp1 = function Comp1(_ref) {
   var onEvent = _ref.onEvent;
 
-  var _React$useState = react["useState"](0),
+  var _React$useState = react_default.a.useState(0),
       count = _React$useState[0],
       setCount = _React$useState[1];
 
-  return /*#__PURE__*/react["createElement"](react["Fragment"], null, /*#__PURE__*/react["createElement"]("button", {
+  return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement("button", {
     onClick: function onClick() {
       onEvent("inc");
       setCount(count + 1);
     }
-  }, "+"), count, /*#__PURE__*/react["createElement"]("button", {
+  }, "+"), count, /*#__PURE__*/react_default.a.createElement("button", {
     onClick: function onClick() {
       onEvent("dec");
       setCount(count - 1);
@@ -1799,14 +1800,14 @@ var zoli_NotFoundPage = function NotFoundPage(_ref2) {
   var data = _ref2.data,
       location = _ref2.location;
   var siteTitle = data.site.siteMetadata.title;
-  return /*#__PURE__*/react["createElement"](layout["a" /* default */], {
+  return /*#__PURE__*/react_default.a.createElement(layout["a" /* default */], {
     location: location,
     title: siteTitle
-  }, /*#__PURE__*/react["createElement"](seo["a" /* default */], {
+  }, /*#__PURE__*/react_default.a.createElement(seo["a" /* default */], {
     title: "404: Not Found"
-  }), /*#__PURE__*/react["createElement"]("h1", null, "Not Found!!!!"), /*#__PURE__*/react["createElement"](ChangeDetector, {
+  }), /*#__PURE__*/react_default.a.createElement("h1", null, "Not Found!!!!"), /*#__PURE__*/react_default.a.createElement(ChangeDetector, {
     Comp1: zoli_Comp1
-  }), /*#__PURE__*/react["createElement"]("p", null, "You just hit a route that doesn't exist... the sadness."));
+  }), /*#__PURE__*/react_default.a.createElement("p", null, "You just hit a route that doesn't exist... the sadness."));
 };
 
 /* harmony default export */ var zoli = __webpack_exports__["default"] = (zoli_NotFoundPage);
@@ -2775,8 +2776,11 @@ module.exports = arrayMap;
 "use strict";
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("ERkP");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("Vgyk");
-/* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("Wbzz");
+/* harmony import */ var gatsby__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("Wbzz");
+/* harmony import */ var react_helmet__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("Vgyk");
+
+
+
 /**
  * SEO component that queries for data with
  *  Gatsby's useStaticQuery React hook
@@ -2784,20 +2788,17 @@ module.exports = arrayMap;
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-
-
-
 var SEO = function SEO(_ref) {
   var description = _ref.description,
       lang = _ref.lang,
       meta = _ref.meta,
       title = _ref.title;
 
-  var _useStaticQuery = Object(gatsby__WEBPACK_IMPORTED_MODULE_2__["useStaticQuery"])("2841359383"),
+  var _useStaticQuery = Object(gatsby__WEBPACK_IMPORTED_MODULE_1__["useStaticQuery"])("2841359383"),
       site = _useStaticQuery.site;
 
   var metaDescription = description || site.siteMetadata.description;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](react_helmet__WEBPACK_IMPORTED_MODULE_1__[/* Helmet */ "a"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](react_helmet__WEBPACK_IMPORTED_MODULE_2__[/* Helmet */ "a"], {
     htmlAttributes: {
       lang: lang
     },
@@ -9990,4 +9991,4 @@ module.exports = clone;
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-zoli-tsx-22cfb49d3b7287cec559.js.map
+//# sourceMappingURL=component---src-pages-zoli-tsx-2967a2fda561240e4605.js.map

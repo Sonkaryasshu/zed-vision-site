@@ -4564,18 +4564,9 @@ module.exports = set;
 
 "use strict";
 
-// EXTERNAL MODULE: ./.cache/gatsby-browser-entry.js
-var gatsby_browser_entry = __webpack_require__("Wbzz");
-
 // EXTERNAL MODULE: /app/node_modules/react/index.js
 var react = __webpack_require__("ERkP");
 var react_default = /*#__PURE__*/__webpack_require__.n(react);
-
-// EXTERNAL MODULE: /app/node_modules/react-helmet/es/Helmet.js
-var Helmet = __webpack_require__("Vgyk");
-
-// EXTERNAL MODULE: /app/node_modules/@mdx-js/react/dist/esm.js
-var esm = __webpack_require__("ZVZ0");
 
 // EXTERNAL MODULE: /app/node_modules/@babel/runtime/helpers/esm/toConsumableArray.js + 2 modules
 var toConsumableArray = __webpack_require__("fGyu");
@@ -4585,9 +4576,6 @@ var defineProperty = __webpack_require__("zjfJ");
 
 // EXTERNAL MODULE: /app/node_modules/@babel/runtime/helpers/esm/taggedTemplateLiteralLoose.js
 var taggedTemplateLiteralLoose = __webpack_require__("fhSp");
-
-// EXTERNAL MODULE: /app/node_modules/styled-components/dist/styled-components.browser.esm.js
-var styled_components_browser_esm = __webpack_require__("j/s1");
 
 // EXTERNAL MODULE: /app/node_modules/@babel/runtime/helpers/esm/extends.js
 var esm_extends = __webpack_require__("cxan");
@@ -8797,6 +8785,48 @@ function transitions() {
 }
 
 
+// EXTERNAL MODULE: /app/node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js
+var objectWithoutProperties = __webpack_require__("HbGN");
+
+// EXTERNAL MODULE: /app/node_modules/clsx/dist/clsx.m.js
+var clsx_m = __webpack_require__("7O4Y");
+
+// EXTERNAL MODULE: /app/node_modules/@material-ui/core/esm/Paper/Paper.js
+var Paper = __webpack_require__("TuTm");
+
+// EXTERNAL MODULE: /app/node_modules/@material-ui/core/esm/styles/withStyles.js + 1 modules
+var withStyles = __webpack_require__("dJc8");
+
+// CONCATENATED MODULE: /app/node_modules/@material-ui/core/esm/Card/Card.js
+
+
+
+
+
+
+var Card_styles = {
+  /* Styles applied to the root element. */
+  root: {
+    overflow: 'hidden'
+  }
+};
+var Card_Card = /*#__PURE__*/react["forwardRef"](function Card(props, ref) {
+  var classes = props.classes,
+      className = props.className,
+      _props$raised = props.raised,
+      raised = _props$raised === void 0 ? false : _props$raised,
+      other = Object(objectWithoutProperties["a" /* default */])(props, ["classes", "className", "raised"]);
+
+  return /*#__PURE__*/react["createElement"](Paper["a" /* default */], Object(esm_extends["a" /* default */])({
+    className: Object(clsx_m["a" /* default */])(classes.root, className),
+    elevation: raised ? 8 : 1,
+    ref: ref
+  }, other));
+});
+ false ? undefined : void 0;
+/* harmony default export */ var esm_Card_Card = (Object(withStyles["a" /* default */])(Card_styles, {
+  name: 'MuiCard'
+})(Card_Card));
 // CONCATENATED MODULE: /app/node_modules/prism-react-renderer/prism/index.js
 /**
  * Prism: Lightweight, robust, elegant syntax highlighting
@@ -12216,7 +12246,7 @@ var themeToDict = function themeToDict(theme, language) {
   return themeDict;
 };
 
-function objectWithoutProperties(obj, exclude) {
+function dist_objectWithoutProperties(obj, exclude) {
   var target = {};
 
   for (var k in obj) {
@@ -12253,7 +12283,7 @@ var Highlight = /*@__PURE__*/function (Component) {
       var key = ref.key;
       var className = ref.className;
       var style = ref.style;
-      var rest$1 = objectWithoutProperties(ref, ["key", "className", "style", "line"]);
+      var rest$1 = dist_objectWithoutProperties(ref, ["key", "className", "style", "line"]);
       var rest = rest$1;
 
       var output = _extends({}, rest, {
@@ -12314,7 +12344,7 @@ var Highlight = /*@__PURE__*/function (Component) {
       var className = ref.className;
       var style = ref.style;
       var token = ref.token;
-      var rest$1 = objectWithoutProperties(ref, ["key", "className", "style", "token"]);
+      var rest$1 = dist_objectWithoutProperties(ref, ["key", "className", "style", "token"]);
       var rest = rest$1;
 
       var output = _extends({}, rest, {
@@ -12368,8 +12398,49 @@ var Highlight = /*@__PURE__*/function (Component) {
 
 /* harmony default export */ var dist = (Highlight);
 
-// EXTERNAL MODULE: /app/node_modules/@material-ui/core/esm/Paper/Paper.js
-var Paper = __webpack_require__("TuTm");
+// EXTERNAL MODULE: /app/node_modules/@material-ui/icons/Menu.js
+var Menu = __webpack_require__("nuiB");
+var Menu_default = /*#__PURE__*/__webpack_require__.n(Menu);
+
+// EXTERNAL MODULE: /app/node_modules/@material-ui/core/esm/CssBaseline/CssBaseline.js
+var CssBaseline = __webpack_require__("TkO3");
+
+// CONCATENATED MODULE: /app/node_modules/@material-ui/core/esm/ScopedCssBaseline/ScopedCssBaseline.js
+
+
+
+
+
+
+var ScopedCssBaseline_styles = function styles(theme) {
+  return {
+    /* Styles applied to the root element. */
+    root: Object(esm_extends["a" /* default */])({}, CssBaseline["c" /* html */], Object(CssBaseline["a" /* body */])(theme), {
+      '& *, & *::before, & *::after': {
+        boxSizing: 'inherit'
+      },
+      '& strong, & b': {
+        fontWeight: theme.typography.fontWeightBold
+      }
+    })
+  };
+};
+var ScopedCssBaseline_ScopedCssBaseline = /*#__PURE__*/react["forwardRef"](function ScopedCssBaseline(props, ref) {
+  var classes = props.classes,
+      className = props.className,
+      other = Object(objectWithoutProperties["a" /* default */])(props, ["classes", "className"]);
+
+  return /*#__PURE__*/react["createElement"]("div", Object(esm_extends["a" /* default */])({
+    className: Object(clsx_m["a" /* default */])(classes.root, className),
+    ref: ref
+  }, other));
+});
+ false ? undefined : void 0;
+/* harmony default export */ var esm_ScopedCssBaseline_ScopedCssBaseline = (Object(withStyles["a" /* default */])(ScopedCssBaseline_styles, {
+  name: 'MuiScopedCssBaseline'
+})(ScopedCssBaseline_ScopedCssBaseline));
+// EXTERNAL MODULE: /app/node_modules/styled-components/dist/styled-components.browser.esm.js
+var styled_components_browser_esm = __webpack_require__("j/s1");
 
 // EXTERNAL MODULE: /app/node_modules/react-simple-code-editor/lib/index.js
 var lib = __webpack_require__("aGk2");
@@ -12890,45 +12961,12 @@ function withLive(WrappedComponent) {
 }
 
 
-// EXTERNAL MODULE: /app/node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js
-var esm_objectWithoutProperties = __webpack_require__("HbGN");
+// EXTERNAL MODULE: /app/node_modules/@mdx-js/react/dist/esm.js
+var esm = __webpack_require__("ZVZ0");
 
-// EXTERNAL MODULE: /app/node_modules/clsx/dist/clsx.m.js
-var clsx_m = __webpack_require__("7O4Y");
+// EXTERNAL MODULE: ../code-editor/themes/prism-synthwave84.css
+var prism_synthwave84 = __webpack_require__("JBYi");
 
-// EXTERNAL MODULE: /app/node_modules/@material-ui/core/esm/styles/withStyles.js + 1 modules
-var withStyles = __webpack_require__("dJc8");
-
-// CONCATENATED MODULE: /app/node_modules/@material-ui/core/esm/Card/Card.js
-
-
-
-
-
-
-var Card_styles = {
-  /* Styles applied to the root element. */
-  root: {
-    overflow: 'hidden'
-  }
-};
-var Card_Card = /*#__PURE__*/react["forwardRef"](function Card(props, ref) {
-  var classes = props.classes,
-      className = props.className,
-      _props$raised = props.raised,
-      raised = _props$raised === void 0 ? false : _props$raised,
-      other = Object(esm_objectWithoutProperties["a" /* default */])(props, ["classes", "className", "raised"]);
-
-  return /*#__PURE__*/react["createElement"](Paper["a" /* default */], Object(esm_extends["a" /* default */])({
-    className: Object(clsx_m["a" /* default */])(classes.root, className),
-    elevation: raised ? 8 : 1,
-    ref: ref
-  }, other));
-});
- false ? undefined : void 0;
-/* harmony default export */ var esm_Card_Card = (Object(withStyles["a" /* default */])(Card_styles, {
-  name: 'MuiCard'
-})(Card_Card));
 // EXTERNAL MODULE: /app/node_modules/@material-ui/core/esm/styles/makeStyles.js
 var makeStyles = __webpack_require__("UE5/");
 
@@ -13052,7 +13090,7 @@ var AppBar_AppBar = /*#__PURE__*/react["forwardRef"](function AppBar(props, ref)
       color = _props$color === void 0 ? 'primary' : _props$color,
       _props$position = props.position,
       position = _props$position === void 0 ? 'fixed' : _props$position,
-      other = Object(esm_objectWithoutProperties["a" /* default */])(props, ["classes", "className", "color", "position"]);
+      other = Object(objectWithoutProperties["a" /* default */])(props, ["classes", "className", "color", "position"]);
 
   return /*#__PURE__*/react["createElement"](Paper["a" /* default */], Object(esm_extends["a" /* default */])({
     square: true,
@@ -13109,7 +13147,7 @@ var Toolbar_Toolbar = /*#__PURE__*/react["forwardRef"](function Toolbar(props, r
       disableGutters = _props$disableGutters === void 0 ? false : _props$disableGutters,
       _props$variant = props.variant,
       variant = _props$variant === void 0 ? 'regular' : _props$variant,
-      other = Object(esm_objectWithoutProperties["a" /* default */])(props, ["classes", "className", "component", "disableGutters", "variant"]);
+      other = Object(objectWithoutProperties["a" /* default */])(props, ["classes", "className", "component", "disableGutters", "variant"]);
 
   return /*#__PURE__*/react["createElement"](Component, Object(esm_extends["a" /* default */])({
     className: Object(clsx_m["a" /* default */])(classes.root, classes[variant], className, !disableGutters && classes.gutters),
@@ -13598,7 +13636,7 @@ function styled_styled(Component) {
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
     var name = options.name,
-        stylesOptions = Object(esm_objectWithoutProperties["a" /* default */])(options, ["name"]);
+        stylesOptions = Object(objectWithoutProperties["a" /* default */])(options, ["name"]);
 
     if (false) {}
 
@@ -13644,7 +13682,7 @@ function styled_styled(Component) {
           classNameProp = props.className,
           clone = props.clone,
           ComponentProp = props.component,
-          other = Object(esm_objectWithoutProperties["a" /* default */])(props, ["children", "className", "clone", "component"]);
+          other = Object(objectWithoutProperties["a" /* default */])(props, ["children", "className", "clone", "component"]);
 
       var classes = useStyles(props);
       var className = Object(clsx_m["a" /* default */])(classes.root, classNameProp);
@@ -13732,7 +13770,7 @@ var CardContent_CardContent = /*#__PURE__*/react["forwardRef"](function CardCont
       className = props.className,
       _props$component = props.component,
       Component = _props$component === void 0 ? 'div' : _props$component,
-      other = Object(esm_objectWithoutProperties["a" /* default */])(props, ["classes", "className", "component"]);
+      other = Object(objectWithoutProperties["a" /* default */])(props, ["classes", "className", "component"]);
 
   return /*#__PURE__*/react["createElement"](Component, Object(esm_extends["a" /* default */])({
     className: Object(clsx_m["a" /* default */])(classes.root, className),
@@ -13745,50 +13783,6 @@ var CardContent_CardContent = /*#__PURE__*/react["forwardRef"](function CardCont
 })(CardContent_CardContent));
 // EXTERNAL MODULE: /app/node_modules/@material-ui/core/esm/Grid/Grid.js
 var Grid = __webpack_require__("qtMa");
-
-// EXTERNAL MODULE: /app/node_modules/@material-ui/core/esm/CssBaseline/CssBaseline.js
-var CssBaseline = __webpack_require__("TkO3");
-
-// CONCATENATED MODULE: /app/node_modules/@material-ui/core/esm/ScopedCssBaseline/ScopedCssBaseline.js
-
-
-
-
-
-
-var ScopedCssBaseline_styles = function styles(theme) {
-  return {
-    /* Styles applied to the root element. */
-    root: Object(esm_extends["a" /* default */])({}, CssBaseline["c" /* html */], Object(CssBaseline["a" /* body */])(theme), {
-      '& *, & *::before, & *::after': {
-        boxSizing: 'inherit'
-      },
-      '& strong, & b': {
-        fontWeight: theme.typography.fontWeightBold
-      }
-    })
-  };
-};
-var ScopedCssBaseline_ScopedCssBaseline = /*#__PURE__*/react["forwardRef"](function ScopedCssBaseline(props, ref) {
-  var classes = props.classes,
-      className = props.className,
-      other = Object(esm_objectWithoutProperties["a" /* default */])(props, ["classes", "className"]);
-
-  return /*#__PURE__*/react["createElement"]("div", Object(esm_extends["a" /* default */])({
-    className: Object(clsx_m["a" /* default */])(classes.root, className),
-    ref: ref
-  }, other));
-});
- false ? undefined : void 0;
-/* harmony default export */ var esm_ScopedCssBaseline_ScopedCssBaseline = (Object(withStyles["a" /* default */])(ScopedCssBaseline_styles, {
-  name: 'MuiScopedCssBaseline'
-})(ScopedCssBaseline_ScopedCssBaseline));
-// EXTERNAL MODULE: /app/node_modules/@material-ui/icons/Menu.js
-var Menu = __webpack_require__("nuiB");
-var Menu_default = /*#__PURE__*/__webpack_require__.n(Menu);
-
-// EXTERNAL MODULE: ../code-editor/themes/prism-synthwave84.css
-var prism_synthwave84 = __webpack_require__("JBYi");
 
 // CONCATENATED MODULE: ../code-editor/CodeEditor.tsx
 
@@ -14151,6 +14145,12 @@ function PreviewComponent(classes) {
     }
   })))));
 }
+// EXTERNAL MODULE: /app/node_modules/react-helmet/es/Helmet.js
+var Helmet = __webpack_require__("Vgyk");
+
+// EXTERNAL MODULE: ./.cache/gatsby-browser-entry.js
+var gatsby_browser_entry = __webpack_require__("Wbzz");
+
 // CONCATENATED MODULE: ./src/components/layout.tsx
 
 
@@ -27672,4 +27672,4 @@ module.exports = set;
 /***/ })
 
 }]);
-//# sourceMappingURL=commons-f89dc88997bfa3594fc0.js.map
+//# sourceMappingURL=commons-91650bd861e1694a0347.js.map

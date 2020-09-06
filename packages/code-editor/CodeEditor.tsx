@@ -1,12 +1,15 @@
-import * as React from "react"
-import styled, { css } from "styled-components"
 import * as polished from "polished"
-import Highlight, { defaultProps } from "prism-react-renderer"
-import { mdx } from "@mdx-js/react"
-import Paper from "@material-ui/core/Paper"
-
-import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live"
+import * as React from "react"
 import Card from "@material-ui/core/Card"
+import Highlight, { defaultProps } from "prism-react-renderer"
+import MenuIcon from "@material-ui/icons/Menu"
+import Paper from "@material-ui/core/Paper"
+import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline"
+import styled, { css } from "styled-components"
+import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live"
+import { mdx } from "@mdx-js/react"
+import "./themes/prism-synthwave84.css"
+
 import {
   AppBar,
   Toolbar,
@@ -21,10 +24,6 @@ import {
   CardContent,
 } from "@material-ui/core"
 
-import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline"
-
-import MenuIcon from "@material-ui/icons/Menu"
-import "./themes/prism-synthwave84.css"
 // import html2canvas from "html2canvas"
 
 const useStyles = makeStyles((theme: Theme) =>
