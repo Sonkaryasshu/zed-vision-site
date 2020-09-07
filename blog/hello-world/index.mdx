@@ -3,6 +3,11 @@ title: Hello World
 date: "2020-08-22T22:12:03.284Z"
 description: "Hello World"
 ---
+import { sha256 } from 'js-sha256';
+import {Counter} from "./Counter.js"
+
+<Counter />
+
 I was always fascinated about how can we get more productive as developers.
 Shall we follow the TDD practices? What we gain if we do? What we lose if we don't?
 
@@ -10,61 +15,29 @@ Is there any better way to develop software and maintain high quality?
 
 Lets see an example, a classic Counter app. 
 
+
 ```javascript live=true title=Counter
 () => {
-const [events, setEvents] = React.useState([])
-
-  const defaultState = def => events.reduce((state, ev) => ev(state), def)
-
   const actions = {
-      decrease: state => ({  counter: state.counter - 1 }),
-      double: state => ({ counter: state.counter * 2 }),
-      increase: state => ( {counter: state.counter + 1 }),
-    }
-
-
-
-  const x = e => {
-    console.log(e.target.parentNode.innerHTML)
-    const action = e.target.getAttribute("data-action")
-    setEvents([...events, actions[action]])
+    decrease: state => ({ counter: state.counter - 1 }),
+    double: state => ({ counter: state.counter * 2 }),
+    increase: state => ({ counter: state.counter + 1 }),
   }
 
-   const state = defaultState({ counter: 0 })
-  
-  return <div>
-        <button data-action="decrease" onClick={x}>-</button>
-        <button data-action="double" onClick={x}> x 2</button>
-        Counter:
-        <span>{state.counter}</span>
-        <button data-action="increase" onClick={x}>+</button>
-      </div>
-    
-}
+  const [events, setEvents] = React.useState([])
 
+  const state = events.reduce((state, ev) => actions[ev](state), { counter: 0 })
+
+  return (
+    <div>
+      <button onClick={() => setEvents([...events, "decrease"])}>- 1</button>
+      <button onClick={() => setEvents([...events, "double"])}>x 2</button>
+      Counter:
+      <span>{state.counter}</span>
+      <button onClick={() => setEvents([...events, "increase"])}>+ 1</button>
+    </div>
+  )
+}
 ```
 
-## And React Create App with Glitch!
-
-<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
-  <iframe
-    src="https://glitch.com/embed/#!/embed/bouncy-curious-town?path=public/index.html&previewSize=100"
-    title="bouncy-curious-town on Glitch"
-    allow="geolocation; microphone; camera; midi; vr; encrypted-media"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
-
-## But we can go a bit more creepy - as always
-
-Here we embed this site (just the public folder) into here - and it will update right away when we push something to github.
-
-<!-- Copy and Paste Me -->
-<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
-  <iframe
-    src="https://glitch.com/embed/#!/embed/zed-vision-zed-vision-build?path=index.html&previewSize=100"
-    title="zed-vision-zed-vision-build on Glitch"
-    allow="geolocation; microphone; camera; midi; vr; encrypted-media"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+That was it!
