@@ -1,8 +1,9 @@
-import * as React from "react"
-import { CodeEditor } from "@zed-vision/code-editor/CodeEditor"
-import { Helmet } from "react-helmet"
-import { Link } from "gatsby"
-import { MDXProvider } from "@mdx-js/react"
+import * as React from 'react';
+import { animated, useSpring } from 'react-spring';
+import { CodeEditor } from '@zed-vision/code-editor/CodeEditor';
+import { Helmet } from 'react-helmet';
+import { Link } from 'gatsby';
+import { MDXProvider } from '@mdx-js/react';
 
 const components = {
   pre: function PreComp(props: any) {
@@ -33,24 +34,32 @@ interface Props {
 const Layout: React.FC<Props> = ({ location, title, children }) => {
   let __PATH_PREFIX__
 
+  const props = useSpring({
+    opacity: 1,
+    from: { opacity: 0 },
+  })
+
   const rootPath = `${__PATH_PREFIX__}/`
   let header = (
-    <h1>
+    //@ts-ignore
+    <animated.h1 style={props}>
       <Link to={`/`}>{title}</Link>
-    </h1>
+    </animated.h1>
   )
   if (!(location && location.pathname)) header = <React.Fragment />
   else if (location.pathname === rootPath) {
     header = (
-      <h1>
+      //@ts-ignore
+      <animated.h1 style={props}>
         <Link to={`/`}>{title}</Link>
-      </h1>
+      </animated.h1>
     )
   } else {
     header = (
-      <h2>
+      //@ts-ignore
+      <animated.h2 style={props}>
         <Link to={`/`}>{title}</Link>
-      </h2>
+      </animated.h2>
     )
   }
   return (
