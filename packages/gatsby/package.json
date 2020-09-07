@@ -1,7 +1,7 @@
 {
   "name": "@zed-vision/zed-vision-site",
   "scripts": {
-    "build": "gatsby clean && rm -rf .cache/* && rm -rf public  && gatsby build --no-uglify && rm -rf ../../public && cp -a ./static/. ./public && mv ./public ../../",
+    "build": "gatsby clean && rm -rf .cache/* && rm -rf public  && gatsby build && rm -rf ../../public && cp -a ./static/. ./public && mv ./public ../../",
     "start": "gatsby develop --host 0.0.0.0 --https --cert-file ../../.certs/localhost.cert --key-file ../../.certs/localhost.key",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
