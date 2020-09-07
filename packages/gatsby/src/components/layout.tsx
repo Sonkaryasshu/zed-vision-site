@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { animated, useSpring } from 'react-spring';
 import { CodeEditor } from '@zed-vision/code-editor/CodeEditor';
 import { Helmet } from 'react-helmet';
 import { Link } from 'gatsby';
@@ -34,32 +33,25 @@ interface Props {
 const Layout: React.FC<Props> = ({ location, title, children }) => {
   let __PATH_PREFIX__
 
-  const props = useSpring({
-    opacity: 1,
-    from: { opacity: 0 },
-  })
-
   const rootPath = `${__PATH_PREFIX__}/`
   let header = (
-    //@ts-ignore
-    <animated.h1 style={props}>
+    <h1>
+      fffff
       <Link to={`/`}>{title}</Link>
-    </animated.h1>
+    </h1>
   )
   if (!(location && location.pathname)) header = <React.Fragment />
   else if (location.pathname === rootPath) {
     header = (
-      //@ts-ignore
-      <animated.h1 style={props}>
+      <h1>
         <Link to={`/`}>{title}</Link>
-      </animated.h1>
+      </h1>
     )
   } else {
     header = (
-      //@ts-ignore
-      <animated.h2 style={props}>
+      <h2>
         <Link to={`/`}>{title}</Link>
-      </animated.h2>
+      </h2>
     )
   }
   return (
