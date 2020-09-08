@@ -1,37 +1,51 @@
 <!DOCTYPE html>
 <head>
 
+    
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    
 </head>
 <body>
-    <h1>yo</h1>
-    <script async type="module">
+    <script type="module" async>
 
         const worker = new Worker("workercomponent.js");
-        const shaWorker = new Worker("sha256.worker.js");
+        // const shaWorker = new Worker("sha256.worker.js");
 
-        shaWorker.postMessage("Hello World")
-        shaWorker.onmessage = (m)=> console.log(m)
+        // shaWorker.postMessage("Hello World")
+        // shaWorker.onmessage = (m)=> console.log(m)
 
-        worker.postMessage("World")
-        const el = document.createElement("div");
+        // worker.postMessage("World")
 
 
-        el.addEventListener("click", (e)=>{
-            console.log(e.target)   
-            worker.postMessage({
-                type: "click",
-                target: e.target.innerHTML
-            })
+
+
+
+        let el = null;
+        let reactEl = null
+        
+        const hydrate = ()=>{
+            ReactDOM.hydrate( reactEl, el)
         }
-        );
-
+        
         worker.onmessage = (d)=> {
-            el.innerHTML = d.data
-            console.log(d.data)
-        }
+            if (d.data.domString){
 
-        // setInterval(()=>worker.postMessage("clicked"), 10000);
-        // worker.postMessage
-        document.body.appendChild(el)
+                el = document.createElement("div");
+                el.innerHTML = d.data.domString;
+
+                document.body.appendChild(el);
+                if (reactEl) hydrate()
+            }
+            if (d.data.code) {
+                const {code, pastEvents} = d.data
+                const Counter = new Function("props", `return (${code})(props)`)
+                
+                reactEl = React.createElement(Counter,  {pastEvents});
+                if (el) hydrate();
+            }
+
+ }
+
 </script>
 </body>

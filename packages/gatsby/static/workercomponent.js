@@ -3,6 +3,7 @@ importScripts(
 )
 importScripts("https://unpkg.com/react@16/umd/react.development.js")
 importScripts("https://unpkg.com/react-dom@16/umd/react-dom.development.js")
+importScripts("react-dom-server.browser.development.js")
 importScripts("https://unpkg.com/@babel/standalone/babel.min.js")
 
 console.log(Babel.availablePresets["react"])
@@ -63,19 +64,11 @@ const render = () => {
 
   const document = WorkerThread.workerDOM.document
 
-  const el = document.createElement("div")
+  const str = ReactDOMServer.renderToString(
+    React.createElement(Counter, { pastEvents: pastEvents })
+  )
 
-  ReactDOM.render(React.createElement(Counter, { pastEvents: pastEvents }), el)
-
-  webRunner.el = el
+  postMessage({ domString: str })
+  postMessage({ code, pastEvents })
 }
-
-self.onmessage = d => {
-  console.log(d)
-
-  if (d.data.type === "click") {
-    pastEvents.push(d.data)
-  }
-  render()
-  postMessage(webRunner.el.innerHTML)
-}
+render()
