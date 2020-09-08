@@ -1,7 +1,6 @@
 const registerSW = async () => {
   try {
-    const worker = new Worker("sha256.worker.js", { type: "module" })
-    worker.postMessage("Yooo")
+    const worker = new Worker("/sha256.worker.js")
 
     worker.onmessage = m => console.log(m)
 

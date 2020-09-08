@@ -20,7 +20,15 @@
         worker.postMessage("World")
         const el = document.createElement("div");
 
-        el.addEventListener("click", ()=>worker.postMessage("click"));
+
+        el.addEventListener("click", (e)=>{
+            console.log(e.target)   
+            worker.postMessage({
+                type: "click",
+                target: e.target.innerHTML
+            })
+        }
+        );
 
         worker.onmessage = (d)=> {
             el.innerHTML = d.data

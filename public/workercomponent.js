@@ -3,6 +3,47 @@ importScripts(
 )
 importScripts("https://unpkg.com/react@16/umd/react.development.js")
 importScripts("https://unpkg.com/react-dom@16/umd/react-dom.development.js")
+importScripts("https://unpkg.com/@babel/standalone/babel.min.js")
+
+
+console.log (Babel.availablePresets["react"]  )
+
+const code = Babel.transform(`function Counter(props){
+  const actions = {
+    decrease: state => ({ counter: state.counter - 1 }),
+    double: state => ({ counter: state.counter * 2 }),
+    increase: state => ({ counter: state.counter + 1 }),
+  }
+
+  const [events, setEvents] = React.useState([...props.pastEvents])
+
+  const state = events
+    .map(ev => {
+      const text = ev.target.innerHTML
+      if (text.includes("-")) return "decrease"
+      else if (text.includes("+")) return "increase"
+      else if (text.includes("x2")) return "double"
+    })
+    .reduce((state, ev) => actions[ev](state), { counter: 0 })
+
+  const onClick = e =>
+    setEvents([...events, { type: click, target: String(e.target.innerHTML) }])
+
+  return (
+    <div>
+      <button onClick={e => onClick(e)}>-</button>
+      <button onClick={e => onClick(e)}>x2</button>
+      Counter {props.name}:<span>{state.counter}</span>
+      <button onClick={e => onClick(e)}>+</button>
+    </div>
+  )
+}
+`, {
+  plugins: [],
+  presets:  ["react"]
+}).code
+
+
 
 const webRunner = {
   el: null,
@@ -10,12 +51,17 @@ const webRunner = {
   onHeaderClick: null,
 }
 
+const pastEvents = []
 //   this.document = WorkerThread.workerDOM.document
 // let window, document, el
 const firstRun = name => {
   const window = (this.window = WorkerThread.workerDOM)
 
+  var Counter = new Function("props",`return (${code})(props)`)
+
+
   const document = WorkerThread.workerDOM.document
+ 
   //   const React = window.React
   //   const window = this.window
 
@@ -23,9 +69,8 @@ const firstRun = name => {
 
   const el = document.createElement("div")
 
-  //   el.innerHTML = "yoooooo"
 
-  ReactDOM.render(React.createElement(HelloName, { name: name }), el)
+  ReactDOM.render(React.createElement(Counter , { pastEvents: pastEvents }), el)
 
   WorkerThread.workerDOM.document.body.appendChild(el)
   console.log(document.body)
@@ -34,41 +79,13 @@ const firstRun = name => {
 }
 
 self.onmessage = d => {
+  console.log(d)
+
+  if (d.data.type === "click")pastEvents.push(d.data)
   if (!webRunner.el) firstRun(d.data)
-  else {
-    webRunner.onHeaderClick()
-  }
+  // else {
+  //   webRunner.onHeaderClick()
+  // }
   postMessage(webRunner.el.innerHTML)
-  console.log(webRunner.el.innerHTML)
-  console.log(webRunner.onHeaderClick)
 }
 
-// https://babeljs.io/en/repl
-// function HelloName({name}){
-//   const [{counter}, setCounter] = React.useState({counter: 0});
-
-//   return <h1 id="header" onClick={()=>setCounter({counter: counter+1})}>hello {counter} {name}</h1>
-// }
-
-function HelloName({ name }) {
-  const [{ counter }, setCounter] = React.useState({
-    counter: 0,
-  })
-  webRunner.onHeaderClick = () => {
-    console.log("onClick")
-    setCounter({
-      counter: counter + 1,
-    })
-  }
-  return /*#__PURE__*/ React.createElement(
-    "h1",
-    {
-      id: "header",
-      onClick: webRunner.onHeaderClick,
-    },
-    "hello ",
-    counter,
-    " ",
-    name
-  )
-}
