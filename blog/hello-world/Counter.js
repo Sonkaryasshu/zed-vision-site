@@ -6,12 +6,13 @@ export const Counter = props => {
     double: state => ({ counter: state.counter * 2 }),
     increase: state => ({ counter: state.counter + 1 }),
   }
+  const pastEvents = props.pastEvents || []
 
-  const [events, setEvents] = React.useState([...props.pastEvents])
+  const [events, setEvents] = React.useState(pastEvents)
 
   const state = events
     .map(ev => {
-      const text = ev.target.innerHTML
+      const text = ev.target
       if (text.includes("-")) return "decrease"
       else if (text.includes("+")) return "increase"
       else if (text.includes("x2")) return "double"
@@ -19,7 +20,10 @@ export const Counter = props => {
     .reduce((state, ev) => actions[ev](state), { counter: 0 })
 
   const onClick = e =>
-    setEvents([...events, { type: click, target: String(e.target.innerHTML) }])
+    setEvents([
+      ...events,
+      { type: "click", target: String(e.target.innerHTML) },
+    ])
 
   return (
     <div>

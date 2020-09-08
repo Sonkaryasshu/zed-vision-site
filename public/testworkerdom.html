@@ -6,16 +6,11 @@
     <h1>yo</h1>
     <script async type="module">
 
-        console.log("yooooo")
-
-
         const worker = new Worker("workercomponent.js");
         const shaWorker = new Worker("sha256.worker.js");
 
         shaWorker.postMessage("Hello World")
         shaWorker.onmessage = (m)=> console.log(m)
-
-        console.log("yoooo2o")
 
         worker.postMessage("World")
         const el = document.createElement("div");
