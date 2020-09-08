@@ -2,12 +2,9 @@
 <html>
 <head>
   <meta charset="utf8" />
-  <script src="/clients-connection.js"></script>\
   <script src="/webtorrent.min.js"></script>
-      
-  <!-- <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-     -->
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 </head>
 <body>
   <video controls autoplay></video>
@@ -16,19 +13,17 @@
 // new VideoStream(new file('sintel.mp4'), video)
      const client = new WebTorrent()
 
-const magnet = "magnet:?xt=urn:btih:31cd99bb03101949c18970418220d13820193710&dn=VID_20170102_072807.mp4&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Fexplodie.org%3A6969&tr=udp%3A%2F%2Ftracker.empire-js.us%3A1337&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com"
-client.add(magnet, function (torrent) {
+const magnetURI = "magnet:?xt=urn:btih:31ed292ddb90f45afcbf3b4c9009b84aacee5de6&dn=bbb_sunflower_1080p_30fps_normal.mp4&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Fexplodie.org%3A6969&tr=udp%3A%2F%2Ftracker.empire-js.us%3A1337&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com"
+client.add(magnetURI, function (torrent) {
+  // Got torrent metadata!
+  console.log('Client is downloading:', torrent.infoHash)
 
-  // Torrents can contain many files. Let's use the .mp4 file
-  const file = torrent.files.find(function (file) {
-
-    new VideoStream(files, document.querySelector('video'))
-    
-    return file.name.endsWith(".mp4")
-
-  })})
-
-  
+  torrent.files.forEach(function (file) {
+    // Display the file by appending it to the DOM. Supports video, audio, images, and
+    // more. Specify a container element (CSS selector or reference to DOM node).
+    file.appendTo('body')
+  })
+})
 
 
   // Display the file by adding it to the DOM. Supports video, audio, image, etc. files
