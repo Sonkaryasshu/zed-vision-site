@@ -3,7 +3,7 @@
   "editor.folding": true,
   "typescript.autoClosingTags": true,
   "typescript.preferences.includePackageJsonAutoImports": "off",
-  "typescript.extension.sortImports.sortOnSave": true,
+  "typescript.extension.sortImports.sortOnSave": false,
   "typescript.suggest.autoImports": true,
   "typescript.extension.sortImports.quoteStyle": "double",
   "typescript.extension.sortImports.omitSemicolon": true,
