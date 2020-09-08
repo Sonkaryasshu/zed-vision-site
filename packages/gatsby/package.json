@@ -2,7 +2,7 @@
   "name": "@zed-vision/zed-vision-site",
   "scripts": {
     "postinstall": "gatsby telemetry --disable",
-    "build": "gatsby build && rm -rf ../../public/* && cp -a ./static/. ./public && cp -a ./public/. ../../public/",
+    "build": "gatsby clean && gatsby build && rm -rf ../../public/* && cp -a ./static/. ./public && cp -a ./public/. ../../public/",
     "start": "gatsby develop --host 0.0.0.0 --https --cert-file ../../.certs/localhost.cert --key-file ../../.certs/localhost.key",
     "serve": "gatsby serve",
     "clean": "gatsby clean"
