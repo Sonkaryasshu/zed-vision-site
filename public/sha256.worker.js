@@ -3,9 +3,10 @@ const cache = new WeakMap()
 onmessage = async message => {
   if (!cache.has({ data: message.data })) {
     const hash = await sha256(String(message.data))
-    cache.set({ data: message.data }, hash)
+    const shorterHash = hash
+    cache.set({ data: message.data }, shorterHash)
     postMessage({
-      hash: hash,
+      hash: shorterHash,
       data: message.data,
     })
     // LocalStorage.setItem(hash, JSON.stringify(message))
@@ -16,14 +17,51 @@ onmessage = async message => {
     })
 }
 
+const hashTable = {}
+
+function shortener(hash) {
+  for (let i = 3; i < 60; i++) {
+    const shorterHash = hash.substr(0, i)
+    if (hashTable[shorterHash] === undefined) {
+      hashTable[shorterHash] = hash
+      return shorterHash
+    }
+    if (hashTable[shorterHash] === hash) return shorterHash
+  }
+  return hash
+}
+
+// const arr = new Array(100000000)
+
+// const fill = async () => {
+//   let prev = ""
+//   for (let t = 0; t < 1000; t++) {
+//     arr.push(getRandomInt(7))
+//   }
+
+//   arr
+//     .filter(n => n > 0 && n < 10)
+//     .forEach(async element => {
+//       const hash = await sha256(String(prev + String(element)))
+//       this.element = hash
+//       prev = shortener(hash)
+//       console.log(prev, element)
+//     })
+
+//   console.log("we f22elt out: ", prev)
+// }
+
+// function getRandomInt(max) {
+//   return Math.floor(Math.random() * Math.floor(max))
+// }
+
+// setInterval(() => fill(), 1000)
+
 async function sha256(message) {
-  // encode as UTF-8
   const msgBuffer = new TextEncoder("utf-8").encode(message)
 
-  // hash the message
   const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer)
 
-  // convert ArrayBuffer to Array
   const hashArray = Array.from(new Uint8Array(hashBuffer))
 
   // convert bytes to hex string
