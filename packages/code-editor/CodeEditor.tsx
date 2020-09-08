@@ -3,7 +3,13 @@ import Highlight, { defaultProps } from "prism-react-renderer"
 import MenuIcon from "@material-ui/icons/Menu"
 import Paper from "@material-ui/core/Paper"
 import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline"
-import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live"
+import styled from "styled-components"
+import {
+  LiveEditor,
+  LiveError,
+  LivePreview,
+  LiveProvider
+  } from "react-live"
 import { mdx } from "@mdx-js/react"
 import "./themes/prism-synthwave84.css"
 
@@ -28,6 +34,15 @@ import {
   StyledPreviewPaper,
 } from "./Container"
 
+const StyledCard = styled(Card)`
+  padding: 0;
+  .MuiCardContent-root {
+    padding: 0;
+    :last-child {
+      padding: 0;
+    }
+  }
+`
 export const CodeEditor: React.FC<{
   live?: boolean
   render?: boolean
@@ -52,29 +67,26 @@ export const CodeEditor: React.FC<{
             transformCode={(code: string) => "/** @jsx mdx */" + code}
             scope={{ mdx }}
           >
-            <Card>
+            <StyledCard square={true}>
               <CardContent>
-                <StyledEditorPaper>
+                <StyledEditorPaper square={true}>
                   <LiveEditor />
                 </StyledEditorPaper>
-                <StyledLiveErrorPaper>
+                <StyledLiveErrorPaper square={true}>
                   <LiveError />
                 </StyledLiveErrorPaper>
 
-                <StyledPreviewPaper>
+                <StyledPreviewPaper square={true}>
                   <Grid container={true} spacing={3} direction="row">
                     <Grid item xs>
                       <Paper>
-                        <LivePreview
-                          id="live-copy"
-                          style={{ overflow: "hidden" }}
-                        />
+                        <LivePreview id="live-copy" />
                       </Paper>
                     </Grid>
                   </Grid>
                 </StyledPreviewPaper>
               </CardContent>
-            </Card>
+            </StyledCard>
           </LiveProvider>
         </Box>
       </Paper>

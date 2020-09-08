@@ -16,6 +16,7 @@ export function Counter(props) {
       if (text.includes("-")) return "decrease"
       else if (text.includes("+")) return "increase"
       else if (text.includes("x2")) return "double"
+      return ""
     })
     .reduce((state, ev) => actions[ev](state), { counter: 0 })
 
