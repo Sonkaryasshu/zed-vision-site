@@ -36,7 +36,6 @@ const Layout: React.FC<Props> = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
   let header = (
     <h1>
-      fffff
       <Link to={`/`}>{title}</Link>
     </h1>
   )

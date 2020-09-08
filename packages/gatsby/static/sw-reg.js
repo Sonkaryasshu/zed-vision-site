@@ -1,5 +1,10 @@
 const registerSW = async () => {
   try {
+    const worker = new Worker("sha256.worker.js", { type: "module" })
+    worker.postMessage("Yooo")
+
+    worker.onmessage = m => console.log(m)
+
     console.log("waiting to be ready")
     //  await navigator.serviceWorker.ready
     console.log("registering now")
@@ -7,6 +12,7 @@ const registerSW = async () => {
       updateViaCache: "imports",
       scope: "/",
     })
+
     console.log("Registration succeeded. Scope is " + reg.scope)
   } catch (error) {
     console.log("Registration failed with " + error)

@@ -10,6 +10,10 @@
 
 
         const worker = new Worker("workercomponent.js");
+        const shaWorker = new Worker("sha256.worker.js");
+
+        shaWorker.postMessage("Hello World")
+        shaWorker.onmessage = (m)=> console.log(m)
 
         console.log("yoooo2o")
 
