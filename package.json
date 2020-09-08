@@ -9,7 +9,7 @@
   "scripts": {
     "build": "cd packages/gatsby && yarn build",
     "start": "cd packages/gatsby && yarn start",
-    "serve": "file_server --cert .certs/localhost.cert --key .certs/localhost.key --host 0.0.0.0 packages/gatsby/public",
+    "serve": "file_server --cert .certs/localhost.cert --key .certs/localhost.key --host 0.0.0.0 public",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,yml}\"",
     "lint": "eslint ./packages --ext .ts --ext .tsx --ext .js --fix",
     "postinstall": "sh ./scripts/debts.sh",
