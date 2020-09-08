@@ -1,21 +1,51 @@
 <!DOCTYPE html>
 <head>
-
-    
+  <meta charset="utf8" />
     <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     
 </head>
 <body>
-    <script type="module" async>
+    <script>
 
         const worker = new Worker("workercomponent.js");
-        // const shaWorker = new Worker("sha256.worker.js");
+      
 
-        // shaWorker.postMessage("Hello World")
-        // shaWorker.onmessage = (m)=> console.log(m)
+        const pastEvents =  new Array(100000).fill({target: "+", type: "click" });
 
-        // worker.postMessage("World")
+        worker.postMessage({code:  `function Counter(props){
+    const actions = {
+      decrease: state => ({ counter: state.counter - 1 }),
+      double: state => ({ counter: state.counter * 2 }),
+      increase: state => ({ counter: state.counter + 1 }),
+    }
+    const pastEvents = props.pastEvents || []
+    
+  
+    const [events, setEvents] = React.useState(pastEvents)
+  
+    const state = events
+      .map(ev => {
+        const text = ev.target
+        if (text.includes("-")) return "decrease"
+        else if (text.includes("+")) return "increase"
+        else if (text.includes("x2")) return "double"
+      })
+      .reduce((state, ev) => actions[ev](state), { counter: 0 })
+      
+    const onClick = e =>
+      setEvents([...events, { type: "click", target: String(e.target.innerHTML) }])
+  
+    return (
+      <div>
+        <button onClick={e => onClick(e)}>-</button>
+        <button onClick={e => onClick(e)}>x2</button>
+        Counter {props.name}:<span>{state.counter}</span>
+        <button onClick={e => onClick(e)}>+</button>
+      </div>
+    )
+  }
+`, pastEvents})
 
 
 
@@ -23,7 +53,7 @@
 
         let el = null;
         let reactEl = null
-        
+    
         const hydrate = ()=>{
             ReactDOM.hydrate( reactEl, el)
         }
@@ -35,14 +65,14 @@
                 el.innerHTML = d.data.domString;
 
                 document.body.appendChild(el);
-                if (reactEl) hydrate()
+                if (reactEl) hydrate();
             }
             if (d.data.code) {
-                const {code, pastEvents} = d.data
+                const {code} = d.data
                 const Counter = new Function("props", `return (${code})(props)`)
                 
-                reactEl = React.createElement(Counter,  {pastEvents});
-                if (el) hydrate();
+                reactEl = React.createElement(Counter,  {pastEvents: pastEvents});
+                if (el) hydrate()
             }
 
  }
