@@ -55,28 +55,19 @@ const webRunner = {
 }
 
 const pastEvents = []
-//   this.document = WorkerThread.workerDOM.document
-// let window, document, el
-const firstRun = name => {
+
+const render = () => {
   const window = (this.window = WorkerThread.workerDOM)
 
   var Counter = new Function("props", `return (${code})(props)`)
 
   const document = WorkerThread.workerDOM.document
 
-  //   const React = window.React
-  //   const window = this.window
-
-  //   Object.assign(window, { HTMLIFrameElement: "yo" })
-
   const el = document.createElement("div")
 
   ReactDOM.render(React.createElement(Counter, { pastEvents: pastEvents }), el)
 
-  WorkerThread.workerDOM.document.body.appendChild(el)
-  console.log(document.body)
   webRunner.el = el
-  webRunner.document = document
 }
 
 self.onmessage = d => {
@@ -85,6 +76,6 @@ self.onmessage = d => {
   if (d.data.type === "click") {
     pastEvents.push(d.data)
   }
-  firstRun()
+  render()
   postMessage(webRunner.el.innerHTML)
 }

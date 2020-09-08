@@ -3,12 +3,7 @@ import Highlight, { defaultProps } from "prism-react-renderer"
 import MenuIcon from "@material-ui/icons/Menu"
 import Paper from "@material-ui/core/Paper"
 import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline"
-import {
-  LiveEditor,
-  LiveError,
-  LivePreview,
-  LiveProvider
-  } from "react-live"
+import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live"
 import { mdx } from "@mdx-js/react"
 import "./themes/prism-synthwave84.css"
 

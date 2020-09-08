@@ -1,6 +1,6 @@
 import React from "react"
 
-export const Counter = props => {
+export function Counter(props) {
   const actions = {
     decrease: state => ({ counter: state.counter - 1 }),
     double: state => ({ counter: state.counter * 2 }),
