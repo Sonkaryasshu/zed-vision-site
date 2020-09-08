@@ -11,13 +11,20 @@ export const Counter = () => {
 
   const state = events.reduce((state, ev) => actions[ev](state), { counter: 0 })
 
+  const onClick = e => {
+    const text = String(e.target.innerText)
+
+    if (text.includes("-")) setEvents([...events, "decrease"])
+    else if (text.includes("+")) setEvents([...events, "increase"])
+    else if (text.includes("x2")) setEvents([...events, "double"])
+  }
   return (
-    <div>
-      <button onClick={() => setEvents([...events, "decrease"])}>-</button>
-      <button onClick={() => setEvents([...events, "double"])}>x 2</button>
+    <>
+      <button onClick={e => onClick(e)}>-</button>
+      <button onClick={e => onClick(e)}>x2</button>
       Counter:
       <span>{state.counter}</span>
-      <button onClick={() => setEvents([...events, "increase"])}>+</button>
-    </div>
+      <button onClick={e => onClick(e)}>+</button>
+    </>
   )
 }
