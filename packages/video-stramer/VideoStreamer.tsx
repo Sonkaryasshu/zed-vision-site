@@ -1,9 +1,10 @@
 import * as React from "react"
 const VideoStream = require("videostream")
-const WebTorrent = require("webtorrent/webtorrent.min.js")
+import "webtorrent/webtorrent.debug.js"
 
 
 const connect = async (magnetURL: string, videoRef: any) => {
+  // @ts-ignore
   const client = new WebTorrent()
 
   client.add(
