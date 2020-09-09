@@ -31,15 +31,12 @@ export const Streamer: React.FC<{ magnetURL: string }> = ({ magnetURL }) => {
     const connect = async (magnetURL: string) => {
       let WebTorrent
 
-      const wtMin = (await import("@devcontainer/webtorrent/webtorrent.min"))
-        .default
+      const wtMin = (await import("webtorrent/webtorrent.min")).default
 
       if (wtMin.Default && wtMin.Default.name === "WebTorrent")
         WebTorrent = wtMin.default
       else {
-        const wtDebug = await import(
-          "@devcontainer/webtorrent/webtorrent.debug"
-        )
+        const wtDebug = await import("webtorrent/webtorrent.debug")
 
         WebTorrent = wtDebug.default
       }
