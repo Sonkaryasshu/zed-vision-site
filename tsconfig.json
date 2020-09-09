@@ -25,5 +25,5 @@
     "emitDecoratorMetadata": true,
     "types": ["react"]
   },
-  "include": ["packages/gatsby/**/*.ts", "packages/gatsby/**/*.tsx"]
+  "include": ["packages/**/*.ts", "packages/**/*.tsx"]
 }

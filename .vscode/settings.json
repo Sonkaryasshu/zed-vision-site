@@ -30,6 +30,7 @@
     "crossorigin",
     "deno",
     "devcert",
+    "devcontainer",
     "docgen",
     "downlevel",
     "emotion",

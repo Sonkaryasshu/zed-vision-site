@@ -1,2 +1,3 @@
 declare module "videostream"
-declare module "webtorrent"
+declare module "@devcontainer/webtorrent/webtorrent.min"
+declare module "@devcontainer/webtorrent/webtorrent.debug"
