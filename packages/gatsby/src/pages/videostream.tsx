@@ -31,7 +31,7 @@ const VideoStreamingPage = ({ data, location }: Props) => {
 
   return (
     <Layout location={location} title={siteTitle}>
-      <SEO title="404: Not Found" />
+      <SEO title="Stream something from here :)" />
 
       <StyledStreamer magnetURL={magnet} />
     </Layout>
