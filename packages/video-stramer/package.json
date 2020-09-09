@@ -1,0 +1,11 @@
+{
+  "name": "@zed-vision/video-streamer",
+  "version": "1.0.0",
+  "main": "VideoStreamer.tsx",
+  "private": "false",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/webtorrent": "^0.107.2"
+  }
+}
