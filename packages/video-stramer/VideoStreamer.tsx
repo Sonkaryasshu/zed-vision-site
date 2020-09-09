@@ -1,11 +1,34 @@
 import * as React from "react"
+import VideoStream from "videostream"
 
+import styled from "styled-components"
+
+const Video: React.FC<{ file: any }> = ({ file }) => {
+  const videoRef = React.useRef(null)
+  React.useEffect(() => {
+    new VideoStream(file, videoRef.current)
+  })
+  return (
+    <>
+      <h4>{file.name}</h4>
+      <video controls ref={videoRef}></video>
+    </>
+  )
+}
+
+const StyledTextArea = styled.textarea`
+  display: block;
+  width: 100%;
+`
 export const Streamer: React.FC<{ magnetURL: string }> = ({ magnetURL }) => {
-  const [state, changeState] = React.useState({ loading: true, videoFiles: [] })
+  const [state, changeState] = React.useState({
+    loading: true,
+    videoFiles: [],
+    magnetURL: magnetURL,
+  })
 
   React.useEffect(() => {
     const connect = async (magnetURL: string) => {
-      // const VideoStream = (await import("videostream")).default
       let WebTorrent
 
       const wtMin = (await import("@devcontainer/webtorrent/webtorrent.min"))
@@ -29,44 +52,28 @@ export const Streamer: React.FC<{ magnetURL: string }> = ({ magnetURL }) => {
           file.name.endsWith("mp4")
         )
 
-        changeState({ loading: false, videoFiles: videoFiles })
-
-        // torrent.files.find(function (file: any) {
-        //   if (file.name.endsWith(".mp4")) {
-        //     if (file.createReadStream) {
-        //       try {
-        //         // const ref = React.useRef()
-        //         //@ts-ignore
-        //         // const videoElement = <video controls ref={ref} />
-        //         // addVideo([...videos, videoElement])
-        //         // const videostream = new VideoStream(file, ref.current)
-        //         // videostream.addEventListener("error", () => {
-        //         //   const errorCode = videostream.error
-        //         //   const detailedError = videostream.detailedError
-        //         //   console.log(errorCode, detailedError)
-        //         //   file.appendTo("body")
-        //         // })
-        //       } catch (e) {
-        //         console.log(e)
-        //       }
-        //     } else {
-        //       file.appendTo()
-        //     }
-        //   }
-        // })
+        changeState({ ...state, loading: false, videoFiles: videoFiles })
       })
     }
     connect(magnetURL)
   }, [])
 
   if (state.loading) {
-    return <h1>loading</h1>
+    return (
+      <>
+        <h2>loading</h2>
+        <StyledTextArea
+          value={magnetURL}
+          onChange={e => changeState({ ...state, magnetURL: e.target.value })}
+        ></StyledTextArea>
+      </>
+    )
   }
 
   return (
     <div>
       {state.videoFiles.map((file: any, key) => (
-        <div key={key}>{file.name}</div>
+        <Video file={file} key={key} />
       ))}
     </div>
   )
