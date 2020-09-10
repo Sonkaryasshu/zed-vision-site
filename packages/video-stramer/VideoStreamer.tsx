@@ -11,7 +11,7 @@ const Video: React.FC<{ file: any }> = ({ file }) => {
   return (
     <>
       <h4>{file.name}</h4>
-      <video controls ref={videoRef} playsInline></video>
+      <video ref={videoRef} autoPlay controls loop muted playsInline></video>
     </>
   )
 }
