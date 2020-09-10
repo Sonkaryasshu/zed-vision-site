@@ -134,7 +134,7 @@ export const register = () => {
 
       // const ReactDOM = (await import("/react-dom.development.js")).default;
 
-      ReactDOM.hydrate(<Counter pastEvents={pastEvents} />, el)
+      // ReactDOM.hydrate(<Counter pastEvents={pastEvents} />, el)
     }
   }
 
