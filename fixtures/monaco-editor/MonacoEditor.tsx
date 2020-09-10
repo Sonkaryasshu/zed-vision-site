@@ -5,7 +5,7 @@ export const MonacoEditor = () => {
   const [isEditorReady, setIsEditorReady] = useState(false)
   const valueGetter = useRef()
 
-  function handleEditorDidMount(_valueGetter) {
+  function handleEditorDidMount(_valueGetter: defined) {
     setIsEditorReady(true)
     valueGetter.current = _valueGetter
   }
