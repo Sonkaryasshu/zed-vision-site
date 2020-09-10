@@ -22,7 +22,7 @@ const VideoStreamingPage = ({ data, location }: Props) => {
     <>
       <SEO title="Stream something from here :)" />
 
-      <Streamer magnetURL={magnet} />
+      {typeof window == `undefined` && <Streamer magnetURL={magnet} />}
     </>
   )
 }

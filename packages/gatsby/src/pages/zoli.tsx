@@ -16,39 +16,21 @@ interface Props {
   location: Location
 }
 
-// var Wrapper = ({ html }) => {
-//   const html2 = ``.toUpperCase()
-//   // `return` <div dangerouslySetInnerHTML={createMarkup()} />
-
-//   function createMarkup() {
-//     return { __html: html2 }
-//   }
-// }
+const Wrapper = (props: any) => (
+  <div dangerouslySetInnerHTML={{ __html: props.innerHTML }} />
+)
 
 const Comp1: React.FC<{ onEvent: (event: string) => void }> = ({ onEvent }) => {
   const [count, setCount] = React.useState(0)
 
-  // let el = register()
-
-  // const [{ html }, setWK] = React.useState({ html: el().innerHTML })
-  // React.useEffect(() => {
-  //   // if (html !== el().innerHTML) setWK({ html: "dddd<div>ello elllo</div>ee" })
-  // }, [])
-
   return (
     <>
-      {/* aaa */}
-      {/* <Wrapper html={html}></Wrapper> */}
-      {/* bbb */}
-
       <button
         onClick={() => {
           onEvent("inc")
           setCount(count + 1)
         }}
-      >
-        +
-      </button>
+      ></button>
       {count}
       <button
         onClick={() => {
@@ -62,16 +44,26 @@ const Comp1: React.FC<{ onEvent: (event: string) => void }> = ({ onEvent }) => {
   )
 }
 
+const renderedOutside = register()
+
 const NotFoundPage = ({ data, location }: Props) => {
   const siteTitle = data.site.siteMetadata.title
+
+  let rr = renderedOutside()
+  const [rrrrr, setRR] = React.useState({ ...rr })
+
+  React.useEffect(() => {
+    setRR({ ...rr })
+  }, [rr.innerHTML])
 
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="404: Not Found" />
-
-      <h1>Not Found!!!!</h1>
+      <h1 onClick={() => setRR({ ...rr })}> Not Found!!!</h1>
+      <Wrapper key={rrrrr.innerHTML} innerHTML={rrrrr.innerHTML}></Wrapper>
       <ChangeDetector Comp1={Comp1}></ChangeDetector>
       <p>You just hit a route that doesn't exist... the sadness.</p>
+      <div id="zoli"></div>
     </Layout>
   )
 }

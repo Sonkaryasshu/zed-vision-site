@@ -73,7 +73,7 @@ const chd: React.FC<{
     document.getElementById("id1")?.innerHTML || "<div></div>",
   ])
 
-  const [lastEvent, setLastEvent] = React.useState("init")
+  // const [{}, setLastEvent] = React.useState("init")
 
   const [nodes, setNodes] = React.useState([
     { id: 0, image: "", shape: "image" },
@@ -102,12 +102,12 @@ const chd: React.FC<{
 
     // newTom
     if (num1.length < num2.length) {
-      console.log(num1)
-      console.log(num2)
-      console.log("render", num1, num2)
-      console.log(lastEvent)
+      // console.log(num1)
+      // console.log(num2)
+      // console.log("render", num1, num2)
+      // console.log(lastEvent)
 
-      setLastEvent(ev)
+      // setLastEvent(ev)
       const from = num2.indexOf(currentHTML)
       const to = num2.indexOf(str)
 
