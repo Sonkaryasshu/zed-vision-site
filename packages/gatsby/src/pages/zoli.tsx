@@ -16,16 +16,34 @@ interface Props {
   location: Location
 }
 
+// var Wrapper = ({ html }) => {
+//   const html2 = ``.toUpperCase()
+//   // `return` <div dangerouslySetInnerHTML={createMarkup()} />
+
+//   function createMarkup() {
+//     return { __html: html2 }
+//   }
+// }
+
 const Comp1: React.FC<{ onEvent: (event: string) => void }> = ({ onEvent }) => {
   const [count, setCount] = React.useState(0)
 
+  // let el = register()
+
+  // const [{ html }, setWK] = React.useState({ html: el().innerHTML })
+  // React.useEffect(() => {
+  //   // if (html !== el().innerHTML) setWK({ html: "dddd<div>ello elllo</div>ee" })
+  // }, [])
+
   return (
     <>
-      Hello
+      {/* aaa */}
+      {/* <Wrapper html={html}></Wrapper> */}
+      {/* bbb */}
+
       <button
         onClick={() => {
           onEvent("inc")
-          register()
           setCount(count + 1)
         }}
       >
