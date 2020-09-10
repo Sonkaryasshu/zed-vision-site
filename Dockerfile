@@ -12,16 +12,13 @@ RUN adduser node sudo && \
   echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
   echo "Set disable_coredump false" >> /etc/sudo.conf 
 
-USER node
-
 WORKDIR /app
 
 ADD ./scripts/debts.sh /tmp/
 
 ENV DENO_INSTALL="/home/node/.deno" 
 ENV PATH="$DENO_INSTALL/bin:$PATH"
-RUN sudo chown -R node /app && \
-    sh /tmp/debts.sh
+RUN sh /tmp/debts.sh
 
 ARG GITBASE=https://raw.githubusercontent.com/zed-vision/zed-vision-site/master
 ADD --chown=node ${GITBASE}/package.json ${GITBASE}/yarn.lock ./
