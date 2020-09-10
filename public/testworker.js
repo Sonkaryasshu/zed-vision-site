@@ -1,7 +1,7 @@
-import  React from "react"
-// import ReactDOM from "./react-dom.development.js"
+import * as React from "./react.development.js"
+import ReactDOM from "./react-dom.development.js"
 
-const worker = new Worker("/workerComponent.js")
+const worker = new Worker("workercomponent.js")
 
 const pastEvents = new Array(100000).fill({ target: "+", type: "click" })
 
@@ -42,19 +42,11 @@ worker.postMessage({
   pastEvents,
 })
 
-
-let resolve;
-
-const isReady = new Promise((res)=>{
-  resolve = res;
-})
-
 let el = null
 let reactEl = null
 
-export const hydrate = async () => {
-  // await isReady;
-  // ReactDOM.hydrate(reactEl, el)
+const hydrate = () => {
+  ReactDOM.hydrate(reactEl, el)
 }
 
 worker.onmessage = d => {
@@ -63,13 +55,13 @@ worker.onmessage = d => {
     el.innerHTML = d.data.domString
 
     document.body.appendChild(el)
-    if (reactEl) resolve()
+    if (reactEl) hydrate()
   }
   if (d.data.code) {
     const { code } = d.data
     const Counter = new Function("props", `return (${code})(props)`)
 
     reactEl = React.createElement(Counter, { pastEvents: pastEvents })
-    if (el) resolve();
+    if (el) hydrate()
   }
 }

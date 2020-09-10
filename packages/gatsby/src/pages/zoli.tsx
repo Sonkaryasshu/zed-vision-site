@@ -3,7 +3,7 @@ import React from "react"
 import SEO from "../components/seo"
 import { ChangeDetector } from "../components/changeDetector"
 import { graphql } from "gatsby"
-import { hydrate } from "../utils/testWorker"
+import { register } from "../utils/testWorker"
 
 interface Props {
   data: {
@@ -18,13 +18,14 @@ interface Props {
 
 const Comp1: React.FC<{ onEvent: (event: string) => void }> = ({ onEvent }) => {
   const [count, setCount] = React.useState(0)
-  hydrate()
+
   return (
     <>
       Hello
       <button
         onClick={() => {
           onEvent("inc")
+          register()
           setCount(count + 1)
         }}
       >
