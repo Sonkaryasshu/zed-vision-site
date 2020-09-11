@@ -6,6 +6,6 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "webtorrent": "0.108.6"
+ 
   }
 }

@@ -1,5 +1,6 @@
 import * as React from "react"
 import VideoStream from "videostream"
+import WebTorrent from "webtorrent"
 
 import styled from "styled-components"
 
@@ -28,6 +29,7 @@ const StyledTextArea = styled.textarea`
   display: block;
   width: 100%;
 `
+
 export const Streamer: React.FC<{ magnetURL: string }> = ({ magnetURL }) => {
   const [state, changeState] = React.useState({
     loading: true,
@@ -37,18 +39,6 @@ export const Streamer: React.FC<{ magnetURL: string }> = ({ magnetURL }) => {
 
   React.useEffect(() => {
     const connect = async (magnetURL: string) => {
-      let WebTorrent
-
-      const wtMin = (await import("webtorrent/webtorrent.min")).default
-
-      if (wtMin.Default && wtMin.Default.name === "WebTorrent")
-        WebTorrent = wtMin.default
-      else {
-        const wtDebug = await import("webtorrent/webtorrent.debug")
-
-        WebTorrent = wtDebug.default
-      }
-
       const client = new WebTorrent()
 
       client.add(magnetURL, async function (torrent: any) {

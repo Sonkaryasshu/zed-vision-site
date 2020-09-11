@@ -2,7 +2,7 @@
   "name": "@zed-vision/zed-vision-site",
   "scripts": {
     "postinstall": "gatsby telemetry --disable",
-    "build": "gatsby clean && gatsby build && rm -rf ../../public/* && cp -a ./static/. ./public && cp -a ./public/. ../../public/",
+    "build": "gatsby clean && rm -rf .cache public ../../public/* && gatsby build && rm -rf ../../public/* && cp -a ./static/. ./public && cp -a ./public/. ../../public/",
     "start": "gatsby develop --host 0.0.0.0 --https --cert-file ../../.certs/localhost.cert --key-file ../../.certs/localhost.key",
     "serve": "gatsby serve",
     "clean": "gatsby clean"
@@ -42,7 +42,9 @@
     "react-typography": "0.16.19",
     "typography": "0.16.19",
     "typography-theme-wordpress-2016": "0.16.19",
-    "vfile-message": "2.0.4"
+    "vfile-message": "2.0.4",
+    "webtorrent": "0.108.6",
+    "videostream": "3.2.1"
   },
   "homepage": "https://www.zed.vision",
   "keywords": [

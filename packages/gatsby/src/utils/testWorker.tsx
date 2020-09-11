@@ -1,5 +1,5 @@
-import * as React from "react"
-import ReactDOM from "react-dom"
+// import * as React from "react"
+// import ReactDOM from "react-dom"
 
 export const register = () => {
   if (typeof window == `undefined`) {
@@ -51,42 +51,42 @@ export const register = () => {
     )
   }
 `
-  const Counter = function Counter(props: { pastEvents: any }) {
-    const actions = {
-      decrease: (state: any) => ({ counter: state.counter - 1 }),
-      double: (state: { counter: number }) => ({ counter: state.counter * 2 }),
-      increase: (state: { counter: number }) => ({
-        counter: state.counter + 1,
-      }),
-    }
-    const pastEvents = props.pastEvents || []
+  // const Counter = function Counter(props: { pastEvents: any }) {
+  //   const actions = {
+  //     decrease: (state: any) => ({ counter: state.counter - 1 }),
+  //     double: (state: { counter: number }) => ({ counter: state.counter * 2 }),
+  //     increase: (state: { counter: number }) => ({
+  //       counter: state.counter + 1,
+  //     }),
+  //   }
+  //   const pastEvents = props.pastEvents || []
 
-    const [events, setEvents] = React.useState(pastEvents)
+  //   const [events, setEvents] = React.useState(pastEvents)
 
-    const state = events
-      .map((ev: { target: any }) => {
-        const text = ev.target
-        if (text.includes("-")) return "decrease"
-        else if (text.includes("+")) return "increase"
-        else if (text.includes("x2")) return "double"
-        return null
-      })
-      .reduce((state: any, ev: string | number) => actions[ev](state), {
-        counter: 0,
-      })
+  //   const state = events
+  //     .map((ev: { target: any }) => {
+  //       const text = ev.target
+  //       if (text.includes("-")) return "decrease"
+  //       else if (text.includes("+")) return "increase"
+  //       else if (text.includes("x2")) return "double"
+  //       return null
+  //     })
+  //     .reduce((state: any, ev: string | number) => actions[ev](state), {
+  //       counter: 0,
+  //     })
 
-    const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
-      setEvents([...events, { type: "click", target: String(e.target) }])
+  //   const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+  //     setEvents([...events, { type: "click", target: String(e.target) }])
 
-    return (
-      <div>
-        <button onClick={e => onClick(e)}>-</button>
-        <button onClick={e => onClick(e)}>x2</button>
-        Counter:<span>{state.counter}</span>
-        <button onClick={e => onClick(e)}>+</button>
-      </div>
-    )
-  }
+  //   return (
+  //     <div>
+  //       <button onClick={e => onClick(e)}>-</button>
+  //       <button onClick={e => onClick(e)}>x2</button>
+  //       Counter:<span>{state.counter}</span>
+  //       <button onClick={e => onClick(e)}>+</button>
+  //     </div>
+  //   )
+  // }
 
   worker.postMessage({
     code: counter,
