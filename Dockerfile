@@ -1,4 +1,4 @@
-FROM node:14.10.0-buster-slim 
+FROM node:14.10.1-buster-slim 
 
 RUN apt-get update && apt-get install --yes \
       curl \
