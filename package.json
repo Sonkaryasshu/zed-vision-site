@@ -7,7 +7,7 @@
   "author": "Zoltan Erdos <zolika84@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "cd packages/gatsby && yarn build",
+    "build": "yarn docker ___build",
     "start": "cd packages/gatsby && yarn start",
     "serve": "file_server --cert .certs/localhost.cert --key .certs/localhost.key --host 0.0.0.0 public",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,yml}\"",
@@ -15,7 +15,8 @@
     "postinstall": "sh ./scripts/debts.sh",
     "docker:start": "docker-compose down && docker-compose up --detach --build gatsby",
     "docker-yarn": "docker-compose exec gatsby yarn",
-    "docker": "(yarn docker-yarn || (yarn docker:start && yarn docker-yarn)) && yarn docker-yarn"
+    "docker": "(yarn docker-yarn || (yarn docker:start && yarn docker-yarn)) && yarn docker-yarn",
+    "___build": "cd packages/gatsby && yarn build"
   },
   "workspaces": [
     "packages/*"
