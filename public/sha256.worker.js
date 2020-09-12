@@ -2,33 +2,41 @@ const cache = new WeakMap()
 
 const hashTable = {}
 
-onmessage = async message => {
-  // if (!cache.has({ data: message.data })) {
-  const msg = message.data
+onconnect = function (e) {
+  var port = e.ports[0]
 
-  if (msg.id) {
-    const data =
-      typeof msg.data === "string"
-        ? msg.data
-        : typeof msg.data === "object"
-        ? JSON.stringify(msg.data)
-        : String(msg.data)
-    const hash = await sha256(data)
+  const onMessage = async message => {
+    // if (!cache.has({ data: message.data })) {
+    const msg = message.data
 
-    const shorterHash = shortener(hash)
+    if (msg.id) {
+      const data =
+        typeof msg.data === "string"
+          ? msg.data
+          : typeof msg.data === "object"
+          ? JSON.stringify(msg.data)
+          : String(msg.data)
+      const hash = await sha256(data)
 
-    hashTable[shorterHash] = data
+      const shorterHash = shortener(hash)
 
-    postMessage({
-      hash: shorterHash,
-      id: msg.id,
-    })
-  } else if (msg.hash) {
-    postMessage({
-      data: hashTable[msg.hash],
-      hash: msg.hash,
-    })
+      hashTable[shorterHash] = data
+
+      port.postMessage({
+        hash: shorterHash,
+        id: msg.id,
+      })
+    } else if (msg.hash) {
+      port.postMessage({
+        data: hashTable[msg.hash],
+        hash: msg.hash,
+      })
+    }
   }
+
+  port.addEventListener("message", onMessage)
+
+  port.start() // Required when using addEventListener. Otherwise called implicitly by onmessage setter.
 }
 
 function shortener(hash) {

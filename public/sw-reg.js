@@ -1,13 +1,5 @@
 const registerSW = async () => {
   try {
-    const worker = new Worker("/sha256.worker.js")
-    worker.onmessage = m => console.log(m)
-
-    worker.postMessage({ id: 1, data: { foo: "bar" } })
-
-    console.log("waiting to be ready")
-    //  await navigator.serviceWorker.ready
-    console.log("registering now")
     const reg = await navigator.serviceWorker.register("/sw.js", {
       updateViaCache: "imports",
       scope: "/",

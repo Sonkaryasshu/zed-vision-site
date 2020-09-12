@@ -11,6 +11,10 @@ export const register = () => {
     })
   }
 
+  const sha256Worker = new window.SharedWorker("/sha256.worker.js")
+
+  sha256Worker.port.start()
+
   const worker = new window.Worker("/workerComponent.js")
 
   const pastEvents = new Array(100000).fill({
@@ -18,9 +22,13 @@ export const register = () => {
     type: "click",
   }) as any
 
+  sha256Worker.port.onmessage = m => console.log(m.data)
+
+  sha256Worker.port.postMessage({ id: 1, data: pastEvents })
+
   const counter = `function Counter(props){
     const actions = {
-      decrease: state => ({ counter: state.counter - 1 }),
+      decrease: state => ({ counter: state.counter - 1 }),  
       double: state => ({ counter: state.counter * 2 }),
       increase: state => ({ counter: state.counter + 1 }),
     }
@@ -51,6 +59,9 @@ export const register = () => {
     )
   }
 `
+  sha256Worker.port.postMessage({ id: 2, counter })
+
+  // sha256Worker.port.postMessage({ hash: "7" })
   // const Counter = function Counter(props: { pastEvents: any }) {
   //   const actions = {
   //     decrease: (state: any) => ({ counter: state.counter - 1 }),

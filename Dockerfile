@@ -29,10 +29,18 @@ ADD --chown=node ${GITBASE}/packages/code-editor/package.json ./packages/code-ed
 RUN yarn --frozen-lockfile --ignore-scripts && rm -rf node_modules
 
 FROM depts 
-ADD . .
 
-RUN yarn install --check-files --frozen-lockfile && \
-    cd packages/gatsby && \
+ADD package.json yarn.lock ./
+ADD packages/gatsby/package.json ./packages/gatsby/
+ADD packages/code-editor/package.json ./packages/code-editor/
+ADD packages/video-streamer/package.json ./packages/video-streamer/
+RUN yarn install --check-files --frozen-lockfile
+
+ADD packages ./packages/
+ADD blog  ./blog
+ADD assets  ./assets
+
+RUN cd packages/gatsby && \
     yarn build && \
     rm -rf /app/node_modules && \
     mv /app /tmp/app && \
