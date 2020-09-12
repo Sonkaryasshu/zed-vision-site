@@ -11,7 +11,7 @@ export const register = () => {
     })
   }
 
-  const sha256Worker = new window.SharedWorker("/sha256.worker.js")
+  const sha256Worker = new window.SharedWorker("/shaWorker.js")
 
   const worker = new window.Worker("/workerComponent.js")
 
