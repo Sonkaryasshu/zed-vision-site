@@ -5,8 +5,9 @@ const hashTable = {}
 onconnect = function (e) {
   var port = e.ports[0]
 
+  // if (!cache.has({ data: message.data })) {
+
   const onMessage = async message => {
-    // if (!cache.has({ data: message.data })) {
     const msg = message.data
 
     if (msg.id) {
@@ -20,7 +21,7 @@ onconnect = function (e) {
 
       const shorterHash = shortener(hash)
 
-      hashTable[shorterHash] = data
+      hashTable[shorterHash] = msg.data
 
       port.postMessage({
         hash: shorterHash,

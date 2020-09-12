@@ -10,12 +10,15 @@ const webRunner = {
   el: null,
   document: null,
   onHeaderClick: null,
+  shaPort: null,
 }
 
 const pastEvents = []
 
 onmessage = m => {
-  const { code, pastEvents } = m.data
+  const { code, pastEvents, shaPort } = m.data
+
+  if (shaPort) webRunner.shaPort == shaPort
 
   const babelCode = Babel.transform(code, {
     plugins: [],

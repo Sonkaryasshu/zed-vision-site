@@ -10,15 +10,16 @@
     "build": "docker-compose down && yarn docker ___build",
     "start": "docker-compose down && yarn old-start & yarn docker ___start",
     "old-start": "cd packages/gatsby && yarn start",
-    "serve": "file_server --cert .certs/localhost.cert --key .certs/localhost.key --host 0.0.0.0 public",
+    "serve-dir" : "file_server --cert .certs/localhost.cert --key .certs/localhost.key --host 0.0.0.0",
+    "serve": "yarn serve-dir public",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,yml}\"",
     "lint": "eslint ./packages --ext .ts --ext .tsx --ext .js --fix",
     "xxx-postinstall": "sh ./scripts/debts.sh",
     "docker:start": "docker-compose down && docker-compose up --detach --build gatsby",
     "docker-yarn": "docker-compose exec gatsby yarn",
     "docker": "(yarn docker-yarn || (yarn docker:start && yarn docker-yarn)) && yarn docker-yarn",
-    "___build": "rm -rf public .certs && mv /tmp/app/.certs /tmp/app/public /app/ && yarn xxx-postinstall",
-    "___start": "yarn ___build && yarn serve"
+    "___build": "rm -rf public && mv /tmp/app/public /app/ ",
+    "___start": "yarn ___build && cd /tmp/app && yarn serve-dir /app/public"
   },
   "workspaces": [
     "packages/*"

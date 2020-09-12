@@ -13,9 +13,14 @@ export const register = () => {
 
   const sha256Worker = new window.SharedWorker("/sha256.worker.js")
 
-  sha256Worker.port.start()
-
   const worker = new window.Worker("/workerComponent.js")
+
+  worker.postMessage(
+    {
+      shaPort: sha256Worker.port,
+    },
+    [sha256Worker.port]
+  )
 
   const pastEvents = new Array(100000).fill({
     target: "+",
@@ -60,6 +65,8 @@ export const register = () => {
   }
 `
   sha256Worker.port.postMessage({ id: 2, counter })
+
+  setTimeout(() => sha256Worker.port.postMessage({ hash: "7" }), 1000)
 
   // sha256Worker.port.postMessage({ hash: "7" })
   // const Counter = function Counter(props: { pastEvents: any }) {

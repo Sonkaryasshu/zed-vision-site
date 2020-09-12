@@ -43,6 +43,7 @@ worker.postMessage({
 })
 
 let el = null
+
 let reactEl = null
 
 const hydrate = () => {
@@ -50,6 +51,12 @@ const hydrate = () => {
 }
 
 worker.onmessage = d => {
+  if (d.data.shaPort) {
+    ;(shaPort = message.shaPort), shaPort.onmessage()
+
+    shaPort.postMessage({ hash7 })
+  }
+
   if (d.data.domString) {
     el = document.createElement("div")
     el.innerHTML = d.data.domString

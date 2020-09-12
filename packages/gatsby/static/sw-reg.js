@@ -1,5 +1,17 @@
 const registerSW = async () => {
   try {
+    if (
+      location.hostname === "localhost" ||
+      location.hostname === "127.0.0.1"
+    ) {
+      navigator.serviceWorker.getRegistrations().then(function (registrations) {
+        for (let registration of registrations) {
+          registration.unregister()
+        }
+      })
+      return
+    }
+
     const reg = await navigator.serviceWorker.register("/sw.js", {
       updateViaCache: "imports",
       scope: "/",
