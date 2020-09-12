@@ -8,8 +8,8 @@
   "license": "MIT",
   "scripts": {
     "build": "docker-compose down && yarn docker ___build",
-    "d-start": "docker-compose down && yarn docker ___start",
-    "start": "cd packages/gatsby && yarn start",
+    "start": "docker-compose down && yarn docker ___start",
+    "old-start": "cd packages/gatsby && yarn start",
     "serve": "file_server --cert .certs/localhost.cert --key .certs/localhost.key --host 0.0.0.0 public",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,yml}\"",
     "lint": "eslint ./packages --ext .ts --ext .tsx --ext .js --fix",
@@ -18,7 +18,7 @@
     "docker-yarn": "docker-compose exec gatsby yarn",
     "docker": "(yarn docker-yarn || (yarn docker:start && yarn docker-yarn)) && yarn docker-yarn",
     "___build": "rm -rf public .certs && mv /tmp/app/.certs /tmp/app/public /app/",
-    "___start": "yarn ___build && yarn serve & yarn start"
+    "___start": "yarn ___build && yarn serve & yarn old-start"
   },
   "workspaces": [
     "packages/*"
