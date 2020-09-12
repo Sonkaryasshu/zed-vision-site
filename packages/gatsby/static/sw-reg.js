@@ -1,8 +1,9 @@
 const registerSW = async () => {
   try {
     const worker = new Worker("/sha256.worker.js")
-    worker.postMessage("booo")
     worker.onmessage = m => console.log(m)
+
+    worker.postMessage({ id: 1, data: { foo: "bar" } })
 
     console.log("waiting to be ready")
     //  await navigator.serviceWorker.ready

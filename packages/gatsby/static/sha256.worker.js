@@ -1,26 +1,38 @@
 const cache = new WeakMap()
 
-onmessage = async message => {
-  if (!cache.has({ data: message.data })) {
-    const hash = await sha256(String(message.data))
-    const shorterHash = hash
-    cache.set({ data: message.data }, shorterHash)
-    postMessage({
-      hash: shorterHash,
-      data: message.data,
-    })
-    // LocalStorage.setItem(hash, JSON.stringify(message))
-  } else
-    postMessage({
-      hash: cache.get({ data: message.data }),
-      data: message.data,
-    })
-}
-
 const hashTable = {}
 
+onmessage = async message => {
+  // if (!cache.has({ data: message.data })) {
+  const msg = message.data
+
+  if (msg.id) {
+    const data =
+      typeof msg.data === "string"
+        ? msg.data
+        : typeof msg.data === "object"
+        ? JSON.stringify(msg.data)
+        : String(msg.data)
+    const hash = await sha256(data)
+
+    const shorterHash = shortener(hash)
+
+    hashTable[shorterHash] = data
+
+    postMessage({
+      hash: shorterHash,
+      id: msg.id,
+    })
+  } else if (msg.hash) {
+    postMessage({
+      data: hashTable[msg.hash],
+      hash: msg.hash,
+    })
+  }
+}
+
 function shortener(hash) {
-  for (let i = 3; i < 60; i++) {
+  for (let i = 1; i < 64; i++) {
     const shorterHash = hash.substr(0, i)
     if (hashTable[shorterHash] === undefined) {
       hashTable[shorterHash] = hash
@@ -67,4 +79,28 @@ async function sha256(message) {
   // convert bytes to hex string
   const hashHex = hashArray.map(b => ("00" + b.toString(16)).slice(-2)).join("")
   return hashHex
+}
+
+async function sign(message) {
+  const msgBuffer = new TextEncoder("utf-8").encode(message)
+
+  const key = await crypto.subtle.importKey(
+    "raw", // raw format of the key - should be Uint8Array
+    enc.encode("mysecretkey"),
+    {
+      // algorithm details
+      name: "HMAC",
+      hash: { name: "SHA-256" },
+    },
+    false, // export = false
+    ["sign", "verify"] // what the key can do'
+  )
+
+  const hashBuffer = await crypto.subtle.sign("SHA-256", key, msgBuffer)
+
+  const hashArray = Array.from(new Uint8Array(hashBuffer))
+
+  // convert bytes to hex string
+  const signHex = hashArray.map(b => ("00" + b.toString(16)).slice(-2)).join("")
+  return signHex
 }
