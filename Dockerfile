@@ -31,7 +31,7 @@ RUN yarn --frozen-lockfile --ignore-scripts && rm -rf node_modules
 FROM depts 
 ADD . .
 
-RUN yarn install --check-files --frozen-lockfile --ignore-scripts && \
+RUN yarn install --check-files --frozen-lockfile && \
     cd packages/gatsby && \
     yarn build && \
     rm -rf /app/node_modules && \
