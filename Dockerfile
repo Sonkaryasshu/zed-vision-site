@@ -1,4 +1,4 @@
-FROM node:14.10.1-buster-slim 
+FROM node:14.10.1-buster-slim as depts
 
 RUN apt-get update && apt-get install --yes \
       curl \
@@ -25,7 +25,16 @@ ADD --chown=node ${GITBASE}/package.json ${GITBASE}/yarn.lock ./
 ADD --chown=node ${GITBASE}/packages/gatsby/package.json ./packages/gatsby/
 ADD --chown=node ${GITBASE}/packages/code-editor/package.json ./packages/code-editor/
 
-RUN yarn --frozen-lockfile --ignore-scripts
+RUN yarn --frozen-lockfile --ignore-scripts && rm -rf node_modules
+
+FROM depts 
+ADD . .
+
+RUN yarn install --check-files --frozen-lockfile  && \
+    yarn ___build && \
+    rm -rf node_modules && \
+    mv /app /tmp/app && \
+    chown node:node /tmp/app -R
 
 EXPOSE 8000
 EXPOSE 4507
