@@ -10,7 +10,7 @@
     "build": "docker-compose down && yarn docker ___build",
     "start": "docker-compose down && yarn old-start & yarn docker ___start",
     "old-start": "cd packages/gatsby && yarn start",
-    "serve-dir" : "file_server --cert .certs/localhost.cert --key .certs/localhost.key --host 0.0.0.0",
+    "serve-dir": "file_server --cert .certs/localhost.cert --key .certs/localhost.key --host 0.0.0.0",
     "serve": "yarn serve-dir public",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,yml}\"",
     "lint": "eslint ./packages --ext .ts --ext .tsx --ext .js --fix",
