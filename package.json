@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "build": "docker-compose down && yarn docker ___build",
-    "start": "docker-compose down && yarn docker ___start",
+    "start": "yarn old-start",
     "old-start": "cd packages/gatsby && yarn start",
     "serve": "file_server --cert .certs/localhost.cert --key .certs/localhost.key --host 0.0.0.0 public",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,yml}\"",
