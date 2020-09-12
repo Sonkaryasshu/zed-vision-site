@@ -11,15 +11,21 @@ export const register = () => {
     })
   }
 
-  const sha256Worker = new window.SharedWorker("/shaWorker.js")
+  const sha256Worker = new Worker("/shaWorker.js")
 
-  const worker = new window.Worker("/workerComponent.js")
+  const worker = new Worker("/workerComponent.js")
+
+  const WC = new MessageChannel()
+
+  WC.port2.onmessage = sha256Worker.postMessage
+
+  sha256Worker.postMessage({ id: 22, data: "xjjxiwhdewh" })
 
   worker.postMessage(
     {
-      shaPort: sha256Worker.port,
+      shaPort: WC.port1,
     },
-    [sha256Worker.port]
+    [WC.port1]
   )
 
   const pastEvents = new Array(100000).fill({
@@ -27,9 +33,9 @@ export const register = () => {
     type: "click",
   }) as any
 
-  sha256Worker.port.onmessage = m => console.log(m.data)
+  sha256Worker.onmessage = m => console.log(m.data)
 
-  sha256Worker.port.postMessage({ id: 1, data: pastEvents })
+  sha256Worker.postMessage({ id: 1, data: pastEvents })
 
   const counter = `function Counter(props){
     const actions = {
@@ -64,9 +70,9 @@ export const register = () => {
     )
   }
 `
-  sha256Worker.port.postMessage({ id: 2, counter })
+  sha256Worker.postMessage({ id: 2, counter })
 
-  setTimeout(() => sha256Worker.port.postMessage({ hash: "7" }), 1000)
+  setTimeout(() => sha256Worker.postMessage({ hash: "7" }), 1000)
 
   // sha256Worker.port.postMessage({ hash: "7" })
   // const Counter = function Counter(props: { pastEvents: any }) {

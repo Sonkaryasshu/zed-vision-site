@@ -1,5 +1,3 @@
-const cache = new WeakMap()
-
 const hashTable = {}
 
 onconnect = function (e) {

@@ -9,7 +9,6 @@ export function Counter(props) {
   const pastEvents = props.pastEvents || []
 
   const [events, setEvents] = React.useState(pastEvents)
-
   const state = events
     .map(ev => {
       const text = ev.target
