@@ -11,13 +11,13 @@ const UsingTypescript: React.FC<PageProps> = ({ path, location }) => (
     <p>
       This means that you can create and write <em>.ts/.tsx</em> files for your
       pages, components etc. Please note that the <em>gatsby-*.js</em> files
-      (like gatsby-node.js) currently don't support TypeScript yet.
+      (like gatsby-node.js) currently do not support TypeScript yet.
     </p>
     <p>
-      For type checking you'll want to install <em>typescript</em> via npm and
+      For type checking you will want to install <em>typescript</em> via npm and
       run <em>tsc --init</em> to create a <em>.tsconfig</em> file.
     </p>
-    <p>You're currently on the page "{path}"</p>
+    <p>You are currently on the page {path}\\</p>
     <Link to="/">Go back to the homepage</Link>
   </Layout>
 );

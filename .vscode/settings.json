@@ -1,6 +1,7 @@
 {
   "files.autoSave": "onFocusChange",
   "editor.folding": true,
+  "eslint.enable": true,
   "terminal.integrated.rendererType": "experimentalWebgl",
   "typescript.autoClosingTags": true,
   "typescript.preferences.includePackageJsonAutoImports": "off",
@@ -22,7 +23,9 @@
   ],
   "cSpell.dictionaries": [],
   "cSpell.words": [
+    "Erdos",
     "Kanye",
+    "Zoltan",
     "atrule",
     "browserslist",
     "cacheable",

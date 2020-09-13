@@ -62,7 +62,7 @@ const NotFoundPage = ({ data, location }: Props) => {
       <h1 onClick={() => setRR({ ...rr })}> Not Found!!!</h1>
       <Wrapper key={rrrrr.innerHTML} innerHTML={rrrrr.innerHTML}></Wrapper>
       <ChangeDetector Comp1={Comp1}></ChangeDetector>
-      <p>You just hit a route that doesn't exist... the sadness.</p>
+      <p>You just hit a route that do not exist... the sadness.</p>
       <div id="zoli"></div>
     </Layout>
   );

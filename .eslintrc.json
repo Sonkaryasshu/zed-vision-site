@@ -5,7 +5,7 @@
   "env": {
     "browser": true
   },
-  "extends": ["plugin:react/recommended"],
+  "extends": ["plugin:react/recommended", "plugin:mdx/recommended"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -14,7 +14,7 @@
     "ecmaVersion": 2020,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint"],
+  "plugins": ["react", "@typescript-eslint","mdx"],
   "rules": {
     "arrow-parens": "error",
     "react/prop-types": 0,
@@ -25,5 +25,14 @@
     "react": {
       "version": "detect"
     }
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*.mdx", "*.md"],
+      "extends": ["plugin:mdx/overrides"],
+      "rules": {
+        "semi": "off"
+      }
+    }
+  ]
 }

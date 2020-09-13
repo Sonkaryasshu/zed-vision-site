@@ -18,7 +18,7 @@ const pastEvents = [];
 onmessage = (m) => {
   const { code, pastEvents, shaPort } = m.data;
 
-  if (shaPort) webRunner.shaPort == shaPort;
+  if (shaPort) webRunner.shaPort = shaPort;
 
   const babelCode = Babel.transform(code, {
     plugins: [],
