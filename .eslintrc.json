@@ -5,7 +5,7 @@
   "env": {
     "browser": true
   },
-  "extends": ["prettier", "plugin:react/recommended"],
+  "extends": ["plugin:react/recommended"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -14,10 +14,11 @@
     "ecmaVersion": 2020,
     "sourceType": "module"
   },
-  "plugins": ["react", "prettier", "@typescript-eslint"],
+  "plugins": ["react", "@typescript-eslint"],
   "rules": {
-    "prettier/prettier": "error",
+    "arrow-parens": "error",
     "react/prop-types": 0,
+    "semi": "error",
     "react/no-unescaped-entities": 0
   },
   "settings": {

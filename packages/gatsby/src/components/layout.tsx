@@ -1,15 +1,15 @@
-import * as React from "react"
-import { CodeEditor } from "@zed-vision/code-editor/CodeEditor"
-import { Helmet } from "react-helmet"
-import { Link } from "gatsby"
-import { MDXProvider } from "@mdx-js/react"
+import * as React from "react";
+import { CodeEditor } from "@zed-vision/code-editor/CodeEditor";
+import { Helmet } from "react-helmet";
+import { Link } from "gatsby";
+import { MDXProvider } from "@mdx-js/react";
 
 const components = {
   pre: function PreComp(props: any) {
-    return <div {...props} />
+    return <div {...props} />;
   },
   code: CodeEditor,
-}
+};
 
 const CustomLayout: React.FC = ({ children }) => (
   <>
@@ -23,7 +23,7 @@ const CustomLayout: React.FC = ({ children }) => (
       <div style={{ maxWidth: 1140, margin: "auto" }}>{children}</div>
     </MDXProvider>
   </>
-)
+);
 
 interface Props {
   location: Location
@@ -31,27 +31,27 @@ interface Props {
 }
 
 const Layout: React.FC<Props> = ({ location, title, children }) => {
-  let __PATH_PREFIX__
+  let __PATH_PREFIX__;
 
-  const rootPath = `${__PATH_PREFIX__}/`
+  const rootPath = `${__PATH_PREFIX__}/`;
   let header = (
     <h1>
       <Link to={`/`}>{title}</Link>
     </h1>
-  )
-  if (!(location && location.pathname)) header = <React.Fragment />
+  );
+  if (!(location && location.pathname)) header = <React.Fragment />;
   else if (location.pathname === rootPath) {
     header = (
       <h1>
         <Link to={`/`}>{title}</Link>
       </h1>
-    )
+    );
   } else {
     header = (
       <h2>
         <Link to={`/`}>{title}</Link>
       </h2>
-    )
+    );
   }
   return (
     <CustomLayout>
@@ -59,7 +59,7 @@ const Layout: React.FC<Props> = ({ location, title, children }) => {
       <main>{children}</main>
       <footer>© {new Date().getFullYear()}, Zed vision</footer>
     </CustomLayout>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

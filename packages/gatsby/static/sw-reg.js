@@ -6,24 +6,24 @@ const registerSW = async () => {
     ) {
       navigator.serviceWorker.getRegistrations().then(function (registrations) {
         for (let registration of registrations) {
-          registration.unregister()
+          registration.unregister();
         }
-      })
-      return
+      });
+      return;
     }
 
     const reg = await navigator.serviceWorker.register("/sw.js", {
       updateViaCache: "imports",
       scope: "/",
-    })
+    });
 
-    console.log("Registration succeeded. Scope is " + reg.scope)
+    console.log("Registration succeeded. Scope is " + reg.scope);
   } catch (error) {
-    console.log("Registration failed with " + error)
+    console.log("Registration failed with " + error);
   }
-}
+};
 
 if ("serviceWorker" in navigator) {
-  console.log("adding event listener for lad")
-  window.addEventListener("load", () => registerSW())
+  console.log("adding event listener for lad");
+  window.addEventListener("load", () => registerSW());
 }

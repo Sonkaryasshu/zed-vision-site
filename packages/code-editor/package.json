@@ -6,7 +6,6 @@
   "license": "MIT",
   "dependencies": {
     "polished": "3.6.6",
-    "react-live": "2.2.2",
-    "html2canvas": "1.0.0-rc.7"
+    "react-live": "2.2.2"
   }
 }

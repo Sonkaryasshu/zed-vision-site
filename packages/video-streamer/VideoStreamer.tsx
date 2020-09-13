@@ -1,14 +1,14 @@
-import * as React from "react"
-import VideoStream from "videostream"
-import WebTorrent from "webtorrent"
+import * as React from "react";
+import VideoStream from "videostream";
+import WebTorrent from "webtorrent";
 
-import styled from "styled-components"
+import styled from "styled-components";
 
 const Video: React.FC<{ file: any }> = ({ file }) => {
-  const videoRef = React.useRef(null)
+  const videoRef = React.useRef(null);
   React.useEffect(() => {
-    new VideoStream(file, videoRef.current)
-  })
+    new VideoStream(file, videoRef.current);
+  });
   return (
     <>
       <h4>{file.name}</h4>
@@ -22,36 +22,36 @@ const Video: React.FC<{ file: any }> = ({ file }) => {
         playsInline
       ></video>
     </>
-  )
-}
+  );
+};
 
 const StyledTextArea = styled.textarea`
   display: block;
   width: 100%;
-`
+`;
 
 export const Streamer: React.FC<{ magnetURL: string }> = ({ magnetURL }) => {
   const [state, changeState] = React.useState({
     loading: true,
     videoFiles: [],
     magnetURL: magnetURL,
-  })
+  });
 
   React.useEffect(() => {
     const connect = async (magnetURL: string) => {
-      const client = new WebTorrent()
+      const client = new WebTorrent();
 
       client.add(magnetURL, async function (torrent: any) {
-        console.log(torrent.files)
+        console.log(torrent.files);
         const videoFiles = torrent.files.filter((file: any) =>
           file.name.endsWith("mp4")
-        )
+        );
 
-        changeState({ ...state, loading: false, videoFiles: videoFiles })
-      })
-    }
-    connect(magnetURL)
-  }, [])
+        changeState({ ...state, loading: false, videoFiles: videoFiles });
+      });
+    };
+    connect(magnetURL);
+  }, []);
 
   if (state.loading) {
     return (
@@ -59,10 +59,10 @@ export const Streamer: React.FC<{ magnetURL: string }> = ({ magnetURL }) => {
         <h2>loading</h2>
         <StyledTextArea
           value={magnetURL}
-          onChange={e => changeState({ ...state, magnetURL: e.target.value })}
+          onChange={(e) => changeState({ ...state, magnetURL: e.target.value })}
         ></StyledTextArea>
       </>
-    )
+    );
   }
 
   return (
@@ -71,5 +71,5 @@ export const Streamer: React.FC<{ magnetURL: string }> = ({ magnetURL }) => {
         <Video file={file} key={key} />
       ))}
     </div>
-  )
-}
+  );
+};

@@ -1,30 +1,30 @@
-import * as React from "react"
-import { Link, graphql } from "gatsby"
+import * as React from "react";
+import { Link, graphql } from "gatsby";
 
-import Bio from "../components/bio"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import { rhythm, scale } from "../utils/typography"
-import { MDXRenderer } from "gatsby-plugin-mdx"
-import styled from "styled-components"
+import Bio from "../components/bio";
+import Layout from "../components/layout";
+import SEO from "../components/seo";
+import { rhythm, scale } from "../utils/typography";
+import { MDXRenderer } from "gatsby-plugin-mdx";
+import styled from "styled-components";
 
 const StyledHeader = styled.h1`
   margin-top: ${rhythm(1)};
   margin-bottom: 0;
-`
+`;
 
-const { fontSize, lineHeight } = scale(1 / 5)
+const { fontSize, lineHeight } = scale(1 / 5);
 
 const StyledDate = styled.p`
   font-size: ${fontSize};
   line-height: ${lineHeight};
   display: block;
   margin-bottom: ${rhythm(1)};
-`
+`;
 
 const Hr = styled.hr`
   margin-bottom: ${rhythm(1)};
-`
+`;
 
 interface Props {
   data: {
@@ -75,10 +75,10 @@ interface Props {
 }
 
 const BlogPostTemplate = ({ data, pageContext, location }: Props) => {
-  const post = data.mdx
-  const siteTitle = data.site.siteMetadata.title
-  const { previous, next } = pageContext
-  const BlogPost = () => <MDXRenderer>{post.body}</MDXRenderer>
+  const post = data.mdx;
+  const siteTitle = data.site.siteMetadata.title;
+  const { previous, next } = pageContext;
+  const BlogPost = () => <MDXRenderer>{post.body}</MDXRenderer>;
 
   return (
     <>
@@ -116,10 +116,10 @@ const BlogPostTemplate = ({ data, pageContext, location }: Props) => {
         </nav>
       </Layout>
     </>
-  )
-}
+  );
+};
 
-export default BlogPostTemplate
+export default BlogPostTemplate;
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
@@ -138,4 +138,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

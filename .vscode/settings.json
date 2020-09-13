@@ -1,6 +1,7 @@
 {
   "files.autoSave": "onFocusChange",
   "editor.folding": true,
+  "terminal.integrated.rendererType": "experimentalWebgl",
   "typescript.autoClosingTags": true,
   "typescript.preferences.includePackageJsonAutoImports": "off",
   "typescript.extension.sortImports.sortOnSave": false,
@@ -54,6 +55,7 @@
     "nomodule",
     "octokit",
     "onconnect",
+    "parens",
     "precache",
     "precaching",
     "preconnect",
@@ -72,6 +74,7 @@
     "typography",
     "valami",
     "vfile",
+    "videostream",
     "wordpress",
     "xkcd",
     "zoli"

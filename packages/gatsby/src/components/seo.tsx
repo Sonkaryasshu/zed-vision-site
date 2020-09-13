@@ -1,7 +1,7 @@
-import * as React from "react"
-import PropTypes from "prop-types"
-import { graphql, useStaticQuery } from "gatsby"
-import { Helmet } from "react-helmet"
+import * as React from "react";
+import PropTypes from "prop-types";
+import { graphql, useStaticQuery } from "gatsby";
+import { Helmet } from "react-helmet";
 /**
  * SEO component that queries for data with
  *  Gatsby's useStaticQuery React hook
@@ -34,9 +34,9 @@ const SEO = ({ description, lang, meta, title }: Props) => {
         }
       }
     `
-  )
+  );
 
-  const metaDescription = description || site.siteMetadata.description
+  const metaDescription = description || site.siteMetadata.description;
 
   return (
     <Helmet
@@ -80,20 +80,20 @@ const SEO = ({ description, lang, meta, title }: Props) => {
         },
       ].concat(meta)}
     />
-  )
-}
+  );
+};
 
 SEO.defaultProps = {
   lang: `en`,
   meta: [],
   description: ``,
-}
+};
 
 SEO.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
-}
+};
 
-export default SEO
+export default SEO;

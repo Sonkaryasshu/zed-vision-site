@@ -1,12 +1,12 @@
-import * as React from "react"
-import Highlight, { defaultProps } from "prism-react-renderer"
-import MenuIcon from "@material-ui/icons/Menu"
-import Paper from "@material-ui/core/Paper"
-import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline"
-import styled from "styled-components"
-import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live"
-import { mdx } from "@mdx-js/react"
-import "./themes/prism-synthwave84.css"
+import * as React from "react";
+import Highlight, { defaultProps } from "prism-react-renderer";
+import MenuIcon from "@material-ui/icons/Menu";
+import Paper from "@material-ui/core/Paper";
+import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline";
+import styled from "styled-components";
+import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
+import { mdx } from "@mdx-js/react";
+import "./themes/prism-synthwave84.css";
 
 import {
   AppBar,
@@ -18,7 +18,7 @@ import {
   Box,
   Grid,
   CardContent,
-} from "@material-ui/core"
+} from "@material-ui/core";
 import {
   StyledEditorPaper,
   StyledLiveErrorPaper,
@@ -27,7 +27,7 @@ import {
   RenderWrapper,
   StyledPreview,
   StyledPreviewPaper,
-} from "./Container"
+} from "./Container";
 
 const StyledCard = styled(Card)`
   padding: 0;
@@ -37,7 +37,7 @@ const StyledCard = styled(Card)`
       padding: 0;
     }
   }
-`
+`;
 export const CodeEditor: React.FC<{
   live?: boolean
   render?: boolean
@@ -112,5 +112,5 @@ export const CodeEditor: React.FC<{
         </pre>
       )}
     </Highlight>
-  )
-}
+  );
+};

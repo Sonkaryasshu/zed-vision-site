@@ -1,9 +1,9 @@
-import Layout from "../components/layout"
-import React from "react"
-import SEO from "../components/seo"
-import { ChangeDetector } from "../components/changeDetector"
-import { graphql } from "gatsby"
-import { register } from "../utils/testWorker"
+import Layout from "../components/layout";
+import React from "react";
+import SEO from "../components/seo";
+import { ChangeDetector } from "../components/changeDetector";
+import { graphql } from "gatsby";
+import { register } from "../utils/testWorker";
 
 interface Props {
   data: {
@@ -18,43 +18,43 @@ interface Props {
 
 const Wrapper = (props: any) => (
   <div dangerouslySetInnerHTML={{ __html: props.innerHTML }} />
-)
+);
 
 const Comp1: React.FC<{ onEvent: (event: string) => void }> = ({ onEvent }) => {
-  const [count, setCount] = React.useState(0)
+  const [count, setCount] = React.useState(0);
 
   return (
     <>
       <button
         onClick={() => {
-          onEvent("inc")
-          setCount(count + 1)
+          onEvent("inc");
+          setCount(count + 1);
         }}
       ></button>
       {count}
       <button
         onClick={() => {
-          onEvent("dec")
-          setCount(count - 1)
+          onEvent("dec");
+          setCount(count - 1);
         }}
       >
         -
       </button>
     </>
-  )
-}
+  );
+};
 
-const renderedOutside = register()
+const renderedOutside = register();
 
 const NotFoundPage = ({ data, location }: Props) => {
-  const siteTitle = data.site.siteMetadata.title
+  const siteTitle = data.site.siteMetadata.title;
 
-  let rr = renderedOutside()
-  const [rrrrr, setRR] = React.useState({ ...rr })
+  let rr = renderedOutside();
+  const [rrrrr, setRR] = React.useState({ ...rr });
 
   React.useEffect(() => {
-    setRR({ ...rr })
-  }, [rr.innerHTML])
+    setRR({ ...rr });
+  }, [rr.innerHTML]);
 
   return (
     <Layout location={location} title={siteTitle}>
@@ -65,10 +65,10 @@ const NotFoundPage = ({ data, location }: Props) => {
       <p>You just hit a route that doesn't exist... the sadness.</p>
       <div id="zoli"></div>
     </Layout>
-  )
-}
+  );
+};
 
-export default NotFoundPage
+export default NotFoundPage;
 
 export const pageQuery = graphql`
   query {
@@ -78,4 +78,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

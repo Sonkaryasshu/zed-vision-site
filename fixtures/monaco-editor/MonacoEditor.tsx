@@ -1,18 +1,18 @@
-import Editor from "@monaco-editor/react"
-import React, { useRef, useState } from "react"
+import Editor from "@monaco-editor/react";
+import React, { useRef, useState } from "react";
 
 export const MonacoEditor = () => {
-  const [isEditorReady, setIsEditorReady] = useState(false)
-  const valueGetter = useRef()
+  const [isEditorReady, setIsEditorReady] = useState(false);
+  const valueGetter = useRef();
 
   function handleEditorDidMount(_valueGetter: defined) {
-    setIsEditorReady(true)
-    valueGetter.current = _valueGetter
+    setIsEditorReady(true);
+    valueGetter.current = _valueGetter;
   }
 
   function handleShowValue() {
     //@ts-ignore
-    alert(valueGetter.current())
+    alert(valueGetter.current());
   }
 
   return (
@@ -65,5 +65,5 @@ export const MonacoEditor = () => {
         editorDidMount={handleEditorDidMount}
       />
     </>
-  )
-}
+  );
+};

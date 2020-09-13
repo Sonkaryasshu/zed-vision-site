@@ -1,8 +1,8 @@
-import * as React from "react"
-import SignIn from "./signIn"
+import * as React from "react";
+import SignIn from "./signIn";
 
 const SignInActioned = () => {
-  const [state, setState] = React.useState({ email: "" })
+  const [state, setState] = React.useState({ email: "" });
 
   return (
     <>
@@ -10,7 +10,7 @@ const SignInActioned = () => {
       <br />
       <h2 onClick={() => setState({ email: "booo" })}>setEmail</h2>
     </>
-  )
-}
+  );
+};
 
-export default SignInActioned
+export default SignInActioned;

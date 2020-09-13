@@ -1,2 +1,2 @@
 export = awsmobile
-declare const awsmobile: any
+declare const awsmobile: any;

@@ -35,16 +35,13 @@
     "gatsby-source-filesystem": "2.3.29",
     "gatsby-transformer-sharp": "2.5.14",
     "react": "16.13.1",
-    "react-spring":"next",
     "react-dom": "16.13.1",
     "react-graph-vis": "1.0.5",
     "react-helmet": "6.1.0",
     "react-typography": "0.16.19",
     "typography": "0.16.19",
     "typography-theme-wordpress-2016": "0.16.19",
-    "vfile-message": "2.0.4",
-    "webtorrent": "0.108.6",
-    "videostream": "3.2.1"
+    "vfile-message": "2.0.4"
   },
   "homepage": "https://www.zed.vision",
   "keywords": [

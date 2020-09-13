@@ -8,34 +8,34 @@ export const register = () => {
       code: "",
       compiledCode: "",
       pastEvents: [],
-    })
+    });
   }
 
-  const sha256Worker = new Worker("/shaWorker.js")
+  const sha256Worker = new Worker("/shaWorker.js");
 
-  const worker = new Worker("/workerComponent.js")
+  const worker = new Worker("/workerComponent.js");
 
-  const WC = new MessageChannel()
+  const WC = new MessageChannel();
 
-  WC.port2.onmessage = sha256Worker.postMessage
+  WC.port2.onmessage = sha256Worker.postMessage;
 
-  sha256Worker.postMessage({ id: 22, data: "xjjxiwhdewh" })
+  sha256Worker.postMessage({ id: 22, data: "xjjxiwhdewh" });
 
   worker.postMessage(
     {
       shaPort: WC.port1,
     },
     [WC.port1]
-  )
+  );
 
   const pastEvents = new Array(100000).fill({
     target: "+",
     type: "click",
-  }) as any
+  }) as any;
 
-  sha256Worker.onmessage = m => console.log(m.data)
+  sha256Worker.onmessage = (m) => console.log(m.data);
 
-  sha256Worker.postMessage({ id: 1, data: pastEvents })
+  sha256Worker.postMessage({ id: 1, data: pastEvents });
 
   const counter = `function Counter(props){
     const actions = {
@@ -69,10 +69,10 @@ export const register = () => {
       </div>
     )
   }
-`
-  sha256Worker.postMessage({ id: 2, counter })
+`;
+  sha256Worker.postMessage({ id: 2, counter });
 
-  setTimeout(() => sha256Worker.postMessage({ hash: "7" }), 1000)
+  setTimeout(() => sha256Worker.postMessage({ hash: "7" }), 1000);
 
   // sha256Worker.port.postMessage({ hash: "7" })
   // const Counter = function Counter(props: { pastEvents: any }) {
@@ -115,33 +115,33 @@ export const register = () => {
   worker.postMessage({
     code: counter,
     pastEvents,
-  })
+  });
 
-  let el = document.createElement("div")
+  let el = document.createElement("div");
 
   const ret = {
     innerHTML: "",
     code: counter,
     compiledCode: "",
     pastEvents: [],
-  }
+  };
 
   // const React = (await import("react")).default
   // const ReactDOM = await import("react-dom")
 
-  worker.onmessage = d => {
+  worker.onmessage = (d) => {
     if (d.data.domString) {
-      console.log(d.data.domString)
+      console.log(d.data.domString);
       // el = document.createElement("div")
-      ret.innerHTML = d.data.domString
+      ret.innerHTML = d.data.domString;
 
-      el.innerHTML = d.data.domString
-      document.getElementById("zoli")?.append(el)
+      el.innerHTML = d.data.domString;
+      document.getElementById("zoli")?.append(el);
       // document.body.appendChild(el)
       // if (reactEl) hydrate()
     }
     if (d.data.code) {
-      ret.compiledCode = d.data.code
+      ret.compiledCode = d.data.code;
       // const { code } = d.data
 
       // const React = (await import("react")).default
@@ -160,7 +160,7 @@ export const register = () => {
 
       // ReactDOM.hydrate(<Counter pastEvents={pastEvents} />, el)
     }
-  }
+  };
 
-  return () => ({ ...ret })
-}
+  return () => ({ ...ret });
+};

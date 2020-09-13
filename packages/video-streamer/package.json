@@ -4,8 +4,10 @@
   "main": "VideoStreamer.tsx",
   "private": "false",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "webtorrent": "0.108.6",
+    "videostream": "3.2.1"
+  },
   "devDependencies": {
- 
   }
 }

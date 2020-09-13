@@ -1,5 +1,5 @@
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
-import React from "react"
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import React from "react";
 import {
   Avatar,
   Button,
@@ -13,8 +13,8 @@ import {
   Paper,
   TextField,
   Typography,
-} from "@material-ui/core"
-const useStyles = makeStyles(theme => ({
+} from "@material-ui/core";
+const useStyles = makeStyles((theme) => ({
   mainPadding: {
     padding: theme.spacing(2),
     minWidth: "400px",
@@ -26,10 +26,10 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-}))
+}));
 
 const SignIn: React.FC<{ email?: string }> = ({ email }) => {
-  const classes = useStyles()
+  const classes = useStyles();
 
   const SignUpComp = () => (
     <Paper className={classes.mainPadding} elevation={2}>
@@ -48,7 +48,7 @@ const SignIn: React.FC<{ email?: string }> = ({ email }) => {
           id="email"
           label="Email Address"
           name="email"
-          onChange={e => console.log("onChange", e.target.value)}
+          onChange={(e) => console.log("onChange", e.target.value)}
           autoComplete="email"
           autoFocus
           // {...(!!email ? { value: email } : {})}
@@ -91,14 +91,14 @@ const SignIn: React.FC<{ email?: string }> = ({ email }) => {
         </Grid>
       </form>
     </Paper>
-  )
+  );
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <SignUpComp />
     </Container>
-  )
-}
+  );
+};
 
-export default SignIn
+export default SignIn;

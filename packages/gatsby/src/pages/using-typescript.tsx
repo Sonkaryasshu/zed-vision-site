@@ -1,7 +1,7 @@
-import * as React from "react"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import { Link, PageProps } from "gatsby"
+import * as React from "react";
+import Layout from "../components/layout";
+import SEO from "../components/seo";
+import { Link, PageProps } from "gatsby";
 // If you don't want to use TypeScript you can delete this file!
 
 const UsingTypescript: React.FC<PageProps> = ({ path, location }) => (
@@ -20,8 +20,8 @@ const UsingTypescript: React.FC<PageProps> = ({ path, location }) => (
     <p>You're currently on the page "{path}"</p>
     <Link to="/">Go back to the homepage</Link>
   </Layout>
-)
+);
 
-export default UsingTypescript
+export default UsingTypescript;
 
-export const query = null
+export const query = null;

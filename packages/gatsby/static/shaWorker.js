@@ -1,12 +1,12 @@
-const hashTable = {}
+const hashTable = {};
 
 onconnect = function (e) {
-  var port = e.ports[0]
+  var port = e.ports[0];
 
   // if (!cache.has({ data: message.data })) {
 
-  const onMessage = async message => {
-    const msg = message.data
+  const onMessage = async (message) => {
+    const msg = message.data;
 
     if (msg.id) {
       const data =
@@ -14,40 +14,40 @@ onconnect = function (e) {
           ? msg.data
           : typeof msg.data === "object"
           ? JSON.stringify(msg.data)
-          : String(msg.data)
-      const hash = await sha256(data)
+          : String(msg.data);
+      const hash = await sha256(data);
 
-      const shorterHash = shortener(hash)
+      const shorterHash = shortener(hash);
 
-      hashTable[shorterHash] = msg.data
+      hashTable[shorterHash] = msg.data;
 
       port.postMessage({
         hash: shorterHash,
         id: msg.id,
-      })
+      });
     } else if (msg.hash) {
       port.postMessage({
         data: hashTable[msg.hash],
         hash: msg.hash,
-      })
+      });
     }
-  }
+  };
 
-  port.addEventListener("message", onMessage)
+  port.addEventListener("message", onMessage);
 
-  port.start() // Required when using addEventListener. Otherwise called implicitly by onmessage setter.
-}
+  port.start(); // Required when using addEventListener. Otherwise called implicitly by onmessage setter.
+};
 
 function shortener(hash) {
   for (let i = 1; i < 64; i++) {
-    const shorterHash = hash.substr(0, i)
+    const shorterHash = hash.substr(0, i);
     if (hashTable[shorterHash] === undefined) {
-      hashTable[shorterHash] = hash
-      return shorterHash
+      hashTable[shorterHash] = hash;
+      return shorterHash;
     }
-    if (hashTable[shorterHash] === hash) return shorterHash
+    if (hashTable[shorterHash] === hash) return shorterHash;
   }
-  return hash
+  return hash;
 }
 
 // const arr = new Array(100000000)
@@ -77,19 +77,19 @@ function shortener(hash) {
 // setInterval(() => fill(), 1000)
 
 async function sha256(message) {
-  const msgBuffer = new TextEncoder("utf-8").encode(message)
+  const msgBuffer = new TextEncoder("utf-8").encode(message);
 
-  const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer)
+  const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
 
-  const hashArray = Array.from(new Uint8Array(hashBuffer))
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
 
   // convert bytes to hex string
-  const hashHex = hashArray.map(b => ("00" + b.toString(16)).slice(-2)).join("")
-  return hashHex
+  const hashHex = hashArray.map((b) => ("00" + b.toString(16)).slice(-2)).join("");
+  return hashHex;
 }
 
 async function sign(message) {
-  const msgBuffer = new TextEncoder("utf-8").encode(message)
+  const msgBuffer = new TextEncoder("utf-8").encode(message);
 
   const key = await crypto.subtle.importKey(
     "raw", // raw format of the key - should be Uint8Array
@@ -101,13 +101,13 @@ async function sign(message) {
     },
     false, // export = false
     ["sign", "verify"] // what the key can do'
-  )
+  );
 
-  const hashBuffer = await crypto.subtle.sign("SHA-256", key, msgBuffer)
+  const hashBuffer = await crypto.subtle.sign("SHA-256", key, msgBuffer);
 
-  const hashArray = Array.from(new Uint8Array(hashBuffer))
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
 
   // convert bytes to hex string
-  const signHex = hashArray.map(b => ("00" + b.toString(16)).slice(-2)).join("")
-  return signHex
+  const signHex = hashArray.map((b) => ("00" + b.toString(16)).slice(-2)).join("");
+  return signHex;
 }

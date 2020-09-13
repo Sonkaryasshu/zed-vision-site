@@ -1,6 +1,6 @@
-import * as React from "react"
+import * as React from "react";
 
-import Graph from "react-graph-vis"
+import Graph from "react-graph-vis";
 
 // import "./styles.css"
 // // need to import the vis network css in order to show tooltip
@@ -14,10 +14,10 @@ const getSvg = (div: string) =>
   div +
   "</div>" +
   "</foreignObject>" +
-  "</svg>"
+  "</svg>";
 
 const getUrl = (div: string) =>
-  "data:image/svg+xml;charset=utf-8," + encodeURIComponent(getSvg(div))
+  "data:image/svg+xml;charset=utf-8," + encodeURIComponent(getSvg(div));
 
 const App: React.FC<{
   nodes: {
@@ -31,12 +31,12 @@ const App: React.FC<{
     label: string
   }[]
 }> = ({ nodes, edges }) => {
-  console.log(nodes)
-  if (!nodes) return <></>
+  console.log(nodes);
+  if (!nodes) return <></>;
   const graph = {
     nodes,
     edges,
-  }
+  };
 
   const options = {
     layout: {
@@ -45,17 +45,17 @@ const App: React.FC<{
     edges: {
       color: "#000000",
     },
-  }
+  };
 
   const events = {
     select: function (event: any) {
-      var { nodes, edges } = event
-      console.log("Selected nodes:")
-      console.log(nodes)
-      console.log("Selected edges:")
-      console.log(edges)
+      var { nodes, edges } = event;
+      console.log("Selected nodes:");
+      console.log(nodes);
+      console.log("Selected edges:");
+      console.log(edges);
     },
-  }
+  };
   return (
     <Graph
       graph={graph}
@@ -63,25 +63,25 @@ const App: React.FC<{
       events={events}
       style={{ height: "640px" }}
     />
-  )
-}
+  );
+};
 
 const chd: React.FC<{
   Comp1: React.FC<{ onEvent: (s: string) => void }>
 }> = ({ Comp1 }) => {
   const [comps, setError] = React.useState([
     document.getElementById("id1")?.innerHTML || "<div></div>",
-  ])
+  ]);
 
   // const [{}, setLastEvent] = React.useState("init")
 
   const [nodes, setNodes] = React.useState([
     { id: 0, image: "", shape: "image" },
-  ])
+  ]);
 
   const [edges, setEdges] = React.useState<
     { from: number; to: number; label: string }[]
-  >([])
+  >([]);
 
   const check = (
     comps: string[],
@@ -89,16 +89,16 @@ const chd: React.FC<{
     setErr: (d: string[]) => void,
     currentHTML: string
   ) => {
-    const str = document.getElementById("id1")?.innerHTML || "<div></div>"
-    console.log("LOOOOOOO", str, currentHTML)
+    const str = document.getElementById("id1")?.innerHTML || "<div></div>";
+    console.log("LOOOOOOO", str, currentHTML);
 
-    let newFn = [...comps, str]
+    let newFn = [...comps, str];
 
-    const old = [...comps]
-    newFn.push(str)
+    const old = [...comps];
+    newFn.push(str);
 
-    const num1 = Array.from(new Set(old))
-    const num2 = Array.from(new Set(newFn))
+    const num1 = Array.from(new Set(old));
+    const num2 = Array.from(new Set(newFn));
 
     // newTom
     if (num1.length < num2.length) {
@@ -108,36 +108,36 @@ const chd: React.FC<{
       // console.log(lastEvent)
 
       // setLastEvent(ev)
-      const from = num2.indexOf(currentHTML)
-      const to = num2.indexOf(str)
+      const from = num2.indexOf(currentHTML);
+      const to = num2.indexOf(str);
 
       setNodes([
         ...nodes,
         { id: nodes.length + 1, image: getUrl(str), shape: "image" },
-      ])
+      ]);
 
-      setEdges([...edges, { from, to, label: ev }])
+      setEdges([...edges, { from, to, label: ev }]);
 
-      setErr(num2)
+      setErr(num2);
 
       //setTimeout(() => check(num2, (d: string[]) => setError(d)), 100)
     } else {
       /// setTimeout(() => check(num2, (d: string[]) => setError(d)), 100)
     }
-  }
+  };
 
   React.useEffect(() => {
     // console.log("useEffect")
-    const original = document.getElementById("id1")?.innerHTML || ""
+    const original = document.getElementById("id1")?.innerHTML || "";
     setTimeout(() =>
       check(comps, "INIT", (d: string[]) => setError(d), original)
-    )
-  }, [])
+    );
+  }, []);
 
   const rest = (
     <div>
       {comps.length &&
-        comps.map(d => (
+        comps.map((d) => (
           <div
             style={{ margin: 5, display: "inline-block" }}
             key={d}
@@ -145,19 +145,19 @@ const chd: React.FC<{
           />
         ))}
     </div>
-  )
+  );
 
   return (
     <>
       <div style={{ margin: "10px", padding: "10px" }}>
         <div id="id1">
           <Comp1
-            onEvent={ev => {
-              const original = document.getElementById("id1")?.innerHTML || ""
+            onEvent={(ev) => {
+              const original = document.getElementById("id1")?.innerHTML || "";
 
               setTimeout(() =>
                 check(comps, ev, (d: string[]) => setError(d), original)
-              )
+              );
             }}
           />
         </div>
@@ -166,12 +166,12 @@ const chd: React.FC<{
       <pre>{JSON.stringify(nodes)}</pre>
       {rest}
     </>
-  )
-}
+  );
+};
 
 function createMarkup(markup: string) {
-  return { __html: markup }
+  return { __html: markup };
 }
 
 export const ChangeDetector =
-  typeof window !== "undefined" ? chd : () => <div>NO ssr</div>
+  typeof window !== "undefined" ? chd : () => <div>NO ssr</div>;

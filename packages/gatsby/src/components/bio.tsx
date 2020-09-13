@@ -1,21 +1,21 @@
-import * as React from "react"
-import { graphql, useStaticQuery } from "gatsby"
-import styled from "styled-components"
-import GatsbyImage from "gatsby-image"
+import * as React from "react";
+import { graphql, useStaticQuery } from "gatsby";
+import styled from "styled-components";
+import GatsbyImage from "gatsby-image";
 
-import { rhythm } from "../utils/typography"
+import { rhythm } from "../utils/typography";
 
 const Container = styled.div`
   display: flex;
   margin-bottom: ${rhythm(2.5)};
-`
+`;
 
 const StyledImage = styled(GatsbyImage)`
   margin-right: ${rhythm(1 / 2)};
   margin-bottom: 0;
   min-width: 50;
   border-radius: "100%";
-`
+`;
 
 const Bio = () => {
   const data = useStaticQuery(graphql`
@@ -39,9 +39,9 @@ const Bio = () => {
         }
       }
     }
-  `)
+  `);
 
-  const { author, social } = data.site.siteMetadata
+  const { author, social } = data.site.siteMetadata;
   return (
     <Container>
       <StyledImage
@@ -60,7 +60,7 @@ const Bio = () => {
         </a>
       </p>
     </Container>
-  )
-}
+  );
+};
 
-export default Bio
+export default Bio;

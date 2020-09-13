@@ -1,9 +1,9 @@
 importScripts(
   "https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js"
-)
-workbox.loadModule("workbox-strategies")
-workbox.loadModule("workbox-expiration")
-workbox.loadModule("workbox-routing")
+);
+workbox.loadModule("workbox-strategies");
+workbox.loadModule("workbox-expiration");
+workbox.loadModule("workbox-routing");
 
 // const { precacheAndRoute } = workbox.precaching
 // The plugin will pass the files to cache here
@@ -11,29 +11,29 @@ workbox.loadModule("workbox-routing")
 
 workbox.routing.registerRoute(
   ({ url }) => {
-    const { pathname } = url
+    const { pathname } = url;
 
     return (
       pathname.length - pathname.lastIndexOf("/") > 16 &&
       (pathname.substr(-3) === ".js" || pathname.lastIndexOf(".js?") > 0)
-    )
+    );
   },
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: "hashed js files",
     plugins: [new workbox.expiration.ExpirationPlugin({ maxEntries: 100 })],
   })
-)
+);
 
 workbox.routing.registerRoute(
   ({ url }) => {
-    const { pathname } = url
+    const { pathname } = url;
 
-    return pathname.includes("page-data.json")
+    return pathname.includes("page-data.json");
   },
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: "page-data",
   })
-)
+);
 
 workbox.routing.registerRoute(
   ({ url }) =>
@@ -44,7 +44,7 @@ workbox.routing.registerRoute(
     cacheName: "google-fonts",
     cacheableResponse: { statuses: [0, 200] },
   })
-)
+);
 
 workbox.routing.registerRoute(
   ({ request }) => request.destination === "image",
@@ -57,7 +57,7 @@ workbox.routing.registerRoute(
       }),
     ],
   })
-)
+);
 
 workbox.routing.registerRoute(
   ({ request }) =>
@@ -65,4 +65,4 @@ workbox.routing.registerRoute(
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: "static-resources",
   })
-)
+);
