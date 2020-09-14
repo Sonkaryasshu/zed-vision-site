@@ -2,7 +2,7 @@
 // import ReactDOM from "react-dom"
 
 export const register = () => {
-  if (typeof window == `undefined`) {
+  if (typeof window === "undefined") {
     return () => ({
       innerHTML: "",
       code: "",
