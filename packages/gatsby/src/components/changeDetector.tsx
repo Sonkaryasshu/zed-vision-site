@@ -126,6 +126,14 @@ const chd: React.FC<{
 
       //setTimeout(() => check(num2, (d: string[]) => setError(d)), 100)
     } else {
+      const from = num2.indexOf(currentHTML);
+      const to = num2.indexOf(str);
+
+      setGraph({
+        nodes,
+        edges: [...edges, {from, to, label: ev }]
+      });
+
       /// setTimeout(() => check(num2, (d: string[]) => setError(d)), 100)
     }
   };

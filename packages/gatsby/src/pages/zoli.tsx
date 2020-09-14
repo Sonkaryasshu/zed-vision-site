@@ -28,6 +28,12 @@ const Comp1: React.FC<{ onEvent: (event: string) => void }> = ({ onEvent }) => {
     <>
       <button
         onClick={() => {
+          onEvent("double");
+          setCount(count * 2);
+        }}
+      >x 2</button>
+      <button
+        onClick={() => {
           onEvent("inc");
           setCount(count + 1);
         }}
