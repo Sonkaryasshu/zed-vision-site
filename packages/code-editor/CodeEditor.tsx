@@ -31,6 +31,9 @@ import {
 
 const StyledCard = styled(Card)`
   padding: 0;
+  .MuiPaper-root {
+    color: white;
+  }
   .MuiCardContent-root {
     padding: 0;
     :last-child {
