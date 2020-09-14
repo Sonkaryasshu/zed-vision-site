@@ -31,16 +31,14 @@ const Comp1: React.FC<{ onEvent: (event: string) => void }> = ({ onEvent }) => {
           onEvent("inc");
           setCount(count + 1);
         }}
-      ></button>
+      >+</button>
       {count}
       <button
         onClick={() => {
           onEvent("dec");
           setCount(count - 1);
         }}
-      >
-        -
-      </button>
+      >-</button>
     </>
   );
 };
