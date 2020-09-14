@@ -25,5 +25,5 @@
     "emitDecoratorMetadata": true,
     "types": ["react"]
   },
-  "include": ["packages/**/*.ts", "packages/**/*.tsx"]
+  "include": ["packages/**/*.ts", "packages/**/*.tsx", "packages/gatsby/src/components/Graph.js"]
 }

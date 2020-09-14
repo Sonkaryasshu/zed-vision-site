@@ -1,6 +1,8 @@
 import * as React from "react";
 
-import Graph from "react-graph-vis";
+import Graph from "./Graph";
+
+// import html2canvas from 'html2canvas';
 
 // import "./styles.css"
 // // need to import the vis network css in order to show tooltip
@@ -139,11 +141,22 @@ const chd: React.FC<{
   };
 
   React.useEffect(() => {
+  
+  //   html2canvas(document.getElementById("id1")!).then(function(canvas) {
+  //     check(comps, "INIT", (d: string[]) => setError(d), canvas);
+
+  //     // check(comps, "INIT", (d: string[]) => setError(d), original);
+  //  });
+
     // console.log("useEffect")
+    // const original = document.getElementById("id1")?.innerHTML || "";
+    // setTimeout(() =>
+ 
+    //);
     const original = document.getElementById("id1")?.innerHTML || "";
     // setTimeout(() =>
     check(comps, "INIT", (d: string[]) => setError(d), original);
-    //);
+
   }, []);
 
   const rest = (
