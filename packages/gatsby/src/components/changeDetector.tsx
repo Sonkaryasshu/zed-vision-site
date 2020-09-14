@@ -75,13 +75,15 @@ const chd: React.FC<{
 
   // const [{}, setLastEvent] = React.useState("init")
 
-  const [nodes, setNodes] = React.useState([
-    { id: 0, image: "", shape: "image" },
-  ]);
+  const [{ nodes, edges }, setGraph] = React.useState({
+    nodes: [
+      { id: 0, image: "", shape: "image" }],
+    edges: [] as { from: number, to: number, label: string }[]
+  });
 
-  const [edges, setEdges] = React.useState<
-    { from: number; to: number; label: string }[]
-  >([]);
+  console.log({nodes, edges});
+
+
 
   const check = (
     comps: string[],
@@ -111,12 +113,14 @@ const chd: React.FC<{
       const from = num2.indexOf(currentHTML);
       const to = num2.indexOf(str);
 
-      setNodes([
-        ...nodes,
-        { id: nodes.length + 1, image: getUrl(str), shape: "image" },
-      ]);
+      setGraph({
+        nodes: [
+          ...nodes,
+          { id: nodes.length , image: getUrl(str), shape: "image" },
+        ], 
+        edges: [...edges, {from, to, label: ev }]
+      });
 
-      setEdges([...edges, { from, to, label: ev }]);
 
       setErr(num2);
 
@@ -129,9 +133,9 @@ const chd: React.FC<{
   React.useEffect(() => {
     // console.log("useEffect")
     const original = document.getElementById("id1")?.innerHTML || "";
-    setTimeout(() =>
-      check(comps, "INIT", (d: string[]) => setError(d), original)
-    );
+    // setTimeout(() =>
+    check(comps, "INIT", (d: string[]) => setError(d), original);
+    //);
   }, []);
 
   const rest = (
