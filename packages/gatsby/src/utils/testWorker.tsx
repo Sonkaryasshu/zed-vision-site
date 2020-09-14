@@ -35,7 +35,7 @@ export const register = () => {
 
   sha256Worker.onmessage = (m) => console.log(m.data);
 
-  sha256Worker.postMessage({ id: 1, data: pastEvents });
+  sha256Worker.postMessage({ id: 44, data: pastEvents });
 
   const counter = `function Counter(props){
     const actions = {

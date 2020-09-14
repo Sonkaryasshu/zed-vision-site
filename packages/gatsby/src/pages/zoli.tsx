@@ -4,6 +4,7 @@ import SEO from "../components/seo";
 import { ChangeDetector } from "../components/changeDetector";
 import { graphql } from "gatsby";
 import { register } from "../utils/testWorker";
+import { sha256, unHash } from "../utils/sha256";
 
 interface Props {
   data: {
@@ -53,6 +54,17 @@ const NotFoundPage = ({ data, location }: Props) => {
   const [rrrrr, setRR] = React.useState({ ...rr });
 
   React.useEffect(() => {
+
+    const runner = async()=>{
+      console.log("ello ello");
+        const res = await sha256("ello world");
+        console.log("ELLO world", res);
+        const val = await unHash(res);
+        console.log("ELLO world", val);
+      };
+      runner();
+
+
     setRR({ ...rr });
   }, [rr.innerHTML]);
 

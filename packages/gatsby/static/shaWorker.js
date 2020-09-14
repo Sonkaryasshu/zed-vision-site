@@ -1,11 +1,9 @@
 const hashTable = {};
 
-onconnect = function (e) {
-  var port = e.ports[0];
-
-  // if (!cache.has({ data: message.data })) {
-
-  const onMessage = async (message) => {
+  
+  
+  onmessage= async (message) => {
+    console.log("SHAWORKER", message.data);
     const msg = message.data;
 
     if (msg.id) {
@@ -21,22 +19,18 @@ onconnect = function (e) {
 
       hashTable[shorterHash] = msg.data;
 
-      port.postMessage({
+      console.log("HAAAASH", msg.id, hash);
+      postMessage({
         hash: shorterHash,
         id: msg.id,
       });
     } else if (msg.hash) {
-      port.postMessage({
+      postMessage({
         data: hashTable[msg.hash],
         hash: msg.hash,
       });
     }
   };
-
-  port.addEventListener("message", onMessage);
-
-  port.start(); // Required when using addEventListener. Otherwise called implicitly by onmessage setter.
-};
 
 function shortener(hash) {
   for (let i = 1; i < 64; i++) {
