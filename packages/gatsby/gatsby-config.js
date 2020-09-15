@@ -61,7 +61,8 @@ module.exports = {
 
       options: {
         icon: `../../assets/gatsby-icon.png`,
-        name: `Zed Vision - Development experience, Testing, and everything between`,
+        name:
+          `Zed Vision - Development experience, Testing, and everything between`,
         short_name: `ZedVision`,
         description: "Blog and tech experiments",
         start_url: `/`,

@@ -7,7 +7,9 @@ See the License for the specific language governing permissions and limitations 
 */
 
 const AWS = require("aws-sdk");
-var awsServerlessExpressMiddleware = require("aws-serverless-express/middleware");
+var awsServerlessExpressMiddleware = require(
+  "aws-serverless-express/middleware",
+);
 var bodyParser = require("body-parser");
 var express = require("express");
 
@@ -40,7 +42,7 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    "Origin, X-Requested-With, Content-Type, Accept",
   );
   next();
 });
@@ -109,7 +111,7 @@ app.get(path + "/object" + hashKeyPath + sortKeyPath, function (req, res) {
     try {
       params[partitionKeyName] = convertUrlType(
         req.params[partitionKeyName],
-        partitionKeyType
+        partitionKeyType,
       );
     } catch (err) {
       res.statusCode = 500;
@@ -118,7 +120,10 @@ app.get(path + "/object" + hashKeyPath + sortKeyPath, function (req, res) {
   }
   if (hasSortKey) {
     try {
-      params[sortKeyName] = convertUrlType(req.params[sortKeyName], sortKeyType);
+      params[sortKeyName] = convertUrlType(
+        req.params[sortKeyName],
+        sortKeyType,
+      );
     } catch (err) {
       res.statusCode = 500;
       res.json({ error: "Wrong column type " + err });
@@ -206,7 +211,7 @@ app.delete(path + "/object" + hashKeyPath + sortKeyPath, function (req, res) {
     try {
       params[partitionKeyName] = convertUrlType(
         req.params[partitionKeyName],
-        partitionKeyType
+        partitionKeyType,
       );
     } catch (err) {
       res.statusCode = 500;
@@ -215,7 +220,10 @@ app.delete(path + "/object" + hashKeyPath + sortKeyPath, function (req, res) {
   }
   if (hasSortKey) {
     try {
-      params[sortKeyName] = convertUrlType(req.params[sortKeyName], sortKeyType);
+      params[sortKeyName] = convertUrlType(
+        req.params[sortKeyName],
+        sortKeyType,
+      );
     } catch (err) {
       res.statusCode = 500;
       res.json({ error: "Wrong column type " + err });

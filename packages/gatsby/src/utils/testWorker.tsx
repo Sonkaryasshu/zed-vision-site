@@ -25,7 +25,7 @@ export const register = () => {
     {
       shaPort: WC.port1,
     },
-    [WC.port1]
+    [WC.port1],
   );
 
   const pastEvents = new Array(100000).fill({

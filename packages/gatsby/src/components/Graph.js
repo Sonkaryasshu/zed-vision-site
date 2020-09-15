@@ -3,7 +3,7 @@ import defaultsDeep from "lodash/fp/defaultsDeep";
 import isEqual from "lodash/isEqual";
 import differenceWith from "lodash/differenceWith";
 import vis from "vis-network/dist/vis-network";
-import uuid from "uuid";
+import { v4 } from "uuid";
 import PropTypes from "prop-types";
 
 class Graph extends Component {
@@ -12,7 +12,7 @@ class Graph extends Component {
     const { identifier } = props;
     this.updateGraph = this.updateGraph.bind(this);
     this.state = {
-      identifier: identifier !== undefined ? identifier : uuid.v4()
+      identifier: identifier !== undefined ? identifier : v4(),
     };
     this.container = React.createRef();
   }
@@ -33,21 +33,37 @@ class Graph extends Component {
 
     if (nodesChange) {
       const idIsEqual = (n1, n2) => n1.id === n2.id;
-      const nodesRemoved = differenceWith(this.props.graph.nodes, nextProps.graph.nodes, idIsEqual);
-      const nodesAdded = differenceWith(nextProps.graph.nodes, this.props.graph.nodes, idIsEqual);
+      const nodesRemoved = differenceWith(
+        this.props.graph.nodes,
+        nextProps.graph.nodes,
+        idIsEqual,
+      );
+      const nodesAdded = differenceWith(
+        nextProps.graph.nodes,
+        this.props.graph.nodes,
+        idIsEqual,
+      );
       const nodesChanged = differenceWith(
         differenceWith(nextProps.graph.nodes, this.props.graph.nodes, isEqual),
-        nodesAdded
+        nodesAdded,
       );
       this.patchNodes({ nodesRemoved, nodesAdded, nodesChanged });
     }
 
     if (edgesChange) {
-      const edgesRemoved = differenceWith(this.props.graph.edges, nextProps.graph.edges, isEqual);
-      const edgesAdded = differenceWith(nextProps.graph.edges, this.props.graph.edges, isEqual);
+      const edgesRemoved = differenceWith(
+        this.props.graph.edges,
+        nextProps.graph.edges,
+        isEqual,
+      );
+      const edgesAdded = differenceWith(
+        nextProps.graph.edges,
+        this.props.graph.edges,
+        isEqual,
+      );
       const edgesChanged = differenceWith(
         differenceWith(nextProps.graph.edges, this.props.graph.edges, isEqual),
-        edgesAdded
+        edgesAdded,
       );
       this.patchEdges({ edgesRemoved, edgesAdded, edgesChanged });
     }
@@ -58,10 +74,14 @@ class Graph extends Component {
 
     if (eventsChange) {
       let events = this.props.events || {};
-      for (let eventName of Object.keys(events)) this.Network.off(eventName, events[eventName]);
+      for (let eventName of Object.keys(events)) {
+        this.Network.off(eventName, events[eventName]);
+      }
 
       events = nextProps.events || {};
-      for (let eventName of Object.keys(events)) this.Network.on(eventName, events[eventName]);
+      for (let eventName of Object.keys(events)) {
+        this.Network.on(eventName, events[eventName]);
+      }
     }
 
     return false;
@@ -86,7 +106,7 @@ class Graph extends Component {
   updateGraph() {
     let defaultOptions = {
       physics: {
-        stabilization: false
+        stabilization: false,
       },
       autoResize: false,
       edges: {
@@ -96,10 +116,10 @@ class Graph extends Component {
         arrows: {
           to: {
             enabled: true,
-            scaleFactor: 0.5
-          }
-        }
-      }
+            scaleFactor: 0.5,
+          },
+        },
+      },
     };
 
     // merge user provied options with our default ones
@@ -109,9 +129,9 @@ class Graph extends Component {
       this.container.current,
       Object.assign({}, this.props.graph, {
         edges: this.edges,
-        nodes: this.nodes
+        nodes: this.nodes,
       }),
-      options
+      options,
     );
 
     if (this.props.getNetwork) {
@@ -141,16 +161,16 @@ class Graph extends Component {
       {
         id: identifier,
         ref: this.container,
-        style
+        style,
       },
-      identifier
+      identifier,
     );
   }
 }
 
 Graph.defaultProps = {
   graph: {},
-  style: { width: "100%", height: "100%" }
+  style: { width: "100%", height: "100%" },
 };
 Graph.propTypes = {
   graph: PropTypes.object,

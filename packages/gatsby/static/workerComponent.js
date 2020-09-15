@@ -1,4 +1,6 @@
-importScripts("https://unpkg.com/@ampproject/worker-dom@0.26.0/dist/worker/worker.js");
+importScripts(
+  "https://unpkg.com/@ampproject/worker-dom@0.26.0/dist/worker/worker.js",
+);
 importScripts("https://unpkg.com/react@16/umd/react.development.js");
 importScripts("https://unpkg.com/react-dom@16/umd/react-dom.development.js");
 importScripts("react-dom-server.browser.development.js");
@@ -16,7 +18,10 @@ const pastEvents = [];
 onmessage = (m) => {
   const { code, pastEvents, shaPort } = m.data;
 
-  if (shaPort) {webRunner.shaPort = shaPort; return;}
+  if (shaPort) {
+    webRunner.shaPort = shaPort;
+    return;
+  }
 
   const babelCode = Babel.transform(code, {
     plugins: [],
@@ -31,7 +36,7 @@ onmessage = (m) => {
   const document = WorkerThread.workerDOM.document;
 
   const str = ReactDOMServer.renderToString(
-    React.createElement(Counter, { pastEvents: pastEvents })
+    React.createElement(Counter, { pastEvents: pastEvents }),
   );
 
   postMessage({ domString: str });

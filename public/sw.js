@@ -1,5 +1,5 @@
 importScripts(
-  "https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js"
+  "https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js",
 );
 workbox.loadModule("workbox-strategies");
 workbox.loadModule("workbox-expiration");
@@ -21,7 +21,7 @@ workbox.routing.registerRoute(
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: "hashed js files",
     plugins: [new workbox.expiration.ExpirationPlugin({ maxEntries: 100 })],
-  })
+  }),
 );
 
 workbox.routing.registerRoute(
@@ -32,7 +32,7 @@ workbox.routing.registerRoute(
   },
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: "page-data",
-  })
+  }),
 );
 
 workbox.routing.registerRoute(
@@ -43,7 +43,7 @@ workbox.routing.registerRoute(
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: "google-fonts",
     cacheableResponse: { statuses: [0, 200] },
-  })
+  }),
 );
 
 workbox.routing.registerRoute(
@@ -53,10 +53,11 @@ workbox.routing.registerRoute(
     plugins: [
       new workbox.expiration.ExpirationPlugin({
         maxEntries: 60,
-        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
-      }),
+        maxAgeSeconds: 30 * 24 * 60 * 60,
+      } // 30 Days
+      ),
     ],
-  })
+  }),
 );
 
 workbox.routing.registerRoute(
@@ -64,5 +65,5 @@ workbox.routing.registerRoute(
     request.destination === "script" || request.destination === "style",
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: "static-resources",
-  })
+  }),
 );

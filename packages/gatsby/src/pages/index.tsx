@@ -19,26 +19,26 @@ interface Props {
   data: {
     site: {
       siteMetadata: {
-        title: string
-      }
-    }
+        title: string;
+      };
+    };
     allMdx: {
       edges: {
         node: {
-          excerpt: string
+          excerpt: string;
           frontmatter: {
-            title: string
-            date: string
-            description: string
-          }
+            title: string;
+            date: string;
+            description: string;
+          };
           fields: {
-            slug: string
-          }
-        }
-      }[]
-    }
-  }
-  location: Location
+            slug: string;
+          };
+        };
+      }[];
+    };
+  };
+  location: Location;
 }
 
 const BlogIndex: React.FC<Props> = ({ data, location }) => {

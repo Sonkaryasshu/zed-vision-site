@@ -20,7 +20,7 @@ const Video: React.FC<{ file: any }> = ({ file }) => {
         loop
         muted
         playsInline
-      ></video>
+      />
     </>
   );
 };
@@ -60,7 +60,7 @@ export const Streamer: React.FC<{ magnetURL: string }> = ({ magnetURL }) => {
         <StyledTextArea
           value={magnetURL}
           onChange={(e) => changeState({ ...state, magnetURL: e.target.value })}
-        ></StyledTextArea>
+        />
       </>
     );
   }

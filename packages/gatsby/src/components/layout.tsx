@@ -26,8 +26,8 @@ const CustomLayout: React.FC = ({ children }) => (
 );
 
 interface Props {
-  location: Location
-  title: string
+  location: Location;
+  title: string;
 }
 
 const Layout: React.FC<Props> = ({ location, title, children }) => {

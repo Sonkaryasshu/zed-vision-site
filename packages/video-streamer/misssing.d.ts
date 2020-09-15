@@ -1,1 +1,1 @@
-declare module "videostream"
+declare module "videostream";

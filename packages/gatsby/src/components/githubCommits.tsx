@@ -5,7 +5,7 @@ export const GithubCommits: React.FC = () => {
   const [state, setState] = React.useState({ data: "" });
 
   React.useEffect(() => {
-    if (state.data === "")
+    if (state.data === "") {
       (async () => {
         const octokit = new Octokit();
         const data = await octokit.repos.listCommits({
@@ -14,6 +14,7 @@ export const GithubCommits: React.FC = () => {
         });
         setState({ data: JSON.stringify(data) });
       })();
+    }
   });
 
   return (

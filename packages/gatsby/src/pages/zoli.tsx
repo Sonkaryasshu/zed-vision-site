@@ -10,11 +10,11 @@ interface Props {
   data: {
     site: {
       siteMetadata: {
-        title: string
-      }
-    }
-  }
-  location: Location
+        title: string;
+      };
+    };
+  };
+  location: Location;
 }
 
 const Wrapper = (props: any) => (
@@ -31,20 +31,26 @@ const Comp1: React.FC<{ onEvent: (event: string) => void }> = ({ onEvent }) => {
           onEvent("double");
           setCount(count * 2);
         }}
-      >x 2</button>
+      >
+        x 2
+      </button>
       <button
         onClick={() => {
           onEvent("inc");
           setCount(count + 1);
         }}
-      >+</button>
+      >
+        +
+      </button>
       {count}
       <button
         onClick={() => {
           onEvent("dec");
           setCount(count - 1);
         }}
-      >-</button>
+      >
+        -
+      </button>
     </>
   );
 };
@@ -58,16 +64,14 @@ const NotFoundPage = ({ data, location }: Props) => {
   const [rrrrr, setRR] = React.useState({ ...rr });
 
   React.useEffect(() => {
-
-    const runner = async()=>{
+    const runner = async () => {
       console.log("ello ello");
-        const res = await sha256("ello world");
-        console.log("ELLO world", res);
-        const val = await unHash(res);
-        console.log("ELLO world", val);
-      };
-      runner();
-
+      const res = await sha256("ello world");
+      console.log("ELLO world", res);
+      const val = await unHash(res);
+      console.log("ELLO world", val);
+    };
+    runner();
 
     setRR({ ...rr });
   }, [rr.innerHTML]);
@@ -75,7 +79,7 @@ const NotFoundPage = ({ data, location }: Props) => {
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="404: Not Found" />
-      <h1 onClick={() => setRR({ ...rr })}> Not Found!!!</h1>
+      <h1 onClick={() => setRR({ ...rr })}>Not Found!!!</h1>
       <Wrapper key={rrrrr.innerHTML} innerHTML={rrrrr.innerHTML}></Wrapper>
       <ChangeDetector Comp1={Comp1}></ChangeDetector>
       <p>You just hit a route that do not exist... the sadness.</p>

@@ -29,49 +29,49 @@ const Hr = styled.hr`
 interface Props {
   data: {
     mdx: {
-      excerpt: string
-      body: string
+      excerpt: string;
+      body: string;
       frontmatter: {
-        date: string
-        title: string
-        description: string
-      }
-    }
+        date: string;
+        title: string;
+        description: string;
+      };
+    };
     site: {
       siteMetadata: {
-        title: string
-      }
-    }
-  }
+        title: string;
+      };
+    };
+  };
   pageContext: {
     previous: {
       fields: {
-        slug: string
-      }
-      date: string
-      title: string
-      description: string
+        slug: string;
+      };
+      date: string;
+      title: string;
+      description: string;
       frontmatter: {
-        date: string
-        title: string
-        description: string
-      }
-    }
+        date: string;
+        title: string;
+        description: string;
+      };
+    };
     next: {
       fields: {
-        slug: string
-      }
-      date: string
-      title: string
-      description: string
+        slug: string;
+      };
+      date: string;
+      title: string;
+      description: string;
       frontmatter: {
-        date: string
-        title: string
-        description: string
-      }
-    }
-  }
-  location: Location
+        date: string;
+        title: string;
+        description: string;
+      };
+    };
+  };
+  location: Location;
 }
 
 const BlogPostTemplate = ({ data, pageContext, location }: Props) => {

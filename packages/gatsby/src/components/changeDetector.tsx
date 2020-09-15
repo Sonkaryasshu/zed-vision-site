@@ -23,15 +23,15 @@ const getUrl = (div: string) =>
 
 const App: React.FC<{
   nodes: {
-    id: number
-    image: string
-    shape: string
-  }[]
+    id: number;
+    image: string;
+    shape: string;
+  }[];
   edges: {
-    from: number
-    to: number
-    label: string
-  }[]
+    from: number;
+    to: number;
+    label: string;
+  }[];
 }> = ({ nodes, edges }) => {
   console.log(nodes);
   if (!nodes) return <></>;
@@ -69,7 +69,7 @@ const App: React.FC<{
 };
 
 const chd: React.FC<{
-  Comp1: React.FC<{ onEvent: (s: string) => void }>
+  Comp1: React.FC<{ onEvent: (s: string) => void }>;
 }> = ({ Comp1 }) => {
   const [comps, setError] = React.useState([
     document.getElementById("id1")?.innerHTML || "<div></div>",
@@ -79,19 +79,18 @@ const chd: React.FC<{
 
   const [{ nodes, edges }, setGraph] = React.useState({
     nodes: [
-      { id: 0, image: "", shape: "image" }],
-    edges: [] as { from: number, to: number, label: string }[]
+      { id: 0, image: "", shape: "image" },
+    ],
+    edges: [] as { from: number; to: number; label: string }[],
   });
 
-  console.log({nodes, edges});
-
-
+  console.log({ nodes, edges });
 
   const check = (
     comps: string[],
     ev: string,
     setErr: (d: string[]) => void,
-    currentHTML: string
+    currentHTML: string,
   ) => {
     const str = document.getElementById("id1")?.innerHTML || "<div></div>";
     console.log("LOOOOOOO", str, currentHTML);
@@ -118,11 +117,10 @@ const chd: React.FC<{
       setGraph({
         nodes: [
           ...nodes,
-          { id: nodes.length , image: getUrl(str), shape: "image" },
-        ], 
-        edges: [...edges, {from, to, label: ev }]
+          { id: nodes.length, image: getUrl(str), shape: "image" },
+        ],
+        edges: [...edges, { from, to, label: ev }],
       });
-
 
       setErr(num2);
 
@@ -133,7 +131,7 @@ const chd: React.FC<{
 
       setGraph({
         nodes,
-        edges: [...edges, {from, to, label: ev }]
+        edges: [...edges, { from, to, label: ev }],
       });
 
       /// setTimeout(() => check(num2, (d: string[]) => setError(d)), 100)
@@ -141,22 +139,20 @@ const chd: React.FC<{
   };
 
   React.useEffect(() => {
-  
-  //   html2canvas(document.getElementById("id1")!).then(function(canvas) {
-  //     check(comps, "INIT", (d: string[]) => setError(d), canvas);
+    //   html2canvas(document.getElementById("id1")!).then(function(canvas) {
+    //     check(comps, "INIT", (d: string[]) => setError(d), canvas);
 
-  //     // check(comps, "INIT", (d: string[]) => setError(d), original);
-  //  });
+    //     // check(comps, "INIT", (d: string[]) => setError(d), original);
+    //  });
 
     // console.log("useEffect")
     // const original = document.getElementById("id1")?.innerHTML || "";
     // setTimeout(() =>
- 
+
     //);
     const original = document.getElementById("id1")?.innerHTML || "";
     // setTimeout(() =>
     check(comps, "INIT", (d: string[]) => setError(d), original);
-
   }, []);
 
   const rest = (
@@ -198,5 +194,6 @@ function createMarkup(markup: string) {
   return { __html: markup };
 }
 
-export const ChangeDetector =
-  typeof window !== "undefined" ? chd : () => <div>NO ssr</div>;
+export const ChangeDetector = typeof window !== "undefined"
+  ? chd
+  : () => <div>NO ssr</div>;

@@ -1,36 +1,33 @@
 const hashTable = {};
 
-  
-  
-  onmessage= async (message) => {
-    console.log("SHAWORKER", message.data);
-    const msg = message.data;
+onmessage = async (message) => {
+  console.log("SHAWORKER", message.data);
+  const msg = message.data;
 
-    if (msg.id) {
-      const data =
-        typeof msg.data === "string"
-          ? msg.data
-          : typeof msg.data === "object"
-          ? JSON.stringify(msg.data)
-          : String(msg.data);
-      const hash = await sha256(data);
+  if (msg.id) {
+    const data = typeof msg.data === "string"
+      ? msg.data
+      : typeof msg.data === "object"
+      ? JSON.stringify(msg.data)
+      : String(msg.data);
+    const hash = await sha256(data);
 
-      const shorterHash = shortener(hash);
+    const shorterHash = shortener(hash);
 
-      hashTable[shorterHash] = msg.data;
+    hashTable[shorterHash] = msg.data;
 
-      console.log("HAAAASH", msg.id, hash);
-      postMessage({
-        hash: shorterHash,
-        id: msg.id,
-      });
-    } else if (msg.hash) {
-      postMessage({
-        data: hashTable[msg.hash],
-        hash: msg.hash,
-      });
-    }
-  };
+    console.log("HAAAASH", msg.id, hash);
+    postMessage({
+      hash: shorterHash,
+      id: msg.id,
+    });
+  } else if (msg.hash) {
+    postMessage({
+      data: hashTable[msg.hash],
+      hash: msg.hash,
+    });
+  }
+};
 
 function shortener(hash) {
   for (let i = 1; i < 64; i++) {
@@ -78,7 +75,9 @@ async function sha256(message) {
   const hashArray = Array.from(new Uint8Array(hashBuffer));
 
   // convert bytes to hex string
-  const hashHex = hashArray.map((b) => ("00" + b.toString(16)).slice(-2)).join("");
+  const hashHex = hashArray.map((b) => ("00" + b.toString(16)).slice(-2)).join(
+    "",
+  );
   return hashHex;
 }
 
@@ -94,7 +93,7 @@ async function sign(message) {
       hash: { name: "SHA-256" },
     },
     false, // export = false
-    ["sign", "verify"] // what the key can do'
+    ["sign", "verify"], // what the key can do'
   );
 
   const hashBuffer = await crypto.subtle.sign("SHA-256", key, msgBuffer);
@@ -102,6 +101,8 @@ async function sign(message) {
   const hashArray = Array.from(new Uint8Array(hashBuffer));
 
   // convert bytes to hex string
-  const signHex = hashArray.map((b) => ("00" + b.toString(16)).slice(-2)).join("");
+  const signHex = hashArray.map((b) => ("00" + b.toString(16)).slice(-2)).join(
+    "",
+  );
   return signHex;
 }

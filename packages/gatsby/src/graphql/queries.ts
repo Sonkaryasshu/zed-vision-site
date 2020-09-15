@@ -13,7 +13,7 @@ export const getTask = /* GraphQL */ `
       updatedAt
     }
   }
-`
+`;
 export const listTasks = /* GraphQL */ `
   query ListTasks(
     $filter: ModelTaskFilterInput
@@ -32,7 +32,7 @@ export const listTasks = /* GraphQL */ `
       nextToken
     }
   }
-`
+`;
 export const getPrivateNote = /* GraphQL */ `
   query GetPrivateNote($id: ID!) {
     getPrivateNote(id: $id) {
@@ -43,7 +43,7 @@ export const getPrivateNote = /* GraphQL */ `
       owner
     }
   }
-`
+`;
 export const listPrivateNotes = /* GraphQL */ `
   query ListPrivateNotes(
     $filter: ModelPrivateNoteFilterInput
@@ -61,4 +61,4 @@ export const listPrivateNotes = /* GraphQL */ `
       nextToken
     }
   }
-`
+`;

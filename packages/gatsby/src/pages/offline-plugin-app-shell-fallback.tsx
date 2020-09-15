@@ -8,11 +8,11 @@ interface Props {
   data: {
     site: {
       siteMetadata: {
-        title: string
-      }
-    }
-  }
-  location: Location
+        title: string;
+      };
+    };
+  };
+  location: Location;
 }
 
 const NotFoundPage = ({ data, location }: Props) => {
