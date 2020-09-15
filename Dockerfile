@@ -24,7 +24,6 @@ ENV PATH="$DENO_INSTALL/bin:$PATH"
 ARG GITBASE=https://raw.githubusercontent.com/zed-vision/zed-vision-site/master
 ADD --chown=node ${GITBASE}/package.json ${GITBASE}/yarn.lock ./
 ADD --chown=node ${GITBASE}/packages/gatsby/package.json ./packages/gatsby/
-ADD --chown=node ${GITBASE}/packages/code-editor/package.json ./packages/code-editor/
 
 RUN yarn --frozen-lockfile --ignore-scripts && rm -rf node_modules
 
@@ -32,7 +31,6 @@ FROM depts
 
 ADD package.json yarn.lock ./
 ADD packages/gatsby/package.json ./packages/gatsby/
-ADD packages/code-editor/package.json ./packages/code-editor/
 ADD packages/video-streamer/package.json ./packages/video-streamer/
 RUN yarn install --check-files --frozen-lockfile
 

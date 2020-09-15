@@ -84,7 +84,7 @@ const StyledError = styled(LiveError)`
   font-size: 0.9em;
   font-family: "Source Code Pro", monospace;
 `;
-export const StyledEditorPaper = styled(Paper)`
+export const StyledEditorDiv = styled.div`
   color: white;
   font-size: large;
   background-color: transparent !important;
@@ -96,7 +96,8 @@ export const StyledLiveErrorPaper = styled(Paper)`
   background-color: transparent !important;
   background-image: linear-gradient(to right top, red 0%, #2a2139 30%);
 `;
-export const StyledPreviewPaper = styled(Paper)`
+
+export const StyledPreviewDiv = styled.div`
   color: black;
   padding: 10px;
   background-color: grey !important;

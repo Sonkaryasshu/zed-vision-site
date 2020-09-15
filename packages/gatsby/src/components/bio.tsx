@@ -5,17 +5,6 @@ import GatsbyImage from "gatsby-image";
 
 import { rhythm } from "../utils/typography";
 
-const Container = styled.div`
-  display: flex;
-  margin-bottom: ${rhythm(2.5)};
-`;
-
-const StyledImage = styled(GatsbyImage)`
-  margin-right: ${rhythm(1 / 2)};
-  margin-bottom: 0;
-  min-width: 50;
-  border-radius: "100%";
-`;
 
 const Bio = () => {
   const data = useStaticQuery(graphql`
@@ -42,6 +31,19 @@ const Bio = () => {
   `);
 
   const { author, social } = data.site.siteMetadata;
+
+  const Container = styled.div`
+  display: flex;
+  margin-bottom: ${rhythm(2.5)};
+`;
+
+  const StyledImage = styled(GatsbyImage)`
+  margin-right: ${rhythm(1 / 2)};
+  margin-bottom: 0;
+  min-width: 50;
+  border-radius: "100%";
+`;
+
   return (
     <Container>
       <StyledImage

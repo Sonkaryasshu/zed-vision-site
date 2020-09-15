@@ -20,13 +20,13 @@ import {
   CardContent,
 } from "@material-ui/core";
 import {
-  StyledEditorPaper,
+  StyledEditorDiv,
   StyledLiveErrorPaper,
   Container,
   StyledProvider,
   RenderWrapper,
   StyledPreview,
-  StyledPreviewPaper,
+  StyledPreviewDiv,
 } from "./Container";
 
 const StyledCard = styled(Card)`
@@ -68,22 +68,25 @@ export const CodeEditor: React.FC<{
             >
               <StyledCard square={true}>
                 <CardContent>
-                  <StyledEditorPaper square={true}>
-                    <LiveEditor />
-                  </StyledEditorPaper>
+                  <Paper square={true}>
+                    <StyledEditorDiv>
+                      <LiveEditor />
+                    </StyledEditorDiv>
+                  </Paper>
                   <StyledLiveErrorPaper square={true}>
                     <LiveError />
                   </StyledLiveErrorPaper>
-
-                  <StyledPreviewPaper square={true}>
-                    <Grid container={true} spacing={3} direction="row">
-                      <Grid item xs>
-                        <Paper>
-                          <LivePreview id="live-copy" />
-                        </Paper>
+                  <Paper square={true}>
+                    <StyledPreviewDiv>
+                      <Grid container={true} spacing={3} direction="row">
+                        <Grid item xs>
+                          <Paper>
+                            <LivePreview id="live-copy" />
+                          </Paper>
+                        </Grid>
                       </Grid>
-                    </Grid>
-                  </StyledPreviewPaper>
+                    </StyledPreviewDiv>
+                  </Paper>
                 </CardContent>
               </StyledCard>
             </LiveProvider>
@@ -92,32 +95,32 @@ export const CodeEditor: React.FC<{
       </ScopedCssBaseline>
     )
     : render
-    ? (
-      <Container>
-        <StyledProvider code={String(children).trim()} scope={{ mdx }}>
-          <RenderWrapper>
-            <StyledPreview />
-          </RenderWrapper>
-        </StyledProvider>
-      </Container>
-    )
-    : (
-      <Highlight
-        {...defaultProps}
-        code={String(children).trim()}
-        language={className?.replace(/language-/, "") as any}
-      >
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre className={className} style={{ ...style, padding: "20px" }}>
-            {tokens.map((line, i) => (
-              <div key={i} {...getLineProps({ line, key: i })}>
-                {line.map((token, key) => (
-                  <span key={key} {...getTokenProps({ token, key })} />
-                ))}
-              </div>
-            ))}
-          </pre>
-        )}
-      </Highlight>
-    );
+      ? (
+        <Container>
+          <StyledProvider code={String(children).trim()} scope={{ mdx }}>
+            <RenderWrapper>
+              <StyledPreview />
+            </RenderWrapper>
+          </StyledProvider>
+        </Container>
+      )
+      : (
+        <Highlight
+          {...defaultProps}
+          code={String(children).trim()}
+          language={className?.replace(/language-/, "") as any}
+        >
+          {({ className, style, tokens, getLineProps, getTokenProps }) => (
+            <pre className={className} style={{ ...style, padding: "20px" }}>
+              {tokens.map((line, i) => (
+                <div key={i} {...getLineProps({ line, key: i })}>
+                  {line.map((token, key) => (
+                    <span key={key} {...getTokenProps({ token, key })} />
+                  ))}
+                </div>
+              ))}
+            </pre>
+          )}
+        </Highlight>
+      );
 };

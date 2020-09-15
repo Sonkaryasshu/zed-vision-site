@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CodeEditor } from "@zed-vision/code-editor/CodeEditor";
+import { CodeEditor } from "./codeEditor/CodeEditor";
 import { Helmet } from "react-helmet";
 import { Link } from "gatsby";
 import { MDXProvider } from "@mdx-js/react";
