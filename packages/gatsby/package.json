@@ -3,7 +3,7 @@
   "scripts": {
     "postinstall": "gatsby telemetry --disable",
     "build": "gatsby clean && cp -a ./static/. ./public && gatsby build",
-    "start:": "yarn generate-certs && yarn gatsby develop --host 0.0.0.0 --https --cert-file .certs/localhost.cert --key-file .certs/localhost.key",
+    "start": "yarn generate-certs && yarn gatsby develop --host 0.0.0.0 --https --cert-file .certs/localhost.cert --key-file .certs/localhost.key",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "serve-https": "yarn generate-certs && file_server --cert .certs/localhost.cert --key .certs/localhost.key --host 0.0.0.0 public",

@@ -7,16 +7,16 @@
   "author": "Zoltan Erdos <zolika84@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "docker-compose down && yarn docker ___build",
-    "start": "docker-compose down && yarn old-start & yarn docker ___start",
+    "build": "docker-compose down && yarn docker ___build && docker-compose down",
+    "start": "docker-compose down && (yarn old-start & yarn docker ___start) && docker-compose down",
     "old-start": "cd packages/gatsby && yarn start",
     "lint": "eslint --fix --ext .ts,tsx,js,mdx,md .",
     "xxx-postinstall": "sh ./scripts/debts.sh",
     "docker:start": "docker-compose down && docker-compose up --detach --build gatsby",
     "docker-yarn": "docker-compose exec gatsby yarn",
     "docker": "(yarn docker-yarn || (yarn docker:start && yarn docker-yarn)) && yarn docker-yarn",
-    "___build": "rm -rf public && mv /tmp/app/packages/gatsby/public /app/packages/gatsby/",
-    "___start": "yarn ___build && cd /tmp/app && yarn serve-dir /app/public"
+    "___build": "rm -rf /app/packages/gatsby/public && cp -r /tmp/app/packages/gatsby/public /app/packages/gatsby/",
+    "___start": "yarn ___build && cd /app && yarn xxx-postinstall && cd /tmp/app/packages/gatsby && yarn serve-https"
   },
   "workspaces": [
     "packages/*"
