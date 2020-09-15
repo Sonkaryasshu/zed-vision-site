@@ -37,8 +37,6 @@ ADD packages/video-streamer/package.json ./packages/video-streamer/
 RUN yarn install --check-files --frozen-lockfile
 
 ADD packages ./packages/
-ADD blog  ./blog
-ADD assets  ./assets
 
 RUN cd packages/gatsby && \
     yarn build && \

@@ -15,14 +15,14 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/../../blog`,
+        path: `${__dirname}/blog`,
         name: `blog`,
       },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/../../assets`,
+        path: `${__dirname}/assets`,
         name: `assets`,
       },
     },
@@ -60,7 +60,7 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
 
       options: {
-        icon: `../../assets/gatsby-icon.png`,
+        icon: `assets/gatsby-icon.png`,
         name:
           `Zed Vision - Development experience, Testing, and everything between`,
         short_name: `ZedVision`,

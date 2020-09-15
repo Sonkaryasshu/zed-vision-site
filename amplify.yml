@@ -7,6 +7,6 @@ backend:
         - amplifyPush --simple
 frontend:
   artifacts:
-    baseDirectory: public
+    baseDirectory: packages/gatsby/public
     files:
       - "**/*"
