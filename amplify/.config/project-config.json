@@ -1,15 +1,17 @@
 {
-  "providers": ["awscloudformation"],
-  "projectName": "zedgatsby",
+  "projectName": "zedvisionblog",
   "version": "3.0",
   "frontend": "javascript",
   "javascript": {
     "framework": "none",
     "config": {
-      "SourceDir": "gatsby/src",
-      "DistributionDir": "public",
-      "BuildCommand": "npm run-script build",
+      "SourceDir": "packages/gatsby/src",
+      "DistributionDir": "packages/gatsby/public",
+      "BuildCommand": "echo \"done\"",
       "StartCommand": "npm run-script start"
     }
-  }
+  },
+  "providers": [
+    "awscloudformation"
+  ]
 }
