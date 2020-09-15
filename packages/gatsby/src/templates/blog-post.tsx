@@ -91,10 +91,10 @@ const BlogPostTemplate = ({ data, pageContext, location }: Props) => {
           <StyledHeader>{post.frontmatter.title}</StyledHeader>
           <StyledDate>{post.frontmatter.date}</StyledDate>
         </header>
-        <BlogPost />
-        <Hr />
+        <BlogPost></BlogPost>
+        <Hr></Hr>
         <footer>
-          <Bio />
+          <Bio></Bio>
         </footer>
         <nav>
           <ul>
