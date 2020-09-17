@@ -1,7 +1,7 @@
 import React from "react";
 import SEO from "../components/seo";
 import { graphql } from "gatsby";
-import { Streamer } from "@zed-vision/video-streamer";
+import { Streamer } from "../components/videoStreamer/VideoStreamer";
 
 interface Props {
   data: {

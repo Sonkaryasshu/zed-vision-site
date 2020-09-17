@@ -31,7 +31,6 @@ FROM depts
 
 ADD package.json yarn.lock ./
 ADD packages/gatsby/package.json ./packages/gatsby/
-ADD packages/video-streamer/package.json ./packages/video-streamer/
 RUN yarn install --check-files --frozen-lockfile
 
 ADD packages ./packages/
