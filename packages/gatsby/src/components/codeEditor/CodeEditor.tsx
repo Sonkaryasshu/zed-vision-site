@@ -5,7 +5,6 @@ import Paper from "@material-ui/core/Paper";
 import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline";
 import styled from "styled-components";
 import { LiveEditor, LiveError, LivePreview, LiveProvider } from "react-live";
-import { mdx } from "@mdx-js/react";
 import "./themes/prism-synthwave84.css";
 
 import {
@@ -63,8 +62,6 @@ export const CodeEditor: React.FC<{
           <Box>
             <LiveProvider
               code={String(children).trim()}
-              transformCode={(code: string) => "/** @jsx mdx */" + code}
-              scope={{ mdx }}
             >
               <StyledCard square={true}>
                 <CardContent>
@@ -97,7 +94,7 @@ export const CodeEditor: React.FC<{
     : render
       ? (
         <Container>
-          <StyledProvider code={String(children).trim()} scope={{ mdx }}>
+          <StyledProvider code={String(children).trim()}>
             <RenderWrapper>
               <StyledPreview />
             </RenderWrapper>

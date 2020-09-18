@@ -8,6 +8,17 @@ import { rhythm, scale } from "../utils/typography";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import styled from "styled-components";
 
+import { CodeEditor } from "../components/codeEditor/CodeEditor";
+import { MDXProvider } from "@mdx-js/react";
+
+const components = {
+  pre: function PreComp(props: any) {
+    return <div {...props} />;
+  },
+  code: CodeEditor,
+};
+
+
 const StyledHeader = styled.h1`
   margin-top: ${rhythm(1)};
   margin-bottom: 0;
@@ -78,7 +89,7 @@ const BlogPostTemplate = ({ data, pageContext, location }: Props) => {
   const post = data.mdx;
   const siteTitle = data.site.siteMetadata.title;
   const { previous, next } = pageContext;
-  const BlogPost = () => <MDXRenderer>{post.body}</MDXRenderer>;
+  const BlogPost = () =><MDXProvider components={components}><MDXRenderer>{post.body}</MDXRenderer></MDXProvider>;
 
   return (
     <>

@@ -1,34 +1,19 @@
 import * as React from "react";
-import { CodeEditor } from "./codeEditor/CodeEditor";
 import { Helmet } from "react-helmet";
 import { Link } from "gatsby";
-import { MDXProvider } from "@mdx-js/react";
-
-const components = {
-  pre: function PreComp(props: any) {
-    return <div {...props} />;
-  },
-  code: CodeEditor,
-};
-
-const CustomLayout: React.FC = ({ children }) => (
-  <>
-    <Helmet>
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-      />
-    </Helmet>
-    <MDXProvider components={components}>
-      <div style={{ maxWidth: 1140, margin: "auto" }}>{children}</div>
-    </MDXProvider>
-  </>
-);
+import styled from "styled-components";
 
 interface Props {
   location: Location;
   title: string;
 }
+
+
+const StyledContent = styled.div`
+max-width: 1140px;
+margin: auto;
+`;
+
 
 const Layout: React.FC<Props> = ({ location, title, children }) => {
   let __PATH_PREFIX__;
@@ -54,11 +39,19 @@ const Layout: React.FC<Props> = ({ location, title, children }) => {
     );
   }
   return (
-    <CustomLayout>
-      <header>{header}</header>
-      <main>{children}</main>
-      <footer>© {new Date().getFullYear()}, Zed vision</footer>
-    </CustomLayout>
+    <>
+      <Helmet>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+      </Helmet>
+      <StyledContent>
+        <header>{header}</header>
+        <main>{children}</main>
+        <footer>© {new Date().getFullYear()}, Zed vision</footer>
+      </StyledContent>
+    </>
   );
 };
 
