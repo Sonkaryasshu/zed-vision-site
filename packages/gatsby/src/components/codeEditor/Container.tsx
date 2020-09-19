@@ -1,7 +1,6 @@
 import * as polished from "polished";
-import Paper from "@material-ui/core/Paper";
 import styled, { css } from "styled-components";
-import { LiveError, LivePreview, LiveProvider } from "react-live";
+import {  LivePreview, LiveProvider } from "react-live";
 
 export const Container = styled.div`
   margin: 0 auto;
@@ -18,17 +17,7 @@ export const StyledProvider = styled(LiveProvider)`
   overflow: hidden;
   margin-bottom: ${polished.rem(100)};
 `;
-// @ts-ignore
-const LiveWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: stretch;
-  align-items: stretch;
-  @media (max-width: 600px) {
-    flex-direction: column;
-  }
-`;
-// @ts-ignore
+
 export const RenderWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -49,19 +38,7 @@ const column = css`
     max-width: 100%;
   }
 `;
-// @ts-ignore
-const StyledEditor = styled.div`
-  font-family: "Source Code Pro", monospace;
-  font-size: ${polished.rem(14)};
-  height: ${polished.rem(350)};
-  max-height: ${polished.rem(350)};
-  overflow: auto;
-  ${column};
-  * > textarea:focus {
-    outline: none;
-  }
-`;
-//@ts-ignore
+
 export const StyledPreview = styled(LivePreview)`
   position: relative;
   padding: 0.5rem;
@@ -71,26 +48,14 @@ export const StyledPreview = styled(LivePreview)`
   overflow: hidden;
   ${column};
 `;
-//@ts-ignore
-const StyledError = styled(LiveError)`
-  display: block;
-  padding: ${polished.rem(8)};
-  background-color: black;
-  padding-bottom: 0;
-  background: red;
-  color: white;
-  white-space: pre-wrap;
-  text-align: left;
-  font-size: 0.9em;
-  font-family: "Source Code Pro", monospace;
-`;
+
 export const StyledEditorDiv = styled.div`
   color: white;
   font-size: large;
   background-color: transparent !important;
   background-image: linear-gradient(to right bottom, #34294f 0%, #2a2139 30%);
 `;
-export const StyledLiveErrorPaper = styled(Paper)`
+export const StyledLiveErrorDiv = styled.div`
   color: white;
   font-size: large;
   background-color: transparent !important;

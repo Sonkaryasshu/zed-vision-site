@@ -20,7 +20,7 @@ import {
 } from "@material-ui/core";
 import {
   StyledEditorDiv,
-  StyledLiveErrorPaper,
+  StyledLiveErrorDiv,
   Container,
   StyledProvider,
   RenderWrapper,
@@ -31,7 +31,6 @@ import {
 const StyledCard = styled(Card)`
   padding: 0;
   .MuiPaper-root {
-    color: white;
   }
   .MuiCardContent-root {
     padding: 0;
@@ -70,9 +69,11 @@ export const CodeEditor: React.FC<{
                       <LiveEditor />
                     </StyledEditorDiv>
                   </Paper>
-                  <StyledLiveErrorPaper square={true}>
-                    <LiveError />
-                  </StyledLiveErrorPaper>
+                  <Paper square={true}>
+                    <StyledLiveErrorDiv>
+                      <LiveError />
+                    </StyledLiveErrorDiv>
+                  </Paper>
                   <Paper square={true}>
                     <StyledPreviewDiv>
                       <Grid container={true} spacing={3} direction="row">

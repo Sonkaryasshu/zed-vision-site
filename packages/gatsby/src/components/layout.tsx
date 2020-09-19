@@ -8,12 +8,10 @@ interface Props {
   title: string;
 }
 
-
 const StyledContent = styled.div`
 max-width: 1140px;
 margin: auto;
 `;
-
 
 const Layout: React.FC<Props> = ({ location, title, children }) => {
   let __PATH_PREFIX__;
