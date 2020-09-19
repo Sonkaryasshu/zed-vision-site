@@ -1,7 +1,7 @@
 import * as React from "react";
 import { graphql, useStaticQuery } from "gatsby";
 import styled from "styled-components";
-import GatsbyImage from "gatsby-image";
+import GatsbyImage, { GatsbyImageFixedProps } from "gatsby-image";
 
 import { rhythm } from "../utils/typography";
 
@@ -27,7 +27,12 @@ const Bio = () => {
         }
       }
     }
-  `);
+  `) as {
+    site: any;
+    avatar: {
+      childImageSharp: GatsbyImageFixedProps;
+    };
+  };
 
   const { author, social } = data.site.siteMetadata;
 
@@ -36,23 +41,27 @@ const Bio = () => {
   margin-bottom: ${rhythm(2.5)};
 `;
 
-  const StyledImage = styled(GatsbyImage)`
-  margin-right: ${rhythm(1 / 2)};
-  margin-bottom: 0;
-  min-width: 50px;
-  min-height: 50px;
-  border-radius: 50%;
+  const StyledImgDiv = styled.div`
+    margin-right: ${rhythm(1 / 2)};
+    margin-bottom: 0;
+    overflow: hidden;
+    min-width: 50px;
+    height: 50px;
+    border-radius: 25px;
 `;
 
   return (
     <Container>
-      <StyledImage
-        alt={author.name}
-        fixed={data.avatar.childImageSharp.fixed}
-      />
+      <StyledImgDiv>
+        <GatsbyImage
+          alt={author.name}
+          fixed={data.avatar.childImageSharp.fixed}
+        />
+      </StyledImgDiv>
       <p>
         Written by <strong>{author.name}</strong>
-        {author.summary}<br/ >
+        {author.summary}
+        <br />
         <a href={`https://twitter.com/${social.twitter}`}>
           Follow me on Twitter
         </a>
