@@ -39,19 +39,16 @@ const Bio = () => {
   const StyledImage = styled(GatsbyImage)`
   margin-right: ${rhythm(1 / 2)};
   margin-bottom: 0;
-  min-width: 50;
-  border-radius: "100%";
+  min-width: 50px;
+  min-height: 50px;
+  border-radius: 50%;
 `;
 
   return (
     <Container>
       <StyledImage
         alt={author.name}
-        //@ts-ignore
         fixed={data.avatar.childImageSharp.fixed}
-        imgStyle={{
-          borderRadius: `50%`,
-        }}
       />
       <p>
         Written by <strong>{author.name}</strong>
