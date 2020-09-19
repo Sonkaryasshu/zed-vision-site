@@ -48,7 +48,7 @@ export const CodeEditor: React.FC<{
   return live
     ? (
       <ScopedCssBaseline>
-        <Paper elevation={10} variant="outlined" square={true}>
+        <Paper elevation={10} square={true}>
           <AppBar position="static">
             <Toolbar>
               <IconButton edge="start" color="inherit" aria-label="menu">
