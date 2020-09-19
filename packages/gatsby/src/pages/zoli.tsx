@@ -57,7 +57,7 @@ const Comp1: React.FC<{ onEvent: (event: string) => void }> = ({ onEvent }) => {
 
 const renderedOutside = register();
 
-const NotFoundPage = ({ data, location }: Props) => {
+const ZedZoliPage = ({ data, location }: Props) => {
   const siteTitle = data.site.siteMetadata.title;
 
   let rr = renderedOutside();
@@ -65,9 +65,7 @@ const NotFoundPage = ({ data, location }: Props) => {
 
   React.useEffect(() => {
     const runner = async () => {
-      console.log("ello ello");
       const res = await sha256("ello world");
-      console.log("ELLO world", res);
       const val = await unHash(res);
       console.log("ELLO world", val);
     };
@@ -78,17 +76,17 @@ const NotFoundPage = ({ data, location }: Props) => {
 
   return (
     <Layout location={location} title={siteTitle}>
-      <SEO title="404: Not Found" />
+      <SEO title="Test Worker side rendering" />
       <h1 onClick={() => setRR({ ...rr })}>Not Found!!!</h1>
       <Wrapper key={rrrrr.innerHTML} innerHTML={rrrrr.innerHTML}></Wrapper>
       <ChangeDetector Comp1={Comp1}></ChangeDetector>
-      <p>You just hit a route that do not exist... the sadness.</p>
+      <p>Worker side rendering</p>
       <div id="zoli"></div>
     </Layout>
   );
 };
 
-export default NotFoundPage;
+export default ZedZoliPage;
 
 export const pageQuery = graphql`
   query {
