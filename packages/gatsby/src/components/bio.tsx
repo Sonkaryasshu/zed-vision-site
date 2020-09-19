@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from "gatsby";
 import styled from "styled-components";
 import GatsbyImage, { GatsbyImageFixedProps } from "gatsby-image";
 
-import { rhythm } from "../utils/typography";
+import { rhythm } from "./utils/typography";
 
 const Bio = () => {
   const data = useStaticQuery(graphql`

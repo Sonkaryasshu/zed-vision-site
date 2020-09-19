@@ -4,7 +4,7 @@ import { Link, graphql } from "gatsby";
 import Bio from "../components/bio";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import { rhythm } from "../utils/typography";
+import { rhythm } from "../components/utils/typography";
 import styled from "styled-components";
 
 const StyledLink = styled(Link)`

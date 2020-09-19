@@ -3,8 +3,8 @@ import React from "react";
 import SEO from "../components/seo";
 import { ChangeDetector } from "../components/changeDetector";
 import { graphql } from "gatsby";
-import { register } from "../utils/testWorker";
-import { sha256, unHash } from "../utils/sha256";
+import { register } from "../components/utils/testWorker";
+import { sha256, unHash } from "../components/utils/sha256";
 
 interface Props {
   data: {
