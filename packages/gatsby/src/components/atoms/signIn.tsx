@@ -51,7 +51,6 @@ const SignIn: React.FC<{ email?: string }> = ({ email }) => {
           onChange={(e) => console.log("onChange", e.target.value)}
           autoComplete="email"
           autoFocus
-          // {...(!!email ? { value: email } : {})}
         />
         <TextField
           variant="outlined"

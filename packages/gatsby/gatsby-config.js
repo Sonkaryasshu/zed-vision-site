@@ -27,7 +27,7 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-mdx`
+      resolve: `gatsby-plugin-mdx`,
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
@@ -53,7 +53,6 @@ module.exports = {
         display: `standalone`,
         cache_busting_mode: "none",
       },
-   
     },
     `gatsby-plugin-styled-components`,
   ],

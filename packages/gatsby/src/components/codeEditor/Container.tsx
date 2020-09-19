@@ -1,6 +1,6 @@
 import * as polished from "polished";
 import styled, { css } from "styled-components";
-import {  LivePreview, LiveProvider } from "react-live";
+import { LivePreview, LiveProvider } from "react-live";
 
 export const Container = styled.div`
   margin: 0 auto;

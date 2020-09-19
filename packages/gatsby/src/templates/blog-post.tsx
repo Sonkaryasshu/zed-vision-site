@@ -18,7 +18,6 @@ const components = {
   code: CodeEditor,
 };
 
-
 const StyledHeader = styled.h1`
   margin-top: ${rhythm(1)};
   margin-bottom: 0;
@@ -89,7 +88,10 @@ const BlogPostTemplate = ({ data, pageContext, location }: Props) => {
   const post = data.mdx;
   const siteTitle = data.site.siteMetadata.title;
   const { previous, next } = pageContext;
-  const BlogPost = () =><MDXProvider components={components}><MDXRenderer>{post.body}</MDXRenderer></MDXProvider>;
+  const BlogPost = () =>
+    <MDXProvider components={components}>
+      <MDXRenderer>{post.body}</MDXRenderer>
+    </MDXProvider>;
 
   return (
     <>

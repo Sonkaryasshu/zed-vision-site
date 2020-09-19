@@ -93,32 +93,32 @@ export const CodeEditor: React.FC<{
       </ScopedCssBaseline>
     )
     : render
-      ? (
-        <Container>
-          <StyledProvider code={String(children).trim()}>
-            <RenderWrapper>
-              <StyledPreview />
-            </RenderWrapper>
-          </StyledProvider>
-        </Container>
-      )
-      : (
-        <Highlight
-          {...defaultProps}
-          code={String(children).trim()}
-          language={className?.replace(/language-/, "") as any}
-        >
-          {({ className, style, tokens, getLineProps, getTokenProps }) => (
-            <pre className={className} style={{ ...style, padding: "20px" }}>
-              {tokens.map((line, i) => (
-                <div key={i} {...getLineProps({ line, key: i })}>
-                  {line.map((token, key) => (
-                    <span key={key} {...getTokenProps({ token, key })} />
-                  ))}
-                </div>
-              ))}
-            </pre>
-          )}
-        </Highlight>
-      );
+    ? (
+      <Container>
+        <StyledProvider code={String(children).trim()}>
+          <RenderWrapper>
+            <StyledPreview />
+          </RenderWrapper>
+        </StyledProvider>
+      </Container>
+    )
+    : (
+      <Highlight
+        {...defaultProps}
+        code={String(children).trim()}
+        language={className?.replace(/language-/, "") as any}
+      >
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+          <pre className={className} style={{ ...style, padding: "20px" }}>
+            {tokens.map((line, i) => (
+              <div key={i} {...getLineProps({ line, key: i })}>
+                {line.map((token, key) => (
+                  <span key={key} {...getTokenProps({ token, key })} />
+                ))}
+              </div>
+            ))}
+          </pre>
+        )}
+      </Highlight>
+    );
 };
