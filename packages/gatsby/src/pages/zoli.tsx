@@ -1,6 +1,6 @@
 import Layout from "../components/layout";
 import React from "react";
-import SEO from "../components/seo";
+import { SEO } from "../components/seo";
 import { ChangeDetector } from "../components/changeDetector";
 import { graphql } from "gatsby";
 import { register } from "../components/utils/testWorker";

@@ -5,7 +5,21 @@ import GatsbyImage, { GatsbyImageFixedProps } from "gatsby-image";
 
 import { rhythm } from "./utils/typography";
 
-const Bio = () => {
+const Container = styled.div`
+display: flex;
+margin-bottom: ${rhythm(2.5)};
+`;
+
+const StyledImgDiv = styled.div`
+  margin-right: ${rhythm(1 / 2)};
+  margin-bottom: 0;
+  overflow: hidden;
+  min-width: 50px;
+  height: 50px;
+  border-radius: 25px;
+`;
+
+export const Bio = () => {
   const data = useStaticQuery(graphql`
     query BioQuery {
       avatar: file(absolutePath: { regex: "/zed-profile-pic.jpg/" }) {
@@ -36,20 +50,6 @@ const Bio = () => {
 
   const { author, social } = data.site.siteMetadata;
 
-  const Container = styled.div`
-  display: flex;
-  margin-bottom: ${rhythm(2.5)};
-`;
-
-  const StyledImgDiv = styled.div`
-    margin-right: ${rhythm(1 / 2)};
-    margin-bottom: 0;
-    overflow: hidden;
-    min-width: 50px;
-    height: 50px;
-    border-radius: 25px;
-`;
-
   return (
     <Container>
       <StyledImgDiv>
@@ -69,5 +69,3 @@ const Bio = () => {
     </Container>
   );
 };
-
-export default Bio;

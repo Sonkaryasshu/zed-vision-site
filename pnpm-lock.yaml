@@ -1,11 +1,6 @@
 devDependencies:
   '@types/react': 16.9.49
   '@types/react-dom': 16.9.8
-  '@types/react-helmet': 6.1.0
-  '@types/styled-components': 5.1.3
-  '@types/typography': 0.16.3
-  '@types/uuid': 8.3.0
-  '@types/webtorrent': 0.107.2
   '@typescript-eslint/eslint-plugin': 4.1.1_97a6c696058c61405b3d4d883f393658
   '@typescript-eslint/parser': 4.1.1_eslint@7.9.0+typescript@4.0.3
   eslint: 7.9.0
@@ -481,23 +476,10 @@ packages:
     optional: true
     resolution:
       integrity: sha512-Yn8hXAFoWIro8+Q5J8YJd/mP85Teiut3fsGVR9CAxwgNfIAiqlYxsk5iHU7VHJks/0KjL4ATSjmbtCDC/4l1qw==
-  /@types/bittorrent-protocol/3.1.1:
-    dependencies:
-      '@types/node': 14.11.1
-    dev: true
-    resolution:
-      integrity: sha512-YY3j5aJNTjAt5SA1P+4mK4cU4QuxSN79T1mzdQMLeQL1eTrruU5AxKcgxKZOuatPET3wCDx5JQnq+4XWpFEb/A==
   /@types/color-name/1.1.1:
     dev: true
     resolution:
       integrity: sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
-  /@types/hoist-non-react-statics/3.3.1:
-    dependencies:
-      '@types/react': 16.9.49
-      hoist-non-react-statics: 3.3.2
-    dev: true
-    resolution:
-      integrity: sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==
   /@types/json-schema/7.0.6:
     dev: true
     resolution:
@@ -506,34 +488,10 @@ packages:
     dev: true
     resolution:
       integrity: sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
-  /@types/magnet-uri/5.1.2:
-    dependencies:
-      '@types/node': 14.11.1
-    dev: true
-    resolution:
-      integrity: sha512-bXFPXskwHoEYP6t8rq4nWchOlbUzXkyhnfCVZmq+zb25R5pWkasw7BmTIqDKQ6RAQmq89jll1v23yLa/SvPfAw==
-  /@types/node/14.11.1:
-    dev: true
-    resolution:
-      integrity: sha512-oTQgnd0hblfLsJ6BvJzzSL+Inogp3lq9fGgqRkMB/ziKMgEUaFl801OncOzUmalfzt14N0oPHMK47ipl+wbTIw==
   /@types/parse-json/4.0.0:
     dev: true
     resolution:
       integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
-  /@types/parse-torrent-file/4.0.2:
-    dependencies:
-      '@types/node': 14.11.1
-    dev: true
-    resolution:
-      integrity: sha512-EzdzpcN0sStQ35sUV2SChTJErLsbotsxZ/RYeR9gf3zXKlPLKaA7aIAoS/nuLRvfxH8mbrWQmXSw76alKecSdg==
-  /@types/parse-torrent/5.8.3:
-    dependencies:
-      '@types/magnet-uri': 5.1.2
-      '@types/node': 14.11.1
-      '@types/parse-torrent-file': 4.0.2
-    dev: true
-    resolution:
-      integrity: sha512-c0xAjnpov+Xk/2HTtpaBm0tukNIAoZoxrqgTDwSaIu6IVCynY+2YD9zcQNk2P6H4atcXzD78/LI2CQzLlMmAJg==
   /@types/prop-types/15.7.3:
     dev: true
     resolution:
@@ -544,18 +502,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-ykkPQ+5nFknnlU6lDd947WbQ6TE3NNzbQAkInC2EKY1qeYdTKp7onFusmYZb+ityzx2YviqT6BXSu+LyWWJwcA==
-  /@types/react-helmet/6.1.0:
-    dependencies:
-      '@types/react': 16.9.49
-    dev: true
-    resolution:
-      integrity: sha512-PYRoU1XJFOzQ3BHvWL1T8iDNbRjdMDJMT5hFmZKGbsq09kbSqJy61uwEpTrbTNWDopVphUT34zUSVLK9pjsgYQ==
-  /@types/react-native/0.63.19:
-    dependencies:
-      '@types/react': 16.9.49
-    dev: true
-    resolution:
-      integrity: sha512-iUcejWDCw5gBIezDtSWBpkbB3piIMZau7FAfQqhObCJpCm/7QgVof/aKIP0fCkADYz/qGmIZATMX8kjAS7TVbw==
   /@types/react/16.9.49:
     dependencies:
       '@types/prop-types': 15.7.3
@@ -563,42 +509,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-DtLFjSj0OYAdVLBbyjhuV9CdGVHCkHn2R+xr3XkBvK2rS1Y1tkc14XSGjYgm5Fjjr90AxH9tiSzc1pCFMGO06g==
-  /@types/simple-peer/9.6.0:
-    dependencies:
-      '@types/node': 14.11.1
-    dev: true
-    resolution:
-      integrity: sha512-X2y6s+vE/3j03hkI90oqld2JH2J/m1L7yFCYYPyFV/whrOK1h4neYvJL3GIE+UcACJacXZqzdmDKudwec18RbA==
-  /@types/styled-components/5.1.3:
-    dependencies:
-      '@types/hoist-non-react-statics': 3.3.1
-      '@types/react': 16.9.49
-      '@types/react-native': 0.63.19
-      csstype: 3.0.3
-    dev: true
-    resolution:
-      integrity: sha512-HGpirof3WOhiX17lb61Q/tpgqn48jxO8EfZkdJ8ueYqwLbK2AHQe/G08DasdA2IdKnmwOIP1s9X2bopxKXgjRw==
-  /@types/typography/0.16.3:
-    dev: true
-    resolution:
-      integrity: sha512-LC+htrmoMhmFfFYjshxeHzZsKnpwVo9oMmdelRhqISG+ataFPscxnq8XEuCGWcNXQXZYfmIKjgmo1eJ/vs1BQw==
   /@types/unist/2.0.3:
     dev: true
     resolution:
       integrity: sha512-FvUupuM3rlRsRtCN+fDudtmytGO6iHJuuRKS1Ss0pG5z8oX0diNEw94UEL7hgDbpN94rgaK5R7sWm6RrSkZuAQ==
-  /@types/uuid/8.3.0:
-    dev: true
-    resolution:
-      integrity: sha512-eQ9qFW/fhfGJF8WKHGEHZEyVWfZxrT+6CLIJGBcZPfxUh/+BnEj+UCGYMlr9qZuX/2AltsvwrGqp0LhEW8D0zQ==
-  /@types/webtorrent/0.107.2:
-    dependencies:
-      '@types/bittorrent-protocol': 3.1.1
-      '@types/node': 14.11.1
-      '@types/parse-torrent': 5.8.3
-      '@types/simple-peer': 9.6.0
-    dev: true
-    resolution:
-      integrity: sha512-Jd8NzoF2FqQSo3Y7vPfJDW/vKCv8VDs+22yhzib4YdYEi4q5CfS+1wLZLvL5OpdpVnaxsVmXoVvTZTgrO7y6Qw==
   /@typescript-eslint/eslint-plugin/4.1.1_97a6c696058c61405b3d4d883f393658:
     dependencies:
       '@typescript-eslint/experimental-utils': 4.1.1_eslint@7.9.0+typescript@4.0.3
@@ -1522,12 +1436,6 @@ packages:
       node: '>= 0.4.0'
     resolution:
       integrity: sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==
-  /hoist-non-react-statics/3.3.2:
-    dependencies:
-      react-is: 16.13.1
-    dev: true
-    resolution:
-      integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
   /hosted-git-info/2.8.8:
     dev: true
     resolution:
@@ -2670,11 +2578,6 @@ packages:
 specifiers:
   '@types/react': 16.9.49
   '@types/react-dom': 16.9.8
-  '@types/react-helmet': 6.1.0
-  '@types/styled-components': 5.1.3
-  '@types/typography': 0.16.3
-  '@types/uuid': 8.3.0
-  '@types/webtorrent': 0.107.2
   '@typescript-eslint/eslint-plugin': ^4.1.1
   '@typescript-eslint/parser': 4.1.1
   eslint: 7.9.0
