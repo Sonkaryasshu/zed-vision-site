@@ -1,4 +1,4 @@
-dependencies:
+andependencies:
   '@material-ui/core': 4.11.0_react-dom@16.13.1+react@16.13.1
   '@material-ui/icons': 4.9.1_64fe165cdb3bb1449f67ef4ad817869b
   '@octokit/rest': 18.0.6
