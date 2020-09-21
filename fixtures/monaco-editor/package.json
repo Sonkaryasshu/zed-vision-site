@@ -6,6 +6,6 @@
     "license": "MIT",
     "dependencies": {
       "@monaco-editor/react": "3.6.2",
-      "monaco-editor": "0.20.0"
+      "monaco-editor": "0.21.0"
     }
   }
