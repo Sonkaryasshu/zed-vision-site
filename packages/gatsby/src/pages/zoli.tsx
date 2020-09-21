@@ -132,7 +132,7 @@ const ZedZoliPage = ({ data, location }: Props) => {
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="Test Worker side rendering" />
-      <textarea value={code} onChange={(e)=>changeCode(e.target.value)} >{counter}</textarea>
+      <textarea value={code} onChange={(e)=>changeCode(e.target.value)} ></textarea>
       <h1 onClick={() => changeWorkerRenderedComponent({ ...workerRenderedComponent, outside: renderedComponent.outside })}>Not Found!!!</h1>
     
       <Wrapper key={renderedComponent.innerHTML} code={renderedComponent.compiledCode} pastEvents={renderedComponent.pastEvents} innerHTML={renderedComponent.innerHTML}></Wrapper>
