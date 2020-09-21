@@ -1,7 +1,7 @@
 // import * as React from "react"
 // import ReactDOM from "react-dom"
 
-export const register = () => {
+export const register = (code:string) => {
   if (typeof window === "undefined") {
     return () => ({
       innerHTML: "",
@@ -37,40 +37,8 @@ export const register = () => {
 
   sha256Worker.postMessage({ id: 44, data: pastEvents });
 
-  const counter = `function Counter(props){
-    const actions = {
-      decrease: state => ({ counter: state.counter - 1 }),  
-      double: state => ({ counter: state.counter * 2 }),
-      increase: state => ({ counter: state.counter + 1 }),
-    }
-    const pastEvents = props.pastEvents || []
-    
-  
-    const [events, setEvents] = React.useState(pastEvents)
-  
-    const state = events
-      .map(ev => {
-        const text = ev.target
-        if (text.includes("-")) return "decrease"
-        else if (text.includes("+")) return "increase"
-        else if (text.includes("x2")) return "double"
-      })
-      .reduce((state, ev) => actions[ev](state), { counter: 0 })
-      
-    const onClick = e =>
-      setEvents([...events, { type: "click", target: String(e.target.innerHTML) }])
-  
-    return (
-      <div>
-        <button onClick={e => onClick(e)}>-</button>
-        <button onClick={e => onClick(e)}>x2</button>
-        Counter {props.name}:<span>{state.counter}</span>
-        <button onClick={e => onClick(e)}>+</button>
-      </div>
-    )
-  }
-`;
-  sha256Worker.postMessage({ id: 2, counter });
+ 
+  sha256Worker.postMessage({ id: 2, code });
 
   setTimeout(() => sha256Worker.postMessage({ hash: "7" }), 1000);
 
@@ -113,7 +81,7 @@ export const register = () => {
   // }
 
   worker.postMessage({
-    code: counter,
+    code: code,
     pastEvents,
   });
 
@@ -121,9 +89,9 @@ export const register = () => {
 
   const ret = {
     innerHTML: "",
-    code: counter,
+    code: code,
     compiledCode: "",
-    pastEvents: [],
+    pastEvents: pastEvents,
   };
 
   // const React = (await import("react")).default
@@ -136,7 +104,7 @@ export const register = () => {
       ret.innerHTML = d.data.domString;
 
       el.innerHTML = d.data.domString;
-      document.getElementById("zoli")?.append(el);
+      document.getElementById("zoli")?.replaceWith(el);
       // document.body.appendChild(el)
       // if (reactEl) hydrate()
     }
