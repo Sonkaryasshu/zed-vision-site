@@ -134,7 +134,6 @@ const ZedZoliPage = ({ data, location }: Props) => {
   }, [code]);
 
   React.useEffect(() => {
-
     const renderedOutside = register(code);
     let workerRenderedComponent = renderedOutside();
 
