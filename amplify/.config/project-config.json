@@ -5,8 +5,8 @@
   "javascript": {
     "framework": "none",
     "config": {
-      "SourceDir": "packages/gatsby/src",
-      "DistributionDir": "packages/gatsby/public",
+      "SourceDir": "src",
+      "DistributionDir": "public",
       "BuildCommand": "echo \"done\"",
       "StartCommand": "npm run-script start"
     }

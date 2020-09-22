@@ -1,18 +1,27 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es2018",
-    "lib": ["es2020", "DOM", "ES2020.Promise"],
-    "downlevelIteration": true,
-    "sourceMap": true,
-    "allowJs": false,
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
+    "downlevelIteration": true,
+    "sourceMap": true,
     "incremental": true,
-    "isolatedModules": true,
-    "moduleResolution": "node",
-    "baseUrl": "packages/gatsby/src",
-    "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
@@ -20,10 +29,13 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "declaration": true,
-    "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "types": ["react"]
+    "types": [
+      "react"
+    ]
   },
-  "include": ["packages/**/*.ts", "packages/**/*.tsx", "packages/gatsby/src/components/Graph.js"]
+  "include": [
+    "src"
+  ]
 }
