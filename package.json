@@ -58,10 +58,12 @@
     ]
   },
   "devDependencies": {
-    "gatsby-plugin-workerize-loader": "1.5.0",
+    "@ampproject/worker-dom": "^0.27.3",
     "@babel/plugin-syntax-jsx": "7.10.4",
+    "@babel/standalone": "^7.11.6",
     "@mdx-js/mdx": "2.0.0-next.8",
     "@mdx-js/react": "2.0.0-next.8",
+    "@types/babel__standalone": "^7.1.2",
     "@types/react": "16.9.49",
     "@types/react-dom": "16.9.8",
     "@types/react-helmet": "6.1.0",
@@ -84,6 +86,7 @@
     "gatsby-plugin-sharp": "2.6.36",
     "gatsby-plugin-styled-components": "3.3.11",
     "gatsby-plugin-typography": "2.5.11",
+    "gatsby-plugin-workerize-loader": "1.5.0",
     "gatsby-source-filesystem": "2.3.30",
     "gatsby-transformer-sharp": "2.5.15",
     "styled-components": "5.2.0",

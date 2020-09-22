@@ -1,5 +1,5 @@
-import { Sha256Worker } from "./sha256.worker";
-import { Sha256 } from "./sha256.utils";
+import { Sha256Worker } from "./sha256/sha256.worker";
+import { Sha256 } from "./sha256/sha256.utils";
 
 const sha256W = ((typeof window !== undefined) && Sha256Worker) || Sha256;
 

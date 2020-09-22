@@ -8,6 +8,9 @@ import { ChangeDetector } from "../components/changeDetector";
 import { graphql } from "gatsby";
 import { register } from "../components/utils/testWorker";
 import { hash, unHash } from "../components/utils/sha";
+
+import { transform } from "../components/utils/babel";
+
 // import { sha256W, unhash } from "../components/utils/sha";
 
 interface Props {
@@ -125,9 +128,10 @@ const ZedZoliPage = ({ data, location }: Props) => {
 
   React.useEffect(() => {
     const runner = async () => {
-      const res = await hash(code);
-      changeSha(res);
-      const val = await unHash(res);
+      const codeHash = await hash(code);
+      const transformedHash = await transform(codeHash);
+      changeSha(transformedHash);
+      const val = await unHash(transformedHash);
       console.log("ELLO world", val);
     };
     runner();

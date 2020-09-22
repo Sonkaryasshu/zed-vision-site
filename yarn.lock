@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@ampproject/worker-dom@^0.27.3":
+  version "0.27.3"
+  resolved "https://registry.yarnpkg.com/@ampproject/worker-dom/-/worker-dom-0.27.3.tgz#1c5a46b7ddf6e0499d8f51e06017ce6f80f60203"
+  integrity sha512-BpSMiEVnSr7VVlEWkf5uE9BAzK5SdoW5d+MZXvBqXN5CGwqol3BmNT15dd2E62D/sE6cc6xk2z+tsgwUaFjVKA==
+
 "@ardatan/aggregate-error@0.0.6":
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/@ardatan/aggregate-error/-/aggregate-error-0.0.6.tgz#fe6924771ea40fc98dc7a7045c2e872dc8527609"
@@ -47,7 +52,7 @@
     semver "^5.4.1"
     source-map "^0.5.0"
 
-"@babel/core@7.11.6", "@babel/core@^7.11.6":
+"@babel/core@7.11.6", "@babel/core@^7.1.0", "@babel/core@^7.11.6":
   version "7.11.6"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.11.6.tgz#3a9455dc7387ff1bac45770650bc13ba04a15651"
   integrity sha512-Wpcv03AGnmkgm6uS6k8iwhIwTrcP0m17TL1n1sy7qD0qelDu4XNeW0dN0mHfa+Gei211yDaLoEe/VlbXQzM4Bg==
@@ -2053,6 +2058,13 @@
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/@turist/time/-/time-0.0.1.tgz#57637d2a7d1860adb9f9cecbdcc966ce4f551d63"
   integrity sha512-M2BiThcbxMxSKX8W4z5u9jKZn6datnM3+FpEU+eYw0//l31E2xhqi7vTAuJ/Sf0P3yhp66SDJgPu3bRRpvrdQQ==
+
+"@types/babel__standalone@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@types/babel__standalone/-/babel__standalone-7.1.2.tgz#36fa55a51f1966688b0c7ce52524f14de0f3c309"
+  integrity sha512-a4gHAe/kNEgCnpc4HfIJHuyGDD/DI/62EFTt3dhvh/LtYdlPD4gUMgiwLoBIfv+Y+2vAfIwoZVrwwpDrwLhVXw==
+  dependencies:
+    "@babel/core" "^7.1.0"
 
 "@types/bittorrent-protocol@*":
   version "3.1.1"
