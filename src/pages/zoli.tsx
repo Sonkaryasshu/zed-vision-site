@@ -125,13 +125,15 @@ const ZedZoliPage = ({ data, location }: Props) => {
 
   React.useEffect(() => {
     const runner = async () => {
-      // if (!sha256W) return;
-      const res = await hash("ello world");
+      const res = await hash(code);
       changeSha(res);
       const val = await unHash(res);
       console.log("ELLO world", val);
     };
     runner();
+  }, [code]);
+
+  React.useEffect(() => {
 
     const renderedOutside = register(code);
     let workerRenderedComponent = renderedOutside();
