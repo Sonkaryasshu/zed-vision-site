@@ -7,7 +7,8 @@ import { SEO } from "../components/seo";
 import { ChangeDetector } from "../components/changeDetector";
 import { graphql } from "gatsby";
 import { register } from "../components/utils/testWorker";
-import { sha256, unHash } from "../components/utils/sha256";
+import { hash, unHash } from "../components/utils/sha";
+// import { sha256W, unhash } from "../components/utils/sha";
 
 interface Props {
   data: {
@@ -120,10 +121,13 @@ const ZedZoliPage = ({ data, location }: Props) => {
     { ...workerRenderedComponent, outside: workerRenderedComponent },
   );
   const [code, changeCode] = React.useState(counter);
+  const [sha, changeSha] = React.useState("");
 
   React.useEffect(() => {
     const runner = async () => {
-      const res = await sha256("ello world");
+      // if (!sha256W) return;
+      const res = await hash("ello world");
+      changeSha(res);
       const val = await unHash(res);
       console.log("ELLO world", val);
     };
@@ -142,6 +146,7 @@ const ZedZoliPage = ({ data, location }: Props) => {
       <SEO title="Test Worker side rendering" />
       <textarea value={code} onChange={(e) => changeCode(e.target.value)}>
       </textarea>
+      {sha}
       <h1
         onClick={() =>
           changeWorkerRenderedComponent(

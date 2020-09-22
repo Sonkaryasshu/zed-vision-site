@@ -13,6 +13,7 @@ module.exports = {
   },
   plugins: [
     // `gatsby-plugin-pnpm`,
+    `gatsby-plugin-workerize-loader`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
