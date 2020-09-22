@@ -75,7 +75,7 @@ export const register = (code: string) => {
 
   worker.onmessage = (d) => {
     if (d.data.domString) {
-      console.log(d.data.domString);
+      // console.log(d.data.domString);
       // el = document.createElement("div")
       ret.innerHTML = d.data.domString;
 

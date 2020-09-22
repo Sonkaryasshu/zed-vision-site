@@ -10,6 +10,7 @@ import { register } from "../components/utils/testWorker";
 import { hash, unHash } from "../components/utils/sha";
 
 import { transform } from "../components/utils/babel";
+import { render } from "../components/utils/renderer";
 
 // import { sha256W, unhash } from "../components/utils/sha";
 
@@ -131,8 +132,15 @@ const ZedZoliPage = ({ data, location }: Props) => {
       const codeHash = await hash(code);
       const transformedHash = await transform(codeHash);
       changeSha(transformedHash);
-      const val = await unHash(transformedHash);
-      console.log("ELLO world", val);
+      const pastEvents = new Array(100000).fill({
+        target: "+",
+        type: "click",
+      }); 
+      const pastEventsHash = await hash(pastEvents);
+      // const val = await unHash(transformedHash);
+      const renderedHash = await render(transformedHash, pastEventsHash);
+      const renderedContent = await unHash(renderedHash);
+      console.log("ELLO world", renderedContent);
     };
     runner();
   }, [code]);

@@ -6,7 +6,7 @@ const sha256W = ((typeof window !== undefined) && Sha256Worker) || Sha256;
 let loadedModule: any;
 
 export const { hash, unHash } = {
-  hash: async (str: string) => {
+  hash: async (str: string| object) => {
     if (!loadedModule) {
       loadedModule = await sha256W();
     }

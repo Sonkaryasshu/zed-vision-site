@@ -1,11 +1,12 @@
 export const Sha256 = (hashTable = {}) => ({
-  hash: async (strInput: string) => {
-    console.log("YYYYYAYYAYAYAYA");
+  hash: async (input: string| object) => {
+    const strInput = typeof input!=="string"? JSON.stringify(input) : input;
+
     const hash = await sha256(strInput);
 
     const shorterHash = shortener(hash);
 
-    hashTable[hash] = strInput;
+    hashTable[hash] = input;
 
     return shorterHash;
     function shortener(hash: string) {
