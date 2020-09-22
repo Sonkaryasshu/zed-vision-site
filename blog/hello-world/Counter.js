@@ -29,7 +29,7 @@ export function Counter(props) {
     <div>
       <button onClick={(e) => onClick(e)}>-</button>
       <button onClick={(e) => onClick(e)}>x2</button>
-      Coer {props.name}:<span>{state.counter}</span>
+      Counter {props.name}:<span>{state.counter}</span>
       <button onClick={(e) => onClick(e)}>+</button>
     </div>
   );

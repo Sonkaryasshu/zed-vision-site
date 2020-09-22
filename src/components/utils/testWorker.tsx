@@ -1,7 +1,7 @@
 // import * as React from "react"
 // import ReactDOM from "react-dom"
 
-export const register = (code:string) => {
+export const register = (code: string) => {
   if (typeof window === "undefined") {
     return () => ({
       innerHTML: "",
@@ -37,7 +37,6 @@ export const register = (code:string) => {
 
   sha256Worker.postMessage({ id: 44, data: pastEvents });
 
- 
   sha256Worker.postMessage({ id: 2, code });
 
   setTimeout(() => sha256Worker.postMessage({ hash: "7" }), 1000);

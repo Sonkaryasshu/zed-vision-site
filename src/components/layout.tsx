@@ -13,7 +13,7 @@ max-width: 1140px;
 margin: auto;
 `;
 
-const Layout: React.FC<Props> = ({ location, title, children }) => {
+export const Layout: React.FC<Props> = ({ location, title, children }) => {
   let __PATH_PREFIX__;
 
   const rootPath = `${__PATH_PREFIX__}/`;
@@ -52,5 +52,3 @@ const Layout: React.FC<Props> = ({ location, title, children }) => {
     </React.Fragment>
   );
 };
-
-export default Layout;

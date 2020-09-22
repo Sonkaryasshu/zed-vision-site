@@ -18,8 +18,8 @@ interface Props {
   title: string;
 }
 
-export const SEO : React.FC<Props> = (
-  { description = "", lang = "en", meta = [], title }
+export const SEO: React.FC<Props> = (
+  { description = "", lang = "en", meta = [], title },
 ) => {
   const { site } = useStaticQuery(
     graphql`
