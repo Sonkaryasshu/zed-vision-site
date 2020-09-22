@@ -17542,7 +17542,7 @@
       // not as a fragment. Nested arrays on the other hand will be treated as
       // fragment nodes. Recursion happens at the normal flow.
       // Handle top level unkeyed fragments as if they were arrays.
-      // This leads to an ambiguity between <>{[...]}</> and <>...</>.
+      // This leads to an ambiguity between <React.Fragment>{[...]}</React.Fragment> and <React.Fragment>...</React.Fragment>.
       // We treat the ambiguous cases above the same.
       var isUnkeyedTopLevelFragment = typeof newChild === "object" &&
         newChild !== null &&

@@ -39,7 +39,7 @@ const Comp1: React.FC<{ onEvent: (event: string) => void }> = ({ onEvent }) => {
   const [count, setCount] = React.useState(0);
 
   return (
-    <>
+    <React.Fragment>
       <button
         onClick={() => {
           onEvent("double");
@@ -65,7 +65,7 @@ const Comp1: React.FC<{ onEvent: (event: string) => void }> = ({ onEvent }) => {
       >
         -
       </button>
-    </>
+    </React.Fragment>
   );
 };
 

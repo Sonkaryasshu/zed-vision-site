@@ -94,7 +94,7 @@ const BlogPostTemplate = ({ data, pageContext, location }: Props) => {
     </MDXProvider>;
 
   return (
-    <>
+    <React.Fragment>
       <Layout location={location} title={siteTitle}>
         <SEO
           title={post.frontmatter.title}
@@ -128,7 +128,7 @@ const BlogPostTemplate = ({ data, pageContext, location }: Props) => {
           </ul>
         </nav>
       </Layout>
-    </>
+    </React.Fragment>
   );
 };
 

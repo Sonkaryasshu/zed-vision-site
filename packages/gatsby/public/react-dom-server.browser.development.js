@@ -1459,7 +1459,7 @@
    * Module variables.
    * @private
    */
-  var matchHtmlRegExp = /["'&<>]/;
+  var matchHtmlRegExp = /["'&<React.Fragment>]/;
   /**
    * Escapes special characters and HTML entities in a given html string.
    *

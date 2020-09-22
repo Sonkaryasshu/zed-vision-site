@@ -16,7 +16,7 @@ export const MonacoEditor = () => {
   }
 
   return (
-    <>
+    <React.Fragment>
       <button onClick={handleShowValue} disabled={!isEditorReady}>
         Show value
       </button>
@@ -64,6 +64,6 @@ export const MonacoEditor = () => {
         `}
         editorDidMount={handleEditorDidMount}
       />
-    </>
+    </React.Fragment>
   );
 };

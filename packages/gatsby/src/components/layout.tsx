@@ -37,7 +37,7 @@ const Layout: React.FC<Props> = ({ location, title, children }) => {
     );
   }
   return (
-    <>
+    <React.Fragment>
       <Helmet>
         <meta
           name="viewport"
@@ -49,7 +49,7 @@ const Layout: React.FC<Props> = ({ location, title, children }) => {
         <main>{children}</main>
         <footer>© {new Date().getFullYear()}, Zed vision</footer>
       </StyledContent>
-    </>
+    </React.Fragment>
   );
 };
 

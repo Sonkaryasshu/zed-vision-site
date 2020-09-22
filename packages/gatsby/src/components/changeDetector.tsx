@@ -34,7 +34,7 @@ const App: React.FC<{
   }[];
 }> = ({ nodes, edges }) => {
   console.log(nodes);
-  if (!nodes) return <></>;
+  if (!nodes) return <React.Fragment></React.Fragment>;
   const graph = {
     nodes,
     edges,
@@ -169,7 +169,7 @@ const chd: React.FC<{
   );
 
   return (
-    <>
+    <React.Fragment>
       <div style={{ margin: "10px", padding: "10px" }}>
         <div id="id1">
           <Comp1
@@ -186,7 +186,7 @@ const chd: React.FC<{
       </div>
       <pre>{JSON.stringify(nodes)}</pre>
       {rest}
-    </>
+    </React.Fragment>
   );
 };
 

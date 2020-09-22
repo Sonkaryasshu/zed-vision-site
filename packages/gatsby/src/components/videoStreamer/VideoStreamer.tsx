@@ -10,7 +10,7 @@ const Video: React.FC<{ file: any }> = ({ file }) => {
     new VideoStream(file, videoRef.current);
   });
   return (
-    <>
+    <React.Fragment>
       <h4>{file.name}</h4>
       <video
         style={{ width: "100%" }}
@@ -21,7 +21,7 @@ const Video: React.FC<{ file: any }> = ({ file }) => {
         muted
         playsInline
       />
-    </>
+    </React.Fragment>
   );
 };
 
@@ -55,13 +55,13 @@ export const Streamer: React.FC<{ magnetURL: string }> = ({ magnetURL }) => {
 
   if (state.loading) {
     return (
-      <>
+      <React.Fragment>
         <h2>loading</h2>
         <StyledTextArea
           value={magnetURL}
           onChange={(e) => changeState({ ...state, magnetURL: e.target.value })}
         />
-      </>
+      </React.Fragment>
     );
   }
 
