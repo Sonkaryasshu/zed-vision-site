@@ -7,11 +7,11 @@ export const Sha256 = (hashTable = {}) => ({
 
         const shorterHash = shortener(hash);
     
-        hashTable[shorterHash] = strInput;
+        hashTable[hash] = strInput;
     
         return shorterHash;
         function shortener(hash: string) {
-            for (let i = 4; i < 64; i++) {
+            for (let i = 1; i < 64; i++) {
               const shorterHash = hash.substr(0, i);
               if (hashTable[shorterHash] === undefined) {
                 hashTable[shorterHash] = hash;
@@ -23,7 +23,7 @@ export const Sha256 = (hashTable = {}) => ({
           }
         
     },
-    unHash: async(hash: string)=>hashTable[hash],
+    unHash: async(hash: string)=>hashTable[hashTable[hash]],
 
 });
 

@@ -139,11 +139,11 @@ const Sha256 = (hashTable = {}) => ({
     console.log("YYYYYAYYAYAYAYA");
     const hash = await sha256(strInput);
     const shorterHash = shortener(hash);
-    hashTable[shorterHash] = strInput;
+    hashTable[hash] = strInput;
     return shorterHash;
 
     function shortener(hash) {
-      for (let i = 4; i < 64; i++) {
+      for (let i = 1; i < 64; i++) {
         const shorterHash = hash.substr(0, i);
 
         if (hashTable[shorterHash] === undefined) {
@@ -157,7 +157,7 @@ const Sha256 = (hashTable = {}) => ({
       return hash;
     }
   },
-  unHash: async hash => hashTable[hash]
+  unHash: async hash => hashTable[hashTable[hash]]
 });
 
 async function sha256(message) {
@@ -172,4 +172,4 @@ async function sha256(message) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=87b10e257b916bffea8e.worker.js.map
+//# sourceMappingURL=ca14b47171e8f5631267.worker.js.map
