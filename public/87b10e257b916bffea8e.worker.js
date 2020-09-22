@@ -96,41 +96,10 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Sha256Worker", function() { return Sha256Worker; });
+/* harmony import */ var _sha256_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./sha256.utils */ "./src/components/utils/sha256.utils.ts");
 const hashTable = {};
-const Sha256Worker = () => ({
-  hash: async strInput => {
-    console.log("YYYYYAYYAYAYAYA");
-    const hash = await sha256(strInput);
-    const shorterHash = shortener(hash);
-    hashTable[shorterHash] = strInput;
-    return shorterHash;
-  },
-  unHash: async hash => hashTable[hash]
-});
 
-function shortener(hash) {
-  for (let i = 4; i < 64; i++) {
-    const shorterHash = hash.substr(0, i);
-
-    if (hashTable[shorterHash] === undefined) {
-      hashTable[shorterHash] = hash;
-      return shorterHash;
-    }
-
-    if (hashTable[shorterHash] === hash) return shorterHash;
-  }
-
-  return hash;
-}
-
-async function sha256(message) {
-  const msgBuffer = new TextEncoder().encode(message);
-  const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
-  const hashArray = Array.from(new Uint8Array(hashBuffer)); // convert bytes to hex string
-
-  const hashHex = hashArray.map(b => ("00" + b.toString(16)).slice(-2)).join("");
-  return hashHex;
-} //   async function sign(message: string) {
+const Sha256Worker = async () => Object(_sha256_utils__WEBPACK_IMPORTED_MODULE_0__["Sha256"])(hashTable); //   async function sign(message: string) {
 //     const msgBuffer = new TextEncoder().encode(message);
 //     const key = await crypto.subtle.importKey(
 //       "raw", // raw format of the key - should be Uint8Array
@@ -153,7 +122,54 @@ async function sha256(message) {
 //   }
 addEventListener('message', function (e) {var _e$data = e.data,type = _e$data.type,method = _e$data.method,id = _e$data.id,params = _e$data.params,f,p;if (type === 'RPC' && method) {if (f = __webpack_exports__[method]) {p = Promise.resolve().then(function () {return f.apply(__webpack_exports__, params);});} else {p = Promise.reject('No such method');}p.then(function (result) {postMessage({type: 'RPC',id: id,result: result});}).catch(function (e) {var error = {message: e};if (e.stack) {error.message = e.message;error.stack = e.stack;error.name = e.name;}postMessage({type: 'RPC',id: id,error: error});});}});postMessage({type: 'RPC',method: 'ready'});
 
+/***/ }),
+
+/***/ "./src/components/utils/sha256.utils.ts":
+/*!**********************************************!*\
+  !*** ./src/components/utils/sha256.utils.ts ***!
+  \**********************************************/
+/*! exports provided: Sha256 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Sha256", function() { return Sha256; });
+const Sha256 = (hashTable = {}) => ({
+  hash: async strInput => {
+    console.log("YYYYYAYYAYAYAYA");
+    const hash = await sha256(strInput);
+    const shorterHash = shortener(hash);
+    hashTable[shorterHash] = strInput;
+    return shorterHash;
+
+    function shortener(hash) {
+      for (let i = 4; i < 64; i++) {
+        const shorterHash = hash.substr(0, i);
+
+        if (hashTable[shorterHash] === undefined) {
+          hashTable[shorterHash] = hash;
+          return shorterHash;
+        }
+
+        if (hashTable[shorterHash] === hash) return shorterHash;
+      }
+
+      return hash;
+    }
+  },
+  unHash: async hash => hashTable[hash]
+});
+
+async function sha256(message) {
+  const msgBuffer = new TextEncoder().encode(message);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer)); // convert bytes to hex string
+
+  const hashHex = hashArray.map(b => ("00" + b.toString(16)).slice(-2)).join("");
+  return hashHex;
+}
+
 /***/ })
 
 /******/ });
-//# sourceMappingURL=18a558740d4a7aa17a6d.worker.js.map
+//# sourceMappingURL=87b10e257b916bffea8e.worker.js.map

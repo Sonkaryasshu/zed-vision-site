@@ -1,45 +1,8 @@
 const hashTable = {};
 
-export const Sha256Worker = () => ({
-    hash: async (strInput: string)=>{
-        console.log("YYYYYAYYAYAYAYA");
-        const hash = await sha256(strInput);
+import {Sha256} from "./sha256.utils";
 
-        const shorterHash = shortener(hash);
-    
-        hashTable[shorterHash] = strInput;
-    
-        return shorterHash;
-    },
-    unHash: async(hash: string)=>hashTable[hash],
-});
-
-function shortener(hash: string) {
-    for (let i = 4; i < 64; i++) {
-      const shorterHash = hash.substr(0, i);
-      if (hashTable[shorterHash] === undefined) {
-        hashTable[shorterHash] = hash;
-        return shorterHash;
-      }
-      if (hashTable[shorterHash] === hash) return shorterHash;
-    }
-    return hash;
-  }
-
-  async function sha256(message: string) {
-    const msgBuffer = new TextEncoder().encode(message);
-  
-    const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
-  
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-  
-    // convert bytes to hex string
-    const hashHex = hashArray.map((b) => ("00" + b.toString(16)).slice(-2)).join(
-      "",
-    );
-    return hashHex;
-  }
-  
+export const Sha256Worker = async () => Sha256(hashTable);
 //   async function sign(message: string) {
 //     const msgBuffer = new TextEncoder().encode(message);
   
