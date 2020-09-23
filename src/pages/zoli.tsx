@@ -1,6 +1,6 @@
 import React from "react";
 
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 
 import { Layout } from "../components/layout";
 import { SEO } from "../components/seo";
@@ -42,27 +42,6 @@ interface Props {
   location: Location;
 }
 
-const Wrapper = (props: any) => {
-  const ref = React.useRef(null);
-
-  React.useEffect(() => {
-    const pastEvents = props.pastEvents;
-    if (props.code) {
-      const cc = new Function(
-        "props",
-        "React",
-        `return (${props.code})(props)`,
-      );
-      const Counter = (props: any) => cc(props, React);
-      ReactDOM.hydrate(<Counter pastEvents={pastEvents} />, ref.current);
-    }
-  }, [props.innerHTML]);
-
-  return <div
-    ref={ref}
-    dangerouslySetInnerHTML={{ __html: props.innerHTML }}
-  />;
-};
 
 const Comp1: React.FC<{ onEvent: (event: string) => void }> = ({ onEvent }) => {
   const [count, setCount] = React.useState(0);
@@ -132,7 +111,7 @@ const counter = `function Counter(props){
 }
 `;
 
-const pastEvents = new Array(100000).fill({
+const pastEventsDefault = new Array(100000).fill({
   target: "+",
   type: "click",
 });
@@ -144,7 +123,7 @@ const ZedZoliPage = ({ data, location }: Props) => {
     {
       code: ``,
       transformedCode: ``,
-      pastEvents,
+      pastEvents: pastEventsDefault,
       pastEventsHash: ``,
       codeHash: ``,
       transformedHash: ``,
@@ -158,19 +137,21 @@ const ZedZoliPage = ({ data, location }: Props) => {
     const runner = async () => {
       const codeHash = await hash(code);
       const transformedHash = await transform(codeHash);
-
-      const pastEventsHash = await hash(pastEvents);
+      const pastEventsHash = await hash(renderedComponent.pastEvents);
       const transformedCode = await unHash(transformedHash);
       const renderedHash = await render(transformedHash, pastEventsHash);
       const renderedContent = await unHash(renderedHash);
 
+
+      
+
       changeWorkerRenderedComponent(
         {
+          ...renderedComponent,
           code: code,
           codeHash,
           transformedHash,
           transformedCode: transformedCode,
-          pastEvents,
           pastEventsHash,
           renderedHash,
           renderedContent,
@@ -178,7 +159,37 @@ const ZedZoliPage = ({ data, location }: Props) => {
       );
     };
     if (typeof window !== "undefined") runner();
-  }, [code]);
+  }, [code, renderedComponent.pastEvents]);
+
+
+const Wrapper = (props: any) => {
+  const ref = React.useRef(null);
+
+  // React.useEffect(() => {
+  //   const pastEvents = props.pastEvents;
+  //   if (props.code) {
+  //     const cc = new Function(
+  //       "props",
+  //       "React",
+  //       `return (${props.code})(props)`,
+  //     );
+  //     const Counter = (props: any) => cc(props, React);
+  //     ReactDOM.hydrate(<Counter pastEvents={pastEvents} />, ref.current);
+  //   }
+  // }, [props.innerHTML]);
+
+  return <div
+    ref={ref}
+    onClick={(e:any)=>{
+      if (e.target.type) {
+        changeWorkerRenderedComponent({...renderedComponent, pastEvents: [...renderedComponent.pastEvents, {target: e.target.innerHTML, type:"click"}]});
+      }
+    
+    }
+  }
+    dangerouslySetInnerHTML={{ __html: props.innerHTML }}
+  />;
+};
 
   return (
     <Layout location={location} title={siteTitle}>
