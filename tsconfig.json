@@ -31,9 +31,6 @@
     "declaration": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "types": [
-      "react"
-    ]
   },
   "include": [
     "src"

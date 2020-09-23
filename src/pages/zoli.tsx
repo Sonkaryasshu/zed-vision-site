@@ -6,13 +6,12 @@ import { Layout } from "../components/layout";
 import { SEO } from "../components/seo";
 import { ChangeDetector } from "../components/changeDetector";
 import { graphql } from "gatsby";
-import { register } from "../components/utils/testWorker";
 import { hash, unHash } from "../components/utils/sha";
 
 import { transform } from "../components/utils/babel";
 import { render } from "../components/utils/renderer";
-
-// import { sha256W, unhash } from "../components/utils/sha";
+import MonacoEditor from "react-monaco-editor";
+import JSONPretty from "react-json-pretty";
 
 interface Props {
   data: {
@@ -40,6 +39,7 @@ const Wrapper = (props: any) => {
       ReactDOM.hydrate(<Counter pastEvents={pastEvents} />, ref.current);
     }
   }, [props.innerHTML]);
+
   return <div
     ref={ref}
     dangerouslySetInnerHTML={{ __html: props.innerHTML }}
@@ -114,68 +114,90 @@ const counter = `function Counter(props){
 }
 `;
 
-const renderedOutside = register(counter);
+const pastEvents = new Array(100000).fill({
+  target: "+",
+  type: "click",
+});
 
 const ZedZoliPage = ({ data, location }: Props) => {
   const siteTitle = data.site.siteMetadata.title;
 
-  let workerRenderedComponent = renderedOutside();
-
   const [renderedComponent, changeWorkerRenderedComponent] = React.useState(
-    { ...workerRenderedComponent, outside: workerRenderedComponent },
+    {
+      code: ``,
+      transformedCode: ``,
+      pastEvents,
+      pastEventsHash: ``,
+      codeHash: ``,
+      transformedHash: ``,
+      renderedHash: ``,
+      renderedContent: ``,
+    },
   );
   const [code, changeCode] = React.useState(counter);
-  const [sha, changeSha] = React.useState("");
 
   React.useEffect(() => {
     const runner = async () => {
       const codeHash = await hash(code);
       const transformedHash = await transform(codeHash);
-      changeSha(transformedHash);
-      const pastEvents = new Array(100000).fill({
-        target: "+",
-        type: "click",
-      }); 
+
       const pastEventsHash = await hash(pastEvents);
-      // const val = await unHash(transformedHash);
+      const transformedCode = await unHash(transformedHash);
       const renderedHash = await render(transformedHash, pastEventsHash);
       const renderedContent = await unHash(renderedHash);
-      console.log("ELLO world", renderedContent);
+
+      changeWorkerRenderedComponent(
+        {
+          code: code,
+          codeHash,
+          transformedHash,
+          transformedCode: transformedCode,
+          pastEvents,
+          pastEventsHash,
+          renderedHash,
+          renderedContent,
+        },
+      );
+
     };
-    runner();
+    if (typeof window !== "undefined" ) runner();
   }, [code]);
-
-  React.useEffect(() => {
-    const renderedOutside = register(code);
-    let workerRenderedComponent = renderedOutside();
-
-    changeWorkerRenderedComponent(
-      { ...workerRenderedComponent, outside: workerRenderedComponent },
-    );
-  }, [renderedComponent.outside.innerHTML]);
 
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="Test Worker side rendering" />
-      <textarea value={code} onChange={(e) => changeCode(e.target.value)}>
-      </textarea>
-      {sha}
-      <h1
-        onClick={() =>
-          changeWorkerRenderedComponent(
-            { ...workerRenderedComponent, outside: renderedComponent.outside },
-          )}
-      >
-        Not Found!!!
-      </h1>
-
+      <MonacoEditor
+        width="800"
+        height="600"
+        language="javascript"
+        theme="vs-dark"
+        value={code}
+        options={{}}
+        onChange={changeCode}
+      />
+      <br />
       <Wrapper
-        key={renderedComponent.innerHTML}
-        code={renderedComponent.compiledCode}
+        key={renderedComponent.renderedHash}
+        code={renderedComponent.transformedCode}
         pastEvents={renderedComponent.pastEvents}
-        innerHTML={renderedComponent.innerHTML}
+        innerHTML={renderedComponent.renderedContent}
+      />
+      <br />
+
+      <JSONPretty
+        id="json-pretty"
+        data={{
+          codeHash: renderedComponent.codeHash,
+          transformedHash: renderedComponent.transformedHash,
+          pastEventsHash: renderedComponent.pastEventsHash,
+          renderedHash: renderedComponent.renderedHash,
+        }}
       >
-      </Wrapper>
+      </JSONPretty>
+
+      <hr />
+      <hr />
+      <hr />
       <ChangeDetector Comp1={Comp1}></ChangeDetector>
       <p>Worker side rendering</p>
       <div id="zoli"></div>

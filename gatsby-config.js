@@ -12,7 +12,6 @@ module.exports = {
     },
   },
   plugins: [
-    // `gatsby-plugin-pnpm`,
     `gatsby-plugin-workerize-loader`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -31,8 +30,6 @@ module.exports = {
     {
       resolve: `gatsby-plugin-mdx`,
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-typography`,
@@ -48,15 +45,15 @@ module.exports = {
         name:
           `Zed Vision - Development experience, Testing, and everything between`,
         short_name: `ZedVision`,
-        description: "Blog and tech experiments",
+        description: `Blog and tech experiments`,
         start_url: `/`,
         background_color: `#f7f0eb`,
         theme_color: `#a2466c`,
         display: `standalone`,
-        cache_busting_mode: "none",
+        cache_busting_mode: `none`,
       },
     },
     `gatsby-plugin-styled-components`,
-    "gatsby-plugin-remove-generator"
+    `gatsby-plugin-remove-generator`
   ],
 };

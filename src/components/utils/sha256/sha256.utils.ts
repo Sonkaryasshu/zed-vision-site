@@ -1,6 +1,6 @@
 export const Sha256 = (hashTable = {}) => ({
-  hash: async (input: string| object) => {
-    const strInput = typeof input!=="string"? JSON.stringify(input) : input;
+  hash: async (input: string | object) => {
+    const strInput = typeof input !== "string" ? JSON.stringify(input) : input;
 
     const hash = await sha256(strInput);
 
@@ -16,6 +16,7 @@ export const Sha256 = (hashTable = {}) => ({
           hashTable[shorterHash] = hash;
           return shorterHash;
         }
+
         if (hashTable[shorterHash] === hash) return shorterHash;
       }
       return hash;

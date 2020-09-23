@@ -1,3 +1,3 @@
-import {TransformModule} from "./babel.utils";
+import { TransformModule } from "./babel.utils";
 
-export const TransformWorker = async()=> await TransformModule();
+export const TransformWorker = async () => await TransformModule();
