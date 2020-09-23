@@ -2,7 +2,7 @@ import { RendererWorker } from "./renderer/renderer.worker";
 import { RendererModule } from "./renderer/renderer.utils";
 import { hash, unHash } from "./sha";
 
-const rendererW = ((typeof window !== undefined) && RendererWorker) ||
+const rendererW = ((typeof window !== "undefined") && RendererWorker) ||
   RendererModule;
 
 let loadedModule: any;

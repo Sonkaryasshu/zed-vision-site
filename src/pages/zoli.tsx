@@ -4,14 +4,32 @@ import ReactDOM from "react-dom";
 
 import { Layout } from "../components/layout";
 import { SEO } from "../components/seo";
-import { ChangeDetector } from "../components/changeDetector";
+// import { ChangeDetector } from "../components/changeDetector";
 import { graphql } from "gatsby";
-import { hash, unHash } from "../components/utils/sha";
 
+import { hash, unHash } from "../components/utils/sha";
 import { transform } from "../components/utils/babel";
 import { render } from "../components/utils/renderer";
-import MonacoEditor from "react-monaco-editor";
-import JSONPretty from "react-json-pretty";
+// import JSONPretty from "react-jso\n-pretty";
+
+const MonacoEditor = React.lazy(() => import("react-monaco-editor"));
+
+const CodeEditorWithFailBack: React.FC<
+  { code: string; changeCode: (code: string) => void }
+> = ({ code, changeCode }) =>
+  <div>
+    <React.Suspense fallback={<div>Loading...</div>}>
+      <MonacoEditor
+        width="800"
+        height="600"
+        language="javascript"
+        theme="vs-dark"
+        value={code}
+        options={{}}
+        onChange={changeCode}
+      />
+    </React.Suspense>
+  </div>;
 
 interface Props {
   data: {
@@ -46,39 +64,39 @@ const Wrapper = (props: any) => {
   />;
 };
 
-const Comp1: React.FC<{ onEvent: (event: string) => void }> = ({ onEvent }) => {
-  const [count, setCount] = React.useState(0);
+// const Comp1: React.FC<{ onEvent: (event: string) => void }> = ({ onEvent }) => {
+//   const [count, setCount] = React.useState(0);
 
-  return (
-    <React.Fragment>
-      <button
-        onClick={() => {
-          onEvent("double");
-          setCount(count * 2);
-        }}
-      >
-        x 2
-      </button>
-      <button
-        onClick={() => {
-          onEvent("inc");
-          setCount(count + 1);
-        }}
-      >
-        +
-      </button>
-      {count}
-      <button
-        onClick={() => {
-          onEvent("dec");
-          setCount(count - 1);
-        }}
-      >
-        -
-      </button>
-    </React.Fragment>
-  );
-};
+//   return (
+//     <React.Fragment>
+//       <button
+//         onClick={() => {
+//           onEvent("double");
+//           setCount(count * 2);
+//         }}
+//       >
+//         x 2
+//       </button>
+//       <button
+//         onClick={() => {
+//           onEvent("inc");
+//           setCount(count + 1);
+//         }}
+//       >
+//         +
+//       </button>
+//       {count}
+//       <button
+//         onClick={() => {
+//           onEvent("dec");
+//           setCount(count - 1);
+//         }}
+//       >
+//         -
+//       </button>
+//     </React.Fragment>
+//   );
+// };
 
 const counter = `function Counter(props){
   const actions = {
@@ -158,23 +176,15 @@ const ZedZoliPage = ({ data, location }: Props) => {
           renderedContent,
         },
       );
-
     };
-    if (typeof window !== "undefined" ) runner();
+    if (typeof window !== "undefined") runner();
   }, [code]);
 
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="Test Worker side rendering" />
-      <MonacoEditor
-        width="800"
-        height="600"
-        language="javascript"
-        theme="vs-dark"
-        value={code}
-        options={{}}
-        onChange={changeCode}
-      />
+      {(typeof window !== "undefined") &&
+        <CodeEditorWithFailBack code={code} changeCode={changeCode} />}
       <br />
       <Wrapper
         key={renderedComponent.renderedHash}
@@ -182,9 +192,9 @@ const ZedZoliPage = ({ data, location }: Props) => {
         pastEvents={renderedComponent.pastEvents}
         innerHTML={renderedComponent.renderedContent}
       />
-      <br />
+      {/* <br /> */}
 
-      <JSONPretty
+      {/* <JSONPretty
         id="json-pretty"
         data={{
           codeHash: renderedComponent.codeHash,
@@ -192,15 +202,14 @@ const ZedZoliPage = ({ data, location }: Props) => {
           pastEventsHash: renderedComponent.pastEventsHash,
           renderedHash: renderedComponent.renderedHash,
         }}
-      >
-      </JSONPretty>
+      /> */}
 
+      {/* <hr />
       <hr />
-      <hr />
-      <hr />
-      <ChangeDetector Comp1={Comp1}></ChangeDetector>
-      <p>Worker side rendering</p>
-      <div id="zoli"></div>
+      <hr /> */}
+      {/* <ChangeDetector Comp1={Comp1}></ChangeDetector> */}
+      {/* <p>Worker side rendering</p> */}
+      {/* <div id="zoli"></div> */}
     </Layout>
   );
 };

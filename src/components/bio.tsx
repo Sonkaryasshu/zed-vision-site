@@ -19,8 +19,6 @@ const StyledImgDiv = styled.div`
 `;
 
 export const Bio = () => {
-
-
   return (
     <Container>
       <StyledImgDiv>

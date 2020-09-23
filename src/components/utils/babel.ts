@@ -1,7 +1,7 @@
 import { TransformWorker } from "./babel/babel.worker";
 import { TransformModule } from "./babel/babel.utils";
 import { hash, unHash } from "./sha";
-const transformW = ((typeof window !== undefined) && TransformWorker) ||
+const transformW = ((typeof window !== "undefined") && TransformWorker) ||
   TransformModule;
 
 let loadedModule: any;
