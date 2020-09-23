@@ -4,13 +4,13 @@ import ReactDOM from "react-dom";
 
 import { Layout } from "../components/layout";
 import { SEO } from "../components/seo";
-// import { ChangeDetector } from "../components/changeDetector";
+import { ChangeDetector } from "../components/changeDetector";
 import { graphql } from "gatsby";
 
 import { hash, unHash } from "../components/utils/sha";
 import { transform } from "../components/utils/babel";
 import { render } from "../components/utils/renderer";
-// import JSONPretty from "react-jso\n-pretty";
+import JSONPretty from "react-json-pretty";
 
 const MonacoEditor = React.lazy(() => import("react-monaco-editor"));
 
@@ -64,39 +64,39 @@ const Wrapper = (props: any) => {
   />;
 };
 
-// const Comp1: React.FC<{ onEvent: (event: string) => void }> = ({ onEvent }) => {
-//   const [count, setCount] = React.useState(0);
+const Comp1: React.FC<{ onEvent: (event: string) => void }> = ({ onEvent }) => {
+  const [count, setCount] = React.useState(0);
 
-//   return (
-//     <React.Fragment>
-//       <button
-//         onClick={() => {
-//           onEvent("double");
-//           setCount(count * 2);
-//         }}
-//       >
-//         x 2
-//       </button>
-//       <button
-//         onClick={() => {
-//           onEvent("inc");
-//           setCount(count + 1);
-//         }}
-//       >
-//         +
-//       </button>
-//       {count}
-//       <button
-//         onClick={() => {
-//           onEvent("dec");
-//           setCount(count - 1);
-//         }}
-//       >
-//         -
-//       </button>
-//     </React.Fragment>
-//   );
-// };
+  return (
+    <React.Fragment>
+      <button
+        onClick={() => {
+          onEvent("double");
+          setCount(count * 2);
+        }}
+      >
+        x 2
+      </button>
+      <button
+        onClick={() => {
+          onEvent("inc");
+          setCount(count + 1);
+        }}
+      >
+        +
+      </button>
+      {count}
+      <button
+        onClick={() => {
+          onEvent("dec");
+          setCount(count - 1);
+        }}
+      >
+        -
+      </button>
+    </React.Fragment>
+  );
+};
 
 const counter = `function Counter(props){
   const actions = {
@@ -194,7 +194,7 @@ const ZedZoliPage = ({ data, location }: Props) => {
       />
       {/* <br /> */}
 
-      {/* <JSONPretty
+      <JSONPretty
         id="json-pretty"
         data={{
           codeHash: renderedComponent.codeHash,
@@ -202,12 +202,12 @@ const ZedZoliPage = ({ data, location }: Props) => {
           pastEventsHash: renderedComponent.pastEventsHash,
           renderedHash: renderedComponent.renderedHash,
         }}
-      /> */}
+      />
 
       {/* <hr />
       <hr />
       <hr /> */}
-      {/* <ChangeDetector Comp1={Comp1}></ChangeDetector> */}
+      <ChangeDetector Comp1={Comp1}></ChangeDetector>
       {/* <p>Worker side rendering</p> */}
       {/* <div id="zoli"></div> */}
     </Layout>
