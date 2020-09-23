@@ -9774,6 +9774,13 @@ moment@^2.27.0:
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.0.tgz#fcbef955844d91deb55438613ddcec56e86a3425"
   integrity sha512-z6IJ5HXYiuxvFTI6eiQ9dm77uE0gyy1yXNApVHqTcnIKfY9tIwEjlzsZ6u1LQXvVgKeTnv9Xm7NDvJ7lso3MtA==
 
+monaco-editor-webpack-plugin@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/monaco-editor-webpack-plugin/-/monaco-editor-webpack-plugin-2.0.0.tgz#196052f23678285deca7a7baf4d7aebe9d1ff9e1"
+  integrity sha512-z3nUGhnNis8eHcPepqrxyt3XwrnHD76E4KwV2ozWlBwYM6B3R5YYqzy40ECfJWqRFcwT4DhaLYaXOk5ym4MZhA==
+  dependencies:
+    loader-utils "^2.0.0"
+
 monaco-editor@*:
   version "0.21.0"
   resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.21.0.tgz#35d964cbeff8b035d574bb113e9491331810d5f1"
