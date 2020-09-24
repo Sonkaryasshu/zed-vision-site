@@ -111,7 +111,7 @@ const counter = `function Counter(props){
 }
 `;
 
-const pastEventsDefault = new Array(100000).fill({
+const pastEventsDefault = new Array(10).fill({
   target: "+",
   type: "click",
 });
