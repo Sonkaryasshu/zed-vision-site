@@ -1,23 +1,23 @@
 {
-    "dev": {
-        "awscloudformation": {
-            "AuthRoleName": "amplify-zedvisionblog-dev-181809-authRole",
-            "UnauthRoleArn": "arn:aws:iam::209616764690:role/amplify-zedvisionblog-dev-181809-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::209616764690:role/amplify-zedvisionblog-dev-181809-authRole",
-            "Region": "eu-west-2",
-            "DeploymentBucketName": "amplify-zedvisionblog-dev-181809-deployment",
-            "UnauthRoleName": "amplify-zedvisionblog-dev-181809-unauthRole",
-            "StackName": "amplify-zedvisionblog-dev-181809",
-            "StackId": "arn:aws:cloudformation:eu-west-2:209616764690:stack/amplify-zedvisionblog-dev-181809/6e689ce0-f777-11ea-9fcb-0ac6423403f2",
-            "AmplifyAppId": "d3840qq3pewttv"
-        },
-        "categories": {
-            "hosting": {
-                "amplifyhosting": {
-                    "appId": "d3840qq3pewttv",
-                    "type": "manual"
-                }
-            }
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-zedvisionblog-dev-181809-authRole",
+      "UnauthRoleArn": "arn:aws:iam::209616764690:role/amplify-zedvisionblog-dev-181809-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::209616764690:role/amplify-zedvisionblog-dev-181809-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-zedvisionblog-dev-181809-deployment",
+      "UnauthRoleName": "amplify-zedvisionblog-dev-181809-unauthRole",
+      "StackName": "amplify-zedvisionblog-dev-181809",
+      "StackId": "arn:aws:cloudformation:eu-west-2:209616764690:stack/amplify-zedvisionblog-dev-181809/6e689ce0-f777-11ea-9fcb-0ac6423403f2",
+      "AmplifyAppId": "d3840qq3pewttv"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d3840qq3pewttv",
+          "type": "manual"
         }
+      }
     }
+  }
 }
