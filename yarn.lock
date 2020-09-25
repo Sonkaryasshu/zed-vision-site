@@ -1782,10 +1782,10 @@
   resolved "https://registry.yarnpkg.com/@turist/time/-/time-0.0.1.tgz#57637d2a7d1860adb9f9cecbdcc966ce4f551d63"
   integrity sha512-M2BiThcbxMxSKX8W4z5u9jKZn6datnM3+FpEU+eYw0//l31E2xhqi7vTAuJ/Sf0P3yhp66SDJgPu3bRRpvrdQQ==
 
-"@types/babel__standalone@^7.1.2":
-  version "7.1.2"
-  resolved "https://registry.yarnpkg.com/@types/babel__standalone/-/babel__standalone-7.1.2.tgz#36fa55a51f1966688b0c7ce52524f14de0f3c309"
-  integrity sha512-a4gHAe/kNEgCnpc4HfIJHuyGDD/DI/62EFTt3dhvh/LtYdlPD4gUMgiwLoBIfv+Y+2vAfIwoZVrwwpDrwLhVXw==
+"@types/babel__standalone@^7.1.3":
+  version "7.1.3"
+  resolved "https://registry.yarnpkg.com/@types/babel__standalone/-/babel__standalone-7.1.3.tgz#e275639469c056f7cecc4963c88a803f028236dd"
+  integrity sha512-gj2Uvh8NT7+/0liAKMBtAqWspdg1LGZ471AD9Rdvrg1mB0q45qnl21dQPGz/ZtMYRgem0Aj/CUVQYHP3QDb5Gw==
   dependencies:
     "@babel/core" "^7.1.0"
 
@@ -1930,6 +1930,13 @@
   integrity sha512-SXPBMnFVQg1s00dlMCc/jCdvPqdE4mXaMMCeRlxLDmTAEoegHT53xKtkDnzDTOcmMHUfcjyf36/YYZ6SxRdnsw==
   dependencies:
     "@types/unist" "*"
+
+"@types/mdx-js__react@^1.5.2":
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@types/mdx-js__react/-/mdx-js__react-1.5.2.tgz#eb87df0ac135a685cc9bb01075a9036c7b395b0d"
+  integrity sha512-M/z869+SVti16ZGqMwg46XTNsBKj5/PNcId9NpjEUVPI2V8wzXpbkkhmhZy1n16nQvMAC6HJuh+Dogn8vPLV6w==
+  dependencies:
+    "@types/react" "*"
 
 "@types/minimatch@*":
   version "3.0.3"
@@ -3422,12 +3429,12 @@ browserify-zlib@^0.2.0:
     pako "~1.0.5"
 
 browserslist@^4.0.0, browserslist@^4.12.0, browserslist@^4.12.2, browserslist@^4.8.5:
-  version "4.14.4"
-  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.14.4.tgz#66a18131439f9e16c3da7f352518dfa12f60b0e3"
-  integrity sha512-7FOuawafVdEwa5Jv4nzeik/PepAjVte6HmVGHsjt2bC237jeL9QlcTBDF3PnHEvcC6uHwLGYPwZHNZMB7wWAnw==
+  version "4.14.5"
+  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.14.5.tgz#1c751461a102ddc60e40993639b709be7f2c4015"
+  integrity sha512-Z+vsCZIvCBvqLoYkBFTwEYH3v5MCQbsAjp50ERycpOjnPmolg1Gjy4+KaWWpm8QOJt9GHkhdqAl14NpCX73CWA==
   dependencies:
     caniuse-lite "^1.0.30001135"
-    electron-to-chromium "^1.3.570"
+    electron-to-chromium "^1.3.571"
     escalade "^3.1.0"
     node-releases "^1.1.61"
 
@@ -3706,9 +3713,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001135:
-  version "1.0.30001135"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001135.tgz#995b1eb94404a3c9a0d7600c113c9bb27f2cd8aa"
-  integrity sha512-ziNcheTGTHlu9g34EVoHQdIu5g4foc8EsxMGC7Xkokmvw0dqNtX8BS8RgCgFBaAiSp2IdjvBxNdh0ssib28eVQ==
+  version "1.0.30001137"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001137.tgz#6f0127b1d3788742561a25af3607a17fc778b803"
+  integrity sha512-54xKQZTqZrKVHmVz0+UvdZR6kQc7pJDgfhsMYDG19ID1BWoNnDMFm5Q3uSBSU401pBvKYMsHAt9qhEDcxmk8aw==
 
 case@^1.6.2:
   version "1.6.3"
@@ -5299,10 +5306,10 @@ ee-first@1.1.1:
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
-electron-to-chromium@^1.3.570:
-  version "1.3.571"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.571.tgz#e57977f1569f8326ae2a7905e26f3943536ba28f"
-  integrity sha512-UYEQ2Gtc50kqmyOmOVtj6Oqi38lm5yRJY3pLuWt6UIot0No1L09uu6Ja6/1XKwmz/p0eJFZTUZi+khd1PV1hHA==
+electron-to-chromium@^1.3.571:
+  version "1.3.572"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.572.tgz#62d87dfe32ca1f6b9a0f76917d24f66e94e19c01"
+  integrity sha512-TKqdEukCCl7JC20SwEoWTbtnGt4YjfHWAv4tcNky0a9qGo0WdM+Lrd60tps+nkaJCmktKBJjr99fLtEBU1ipWQ==
 
 elliptic@^6.5.3:
   version "6.5.3"
@@ -5657,10 +5664,10 @@ eslint-plugin-react-hooks@^1.7.0:
   resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-1.7.0.tgz#6210b6d5a37205f0b92858f895a4e827020a7d04"
   integrity sha512-iXTCFcOmlWvw4+TOE8CLWj6yX1GwzT0Y6cUfHHZqWnSk144VmVIRcVGtUAzrLES7C798lmvnt02C7rxaOX1HNA==
 
-eslint-plugin-react@7.21.1, eslint-plugin-react@^7.20.6:
-  version "7.21.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.21.1.tgz#3d9fe506eab78756f67c671bb2a9aa9c20990a39"
-  integrity sha512-TGtWzWrFjZtrD1giMz0O6a9ul++YR9vZSzIL/a7qlb5I/ra/O5RkMGMJK+KKYnJrzz884kyAkEyWiU4Hg2HTrg==
+eslint-plugin-react@7.21.2, eslint-plugin-react@^7.20.6:
+  version "7.21.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.21.2.tgz#3bd5d2c4c36d5a0428d0d6dda301ac9a84d681b2"
+  integrity sha512-j3XKvrK3rpBzveKFbgAeGsWb9uz6iUOrR0jixRfjwdFeGSRsXvVTFtHDQYCjsd1/6Z/xvb8Vy3LiI5Reo7fDrg==
   dependencies:
     array-includes "^3.1.1"
     array.prototype.flatmap "^1.2.3"
@@ -9783,9 +9790,9 @@ monaco-editor-webpack-plugin@^2.0.0:
     loader-utils "^2.0.0"
 
 monaco-editor@*:
-  version "0.21.0"
-  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.21.0.tgz#35d964cbeff8b035d574bb113e9491331810d5f1"
-  integrity sha512-fUmW7iC+wKWMetD44iVacEoSi+RqkA+C0vQvAk/FkEugg70iwGGLj5WoheAULaxLASQbYiapD2+85FJ0cnErYg==
+  version "0.21.1"
+  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.21.1.tgz#5e77cfb7105cdbcb3d3090f5f37fbf8471a889f8"
+  integrity sha512-6zBIh9tE8dkV/wvdssE6Rwqlt1RaLmBH27iCuQlDJdcWQukgoXiy7Fc+oH9cmtdnU5IojjOn/xLfnW0qJLoDYg==
 
 move-concurrently@^1.0.1:
   version "1.0.1"
