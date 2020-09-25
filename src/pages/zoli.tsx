@@ -92,6 +92,7 @@ const counter = `function Counter(props){
     decrease: state => ({ counter: state.counter - 1 }),  
     double: state => ({ counter: state.counter * 2 }),
     increase: state => ({ counter: state.counter + 1 }),
+    _skip: state => ({ counter: state.counter }),
   }
   const pastEvents = props.pastEvents || []
   
@@ -104,6 +105,7 @@ const counter = `function Counter(props){
       if (text.includes("-")) return "decrease"
       else if (text.includes("+")) return "increase"
       else if (text.includes("x2")) return "double"
+      else return "_skip"
     })
     .reduce((state, ev) => actions[ev](state), { counter: 0 })
     
