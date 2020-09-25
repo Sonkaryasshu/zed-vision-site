@@ -4,13 +4,23 @@ import React from "react";
 
 import { Layout } from "../components/layout";
 import { SEO } from "../components/seo";
-import { ChangeDetector } from "../components/changeDetector";
+// import { ChangeDetector } from "../components/changeDetector";
 import { graphql } from "gatsby";
 
 import { hash, unHash } from "../components/utils/sha";
 import { transform } from "../components/utils/babel";
 import { render } from "../components/utils/renderer";
 import JSONPretty from "react-json-pretty";
+import styled from "styled-components";
+import ReactDiffViewer from 'react-diff-viewer';
+
+
+const StyledContainer = styled.div`
+display: flex;
+flex-wrap: nowrap;
+flex-direction: row;
+justify-content: space-between;
+`;
 
 const MonacoEditor = React.lazy(() => import("react-monaco-editor"));
 
@@ -20,7 +30,7 @@ const CodeEditorWithFailBack: React.FC<
   <div>
     <React.Suspense fallback={<div>Loading...</div>}>
       <MonacoEditor
-        width="800"
+        width="100%"
         height="600"
         language="javascript"
         theme="vs-dark"
@@ -43,39 +53,39 @@ interface Props {
 }
 
 
-const Comp1: React.FC<{ onEvent: (event: string) => void }> = ({ onEvent }) => {
-  const [count, setCount] = React.useState(0);
+// const Comp1: React.FC<{ onEvent: (event: string) => void }> = ({ onEvent }) => {
+//   const [count, setCount] = React.useState(0);
 
-  return (
-    <React.Fragment>
-      <button
-        onClick={() => {
-          onEvent("double");
-          setCount(count * 2);
-        }}
-      >
-        x 2
-      </button>
-      <button
-        onClick={() => {
-          onEvent("inc");
-          setCount(count + 1);
-        }}
-      >
-        +
-      </button>
-      {count}
-      <button
-        onClick={() => {
-          onEvent("dec");
-          setCount(count - 1);
-        }}
-      >
-        -
-      </button>
-    </React.Fragment>
-  );
-};
+//   return (
+//     <React.Fragment>
+//       <button
+//         onClick={() => {
+//           onEvent("double");
+//           setCount(count * 2);
+//         }}
+//       >
+//         x 2
+//       </button>
+//       <button
+//         onClick={() => {
+//           onEvent("inc");
+//           setCount(count + 1);
+//         }}
+//       >
+//         +
+//       </button>
+//       {count}
+//       <button
+//         onClick={() => {
+//           onEvent("dec");
+//           setCount(count - 1);
+//         }}
+//       >
+//         -
+//       </button>
+//     </React.Fragment>
+//   );
+// };
 
 const counter = `function Counter(props){
   const actions = {
@@ -123,38 +133,53 @@ const ZedZoliPage = ({ data, location }: Props) => {
     {
       code: ``,
       transformedCode: ``,
+      mainCodeHash: "",
+      devCodeHash: "",
       pastEvents: pastEventsDefault,
       pastEventsHash: ``,
       codeHash: ``,
       transformedHash: ``,
+      transformedMainHash: ``,
       renderedHash: ``,
       renderedContent: ``,
+      renderedMainHash: ``,
+      renderedContentMain: ``,
     },
   );
   const [code, changeCode] = React.useState(counter);
 
   React.useEffect(() => {
     const runner = async () => {
-      const codeHash = await hash(code);
+      const devCodeHash = await hash(code);
+      const codeHash = devCodeHash;
+      const mainCodeHash = renderedComponent.mainCodeHash ? renderedComponent.mainCodeHash : devCodeHash;
+
       const transformedHash = await transform(codeHash);
+      const transformedMainHash = await transform(mainCodeHash);
       const pastEventsHash = await hash(renderedComponent.pastEvents);
       const transformedCode = await unHash(transformedHash);
+
       const renderedHash = await render(transformedHash, pastEventsHash);
+      const renderedMainHash = await render(transformedMainHash, pastEventsHash);
       const renderedContent = await unHash(renderedHash);
+      const renderedContentMain = await unHash(renderedMainHash);
 
-
-      
 
       changeWorkerRenderedComponent(
         {
           ...renderedComponent,
-          code: code,
+          code,
+          devCodeHash,
+          mainCodeHash,
           codeHash,
           transformedHash,
+          transformedMainHash,
           transformedCode: transformedCode,
           pastEventsHash,
           renderedHash,
           renderedContent,
+          renderedMainHash,
+          renderedContentMain
         },
       );
     };
@@ -196,29 +221,60 @@ const Wrapper = (props: any) => {
       <SEO title="Test Worker side rendering" />
       {(typeof window !== "undefined") &&
         <CodeEditorWithFailBack code={code} changeCode={changeCode} />}
-      <br />
-      <Wrapper
-        key={renderedComponent.renderedHash}
-        code={renderedComponent.transformedCode}
-        pastEvents={renderedComponent.pastEvents}
-        innerHTML={renderedComponent.renderedContent}
-      />
-      {/* <br /> */}
+      <StyledContainer>
+        <div>
+          <h4>Main</h4>
+          <Wrapper
+            key={renderedComponent.renderedMainHash}
+            code={renderedComponent.transformedCode}
+            pastEvents={renderedComponent.pastEvents}
+            innerHTML={renderedComponent.renderedContentMain}
+          />
+          <JSONPretty
+            id="json-pretty"
+            data={{
+              mainCodeHash: renderedComponent.mainCodeHash,
+              transformedHash: renderedComponent.transformedMainHash,
+              pastEventsHash: renderedComponent.pastEventsHash,
+              renderedHash: renderedComponent.renderedMainHash,
+            }}
+          />
+        </div>
+        {renderedComponent.renderedMainHash !== renderedComponent.renderedHash && <React.Fragment>
 
-      <JSONPretty
-        id="json-pretty"
-        data={{
-          codeHash: renderedComponent.codeHash,
-          transformedHash: renderedComponent.transformedHash,
-          pastEventsHash: renderedComponent.pastEventsHash,
-          renderedHash: renderedComponent.renderedHash,
-        }}
-      />
+          <div>
+            <h4>Output diff</h4>
+
+            <div><ReactDiffViewer oldValue={renderedComponent.renderedContentMain} newValue={renderedComponent.renderedContent} splitView={true} /></div>
+            <div>
+              <button onClick={() => changeWorkerRenderedComponent({ ...renderedComponent, mainCodeHash: renderedComponent.codeHash, renderedContentMain: renderedComponent.renderedContent, renderedMainHash: renderedComponent.renderedHash })}>Save change - as main code</button>
+            </div>
+          </div>
+          <div>
+            <h4>Changed</h4>
+          <Wrapper
+            key={renderedComponent.renderedHash}
+            code={renderedComponent.transformedCode}
+            pastEvents={renderedComponent.pastEvents}
+            innerHTML={renderedComponent.renderedContent}
+            />
+          <JSONPretty
+            id="json-pretty"
+            data={{
+              codeHash: renderedComponent.codeHash,
+              transformedHash: renderedComponent.transformedHash,
+              pastEventsHash: renderedComponent.pastEventsHash,
+              renderedHash: renderedComponent.renderedHash,
+            }}
+          />
+          </div></React.Fragment>}
+
+      </StyledContainer>
 
       {/* <hr />
       <hr />
       <hr /> */}
-      <ChangeDetector Comp1={Comp1}></ChangeDetector>
+      {/* <ChangeDetector Comp1={Comp1}></ChangeDetector> */}
       {/* <p>Worker side rendering</p> */}
       {/* <div id="zoli"></div> */}
     </Layout>
