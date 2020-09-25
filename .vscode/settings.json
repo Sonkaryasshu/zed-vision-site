@@ -1,8 +1,9 @@
 {
   "files.autoSave": "onFocusChange",
   "editor.folding": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "modifications",
   "eslint.enable": true,
-  "terminal.integrated.rendererType": "experimentalWebgl",
   "typescript.autoClosingTags": true,
   "typescript.preferences.includePackageJsonAutoImports": "off",
   "typescript.extension.sortImports.sortOnSave": false,
@@ -26,6 +27,7 @@
     "Erdos",
     "Kanye",
     "Zoltan",
+    "ampproject",
     "atrule",
     "browserslist",
     "cacheable",
@@ -38,6 +40,7 @@
     "docgen",
     "downlevel",
     "emotion",
+    "esnext",
     "facebox",
     "firstload",
     "focusable",
@@ -79,11 +82,12 @@
     "vfile",
     "videostream",
     "wordpress",
+    "workerize",
     "xkcd",
     "zoli"
   ],
   "typescript.suggest.paths": false,
   "mdx-preview.build.useSucraseTranspiler": true,
   "mdx-preview.preview.useWhiteBackground": true,
-  "mdx-preview.preview.security": "disabled"
+  "mdx-preview.preview.security": "disabled",
 }
