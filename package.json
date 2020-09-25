@@ -23,6 +23,7 @@
     "@material-ui/icons": "4.9.1",
     "@octokit/rest": "18.0.6",
     "html2canvas": "1.0.0-rc.7",
+    "monaco-editor": "^0.21.1",
     "polished": "3.6.7",
     "react": "16.13.1",
     "react-diff-viewer": "^3.1.1",
