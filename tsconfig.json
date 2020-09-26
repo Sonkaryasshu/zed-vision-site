@@ -20,7 +20,7 @@
     "noEmit": true,
     "jsx": "react",
     "downlevelIteration": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "incremental": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
