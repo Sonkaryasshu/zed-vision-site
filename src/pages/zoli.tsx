@@ -10,15 +10,16 @@ import { graphql } from "gatsby";
 import { hash, unHash } from "../components/utils/sha";
 import { transform } from "../components/utils/babel";
 import { render } from "../components/utils/renderer";
-import JSONPretty from "react-json-pretty";
+// import JSONPretty from "react-json-pretty";
 import styled from "styled-components";
 import ReactDiffViewer from "react-diff-viewer";
+import format from "html-format";
 
 const StyledContainer = styled.div`
 display: flex;
 flex-wrap: nowrap;
 flex-direction: row;
-justify-content: space-between;
+justify-content: space-evenly;
 `;
 
 const MonacoEditor = React.lazy(() => import("../components/monacoEditor"));
@@ -203,7 +204,7 @@ const ZedZoliPage = ({ data, location }: Props) => {
     //     );
     //     const Counter = (props: any) => cc(props, React);
     //     ReactDOM.hydrate(<Counter pastEvents={pastEvents} />, ref.current);
-    //   }
+    //   }  
     // }, [props.innerHTML]);
 
     return <div
@@ -230,16 +231,38 @@ const ZedZoliPage = ({ data, location }: Props) => {
       <SEO title="Test Worker side rendering" />
       {(typeof window !== "undefined") &&
         <CodeEditorWithFailBack code={code} changeCode={changeCode} />}
-      <StyledContainer>
-        <div>
-          <h4>Main</h4>
+    <>
+      {renderedComponent.renderedMainHash === renderedComponent.renderedHash && <div>
+          <h4>Result</h4>
           <Wrapper
             key={renderedComponent.renderedMainHash}
             code={renderedComponent.transformedCode}
             pastEvents={renderedComponent.pastEvents}
             innerHTML={renderedComponent.renderedContentMain}
           />
-          <JSONPretty
+          {/* <JSONPretty
+            id="json-pretty"
+            data={{
+              mainCodeHash: renderedComponent.mainCodeHash,
+              transformedHash: renderedComponent.transformedMainHash,
+              pastEventsHash: renderedComponent.pastEventsHash,
+              renderedHash: renderedComponent.renderedMainHash,
+            }} */}
+          {/* /> */}
+        </div>}
+        {renderedComponent.renderedMainHash !==
+            renderedComponent.renderedHash && <React.Fragment>
+          <div>
+          <StyledContainer>
+          <div>
+          <h4>Previous</h4>
+          <Wrapper
+            key={renderedComponent.renderedMainHash}
+            code={renderedComponent.transformedCode}
+            pastEvents={renderedComponent.pastEvents}
+            innerHTML={renderedComponent.renderedContentMain}
+          />
+          {/* <JSONPretty
             id="json-pretty"
             data={{
               mainCodeHash: renderedComponent.mainCodeHash,
@@ -247,17 +270,32 @@ const ZedZoliPage = ({ data, location }: Props) => {
               pastEventsHash: renderedComponent.pastEventsHash,
               renderedHash: renderedComponent.renderedMainHash,
             }}
-          />
+          /> */}
         </div>
-        {renderedComponent.renderedMainHash !==
-            renderedComponent.renderedHash && <React.Fragment>
-          <div>
-            <h4>Output diff</h4>
-
+        <div>
+          <h4>Next</h4>
+          <Wrapper
+            key={renderedComponent.renderedHash}
+            code={renderedComponent.transformedCode}
+            pastEvents={renderedComponent.pastEvents}
+            innerHTML={renderedComponent.renderedContent}
+          />
+          {/* <JSONPretty
+            id="json-pretty"
+            data={{
+              mainCodeHash: renderedComponent.mainCodeHash,
+              transformedHash: renderedComponent.transformedMainHash,
+              pastEventsHash: renderedComponent.pastEventsHash,
+              renderedHash: renderedComponent.renderedMainHash,
+            }}
+          /> */}
+        </div>
+          </StyledContainer>
             <div>
               <ReactDiffViewer
-                oldValue={renderedComponent.renderedContentMain}
-                newValue={renderedComponent.renderedContent}
+                oldValue={format(renderedComponent.renderedContentMain)}
+                newValue={format(renderedComponent.renderedContent)}
+                showDiffOnly={true}
                 splitView={true}
               />
             </div>
@@ -277,26 +315,8 @@ const ZedZoliPage = ({ data, location }: Props) => {
               </button>
             </div>
           </div>
-          <div>
-            <h4>Changed</h4>
-            <Wrapper
-              key={renderedComponent.renderedHash}
-              code={renderedComponent.transformedCode}
-              pastEvents={renderedComponent.pastEvents}
-              innerHTML={renderedComponent.renderedContent}
-            />
-            <JSONPretty
-              id="json-pretty"
-              data={{
-                codeHash: renderedComponent.codeHash,
-                transformedHash: renderedComponent.transformedHash,
-                pastEventsHash: renderedComponent.pastEventsHash,
-                renderedHash: renderedComponent.renderedHash,
-              }}
-            />
-          </div>
         </React.Fragment>}
-      </StyledContainer>
+      </>
 
       {/* <hr />
       <hr />
