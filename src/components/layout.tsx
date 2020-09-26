@@ -1,5 +1,5 @@
 import React from "react";
-import { Helmet } from "react-helmet";  
+import { Helmet } from "react-helmet";
 import styled from "styled-components";
 
 const StyledContent = styled.main`
@@ -8,8 +8,6 @@ margin: auto;
 `;
 
 export const Layout: React.FC = ({ children }) => {
-
-
   return (
     <React.Fragment>
       <Helmet>
@@ -19,7 +17,7 @@ export const Layout: React.FC = ({ children }) => {
         />
       </Helmet>
       <StyledContent>
-      {children}
+        {children}
       </StyledContent>
     </React.Fragment>
   );

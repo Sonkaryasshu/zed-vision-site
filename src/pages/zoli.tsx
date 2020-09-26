@@ -23,7 +23,6 @@ const CodeEditorWithFailBack: React.FC<
     </React.Suspense>
   </div>;
 
-
 const counter = `function Counter(props){
   const actions = {
     decrease: state => ({ counter: state.counter - 1 }),  
@@ -70,8 +69,7 @@ const pastEventsDefault = new Array(10).fill({
   type: "click",
 });
 
-const ZedZoliPage = ( ) => {
-
+const ZedZoliPage = () => {
   const [renderedComponent, changeWorkerRenderedComponent] = React.useState(
     {
       code: ``,
@@ -160,73 +158,73 @@ const ZedZoliPage = ( ) => {
     />;
   };
 
-  const isChangeAvailable = renderedComponent.renderedMainHash !==renderedComponent.renderedHash ;
+  const isChangeAvailable =
+    renderedComponent.renderedMainHash !== renderedComponent.renderedHash;
 
   return (
     <Layout>
       <SEO title="Test Worker side rendering" />
       {(typeof window !== "undefined") &&
         <CodeEditorWithFailBack code={code} changeCode={changeCode} />}
-    
-        {!isChangeAvailable&& <div>
-          <h4>Result</h4>
-          <Wrapper
+
+      {!isChangeAvailable && <div>
+        <h4>Result</h4>
+        <Wrapper
+          key={renderedComponent.renderedMainHash}
+          code={renderedComponent.transformedCode}
+          pastEvents={renderedComponent.pastEvents}
+          innerHTML={renderedComponent.renderedContentMain}
+        />
+      </div>}
+
+      {isChangeAvailable && <div>
+        <ReactDiffViewer
+          oldValue={format(renderedComponent.renderedContent)}
+          newValue={format(renderedComponent.renderedContentMain)}
+          showDiffOnly={true}
+          rightTitle={<Wrapper
             key={renderedComponent.renderedMainHash}
             code={renderedComponent.transformedCode}
             pastEvents={renderedComponent.pastEvents}
             innerHTML={renderedComponent.renderedContentMain}
-          />
-        </div>}
+          />}
+          leftTitle={<Wrapper
+            key={renderedComponent.renderedHash}
+            code={renderedComponent.transformedCode}
+            pastEvents={renderedComponent.pastEvents}
+            innerHTML={renderedComponent.renderedContent}
+          />}
+          hideLineNumbers={true}
+          splitView={true}
+        />
 
-        {isChangeAvailable && <div>
-          <ReactDiffViewer
-            oldValue={format(renderedComponent.renderedContent)}
-            newValue={format(renderedComponent.renderedContentMain)}
-            showDiffOnly={true}
-            leftTitle={<Wrapper
-              key={renderedComponent.renderedMainHash}
-              code={renderedComponent.transformedCode}
-              pastEvents={renderedComponent.pastEvents}
-              innerHTML={renderedComponent.renderedContentMain}
-            />}
-            rightTitle={<Wrapper
-              key={renderedComponent.renderedHash}
-              code={renderedComponent.transformedCode}
-              pastEvents={renderedComponent.pastEvents}
-              innerHTML={renderedComponent.renderedContent}
-            />}
-            hideLineNumbers={true}
-            splitView={true}
-          />
-
-          <button
-            onClick={() =>
-              changeWorkerRenderedComponent(
-                {
-                  ...renderedComponent,
-                  mainCodeHash: renderedComponent.codeHash,
-                  renderedContentMain: renderedComponent.renderedContent,
-                  renderedMainHash: renderedComponent.renderedHash,
-                },
-              )}
-          >
-            Save change - as main code
-          </button>
-          <button
-            onClick={() => {
-              changeCode(renderedComponent.mainCode);
-              changeWorkerRenderedComponent({
+        <button
+          onClick={() =>
+            changeWorkerRenderedComponent(
+              {
                 ...renderedComponent,
-                code: renderedComponent.mainCode,
-              });
-            }}
-          >
-            Restore
-          </button>
-        </div>}
+                mainCodeHash: renderedComponent.codeHash,
+                renderedContentMain: renderedComponent.renderedContent,
+                renderedMainHash: renderedComponent.renderedHash,
+              },
+            )}
+        >
+          Save change - as main code
+        </button>
+        <button
+          onClick={() => {
+            changeCode(renderedComponent.mainCode);
+            changeWorkerRenderedComponent({
+              ...renderedComponent,
+              code: renderedComponent.mainCode,
+            });
+          }}
+        >
+          Restore
+        </button>
+      </div>}
     </Layout>
   );
 };
 
 export default ZedZoliPage;
-
