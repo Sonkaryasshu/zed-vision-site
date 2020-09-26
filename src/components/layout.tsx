@@ -1,41 +1,15 @@
-import * as React from "react";
-import { Helmet } from "react-helmet";
-import { Link } from "gatsby";
+import React from "react";
+import { Helmet } from "react-helmet";  
 import styled from "styled-components";
 
-interface Props {
-  location: Location;
-  title: string;
-}
-
-const StyledContent = styled.div`
+const StyledContent = styled.main`
 max-width: 1140px;
 margin: auto;
 `;
 
-export const Layout: React.FC<Props> = ({ location, title, children }) => {
-  let __PATH_PREFIX__;
+export const Layout: React.FC = ({ children }) => {
 
-  const rootPath = `${__PATH_PREFIX__}/`;
-  let header = (
-    <h1>
-      <Link to={`/`}>{title}</Link>
-    </h1>
-  );
-  if (!(location && location.pathname)) header = <React.Fragment />;
-  else if (location.pathname === rootPath) {
-    header = (
-      <h1>
-        <Link to={`/`}>{title}</Link>
-      </h1>
-    );
-  } else {
-    header = (
-      <h2>
-        <Link to={`/`}>{title}</Link>
-      </h2>
-    );
-  }
+
   return (
     <React.Fragment>
       <Helmet>
@@ -45,9 +19,7 @@ export const Layout: React.FC<Props> = ({ location, title, children }) => {
         />
       </Helmet>
       <StyledContent>
-        <header>{header}</header>
-        <main>{children}</main>
-        <footer>© {new Date().getFullYear()}, Zed vision</footer>
+      {children}
       </StyledContent>
     </React.Fragment>
   );

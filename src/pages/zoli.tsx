@@ -1,26 +1,13 @@
 import React from "react";
-
-// import ReactDOM from "react-dom";
-
 import { Layout } from "../components/layout";
 import { SEO } from "../components/seo";
-// import { ChangeDetector } from "../components/changeDetector";
-import { graphql } from "gatsby";
 
 import { hash, unHash } from "../components/utils/sha";
 import { transform } from "../components/utils/babel";
 import { render } from "../components/utils/renderer";
-// import JSONPretty from "react-json-pretty";
-import styled from "styled-components";
+
 import ReactDiffViewer from "react-diff-viewer";
 import format from "html-format";
-
-const StyledContainer = styled.div`
-display: flex;
-flex-wrap: nowrap;
-flex-direction: row;
-justify-content: space-evenly;
-`;
 
 const MonacoEditor = React.lazy(() => import("../components/monacoEditor"));
 
@@ -36,50 +23,6 @@ const CodeEditorWithFailBack: React.FC<
     </React.Suspense>
   </div>;
 
-interface Props {
-  data: {
-    site: {
-      siteMetadata: {
-        title: string;
-      };
-    };
-  };
-  location: Location;
-}
-
-// const Comp1: React.FC<{ onEvent: (event: string) => void }> = ({ onEvent }) => {
-//   const [count, setCount] = React.useState(0);
-
-//   return (
-//     <React.Fragment>
-//       <button
-//         onClick={() => {
-//           onEvent("double");
-//           setCount(count * 2);
-//         }}
-//       >
-//         x 2
-//       </button>
-//       <button
-//         onClick={() => {
-//           onEvent("inc");
-//           setCount(count + 1);
-//         }}
-//       >
-//         +
-//       </button>
-//       {count}
-//       <button
-//         onClick={() => {
-//           onEvent("dec");
-//           setCount(count - 1);
-//         }}
-//       >
-//         -
-//       </button>
-//     </React.Fragment>
-//   );
-// };
 
 const counter = `function Counter(props){
   const actions = {
@@ -127,13 +70,13 @@ const pastEventsDefault = new Array(10).fill({
   type: "click",
 });
 
-const ZedZoliPage = ({ data, location }: Props) => {
-  const siteTitle = data.site.siteMetadata.title;
+const ZedZoliPage = ( ) => {
 
   const [renderedComponent, changeWorkerRenderedComponent] = React.useState(
     {
       code: ``,
       transformedCode: ``,
+      mainCode: ``,
       mainCodeHash: "",
       devCodeHash: "",
       pastEvents: pastEventsDefault,
@@ -153,6 +96,9 @@ const ZedZoliPage = ({ data, location }: Props) => {
     const runner = async () => {
       const devCodeHash = await hash(code);
       const codeHash = devCodeHash;
+      const mainCode = renderedComponent.mainCode
+        ? renderedComponent.mainCode
+        : code;
       const mainCodeHash = renderedComponent.mainCodeHash
         ? renderedComponent.mainCodeHash
         : devCodeHash;
@@ -175,11 +121,12 @@ const ZedZoliPage = ({ data, location }: Props) => {
           ...renderedComponent,
           code,
           devCodeHash,
+          mainCode,
           mainCodeHash,
           codeHash,
           transformedHash,
           transformedMainHash,
-          transformedCode: transformedCode,
+          transformedCode,
           pastEventsHash,
           renderedHash,
           renderedContent,
@@ -193,19 +140,6 @@ const ZedZoliPage = ({ data, location }: Props) => {
 
   const Wrapper = (props: any) => {
     const ref = React.useRef(null);
-
-    // React.useEffect(() => {
-    //   const pastEvents = props.pastEvents;
-    //   if (props.code) {
-    //     const cc = new Function(
-    //       "props",
-    //       "React",
-    //       `return (${props.code})(props)`,
-    //     );
-    //     const Counter = (props: any) => cc(props, React);
-    //     ReactDOM.hydrate(<Counter pastEvents={pastEvents} />, ref.current);
-    //   }  
-    // }, [props.innerHTML]);
 
     return <div
       ref={ref}
@@ -226,13 +160,15 @@ const ZedZoliPage = ({ data, location }: Props) => {
     />;
   };
 
+  const isChangeAvailable = renderedComponent.renderedMainHash !==renderedComponent.renderedHash ;
+
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout>
       <SEO title="Test Worker side rendering" />
       {(typeof window !== "undefined") &&
         <CodeEditorWithFailBack code={code} changeCode={changeCode} />}
-    <>
-      {renderedComponent.renderedMainHash === renderedComponent.renderedHash && <div>
+    
+        {!isChangeAvailable&& <div>
           <h4>Result</h4>
           <Wrapper
             key={renderedComponent.renderedMainHash}
@@ -240,102 +176,57 @@ const ZedZoliPage = ({ data, location }: Props) => {
             pastEvents={renderedComponent.pastEvents}
             innerHTML={renderedComponent.renderedContentMain}
           />
-          {/* <JSONPretty
-            id="json-pretty"
-            data={{
-              mainCodeHash: renderedComponent.mainCodeHash,
-              transformedHash: renderedComponent.transformedMainHash,
-              pastEventsHash: renderedComponent.pastEventsHash,
-              renderedHash: renderedComponent.renderedMainHash,
-            }} */}
-          {/* /> */}
         </div>}
-        {renderedComponent.renderedMainHash !==
-            renderedComponent.renderedHash && <React.Fragment>
-          <div>
-          <StyledContainer>
-          <div>
-          <h4>Previous</h4>
-          <Wrapper
-            key={renderedComponent.renderedMainHash}
-            code={renderedComponent.transformedCode}
-            pastEvents={renderedComponent.pastEvents}
-            innerHTML={renderedComponent.renderedContentMain}
-          />
-          {/* <JSONPretty
-            id="json-pretty"
-            data={{
-              mainCodeHash: renderedComponent.mainCodeHash,
-              transformedHash: renderedComponent.transformedMainHash,
-              pastEventsHash: renderedComponent.pastEventsHash,
-              renderedHash: renderedComponent.renderedMainHash,
-            }}
-          /> */}
-        </div>
-        <div>
-          <h4>Next</h4>
-          <Wrapper
-            key={renderedComponent.renderedHash}
-            code={renderedComponent.transformedCode}
-            pastEvents={renderedComponent.pastEvents}
-            innerHTML={renderedComponent.renderedContent}
-          />
-          {/* <JSONPretty
-            id="json-pretty"
-            data={{
-              mainCodeHash: renderedComponent.mainCodeHash,
-              transformedHash: renderedComponent.transformedMainHash,
-              pastEventsHash: renderedComponent.pastEventsHash,
-              renderedHash: renderedComponent.renderedMainHash,
-            }}
-          /> */}
-        </div>
-          </StyledContainer>
-            <div>
-              <ReactDiffViewer
-                oldValue={format(renderedComponent.renderedContentMain)}
-                newValue={format(renderedComponent.renderedContent)}
-                showDiffOnly={true}
-                splitView={true}
-              />
-            </div>
-            <div>
-              <button
-                onClick={() =>
-                  changeWorkerRenderedComponent(
-                    {
-                      ...renderedComponent,
-                      mainCodeHash: renderedComponent.codeHash,
-                      renderedContentMain: renderedComponent.renderedContent,
-                      renderedMainHash: renderedComponent.renderedHash,
-                    },
-                  )}
-              >
-                Save change - as main code
-              </button>
-            </div>
-          </div>
-        </React.Fragment>}
-      </>
 
-      {/* <hr />
-      <hr />
-      <hr /> */}
-      {/* <ChangeDetector Comp1={Comp1}></ChangeDetector> */}
-      {/* <p>Worker side rendering</p> */}
-      {/* <div id="zoli"></div> */}
+        {isChangeAvailable && <div>
+          <ReactDiffViewer
+            oldValue={format(renderedComponent.renderedContent)}
+            newValue={format(renderedComponent.renderedContentMain)}
+            showDiffOnly={true}
+            leftTitle={<Wrapper
+              key={renderedComponent.renderedMainHash}
+              code={renderedComponent.transformedCode}
+              pastEvents={renderedComponent.pastEvents}
+              innerHTML={renderedComponent.renderedContentMain}
+            />}
+            rightTitle={<Wrapper
+              key={renderedComponent.renderedHash}
+              code={renderedComponent.transformedCode}
+              pastEvents={renderedComponent.pastEvents}
+              innerHTML={renderedComponent.renderedContent}
+            />}
+            hideLineNumbers={true}
+            splitView={true}
+          />
+
+          <button
+            onClick={() =>
+              changeWorkerRenderedComponent(
+                {
+                  ...renderedComponent,
+                  mainCodeHash: renderedComponent.codeHash,
+                  renderedContentMain: renderedComponent.renderedContent,
+                  renderedMainHash: renderedComponent.renderedHash,
+                },
+              )}
+          >
+            Save change - as main code
+          </button>
+          <button
+            onClick={() => {
+              changeCode(renderedComponent.mainCode);
+              changeWorkerRenderedComponent({
+                ...renderedComponent,
+                code: renderedComponent.mainCode,
+              });
+            }}
+          >
+            Restore
+          </button>
+        </div>}
     </Layout>
   );
 };
 
 export default ZedZoliPage;
 
-export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-  }
-`;
