@@ -125,7 +125,7 @@ var zzz_MyComponent = function MyComponent(_ref) {
   }, children))));
 };
 function Page() {
-  if (typeof window === "undefined") return /*#__PURE__*/react_default.a.createElement("div", null, "Loading");
+  if (typeof window === "undefined") return /*#__PURE__*/react_default.a.createElement(Container, null, "Loading");
   return /*#__PURE__*/react_default.a.createElement(Container, null, /*#__PURE__*/react_default.a.createElement(zzz_MyComponent, null, /*#__PURE__*/react_default.a.createElement(CounterTS, {
     startState: {
       counter: 0
@@ -2317,4 +2317,4 @@ var steps = function steps(_steps, direction) {
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-zzz-tsx-44dc23f580952f6113d7.js.map
+//# sourceMappingURL=component---src-pages-zzz-tsx-eb98faa9dcf62fc79951.js.map

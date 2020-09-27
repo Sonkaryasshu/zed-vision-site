@@ -65,7 +65,7 @@ export const MyComponent: React.FC = ({ children }) => {
 };
 
 export default function Page() {
-  if (typeof window === "undefined") return <div>Loading</div>;
+  if (typeof window === "undefined") return <Container>Loading</Container>;
   return <Container>
     <MyComponent>
       <CounterTS
