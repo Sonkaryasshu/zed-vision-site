@@ -218,7 +218,7 @@ var VideoStreamer_Streamer = function Streamer(_ref2) {
 var videostream_VideoStreamingPage = function VideoStreamingPage(_ref) {
   var data = _ref.data,
       location = _ref.location;
-  var magnet = "magnet:?xt=urn:btih:cf405c3f4683631e43a20056933dc565da3cc2b9&dn=VID_20190802_145240.mp4&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Fexplodie.org%3A6969&tr=udp%3A%2F%2Ftracker.empire-js.us%3A1337&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com";
+  var magnet = "magnet:?xt=urn:btih:b87ed3b80680ff7d2f97b61812f10b53d580496a&dn=The.Devil.All.the.Time.2020.1080p.NF.WEB-DL.DDP5.1.Atmos.x264-CMRG&tr=http%3A%2F%2Ft.ncore.sh%3A2710%2Fb48a71a436a207570717e70013dd39b0%2Fannounce";
   return /*#__PURE__*/react_default.a.createElement(react_default.a.Fragment, null, /*#__PURE__*/react_default.a.createElement(seo["a" /* SEO */], {
     title: "Stream something from here :)"
   }), /*#__PURE__*/react_default.a.createElement(VideoStreamer_Streamer, {
@@ -27227,4 +27227,4 @@ function once(emitter, name) {
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-videostream-tsx-fcd9d2b885a5f006bb88.js.map
+//# sourceMappingURL=component---src-pages-videostream-tsx-6381389153dfb711973f.js.map
