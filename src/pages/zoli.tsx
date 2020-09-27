@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Layout } from "../components/layout";
 import { SEO } from "../components/seo";
+// import { Frame } from "framer";
 
 // import ReactDOM from "react-dom";
 
@@ -101,6 +102,32 @@ const defaultProps: Props = {
   pastEvents: new Array(10).fill("+1"),
   onEvent: (action, hash) => {},
 };
+
+// export function MyComponent() {
+//   // Parent variants
+//   const list = {
+//     hidden: { opacity: 0, x: -100 },
+//     visible: { opacity: 1, x: 0 },
+//   };
+
+//   // Child variants
+//   const item = {
+//     hidden: { opacity: 0, scale: 0.5 },
+//     visible: { opacity: 1, scale: 1 },
+//   };
+
+//   return (
+//     <Frame
+//       variants={list}
+//       initial="hidden"
+//       animate="visible"
+//     >
+//       <Frame variants={item} />
+//       <Frame variants={item} />
+//       <Frame variants={item} />
+//     </Frame>
+//   );
+// }
 
 const Wrapper: React.FC<
   {
@@ -257,6 +284,8 @@ eventsHash   ${renderedComponent.defaultStateHash}
       </div>}
 
       {isChangeAvailable && <div>
+        {/* <MyComponent /> */}
+
         <ReactDiffViewer
           oldValue={format(renderedComponent.renderedContent)}
           newValue={format(renderedComponent.renderedContentMain)}

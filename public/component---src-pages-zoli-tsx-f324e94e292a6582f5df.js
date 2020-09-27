@@ -1348,7 +1348,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
- // import ReactDOM from "react-dom";
+ // import { Frame } from "framer";
+// import ReactDOM from "react-dom";
 // import Prism from "prismjs";
 
 
@@ -1394,7 +1395,29 @@ var zoli_defaultProps = {
   },
   pastEvents: new Array(10).fill("+1"),
   onEvent: function onEvent(action, hash) {}
-};
+}; // export function MyComponent() {
+//   // Parent variants
+//   const list = {
+//     hidden: { opacity: 0, x: -100 },
+//     visible: { opacity: 1, x: 0 },
+//   };
+//   // Child variants
+//   const item = {
+//     hidden: { opacity: 0, scale: 0.5 },
+//     visible: { opacity: 1, scale: 1 },
+//   };
+//   return (
+//     <Frame
+//       variants={list}
+//       initial="hidden"
+//       animate="visible"
+//     >
+//       <Frame variants={item} />
+//       <Frame variants={item} />
+//       <Frame variants={item} />
+//     </Frame>
+//   );
+// }
 
 var zoli_Wrapper = function Wrapper(_ref2) {
   var code = _ref2.code,
@@ -4680,4 +4703,4 @@ var Layout = function Layout(_ref) {
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-zoli-tsx-6adcf91a215c74364a13.js.map
+//# sourceMappingURL=component---src-pages-zoli-tsx-f324e94e292a6582f5df.js.map
