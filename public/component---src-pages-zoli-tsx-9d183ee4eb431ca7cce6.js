@@ -1597,7 +1597,7 @@ var zoli_ZedZoliPage = function ZedZoliPage() {
     newValue: html_format_default()(renderedComponent.renderedContentMain),
     showDiffOnly: true // renderContent={highlightSyntax}
     ,
-    leftTitle: /*#__PURE__*/react["createElement"](zoli_Wrapper, {
+    leftTitle: /*#__PURE__*/react["createElement"](react["Fragment"], null, /*#__PURE__*/react["createElement"](zoli_Wrapper, {
       key: renderedComponent.codeHash,
       renderHash: renderedComponent.renderedHash,
       innerHTML: renderedComponent.renderedContent,
@@ -1606,8 +1606,16 @@ var zoli_ZedZoliPage = function ZedZoliPage() {
       defaultProps: _objectSpread(_objectSpread({}, renderedComponent.defaultProps), {}, {
         onEvent: onEvent
       })
-    }),
-    rightTitle: /*#__PURE__*/react["createElement"](zoli_Wrapper, {
+    }), /*#__PURE__*/react["createElement"]("button", {
+      onClick: function onClick() {
+        return changeWorkerRenderedComponent(_objectSpread(_objectSpread({}, renderedComponent), {}, {
+          mainCodeHash: renderedComponent.codeHash,
+          renderedContentMain: renderedComponent.renderedContent,
+          renderedMainHash: renderedComponent.renderedHash
+        }));
+      }
+    }, "Save change - as main code")),
+    rightTitle: /*#__PURE__*/react["createElement"](react["Fragment"], null, /*#__PURE__*/react["createElement"](zoli_Wrapper, {
       key: renderedComponent.mainCodeHash,
       code: renderedComponent.transformedMainCode,
       innerHTML: renderedComponent.renderedContentMain,
@@ -1616,25 +1624,17 @@ var zoli_ZedZoliPage = function ZedZoliPage() {
       defaultProps: _objectSpread(_objectSpread({}, renderedComponent.defaultProps), {}, {
         onEvent: onEvent
       })
-    }),
+    }), /*#__PURE__*/react["createElement"]("button", {
+      onClick: function onClick() {
+        changeCode(renderedComponent.mainCode);
+        changeWorkerRenderedComponent(_objectSpread(_objectSpread({}, renderedComponent), {}, {
+          code: renderedComponent.mainCode
+        }));
+      }
+    }, "Restore the the code to this version")),
     hideLineNumbers: true,
     splitView: true
-  }), /*#__PURE__*/react["createElement"]("button", {
-    onClick: function onClick() {
-      return changeWorkerRenderedComponent(_objectSpread(_objectSpread({}, renderedComponent), {}, {
-        mainCodeHash: renderedComponent.codeHash,
-        renderedContentMain: renderedComponent.renderedContent,
-        renderedMainHash: renderedComponent.renderedHash
-      }));
-    }
-  }, "Save change - as main code"), /*#__PURE__*/react["createElement"]("button", {
-    onClick: function onClick() {
-      changeCode(renderedComponent.mainCode);
-      changeWorkerRenderedComponent(_objectSpread(_objectSpread({}, renderedComponent), {}, {
-        code: renderedComponent.mainCode
-      }));
-    }
-  }, "Restore")));
+  })));
 };
 
 /* harmony default export */ var zoli = __webpack_exports__["default"] = (zoli_ZedZoliPage);
@@ -4703,4 +4703,4 @@ var Layout = function Layout(_ref) {
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-zoli-tsx-f324e94e292a6582f5df.js.map
+//# sourceMappingURL=component---src-pages-zoli-tsx-9d183ee4eb431ca7cce6.js.map

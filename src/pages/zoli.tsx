@@ -291,64 +291,68 @@ eventsHash   ${renderedComponent.defaultStateHash}
           newValue={format(renderedComponent.renderedContentMain)}
           showDiffOnly={true}
           // renderContent={highlightSyntax}
-          leftTitle={<Wrapper
-            key={renderedComponent.codeHash}
-            renderHash={renderedComponent.renderedHash}
-            innerHTML={renderedComponent.renderedContent}
-            code={renderedComponent.transformedCode}
-            message={`
+          leftTitle={<>
+            <Wrapper
+              key={renderedComponent.codeHash}
+              renderHash={renderedComponent.renderedHash}
+              innerHTML={renderedComponent.renderedContent}
+              code={renderedComponent.transformedCode}
+              message={`
 codeHash         ${renderedComponent.codeHash}
 events           ${renderedComponent.defaultProps.pastEvents}
 eventsHash       ${renderedComponent.defaultStateHash}
           `}
-            defaultProps={{
-              ...renderedComponent.defaultProps,
-              onEvent: onEvent,
-            }}
-          />}
-          rightTitle={<Wrapper
-            key={renderedComponent.mainCodeHash}
-            code={renderedComponent.transformedMainCode}
-            innerHTML={renderedComponent.renderedContentMain}
-            renderHash={renderedComponent.renderedMainHash}
-            message={`
+              defaultProps={{
+                ...renderedComponent.defaultProps,
+                onEvent: onEvent,
+              }}
+            />
+            <button
+              onClick={() =>
+                changeWorkerRenderedComponent(
+                  {
+                    ...renderedComponent,
+                    mainCodeHash: renderedComponent.codeHash,
+                    renderedContentMain: renderedComponent.renderedContent,
+                    renderedMainHash: renderedComponent.renderedHash,
+                  },
+                )}
+            >
+              Save change - as main code
+            </button>
+          </>}
+          rightTitle={<>
+            <Wrapper
+              key={renderedComponent.mainCodeHash}
+              code={renderedComponent.transformedMainCode}
+              innerHTML={renderedComponent.renderedContentMain}
+              renderHash={renderedComponent.renderedMainHash}
+              message={`
 codeHash      ${renderedComponent.mainCodeHash}
 events        ${renderedComponent.defaultProps.pastEvents}
 eventsHash   ${renderedComponent.defaultStateHash}
           `}
-            defaultProps={{
-              ...renderedComponent.defaultProps,
-              onEvent: onEvent,
-            }}
-          />}
+              defaultProps={{
+                ...renderedComponent.defaultProps,
+                onEvent: onEvent,
+              }}
+            />
+
+            <button
+              onClick={() => {
+                changeCode(renderedComponent.mainCode);
+                changeWorkerRenderedComponent({
+                  ...renderedComponent,
+                  code: renderedComponent.mainCode,
+                });
+              }}
+            >
+              Restore the the code to this version
+            </button>
+          </>}
           hideLineNumbers={true}
           splitView={true}
         />
-
-        <button
-          onClick={() =>
-            changeWorkerRenderedComponent(
-              {
-                ...renderedComponent,
-                mainCodeHash: renderedComponent.codeHash,
-                renderedContentMain: renderedComponent.renderedContent,
-                renderedMainHash: renderedComponent.renderedHash,
-              },
-            )}
-        >
-          Save change - as main code
-        </button>
-        <button
-          onClick={() => {
-            changeCode(renderedComponent.mainCode);
-            changeWorkerRenderedComponent({
-              ...renderedComponent,
-              code: renderedComponent.mainCode,
-            });
-          }}
-        >
-          Restore
-        </button>
       </div>}
     </Layout>
   );
