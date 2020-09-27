@@ -1392,7 +1392,7 @@ var zoli_defaultProps = {
   startState: {
     counter: 0
   },
-  pastEvents: new Array(100000).fill("+1"),
+  pastEvents: new Array(10).fill("+1"),
   onEvent: function onEvent(action, hash) {}
 };
 
@@ -1402,15 +1402,9 @@ var zoli_Wrapper = function Wrapper(_ref2) {
       renderHash = _ref2.renderHash,
       message = _ref2.message,
       defaultProps = _ref2.defaultProps;
-  if (!code || !renderHash) return /*#__PURE__*/react["createElement"]("div", null, "Error!");
+  if (!code || !renderHash) return /*#__PURE__*/react["createElement"]("div", null, "Loading");
   var Component = zoli_getComponent(code, defaultProps);
-  return /*#__PURE__*/react["createElement"]("div", null, Component && /*#__PURE__*/react["createElement"](Component, {
-    startState: defaultProps.startState,
-    pastEvents: defaultProps.pastEvents,
-    onEvent: function onEvent(action) {
-      return defaultProps.onEvent(action, sha_hash);
-    }
-  }), /*#__PURE__*/react["createElement"]("pre", null, message));
+  return /*#__PURE__*/react["createElement"]("div", null, Component && /*#__PURE__*/react["createElement"](Component, defaultProps), /*#__PURE__*/react["createElement"]("pre", null, message));
 };
 
 var zoli_ZedZoliPage = function ZedZoliPage() {
@@ -1553,8 +1547,8 @@ var zoli_ZedZoliPage = function ZedZoliPage() {
   //     }}
   //   />;
 
-  var onEvent = function onEvent(action, hash) {
-    return hash === renderedComponent.renderedHash && changeWorkerRenderedComponent(_objectSpread(_objectSpread({}, renderedComponent), {}, {
+  var onEvent = function onEvent(action) {
+    return changeWorkerRenderedComponent(_objectSpread(_objectSpread({}, renderedComponent), {}, {
       defaultProps: _objectSpread(_objectSpread({}, renderedComponent.defaultProps), {}, {
         pastEvents: [].concat(Object(toConsumableArray["a" /* default */])(renderedComponent.defaultProps.pastEvents), [action])
       })
@@ -4686,4 +4680,4 @@ var Layout = function Layout(_ref) {
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-zoli-tsx-db1604fb5661d314808c.js.map
+//# sourceMappingURL=component---src-pages-zoli-tsx-6adcf91a215c74364a13.js.map

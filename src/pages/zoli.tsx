@@ -98,7 +98,7 @@ interface Props {
 
 const defaultProps: Props = {
   startState: { counter: 0 },
-  pastEvents: new Array(100000).fill("+1"),
+  pastEvents: new Array(10).fill("+1"),
   onEvent: (action, hash) => {},
 };
 
@@ -119,15 +119,13 @@ const Wrapper: React.FC<
     defaultProps,
   },
 ) => {
-  if (!code || !renderHash) return <div>Error!</div>;
+  if (!code || !renderHash) return <div>Loading</div>;
 
   const Component = getComponent(code, defaultProps);
 
   return <div>
     {Component && <Component
-      startState={defaultProps.startState}
-      pastEvents={defaultProps.pastEvents}
-      onEvent={(action) => defaultProps.onEvent(action, hash)}
+      {...defaultProps}
     />}
     <pre>{message}</pre>
   </div>;
@@ -221,8 +219,8 @@ const ZedZoliPage = () => {
   //     }}
   //   />;
 
-  const onEvent = (action: string, hash: string) =>
-    hash === renderedComponent.renderedHash && changeWorkerRenderedComponent(
+  const onEvent = (action: string) =>
+    changeWorkerRenderedComponent(
       {
         ...renderedComponent,
         defaultProps: {
