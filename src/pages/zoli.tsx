@@ -1,8 +1,10 @@
-import React from "react";
+import * as React from "react";
 import { Layout } from "../components/layout";
 import { SEO } from "../components/seo";
 
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
+
+import Prism from "prismjs";
 
 import { hash, unHash } from "../components/utils/sha";
 import { transform } from "../components/utils/babel";
@@ -69,79 +71,79 @@ const Component: React.FC<Props> = ({ startState, pastEvents, onEvent }) => {
 };
 
 
+
 `;
-const defaultProps = { startState:{counter: 0}, pastEvents: new Array(10).fill("+1") , onEvent: ()=>{}};
+
+const getComponent = (code: string, props: Props) => {
+  const componentFactory = new Function(
+    "props",
+    "React",
+    `${code}; return Component(props)`,
+  );
+
+  const Component: React.FC<Props> = (props) => componentFactory(props, React);
+  return Component;
+};
+
+type DState = { counter: number };
+interface Props {
+  startState: DState;
+  pastEvents: string[];
+  onEvent: (action: string) => void;
+}
+
+const defaultProps: Props = {
+  startState: { counter: 0 },
+  pastEvents: new Array(10).fill("+1"),
+  onEvent: (action: string) => {},
+};
 const Wrapper: React.FC<
   {
     code: string;
-    innerHTML: string;
-    defaultProps: { startState: {counter: number}, pastEvents: string[] };
-    changeWorkerRenderedComponent?: any;
-    renderedComponent?: any;
+    defaultProps: Props;
   }
 > = (
   {
     code,
-    innerHTML,
     defaultProps,
-    changeWorkerRenderedComponent,
-    renderedComponent,
   },
 ) => {
-  const ref = React.useRef(null);
+  // const ref = React.useRef(null);
 
-  React.useEffect(() => {
-    if (!code || !changeWorkerRenderedComponent) return;
-  
+  if (!code) return <div>Loading</div>;
 
-    const onEvent = (action: string)=>changeWorkerRenderedComponent({
-      ...renderedComponent,
-      defaultProps: {
-        ...renderedComponent.default,
-        pastEvents:[...renderedComponent.defaultProps.pastEvents, action]
-      }
-    });
+  const Component = getComponent(code, defaultProps);
 
-    const componentFactory = new Function(
-      "props",
-      "React",
-      `${code}; return Component(props)`,
-    );
-    type DState = { counter: number}
-    interface Props {
-      startState: DState
-      pastEvents: string[]
-      onEvent: (action: string)=>void 
-  }
-    const Component: React.FC<Props>  = (props) => componentFactory( props, React);
+  // const {state, setWrapState} = React.useState({hydrated: false, innerHTML});
 
-    setTimeout(
-      () => ReactDOM.hydrate(<Component startState={defaultProps.startState} pastEvents={defaultProps.pastEvents} onEvent={onEvent} />, ref.current),
-      10,
-    );
-  }, [code]);
+  // React.useEffect(() => {
 
-  return <div
-    ref={ref}
-    onClick={(e: any) => {
-      const action = e.target.getAttribute("data-onclick");
-      if (action) {
-        changeWorkerRenderedComponent(
-          {
-            ...renderedComponent,
-            defaultProps: {
-              ...renderedComponent.defaultProps,
-              pastEvents: [
-                ...renderedComponent.defaultProps.pastEvents,
-                action,
-              ],
-            },
-          },
-        );
-      }
-    }}
-    dangerouslySetInnerHTML={{ __html: innerHTML }}
-  />;
+  //   if (!code) return;
+
+  //   if (state.hydrated)
+  //   setTimeout(
+  //     () =>{
+  //     const Component = getComponent(code, defaultProps);
+
+  //       ReactDOM.hydrate(<Component {...defaultProps} />,
+  //         ref.current,
+  //       );
+  //     }
+  //   );
+  // }, [code]);
+
+  return <Component
+    startState={defaultProps.startState}
+    pastEvents={defaultProps.pastEvents}
+    onEvent={defaultProps.onEvent}
+  /> // onClick={(e: any) => {
+  //   const action = e.target.getAttribute("data-onclick");
+  //   if (action) {
+  //     defaultProps.onEvent(action);
+  //   }
+  // }}
+  //  dangerouslySetInnerHTML={{ __html: state.innerHTML }}
+  ;
 };
 
 const ZedZoliPage = () => {
@@ -155,6 +157,7 @@ const ZedZoliPage = () => {
       defaultProps,
       defaultStateHash: ``,
       codeHash: ``,
+      transformedMainCode: ``,
       transformedHash: ``,
       transformedMainHash: ``,
       renderedHash: ``,
@@ -181,6 +184,8 @@ const ZedZoliPage = () => {
       const defaultStateHash = await hash(renderedComponent.defaultProps);
       const transformedCode = await unHash(transformedHash);
 
+      const transformedMainCode = await unHash(transformedMainHash);
+
       const renderedHash = await render(transformedHash, defaultStateHash);
       const renderedMainHash = await render(
         transformedMainHash,
@@ -198,6 +203,7 @@ const ZedZoliPage = () => {
           mainCodeHash,
           codeHash,
           transformedHash,
+          transformedMainCode,
           transformedMainHash,
           transformedCode,
           defaultStateHash,
@@ -214,6 +220,25 @@ const ZedZoliPage = () => {
   const isChangeAvailable =
     renderedComponent.renderedMainHash !== renderedComponent.renderedHash;
 
+  const highlightSyntax = (str: string) =>
+    <pre
+      style={{ display: "inline" }}
+      dangerouslySetInnerHTML={{
+        __html: Prism.highlight(str, Prism.languages["html"], "html"),
+      }}
+    />;
+
+  const onEvent = (action: string) =>
+    changeWorkerRenderedComponent(
+      {
+        ...renderedComponent,
+        defaultProps: {
+          ...renderedComponent.defaultProps,
+          pastEvents: [...renderedComponent.defaultProps.pastEvents, action],
+        },
+      },
+    );
+
   return (
     <Layout>
       <SEO title="Test Worker side rendering" />
@@ -223,13 +248,10 @@ const ZedZoliPage = () => {
       {!isChangeAvailable && <div>
         <h4>Result</h4>
         <Wrapper
-          key={renderedComponent.renderedMainHash}
+          key={renderedComponent.mainCodeHash}
           code={renderedComponent.transformedCode}
-          defaultProps={renderedComponent.defaultProps}
-          innerHTML={renderedComponent.renderedContentMain}
-          renderedComponent={renderedComponent}
-          changeWorkerRenderedComponent={changeWorkerRenderedComponent}
-        />
+          defaultProps={{ ...renderedComponent.defaultProps, onEvent: onEvent }}
+        /> // innerHTML={renderedComponent.renderedContentMain}
       </div>}
 
       {isChangeAvailable && <div>
@@ -237,18 +259,25 @@ const ZedZoliPage = () => {
           oldValue={format(renderedComponent.renderedContent)}
           newValue={format(renderedComponent.renderedContentMain)}
           showDiffOnly={true}
+          renderContent={highlightSyntax}
           leftTitle={<Wrapper
-            key={renderedComponent.renderedMainHash}
+            key={renderedComponent.codeHash}
             code={renderedComponent.transformedCode}
-            defaultProps={renderedComponent.defaultProps}
-            innerHTML={renderedComponent.renderedContentMain}
-          />}
+            defaultProps={{
+              ...renderedComponent.defaultProps,
+              onEvent: onEvent,
+            }}
+          /> // innerHTML={renderedComponent.renderedContent}
+          }
           rightTitle={<Wrapper
-            key={renderedComponent.renderedHash}
-            code={renderedComponent.transformedCode}
-            defaultProps={renderedComponent.defaultProps}
-            innerHTML={renderedComponent.renderedContent}
-          />}
+            key={renderedComponent.mainCodeHash}
+            code={renderedComponent.transformedMainCode}
+            defaultProps={{
+              ...renderedComponent.defaultProps,
+              onEvent: onEvent,
+            }}
+          /> // innerHTML={renderedComponent.renderedContentMain}
+          }
           hideLineNumbers={true}
           splitView={true}
         />

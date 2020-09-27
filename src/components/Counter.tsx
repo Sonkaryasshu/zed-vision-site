@@ -1,7 +1,6 @@
 import React from "react";
 
-
-type DState = { counter: number}
+type DState = { counter: number };
 
 const actions = {
   "+1": (s: DState) => ({ ...s, counter: s.counter + 1 }),
@@ -11,17 +10,17 @@ const actions = {
 type ActionType = keyof typeof actions;
 
 interface Props {
-    startState: DState
-    pastEvents: string[]
-    onEvent: (action: string)=>void 
+  startState: DState;
+  pastEvents: string[];
+  onEvent: (action: string) => void;
 }
 
 const Component: React.FC<Props> = ({ startState, pastEvents, onEvent }) => {
-  const [state, setState] = React.useState({startState, pastEvents});
+  const [state, setState] = React.useState({ startState, pastEvents });
 
   const calculatedState = state.pastEvents.reduce(
     (prevValue, currentValue) => actions[currentValue](prevValue),
-    startState 
+    startState,
   );
 
   return <div>
@@ -29,7 +28,6 @@ const Component: React.FC<Props> = ({ startState, pastEvents, onEvent }) => {
     {calculatedState.counter}
     <button {...update("+1")}>+</button>
   </div>;
-
 
   function update(action: ActionType) {
     return {
