@@ -4,7 +4,7 @@ import { SEO } from "../components/seo";
 
 // import ReactDOM from "react-dom";
 
-import Prism from "prismjs";
+// import Prism from "prismjs";
 
 import { hash, unHash } from "../components/utils/sha";
 import { transform } from "../components/utils/babel";
@@ -195,13 +195,13 @@ const ZedZoliPage = () => {
     renderedComponent.renderedMainHash !== renderedComponent.renderedHash;
 
   const isError = !renderedComponent.renderedContent;
-  const highlightSyntax = (str: string) =>
-    <pre
-      style={{ display: "inline" }}
-      dangerouslySetInnerHTML={{
-        __html: Prism.highlight((str), Prism.languages["html"], "html"),
-      }}
-    />;
+  // const highlightSyntax = (str: string) =>
+  //   <pre
+  //     style={{ display: "inline" }}
+  //     dangerouslySetInnerHTML={{
+  //       __html: Prism.highlight((str), Prism.languages["html"], "html"),
+  //     }}
+  //   />;
 
   const onEvent = (action: string) =>
     changeWorkerRenderedComponent(

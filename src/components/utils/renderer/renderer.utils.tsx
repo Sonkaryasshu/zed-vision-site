@@ -12,8 +12,11 @@ export const RendererModule = async () => ({
 
     const Component = (props: any) => cf(props, React);
 
-    return String(pretty(ReactDOMServer.renderToString(
-      <Component {...props} />,
-    ), {ocd: true})).toString();
+    return String(pretty(
+      ReactDOMServer.renderToString(
+        <Component {...props} />,
+      ),
+      { ocd: true },
+    )).toString();
   },
 });
