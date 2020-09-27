@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Layout } from "../components/layout";
 import { SEO } from "../components/seo";
+import styled, { css } from "styled-components";
 // import { Frame } from "framer";
 
 // import ReactDOM from "react-dom";
@@ -25,6 +26,16 @@ const CodeEditorWithFailBack: React.FC<
       changeCode={changeCode}
     />
   </React.Suspense>;
+
+const StyledContainer = styled.div`
+  background: white;
+  padding: 12px;
+  width: 200px;
+  height: 100px;
+  margin: auto;
+  display: block;
+  border: 2px solid red;
+`;
 
 const counter = `
 type DState = { counter: number}
@@ -68,9 +79,6 @@ const Component: React.FC<Props> = ({ startState, pastEvents, onEvent }) => {
     };
   }
 };
-
-
-
 `;
 
 const getComponent = (code: string, props: Props) => {
@@ -266,21 +274,28 @@ const ZedZoliPage = () => {
       {isError && <h1>Error</h1>}
       {!isChangeAvailable && <div>
         <h4>Result</h4>
-        <Wrapper
-          key={renderedComponent.codeHash}
-          renderHash={renderedComponent.renderedHash}
-          code={renderedComponent.transformedCode}
-          innerHTML={renderedComponent.renderedContent}
-          message={`
+        <StyledContainer>
+          <Wrapper
+            key={renderedComponent.codeHash}
+            renderHash={renderedComponent.renderedHash}
+            code={renderedComponent.transformedCode}
+            innerHTML={renderedComponent.renderedContent}
+            defaultProps={{
+              ...renderedComponent.defaultProps,
+              onEvent: onEvent,
+            }}
+          />
+        </StyledContainer>
+        <pre>
+          {`
 
-codeHash      ${renderedComponent.codeHash}
-renderedHash      ${renderedComponent.renderedHash}
-
-events        ${renderedComponent.defaultProps.pastEvents}
-eventsHash   ${renderedComponent.defaultStateHash}
-          `}
-          defaultProps={{ ...renderedComponent.defaultProps, onEvent: onEvent }}
-        />
+        codeHash      ${renderedComponent.codeHash}
+        renderedHash      ${renderedComponent.renderedHash}
+        
+        events        ${renderedComponent.defaultProps.pastEvents}
+        eventsHash   ${renderedComponent.defaultStateHash}
+                  `}
+        </pre>
       </div>}
 
       {isChangeAvailable && <div>
@@ -290,23 +305,28 @@ eventsHash   ${renderedComponent.defaultStateHash}
           oldValue={format(renderedComponent.renderedContent)}
           newValue={format(renderedComponent.renderedContentMain)}
           showDiffOnly={true}
+          useDarkTheme={true}
           // renderContent={highlightSyntax}
           leftTitle={<>
-            <Wrapper
-              key={renderedComponent.codeHash}
-              renderHash={renderedComponent.renderedHash}
-              innerHTML={renderedComponent.renderedContent}
-              code={renderedComponent.transformedCode}
-              message={`
-codeHash         ${renderedComponent.codeHash}
-events           ${renderedComponent.defaultProps.pastEvents}
-eventsHash       ${renderedComponent.defaultStateHash}
-          `}
-              defaultProps={{
-                ...renderedComponent.defaultProps,
-                onEvent: onEvent,
-              }}
-            />
+            <StyledContainer>
+              <Wrapper
+                key={renderedComponent.codeHash}
+                renderHash={renderedComponent.renderedHash}
+                innerHTML={renderedComponent.renderedContent}
+                code={renderedComponent.transformedCode}
+                defaultProps={{
+                  ...renderedComponent.defaultProps,
+                  onEvent: onEvent,
+                }}
+              />
+            </StyledContainer>
+            <pre>
+              {`
+            codeHash         ${renderedComponent.codeHash}
+            events           ${renderedComponent.defaultProps.pastEvents}
+            eventsHash       ${renderedComponent.defaultStateHash}
+                      `}
+            </pre>
             <button
               onClick={() =>
                 changeWorkerRenderedComponent(
@@ -322,22 +342,27 @@ eventsHash       ${renderedComponent.defaultStateHash}
             </button>
           </>}
           rightTitle={<>
-            <Wrapper
-              key={renderedComponent.mainCodeHash}
-              code={renderedComponent.transformedMainCode}
-              innerHTML={renderedComponent.renderedContentMain}
-              renderHash={renderedComponent.renderedMainHash}
-              message={`
-codeHash      ${renderedComponent.mainCodeHash}
-events        ${renderedComponent.defaultProps.pastEvents}
-eventsHash   ${renderedComponent.defaultStateHash}
-          `}
-              defaultProps={{
-                ...renderedComponent.defaultProps,
-                onEvent: onEvent,
-              }}
-            />
-
+            <div>
+              <StyledContainer>
+                <Wrapper
+                  key={renderedComponent.mainCodeHash}
+                  code={renderedComponent.transformedMainCode}
+                  innerHTML={renderedComponent.renderedContentMain}
+                  renderHash={renderedComponent.renderedMainHash}
+                  defaultProps={{
+                    ...renderedComponent.defaultProps,
+                    onEvent: onEvent,
+                  }}
+                />
+              </StyledContainer>
+              <pre>
+                {`
+            codeHash      ${renderedComponent.mainCodeHash}
+            events        ${renderedComponent.defaultProps.pastEvents}
+            eventsHash   ${renderedComponent.defaultStateHash}
+                      `}
+              </pre>
+            </div>
             <button
               onClick={() => {
                 changeCode(renderedComponent.mainCode);

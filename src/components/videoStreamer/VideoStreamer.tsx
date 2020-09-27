@@ -44,7 +44,7 @@ export const Streamer: React.FC<{ magnetURL: string }> = ({ magnetURL }) => {
       client.add(magnetURL, async function (torrent: any) {
         console.log(torrent.files);
         const videoFiles = torrent.files.filter((file: any) =>
-          file.name.endsWith("mp4")
+          file.name.endsWith("mp4") || file.name.endsWith("mkv")
         );
 
         changeState({ ...state, loading: false, videoFiles: videoFiles });
