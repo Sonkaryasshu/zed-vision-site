@@ -9,16 +9,16 @@ let loadedModule: any;
 
 export const render = async (
   transformedCodeHash: string,
-  pastEventsHash: string,
+  defaultStateHash: string,
 ) => {
   if (!loadedModule) {
     loadedModule = await rendererW();
   }
 
   const code = await unHash(transformedCodeHash);
-  const pastEvents = await unHash(pastEventsHash);
+  const defaultState = await unHash(defaultStateHash);
 
-  const renderedString = await loadedModule.render(code, pastEvents);
+  const renderedString = await loadedModule.render(code, defaultState);
   const renderedStringHash = await hash(renderedString);
   return renderedStringHash;
 };
