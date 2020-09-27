@@ -1,9 +1,5 @@
 import React from "react";
 
-// monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
-//     jsx: monaco.languages.typescript.JsxEmit.React,
-// });
-
 import MonacoEditor from "react-monaco-editor";
 
 const MonacoEditorComp: React.FC<
@@ -11,7 +7,7 @@ const MonacoEditorComp: React.FC<
 > = ({ value, changeCode }) =>
   <MonacoEditor
     width="100%"
-    height="100%"
+    height="600px"
     language="typescript"
     theme="vs-dark"
     value={value}

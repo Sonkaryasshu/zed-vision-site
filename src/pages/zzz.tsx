@@ -38,11 +38,10 @@ const Container = styled.div`
   padding: 0;
   perspective: 1000px;
 
-
 `;
 
 export const MyComponent: React.FC = ({ children }) => {
-  const x = useMotionValue(0);
+  const x = useMotionValue(200);
 
   // const dragControls = useDragControls();
   // dragControls;
@@ -61,9 +60,15 @@ export const MyComponent: React.FC = ({ children }) => {
         dragConstraints={{ top: -600, bottom: 600, left: -200, right: 200 }}
         style={{ x }}
       >
+        {x.get()}
+
         <Styled>
           <ScopedCssBaseline>
-            {children}
+            <CounterTS
+              startState={{ counter: 0 }}
+              pastEvents={[]}
+              onEvent={(action) => console.log(action)}
+            />
           </ScopedCssBaseline>
         </Styled>
       </motion.div>
@@ -74,12 +79,7 @@ export const MyComponent: React.FC = ({ children }) => {
 export default function Page() {
   if (typeof window === "undefined") return <Container>Loading</Container>;
   return <Container>
-    <MyComponent>
-      <CounterTS
-        startState={{ counter: 0 }}
-        pastEvents={[]}
-        onEvent={(action) => console.log(action)}
-      />
-    </MyComponent>
+    <MyComponent />
+    <MyComponent2 />
   </Container>;
 }
