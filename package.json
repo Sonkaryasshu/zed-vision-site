@@ -6,6 +6,7 @@
     "start": "yarn generate-certs && yarn gatsby develop --host 0.0.0.0 --https --cert-file .certs/localhost.cert --key-file .certs/localhost.key",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
+    "lint": "yarn eslint --ext js,jsx,md,mdx,ts,tsx --fix src",
     "serve-https": "yarn generate-certs && file_server --cert .certs/localhost.cert --key .certs/localhost.key --host 0.0.0.0 public",
     "generate-certs": "test -d .certs || (mkdir .certs && cd .certs && npx devcert-cli generate localhost)"
   },

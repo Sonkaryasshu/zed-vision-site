@@ -5,8 +5,8 @@ import { rhythm } from "./utils/typography";
 import img from "./zed-profile-pic.jpg";
 
 const Container = styled.div`
-display: flex;
-margin-bottom: ${rhythm(2.5)};
+  display: flex;
+  margin-bottom: ${rhythm(2.5)};
 `;
 
 const StyledImgDiv = styled.div`
