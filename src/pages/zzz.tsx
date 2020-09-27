@@ -7,13 +7,22 @@ import {
   motion,
   useMotionValue,
   useTransform,
-  useDragControls,
 } from "framer-motion";
+import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline";
 
 const Styled = styled.div`
-display: block;
-padding: 40px;
-margin: auto;
+text-align: center;
+border-radius: 25px;
+width: 200px;
+height: 200px;
+display: flex;
+  place-content: center;
+  place-items: center;
+  margin: 0;
+  padding: 0;
+background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+user-select: none;
+box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 3px 0px, rgba(0, 0, 0, 0.06) 0px 10px 15px 0px;
 `;
 
 const Container = styled.div`
@@ -28,7 +37,6 @@ const Container = styled.div`
   margin: 0;
   padding: 0;
   perspective: 1000px;
-  overflow: hidden;
 
 
 `;
@@ -36,7 +44,8 @@ const Container = styled.div`
 export const MyComponent: React.FC = ({ children }) => {
   const x = useMotionValue(0);
 
-  const dragControls = useDragControls();
+  // const dragControls = useDragControls();
+  // dragControls;
 
   const background = useTransform(
     x,
@@ -48,16 +57,14 @@ export const MyComponent: React.FC = ({ children }) => {
     <motion.div style={{ width: 400, background }}>
       <motion.div
         drag={true}
-        dragControls={dragControls}
+        // dragControls={dragControls}
         dragConstraints={{ top: -600, bottom: 600, left: -200, right: 200 }}
         style={{ x }}
       >
         <Styled>
-          <div
-            onPointerDown={(e) => dragControls.start(e, { snapToCursor: true })}
-          >
+          <ScopedCssBaseline>
             {children}
-          </div>
+          </ScopedCssBaseline>
         </Styled>
       </motion.div>
     </motion.div>

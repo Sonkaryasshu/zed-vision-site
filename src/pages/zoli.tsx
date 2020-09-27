@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Layout } from "../components/layout";
 import { SEO } from "../components/seo";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 // import { Frame } from "framer";
 
 // import ReactDOM from "react-dom";

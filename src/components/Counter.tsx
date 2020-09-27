@@ -24,6 +24,7 @@ const Component: React.FC<Props> = ({ startState, pastEvents, onEvent }) => {
   );
 
   return <div>
+    <header>Counter App</header>
     <button {...update("-1")}>-</button>
     {calculatedState.counter}
     <button {...update("+1")}>+</button>
