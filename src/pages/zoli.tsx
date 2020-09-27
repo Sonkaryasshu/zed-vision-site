@@ -93,13 +93,13 @@ type DState = { counter: number };
 interface Props {
   startState: DState;
   pastEvents: string[];
-  onEvent: (action: string) => void;
+  onEvent: (action: string, hash: string) => void;
 }
 
 const defaultProps: Props = {
   startState: { counter: 0 },
-  pastEvents: new Array(10).fill("+1"),
-  onEvent: (action) => {},
+  pastEvents: new Array(100000).fill("+1"),
+  onEvent: (action, hash) => {},
 };
 
 const Wrapper: React.FC<
@@ -127,7 +127,7 @@ const Wrapper: React.FC<
     {Component && <Component
       startState={defaultProps.startState}
       pastEvents={defaultProps.pastEvents}
-      onEvent={defaultProps.onEvent}
+      onEvent={(action) => defaultProps.onEvent(action, hash)}
     />}
     <pre>{message}</pre>
   </div>;
@@ -157,6 +157,7 @@ const ZedZoliPage = () => {
 
   React.useEffect(() => {
     const runner = async () => {
+      const runnerHash = await hash(renderedComponent);
       const devCodeHash = await hash(code);
       const codeHash = devCodeHash;
       const mainCode = renderedComponent.mainCode
@@ -181,25 +182,29 @@ const ZedZoliPage = () => {
       const renderedContent = await unHash(renderedHash);
       const renderedContentMain = await unHash(renderedMainHash);
 
-      changeWorkerRenderedComponent(
-        {
-          ...renderedComponent,
-          code,
-          devCodeHash,
-          mainCode,
-          mainCodeHash,
-          codeHash,
-          transformedHash,
-          transformedMainCode,
-          transformedMainHash,
-          transformedCode,
-          defaultStateHash,
-          renderedHash,
-          renderedContent,
-          renderedMainHash,
-          renderedContentMain,
-        },
-      );
+      const runnerHash2 = await hash(renderedComponent);
+
+      if (runnerHash === runnerHash2) {
+        changeWorkerRenderedComponent(
+          {
+            ...renderedComponent,
+            code,
+            devCodeHash,
+            mainCode,
+            mainCodeHash,
+            codeHash,
+            transformedHash,
+            transformedMainCode,
+            transformedMainHash,
+            transformedCode,
+            defaultStateHash,
+            renderedHash,
+            renderedContent,
+            renderedMainHash,
+            renderedContentMain,
+          },
+        );
+      }
     };
     if (typeof window !== "undefined") runner();
   }, [code, renderedComponent.defaultProps]);
@@ -216,8 +221,8 @@ const ZedZoliPage = () => {
   //     }}
   //   />;
 
-  const onEvent = (action: string) =>
-    changeWorkerRenderedComponent(
+  const onEvent = (action: string, hash: string) =>
+    hash === renderedComponent.renderedHash && changeWorkerRenderedComponent(
       {
         ...renderedComponent,
         defaultProps: {
@@ -262,11 +267,12 @@ eventsHash   ${renderedComponent.defaultStateHash}
           leftTitle={<Wrapper
             key={renderedComponent.codeHash}
             renderHash={renderedComponent.renderedHash}
+            innerHTML={renderedComponent.renderedContent}
             code={renderedComponent.transformedCode}
             message={`
-codeHash      ${renderedComponent.codeHash}
-events        ${renderedComponent.defaultProps.pastEvents}
-eventsHash   ${renderedComponent.defaultStateHash}
+codeHash         ${renderedComponent.codeHash}
+events           ${renderedComponent.defaultProps.pastEvents}
+eventsHash       ${renderedComponent.defaultStateHash}
           `}
             defaultProps={{
               ...renderedComponent.defaultProps,
@@ -276,6 +282,7 @@ eventsHash   ${renderedComponent.defaultStateHash}
           rightTitle={<Wrapper
             key={renderedComponent.mainCodeHash}
             code={renderedComponent.transformedMainCode}
+            innerHTML={renderedComponent.renderedContentMain}
             renderHash={renderedComponent.renderedMainHash}
             message={`
 codeHash      ${renderedComponent.mainCodeHash}

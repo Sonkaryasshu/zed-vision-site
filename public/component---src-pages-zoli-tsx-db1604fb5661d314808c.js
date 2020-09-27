@@ -1392,8 +1392,8 @@ var zoli_defaultProps = {
   startState: {
     counter: 0
   },
-  pastEvents: new Array(10).fill("+1"),
-  onEvent: function onEvent(action) {}
+  pastEvents: new Array(100000).fill("+1"),
+  onEvent: function onEvent(action, hash) {}
 };
 
 var zoli_Wrapper = function Wrapper(_ref2) {
@@ -1407,7 +1407,9 @@ var zoli_Wrapper = function Wrapper(_ref2) {
   return /*#__PURE__*/react["createElement"]("div", null, Component && /*#__PURE__*/react["createElement"](Component, {
     startState: defaultProps.startState,
     pastEvents: defaultProps.pastEvents,
-    onEvent: defaultProps.onEvent
+    onEvent: function onEvent(action) {
+      return defaultProps.onEvent(action, sha_hash);
+    }
   }), /*#__PURE__*/react["createElement"]("pre", null, message));
 };
 
@@ -1439,82 +1441,95 @@ var zoli_ZedZoliPage = function ZedZoliPage() {
   react["useEffect"](function () {
     var runner = /*#__PURE__*/function () {
       var _ref3 = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regenerator_default.a.mark(function _callee() {
-        var devCodeHash, codeHash, mainCode, mainCodeHash, transformedHash, transformedMainHash, defaultStateHash, transformedCode, transformedMainCode, renderedHash, renderedMainHash, renderedContent, renderedContentMain;
+        var runnerHash, devCodeHash, codeHash, mainCode, mainCodeHash, transformedHash, transformedMainHash, defaultStateHash, transformedCode, transformedMainCode, renderedHash, renderedMainHash, renderedContent, renderedContentMain, runnerHash2;
         return regenerator_default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return sha_hash(code);
+                return sha_hash(renderedComponent);
 
               case 2:
+                runnerHash = _context.sent;
+                _context.next = 5;
+                return sha_hash(code);
+
+              case 5:
                 devCodeHash = _context.sent;
                 codeHash = devCodeHash;
                 mainCode = renderedComponent.mainCode ? renderedComponent.mainCode : code;
                 mainCodeHash = renderedComponent.mainCodeHash ? renderedComponent.mainCodeHash : devCodeHash;
-                _context.next = 8;
+                _context.next = 11;
                 return babel_transform(codeHash);
 
-              case 8:
+              case 11:
                 transformedHash = _context.sent;
-                _context.next = 11;
+                _context.next = 14;
                 return babel_transform(mainCodeHash);
 
-              case 11:
+              case 14:
                 transformedMainHash = _context.sent;
-                _context.next = 14;
+                _context.next = 17;
                 return sha_hash(renderedComponent.defaultProps);
 
-              case 14:
+              case 17:
                 defaultStateHash = _context.sent;
-                _context.next = 17;
+                _context.next = 20;
                 return sha_unHash(transformedHash);
 
-              case 17:
+              case 20:
                 transformedCode = _context.sent;
-                _context.next = 20;
+                _context.next = 23;
                 return sha_unHash(transformedMainHash);
 
-              case 20:
+              case 23:
                 transformedMainCode = _context.sent;
-                _context.next = 23;
+                _context.next = 26;
                 return renderer_render(transformedHash, defaultStateHash);
 
-              case 23:
+              case 26:
                 renderedHash = _context.sent;
-                _context.next = 26;
+                _context.next = 29;
                 return renderer_render(transformedMainHash, defaultStateHash);
 
-              case 26:
+              case 29:
                 renderedMainHash = _context.sent;
-                _context.next = 29;
+                _context.next = 32;
                 return sha_unHash(renderedHash);
 
-              case 29:
+              case 32:
                 renderedContent = _context.sent;
-                _context.next = 32;
+                _context.next = 35;
                 return sha_unHash(renderedMainHash);
 
-              case 32:
+              case 35:
                 renderedContentMain = _context.sent;
-                changeWorkerRenderedComponent(_objectSpread(_objectSpread({}, renderedComponent), {}, {
-                  code: code,
-                  devCodeHash: devCodeHash,
-                  mainCode: mainCode,
-                  mainCodeHash: mainCodeHash,
-                  codeHash: codeHash,
-                  transformedHash: transformedHash,
-                  transformedMainCode: transformedMainCode,
-                  transformedMainHash: transformedMainHash,
-                  transformedCode: transformedCode,
-                  defaultStateHash: defaultStateHash,
-                  renderedHash: renderedHash,
-                  renderedContent: renderedContent,
-                  renderedMainHash: renderedMainHash,
-                  renderedContentMain: renderedContentMain
-                }));
+                _context.next = 38;
+                return sha_hash(renderedComponent);
 
-              case 34:
+              case 38:
+                runnerHash2 = _context.sent;
+
+                if (runnerHash === runnerHash2) {
+                  changeWorkerRenderedComponent(_objectSpread(_objectSpread({}, renderedComponent), {}, {
+                    code: code,
+                    devCodeHash: devCodeHash,
+                    mainCode: mainCode,
+                    mainCodeHash: mainCodeHash,
+                    codeHash: codeHash,
+                    transformedHash: transformedHash,
+                    transformedMainCode: transformedMainCode,
+                    transformedMainHash: transformedMainHash,
+                    transformedCode: transformedCode,
+                    defaultStateHash: defaultStateHash,
+                    renderedHash: renderedHash,
+                    renderedContent: renderedContent,
+                    renderedMainHash: renderedMainHash,
+                    renderedContentMain: renderedContentMain
+                  }));
+                }
+
+              case 40:
               case "end":
                 return _context.stop();
             }
@@ -1538,8 +1553,8 @@ var zoli_ZedZoliPage = function ZedZoliPage() {
   //     }}
   //   />;
 
-  var onEvent = function onEvent(action) {
-    return changeWorkerRenderedComponent(_objectSpread(_objectSpread({}, renderedComponent), {}, {
+  var onEvent = function onEvent(action, hash) {
+    return hash === renderedComponent.renderedHash && changeWorkerRenderedComponent(_objectSpread(_objectSpread({}, renderedComponent), {}, {
       defaultProps: _objectSpread(_objectSpread({}, renderedComponent.defaultProps), {}, {
         pastEvents: [].concat(Object(toConsumableArray["a" /* default */])(renderedComponent.defaultProps.pastEvents), [action])
       })
@@ -1568,8 +1583,9 @@ var zoli_ZedZoliPage = function ZedZoliPage() {
     leftTitle: /*#__PURE__*/react["createElement"](zoli_Wrapper, {
       key: renderedComponent.codeHash,
       renderHash: renderedComponent.renderedHash,
+      innerHTML: renderedComponent.renderedContent,
       code: renderedComponent.transformedCode,
-      message: "\ncodeHash      " + renderedComponent.codeHash + "\nevents        " + renderedComponent.defaultProps.pastEvents + "\neventsHash   " + renderedComponent.defaultStateHash + "\n          ",
+      message: "\ncodeHash         " + renderedComponent.codeHash + "\nevents           " + renderedComponent.defaultProps.pastEvents + "\neventsHash       " + renderedComponent.defaultStateHash + "\n          ",
       defaultProps: _objectSpread(_objectSpread({}, renderedComponent.defaultProps), {}, {
         onEvent: onEvent
       })
@@ -1577,6 +1593,7 @@ var zoli_ZedZoliPage = function ZedZoliPage() {
     rightTitle: /*#__PURE__*/react["createElement"](zoli_Wrapper, {
       key: renderedComponent.mainCodeHash,
       code: renderedComponent.transformedMainCode,
+      innerHTML: renderedComponent.renderedContentMain,
       renderHash: renderedComponent.renderedMainHash,
       message: "\ncodeHash      " + renderedComponent.mainCodeHash + "\nevents        " + renderedComponent.defaultProps.pastEvents + "\neventsHash   " + renderedComponent.defaultStateHash + "\n          ",
       defaultProps: _objectSpread(_objectSpread({}, renderedComponent.defaultProps), {}, {
@@ -4669,4 +4686,4 @@ var Layout = function Layout(_ref) {
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-zoli-tsx-fa7c176ffbdde4decf90.js.map
+//# sourceMappingURL=component---src-pages-zoli-tsx-db1604fb5661d314808c.js.map
