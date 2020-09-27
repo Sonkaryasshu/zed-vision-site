@@ -2,6 +2,8 @@ import React from "react";
 import { Layout } from "../components/layout";
 import { SEO } from "../components/seo";
 
+import ReactDOM from "react-dom";
+
 import { hash, unHash } from "../components/utils/sha";
 import { transform } from "../components/utils/babel";
 import { render } from "../components/utils/renderer";
@@ -24,19 +26,27 @@ const CodeEditorWithFailBack: React.FC<
   </div>;
 
 const counter = `
-type DState = { counter: number; pastEvents: string[] };
+type DState = { counter: number}
 
 const actions = {
   "+1": (s: DState) => ({ ...s, counter: s.counter + 1 }),
   "-1": (s: DState) => ({ ...s, counter: s.counter - 1 }),
 };
 
-const Component: React.FC<{ defaultState: DState }> = ({ defaultState }) => {
-  const [state, setState] = React.useState(defaultState);
+type ActionType = keyof typeof actions;
+
+interface Props {
+    startState: DState
+    pastEvents: string[]
+    onEvent: (action: string)=>void 
+}
+
+const Component: React.FC<Props> = ({ startState, pastEvents, onEvent }) => {
+  const [state, setState] = React.useState({startState, pastEvents});
 
   const calculatedState = state.pastEvents.reduce(
     (prevValue, currentValue) => actions[currentValue](prevValue),
-    { ...state },
+    startState 
   );
 
   return <div>
@@ -45,22 +55,94 @@ const Component: React.FC<{ defaultState: DState }> = ({ defaultState }) => {
     <button {...update("+1")}>+</button>
   </div>;
 
-  type ActionType = keyof typeof actions;
 
   function update(action: ActionType) {
     return {
       "data-onclick": String(action),
       onClick: (e: React.MouseEvent) => {
         e.stopPropagation();
+        onEvent(action);
         setState({ ...state, pastEvents: [...state.pastEvents, action] });
       },
     };
   }
 };
 
-`;
 
-const defaultState = { counter: 0, pastEvents: new Array(10).fill("+1") };
+`;
+const defaultProps = { startState:{counter: 0}, pastEvents: new Array(10).fill("+1") , onEvent: ()=>{}};
+const Wrapper: React.FC<
+  {
+    code: string;
+    innerHTML: string;
+    defaultProps: { startState: {counter: number}, pastEvents: string[] };
+    changeWorkerRenderedComponent?: any;
+    renderedComponent?: any;
+  }
+> = (
+  {
+    code,
+    innerHTML,
+    defaultProps,
+    changeWorkerRenderedComponent,
+    renderedComponent,
+  },
+) => {
+  const ref = React.useRef(null);
+
+  React.useEffect(() => {
+    if (!code || !changeWorkerRenderedComponent) return;
+  
+
+    const onEvent = (action: string)=>changeWorkerRenderedComponent({
+      ...renderedComponent,
+      defaultProps: {
+        ...renderedComponent.default,
+        pastEvents:[...renderedComponent.defaultProps.pastEvents, action]
+      }
+    });
+
+    const componentFactory = new Function(
+      "props",
+      "React",
+      `${code}; return Component(props)`,
+    );
+    type DState = { counter: number}
+    interface Props {
+      startState: DState
+      pastEvents: string[]
+      onEvent: (action: string)=>void 
+  }
+    const Component: React.FC<Props>  = (props) => componentFactory( props, React);
+
+    setTimeout(
+      () => ReactDOM.hydrate(<Component startState={defaultProps.startState} pastEvents={defaultProps.pastEvents} onEvent={onEvent} />, ref.current),
+      10,
+    );
+  }, [code]);
+
+  return <div
+    ref={ref}
+    onClick={(e: any) => {
+      const action = e.target.getAttribute("data-onclick");
+      if (action) {
+        changeWorkerRenderedComponent(
+          {
+            ...renderedComponent,
+            defaultProps: {
+              ...renderedComponent.defaultProps,
+              pastEvents: [
+                ...renderedComponent.defaultProps.pastEvents,
+                action,
+              ],
+            },
+          },
+        );
+      }
+    }}
+    dangerouslySetInnerHTML={{ __html: innerHTML }}
+  />;
+};
 
 const ZedZoliPage = () => {
   const [renderedComponent, changeWorkerRenderedComponent] = React.useState(
@@ -70,7 +152,7 @@ const ZedZoliPage = () => {
       mainCode: ``,
       mainCodeHash: "",
       devCodeHash: "",
-      defaultState: defaultState,
+      defaultProps,
       defaultStateHash: ``,
       codeHash: ``,
       transformedHash: ``,
@@ -96,7 +178,7 @@ const ZedZoliPage = () => {
 
       const transformedHash = await transform(codeHash);
       const transformedMainHash = await transform(mainCodeHash);
-      const defaultStateHash = await hash(renderedComponent.defaultState);
+      const defaultStateHash = await hash(renderedComponent.defaultProps);
       const transformedCode = await unHash(transformedHash);
 
       const renderedHash = await render(transformedHash, defaultStateHash);
@@ -127,34 +209,7 @@ const ZedZoliPage = () => {
       );
     };
     if (typeof window !== "undefined") runner();
-  }, [code, renderedComponent.defaultState]);
-
-  const Wrapper = (props: any) => {
-    const ref = React.useRef(null);
-
-    return <div
-      ref={ref}
-      onClick={(e: any) => {
-        const action = e.target.getAttribute("data-onclick");
-        console.log(action, renderedComponent.defaultState);
-        if (action) {
-          changeWorkerRenderedComponent(
-            {
-              ...renderedComponent,
-              defaultState: {
-                ...renderedComponent.defaultState,
-                pastEvents: [
-                  ...renderedComponent.defaultState.pastEvents,
-                  action,
-                ],
-              },
-            },
-          );
-        }
-      }}
-      dangerouslySetInnerHTML={{ __html: props.innerHTML }}
-    />;
-  };
+  }, [code, renderedComponent.defaultProps]);
 
   const isChangeAvailable =
     renderedComponent.renderedMainHash !== renderedComponent.renderedHash;
@@ -170,8 +225,10 @@ const ZedZoliPage = () => {
         <Wrapper
           key={renderedComponent.renderedMainHash}
           code={renderedComponent.transformedCode}
-          defaultState={renderedComponent.defaultState}
+          defaultProps={renderedComponent.defaultProps}
           innerHTML={renderedComponent.renderedContentMain}
+          renderedComponent={renderedComponent}
+          changeWorkerRenderedComponent={changeWorkerRenderedComponent}
         />
       </div>}
 
@@ -183,13 +240,13 @@ const ZedZoliPage = () => {
           leftTitle={<Wrapper
             key={renderedComponent.renderedMainHash}
             code={renderedComponent.transformedCode}
-            defaultState={renderedComponent.defaultState}
+            defaultProps={renderedComponent.defaultProps}
             innerHTML={renderedComponent.renderedContentMain}
           />}
           rightTitle={<Wrapper
             key={renderedComponent.renderedHash}
             code={renderedComponent.transformedCode}
-            defaultState={renderedComponent.defaultState}
+            defaultProps={renderedComponent.defaultProps}
             innerHTML={renderedComponent.renderedContent}
           />}
           hideLineNumbers={true}
