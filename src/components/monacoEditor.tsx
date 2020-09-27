@@ -12,7 +12,7 @@ const MonacoEditorComp: React.FC<
   <MonacoEditor
     width="100%"
     height="600"
-    language="javascript"
+    language="typescript"
     theme="vs-dark"
     value={value}
     options={{}}

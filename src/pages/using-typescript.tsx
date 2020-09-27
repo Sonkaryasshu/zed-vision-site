@@ -4,8 +4,8 @@ import { SEO } from "../components/seo";
 import { Link, PageProps } from "gatsby";
 // If you don't want to use TypeScript you can delete this file!
 
-const UsingTypescript: React.FC<PageProps> = ({ path, location }) => (
-  <Layout title="Using TypeScript" location={location}>
+const UsingTypescript: React.FC<PageProps> = ({ path }) => (
+  <Layout>
     <SEO title="Using TypeScript" />
     <h1>Gatsby supports TypeScript by default!</h1>
     <p>

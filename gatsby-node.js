@@ -2,8 +2,7 @@ const path = require(`path`);
 const fs = require("fs").promises;
 const glob = require("glob");
 const { createFilePath } = require(`gatsby-source-filesystem`);
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
-
+const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -75,8 +74,10 @@ exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
   });
 
   const config = getConfig();
-  config.plugins.push(new MonacoWebpackPlugin({
-    languages: ['json', "javascript"]
-  }));
+  config.plugins.push(
+    new MonacoWebpackPlugin({
+      languages: ["json", "javascript"],
+    }),
+  );
   return config;
 };

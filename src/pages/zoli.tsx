@@ -23,51 +23,44 @@ const CodeEditorWithFailBack: React.FC<
     </React.Suspense>
   </div>;
 
-const counter = `function Counter(props){
-  const actions = {
-    decrease: state => ({ counter: state.counter - 1 }),  
-    double: state => ({ counter: state.counter * 2 }),
-    increase: state => ({ counter: state.counter + 1 }),
-    reset: state => ({ counter: 0 }),
-    sum: (state, index)=> ({ counter: index }),
-    _skip: state => ({ counter: state.counter }),
+const counter = `
+type DState = { counter: number; pastEvents: string[] };
+
+const actions = {
+  "+1": (s: DState) => ({ ...s, counter: s.counter + 1 }),
+  "-1": (s: DState) => ({ ...s, counter: s.counter - 1 }),
+};
+
+const Component: React.FC<{ defaultState: DState }> = ({ defaultState }) => {
+  const [state, setState] = React.useState(defaultState);
+
+  const calculatedState = state.pastEvents.reduce(
+    (prevValue, currentValue) => actions[currentValue](prevValue),
+    { ...state },
+  );
+
+  return <div>
+    <button {...update("-1")}>-</button>
+    {calculatedState.counter}
+    <button {...update("+1")}>+</button>
+  </div>;
+
+  type ActionType = keyof typeof actions;
+
+  function update(action: ActionType) {
+    return {
+      "data-onclick": String(action),
+      onClick: (e: React.MouseEvent) => {
+        e.stopPropagation();
+        setState({ ...state, pastEvents: [...state.pastEvents, action] });
+      },
+    };
   }
-  const pastEvents = props.pastEvents || []
-  
+};
 
-  const [events, setEvents] = React.useState(pastEvents)
-
-  const state = events
-    .map(ev => {
-      const text = ev.target
-      if (text.includes("-")) return "decrease"
-      else if (text.includes("Reset")) return "reset"
-      else if (text.includes("SUM")) return "sum"
-      else if (text.includes("+")) return "increase"
-      else if (text.includes("x2")) return "double"
-      else return "_skip"
-    })
-    .reduce((state, ev, index) => actions[ev](state, index), { counter: 0 })
-    
-  const onClick = e =>
-    setEvents([...events, { type: "click", target: String(e.target.innerHTML) }])
-
-  return (
-    <div>
-      {state.counter!==0 && <><button onClick={e => onClick(e)}>Reset</button><br/></>}
-      {state.counter===0 && <><button onClick={e => onClick(e)}>Jump to all SUM!</button><br/></>}
-      <button onClick={e => onClick(e)}>-</button>
-      Counter {props.name}:<span>{state.counter}</span>
-      <button onClick={e => onClick(e)}>+</button>
-    </div>
-  )
-}
 `;
 
-const pastEventsDefault = new Array(10).fill({
-  target: "+",
-  type: "click",
-});
+const defaultState = { counter: 0, pastEvents: new Array(10).fill("+1") };
 
 const ZedZoliPage = () => {
   const [renderedComponent, changeWorkerRenderedComponent] = React.useState(
@@ -77,8 +70,8 @@ const ZedZoliPage = () => {
       mainCode: ``,
       mainCodeHash: "",
       devCodeHash: "",
-      pastEvents: pastEventsDefault,
-      pastEventsHash: ``,
+      defaultState: defaultState,
+      defaultStateHash: ``,
       codeHash: ``,
       transformedHash: ``,
       transformedMainHash: ``,
@@ -103,13 +96,13 @@ const ZedZoliPage = () => {
 
       const transformedHash = await transform(codeHash);
       const transformedMainHash = await transform(mainCodeHash);
-      const pastEventsHash = await hash(renderedComponent.pastEvents);
+      const defaultStateHash = await hash(renderedComponent.defaultState);
       const transformedCode = await unHash(transformedHash);
 
-      const renderedHash = await render(transformedHash, pastEventsHash);
+      const renderedHash = await render(transformedHash, defaultStateHash);
       const renderedMainHash = await render(
         transformedMainHash,
-        pastEventsHash,
+        defaultStateHash,
       );
       const renderedContent = await unHash(renderedHash);
       const renderedContentMain = await unHash(renderedMainHash);
@@ -125,7 +118,7 @@ const ZedZoliPage = () => {
           transformedHash,
           transformedMainHash,
           transformedCode,
-          pastEventsHash,
+          defaultStateHash,
           renderedHash,
           renderedContent,
           renderedMainHash,
@@ -134,7 +127,7 @@ const ZedZoliPage = () => {
       );
     };
     if (typeof window !== "undefined") runner();
-  }, [code, renderedComponent.pastEvents]);
+  }, [code, renderedComponent.defaultState]);
 
   const Wrapper = (props: any) => {
     const ref = React.useRef(null);
@@ -142,14 +135,19 @@ const ZedZoliPage = () => {
     return <div
       ref={ref}
       onClick={(e: any) => {
-        if (e.target.type) {
+        const action = e.target.getAttribute("data-onclick");
+        console.log(action, renderedComponent.defaultState);
+        if (action) {
           changeWorkerRenderedComponent(
             {
               ...renderedComponent,
-              pastEvents: [
-                ...renderedComponent.pastEvents,
-                { target: e.target.innerHTML, type: "click" },
-              ],
+              defaultState: {
+                ...renderedComponent.defaultState,
+                pastEvents: [
+                  ...renderedComponent.defaultState.pastEvents,
+                  action,
+                ],
+              },
             },
           );
         }
@@ -172,7 +170,7 @@ const ZedZoliPage = () => {
         <Wrapper
           key={renderedComponent.renderedMainHash}
           code={renderedComponent.transformedCode}
-          pastEvents={renderedComponent.pastEvents}
+          defaultState={renderedComponent.defaultState}
           innerHTML={renderedComponent.renderedContentMain}
         />
       </div>}
@@ -182,16 +180,16 @@ const ZedZoliPage = () => {
           oldValue={format(renderedComponent.renderedContent)}
           newValue={format(renderedComponent.renderedContentMain)}
           showDiffOnly={true}
-          rightTitle={<Wrapper
+          leftTitle={<Wrapper
             key={renderedComponent.renderedMainHash}
             code={renderedComponent.transformedCode}
-            pastEvents={renderedComponent.pastEvents}
+            defaultState={renderedComponent.defaultState}
             innerHTML={renderedComponent.renderedContentMain}
           />}
-          leftTitle={<Wrapper
+          rightTitle={<Wrapper
             key={renderedComponent.renderedHash}
             code={renderedComponent.transformedCode}
-            pastEvents={renderedComponent.pastEvents}
+            defaultState={renderedComponent.defaultState}
             innerHTML={renderedComponent.renderedContent}
           />}
           hideLineNumbers={true}

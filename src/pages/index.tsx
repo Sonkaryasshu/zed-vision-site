@@ -41,12 +41,11 @@ interface Props {
   location: Location;
 }
 
-const BlogIndex: React.FC<Props> = ({ data, location }) => {
-  const siteTitle = data.site.siteMetadata.title;
+const BlogIndex: React.FC<Props> = ({ data }) => {
   const edges = data.allMdx.edges;
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout>
       <SEO title="This is Zed vision" />
       <Bio />
       {edges.map(({ node }) => {
