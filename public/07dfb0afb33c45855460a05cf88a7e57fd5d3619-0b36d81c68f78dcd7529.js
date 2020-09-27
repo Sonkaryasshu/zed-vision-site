@@ -1867,7 +1867,7 @@ function isnan(val) {
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
-  return toString.call(arr) == '[object Array]';
+  return toString.call(arr) == "[object Array]";
 };
 
 /***/ }),
@@ -2093,4 +2093,4 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 /***/ })
 
 }]);
-//# sourceMappingURL=07dfb0afb33c45855460a05cf88a7e57fd5d3619-71fb4d9a5bd621efcea0.js.map
+//# sourceMappingURL=07dfb0afb33c45855460a05cf88a7e57fd5d3619-0b36d81c68f78dcd7529.js.map

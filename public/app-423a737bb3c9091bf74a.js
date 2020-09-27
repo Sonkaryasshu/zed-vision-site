@@ -112,14 +112,18 @@ var defineProperty = __webpack_require__(46);
 function shallowDiffers(a, b) {
   for (var i in a) {
     if (!(i in b)) return true;
-  }for (var _i in b) {
+  }
+  for (var _i in b) {
     if (a[_i] !== b[_i]) return true;
-  }return false;
+  }
+  return false;
 }
 
 /* harmony default export */ var shallow_compare_es = (function (instance, nextProps, nextState) {
-  return shallowDiffers(instance.props, nextProps) || shallowDiffers(instance.state, nextState);
+  return shallowDiffers(instance.props, nextProps) ||
+    shallowDiffers(instance.state, nextState);
 });
+
 // CONCATENATED MODULE: ./.cache/ensure-resources.js
 function ownKeys(object,enumerableOnly){var keys=Object.keys(object);if(Object.getOwnPropertySymbols){var symbols=Object.getOwnPropertySymbols(object);if(enumerableOnly)symbols=symbols.filter(function(sym){return Object.getOwnPropertyDescriptor(object,sym).enumerable;});keys.push.apply(keys,symbols);}return keys;}function _objectSpread(target){for(var i=1;i<arguments.length;i++){var source=arguments[i]!=null?arguments[i]:{};if(i%2){ownKeys(Object(source),true).forEach(function(key){Object(defineProperty["a" /* default */])(target,key,source[key]);});}else if(Object.getOwnPropertyDescriptors){Object.defineProperties(target,Object.getOwnPropertyDescriptors(source));}else{ownKeys(Object(source)).forEach(function(key){Object.defineProperty(target,key,Object.getOwnPropertyDescriptor(source,key));});}}return target;}var ensure_resources_EnsureResources=/*#__PURE__*/function(_React$Component){Object(inheritsLoose["a" /* default */])(EnsureResources,_React$Component);function EnsureResources(props){var _this;_this=_React$Component.call(this)||this;var location=props.location,pageResources=props.pageResources;_this.state={location:_objectSpread({},location),pageResources:pageResources||loader["default"].loadPageSync(location.pathname)};return _this;}EnsureResources.getDerivedStateFromProps=function getDerivedStateFromProps(_ref,prevState){var location=_ref.location;if(prevState.location.href!==location.href){var pageResources=loader["default"].loadPageSync(location.pathname);return{pageResources:pageResources,location:_objectSpread({},location)};}return{location:_objectSpread({},location)};};var _proto=EnsureResources.prototype;_proto.loadResources=function loadResources(rawPath){var _this2=this;loader["default"].loadPage(rawPath).then(function(pageResources){if(pageResources&&pageResources.status!==loader["PageResourceStatus"].Error){_this2.setState({location:_objectSpread({},window.location),pageResources:pageResources});}else{window.history.replaceState({},"",location.href);window.location=rawPath;}});};_proto.shouldComponentUpdate=function shouldComponentUpdate(nextProps,nextState){// Always return false if we're missing resources.
 if(!nextState.pageResources){this.loadResources(nextProps.location.pathname);return false;}// Check if the component or json have changed.
@@ -727,7 +731,7 @@ var objectWithoutPropertiesLoose = __webpack_require__(219);
 var plainObjectConstrurctor = {}.constructor;
 
 function cloneStyle(style) {
-  if (style == null || typeof style !== 'object') return style;
+  if (style == null || typeof style !== "object") return style;
   if (Array.isArray(style)) return style.map(cloneStyle);
   if (style.constructor !== plainObjectConstrurctor) return style;
   var newStyle = {};
@@ -745,7 +749,7 @@ function cloneStyle(style) {
 
 function createRule(name, decl, options) {
   if (name === void 0) {
-    name = 'unnamed';
+    name = "unnamed";
   }
 
   var jss = options.jss;
@@ -753,7 +757,7 @@ function createRule(name, decl, options) {
   var rule = jss.plugins.onCreateRule(name, declCopy, options);
   if (rule) return rule; // It is an at-rule and it has no instance.
 
-  if (name[0] === '@') {
+  if (name[0] === "@") {
      false ? undefined : void 0;
   }
 
@@ -761,11 +765,11 @@ function createRule(name, decl, options) {
 }
 
 var join = function join(value, by) {
-  var result = '';
+  var result = "";
 
   for (var i = 0; i < value.length; i++) {
     // Remove !important from the value, it will be readded later.
-    if (value[i] === '!important') break;
+    if (value[i] === "!important") break;
     if (result) result += by;
     result += value[i];
   }
@@ -788,19 +792,19 @@ function toCssValue(value, ignoreImportant) {
   }
 
   if (!Array.isArray(value)) return value;
-  var cssValue = ''; // Support space separated values via `[['5px', '10px']]`.
+  var cssValue = ""; // Support space separated values via `[['5px', '10px']]`.
 
   if (Array.isArray(value[0])) {
     for (var i = 0; i < value.length; i++) {
-      if (value[i] === '!important') break;
-      if (cssValue) cssValue += ', ';
-      cssValue += join(value[i], ' ');
+      if (value[i] === "!important") break;
+      if (cssValue) cssValue += ", ";
+      cssValue += join(value[i], " ");
     }
-  } else cssValue = join(value, ', '); // Add !important, because it was ignored.
+  } else cssValue = join(value, ", "); // Add !important, because it was ignored.
 
 
-  if (!ignoreImportant && value[value.length - 1] === '!important') {
-    cssValue += ' !important';
+  if (!ignoreImportant && value[value.length - 1] === "!important") {
+    cssValue += " !important";
   }
 
   return cssValue;
@@ -812,10 +816,10 @@ function toCssValue(value, ignoreImportant) {
 
 
 function indentStr(str, indent) {
-  var result = '';
+  var result = "";
 
   for (var index = 0; index < indent; index++) {
-    result += '  ';
+    result += "  ";
   }
 
   return result + str;
@@ -830,7 +834,7 @@ function toCss(selector, style, options) {
     options = {};
   }
 
-  var result = '';
+  var result = "";
   if (!style) return result;
   var _options = options,
       _options$indent = _options.indent,
@@ -848,7 +852,7 @@ function toCss(selector, style, options) {
           var value = fallback[prop];
 
           if (value != null) {
-            if (result) result += '\n';
+            if (result) result += "\n";
             result += "" + indentStr(prop + ": " + toCssValue(value) + ";", indent);
           }
         }
@@ -859,7 +863,7 @@ function toCss(selector, style, options) {
         var _value = fallbacks[_prop];
 
         if (_value != null) {
-          if (result) result += '\n';
+          if (result) result += "\n";
           result += "" + indentStr(_prop + ": " + toCssValue(_value) + ";", indent);
         }
       }
@@ -869,8 +873,8 @@ function toCss(selector, style, options) {
   for (var _prop2 in style) {
     var _value2 = style[_prop2];
 
-    if (_value2 != null && _prop2 !== 'fallbacks') {
-      if (result) result += '\n';
+    if (_value2 != null && _prop2 !== "fallbacks") {
+      if (result) result += "\n";
       result += "" + indentStr(_prop2 + ": " + toCssValue(_value2) + ";", indent);
     }
   } // Allow empty style in this case, because properties will be added dynamically.
@@ -881,19 +885,19 @@ function toCss(selector, style, options) {
   if (!selector) return result;
   indent--;
   if (result) result = "\n" + result + "\n";
-  return indentStr(selector + " {" + result, indent) + indentStr('}', indent);
+  return indentStr(selector + " {" + result, indent) + indentStr("}", indent);
 }
 
 var escapeRegex = /([[\].#*$><+~=|^:(),"'`\s])/g;
-var nativeEscape = typeof CSS !== 'undefined' && CSS.escape;
+var nativeEscape = typeof CSS !== "undefined" && CSS.escape;
 
 var jss_esm_escape = function escape(str) {
-  return nativeEscape ? nativeEscape(str) : str.replace(escapeRegex, '\\$1');
+  return nativeEscape ? nativeEscape(str) : str.replace(escapeRegex, "\\$1");
 };
 
 var BaseStyleRule = /*#__PURE__*/function () {
   function BaseStyleRule(key, style, options) {
-    this.type = 'style';
+    this.type = "style";
     this.key = void 0;
     this.isProcessed = false;
     this.style = void 0;
@@ -908,8 +912,8 @@ var BaseStyleRule = /*#__PURE__*/function () {
     if (sheet) this.renderer = sheet.renderer;else if (Renderer) this.renderer = new Renderer();
   }
   /**
-   * Get or set a style property.
-   */
+  * Get or set a style property.
+  */
 
 
   var _proto = BaseStyleRule.prototype;
@@ -976,16 +980,16 @@ var jss_esm_StyleRule = /*#__PURE__*/function (_BaseStyleRule) {
     return _this;
   }
   /**
-   * Set selector string.
-   * Attention: use this with caution. Most browsers didn't implement
-   * selectorText setter, so this may result in rerendering of entire Style Sheet.
-   */
+  * Set selector string.
+  * Attention: use this with caution. Most browsers didn't implement
+  * selectorText setter, so this may result in rerendering of entire Style Sheet.
+  */
 
 
   var _proto2 = StyleRule.prototype;
   /**
-   * Apply rule to an element inline.
-   */
+  * Apply rule to an element inline.
+  */
 
   _proto2.applyTo = function applyTo(renderable) {
     var renderer = this.renderer;
@@ -999,28 +1003,28 @@ var jss_esm_StyleRule = /*#__PURE__*/function (_BaseStyleRule) {
     }
 
     return this;
-  }
+  };
   /**
-   * Returns JSON representation of the rule.
-   * Fallbacks are not supported.
-   * Useful for inline styles.
-   */
-  ;
+  * Returns JSON representation of the rule.
+  * Fallbacks are not supported.
+  * Useful for inline styles.
+  */
+
 
   _proto2.toJSON = function toJSON() {
     var json = {};
 
     for (var prop in this.style) {
       var value = this.style[prop];
-      if (typeof value !== 'object') json[prop] = value;else if (Array.isArray(value)) json[prop] = toCssValue(value);
+      if (typeof value !== "object") json[prop] = value;else if (Array.isArray(value)) json[prop] = toCssValue(value);
     }
 
     return json;
-  }
+  };
   /**
-   * Generates a CSS string.
-   */
-  ;
+  * Generates a CSS string.
+  */
+
 
   _proto2.toString = function toString(options) {
     var sheet = this.options.sheet;
@@ -1044,11 +1048,7 @@ var jss_esm_StyleRule = /*#__PURE__*/function (_BaseStyleRule) {
       if (!hasChanged) {
         renderer.replaceRule(renderable, this);
       }
-    }
-    /**
-     * Get selector string.
-     */
-    ,
+    },
     get: function get() {
       return this.selectorText;
     }
@@ -1059,7 +1059,7 @@ var jss_esm_StyleRule = /*#__PURE__*/function (_BaseStyleRule) {
 
 var pluginStyleRule = {
   onCreateRule: function onCreateRule(name, style, options) {
-    if (name[0] === '@' || options.parent && options.parent.type === 'keyframes') {
+    if (name[0] === "@" || options.parent && options.parent.type === "keyframes") {
       return null;
     }
 
@@ -1077,7 +1077,7 @@ var atRegExp = /@([\w-]+)/;
 
 var jss_esm_ConditionalRule = /*#__PURE__*/function () {
   function ConditionalRule(key, styles, options) {
-    this.type = 'conditional';
+    this.type = "conditional";
     this.at = void 0;
     this.key = void 0;
     this.query = void 0;
@@ -1089,7 +1089,7 @@ var jss_esm_ConditionalRule = /*#__PURE__*/function () {
 
     this.query = options.name;
     var atMatch = key.match(atRegExp);
-    this.at = atMatch ? atMatch[1] : 'unknown';
+    this.at = atMatch ? atMatch[1] : "unknown";
     this.options = options;
     this.rules = new jss_esm_RuleList(Object(esm_extends["a" /* default */])({}, options, {
       parent: this
@@ -1102,53 +1102,58 @@ var jss_esm_ConditionalRule = /*#__PURE__*/function () {
     this.rules.process();
   }
   /**
-   * Get a rule.
-   */
+  * Get a rule.
+  */
 
 
   var _proto = ConditionalRule.prototype;
 
   _proto.getRule = function getRule(name) {
     return this.rules.get(name);
-  }
+  };
   /**
-   * Get index of a rule.
-   */
-  ;
+  * Get index of a rule.
+  */
+
 
   _proto.indexOf = function indexOf(rule) {
     return this.rules.indexOf(rule);
-  }
+  };
   /**
-   * Create and register rule, run plugins.
-   */
-  ;
+  * Create and register rule, run plugins.
+  */
+
 
   _proto.addRule = function addRule(name, style, options) {
     var rule = this.rules.add(name, style, options);
     if (!rule) return null;
     this.options.jss.plugins.onProcessRule(rule);
     return rule;
-  }
+  };
   /**
-   * Generates a CSS string.
-   */
-  ;
+  * Generates a CSS string.
+  */
+
 
   _proto.toString = function toString(options) {
     if (options === void 0) {
       options = defaultToStringOptions;
     }
 
-    if (options.indent == null) options.indent = defaultToStringOptions.indent;
-    if (options.children == null) options.children = defaultToStringOptions.children;
+    if (options.indent == null) {
+      options.indent = defaultToStringOptions.indent;
+    }
+
+    if (options.children == null) {
+      options.children = defaultToStringOptions.children;
+    }
 
     if (options.children === false) {
       return this.query + " {}";
     }
 
     var children = this.rules.toString(options);
-    return children ? this.query + " {\n" + children + "\n}" : '';
+    return children ? this.query + " {\n" + children + "\n}" : "";
   };
 
   return ConditionalRule;
@@ -1171,8 +1176,8 @@ var nameRegExp = /@keyframes\s+([\w-]+)/;
 
 var jss_esm_KeyframesRule = /*#__PURE__*/function () {
   function KeyframesRule(key, frames, options) {
-    this.type = 'keyframes';
-    this.at = '@keyframes';
+    this.type = "keyframes";
+    this.at = "@keyframes";
     this.key = void 0;
     this.name = void 0;
     this.id = void 0;
@@ -1185,7 +1190,7 @@ var jss_esm_KeyframesRule = /*#__PURE__*/function () {
     if (nameMatch && nameMatch[1]) {
       this.name = nameMatch[1];
     } else {
-      this.name = 'noname';
+      this.name = "noname";
        false ? undefined : void 0;
     }
 
@@ -1208,8 +1213,8 @@ var jss_esm_KeyframesRule = /*#__PURE__*/function () {
     this.rules.process();
   }
   /**
-   * Generates a CSS string.
-   */
+  * Generates a CSS string.
+  */
 
 
   var _proto = KeyframesRule.prototype;
@@ -1219,8 +1224,13 @@ var jss_esm_KeyframesRule = /*#__PURE__*/function () {
       options = defaultToStringOptions$1;
     }
 
-    if (options.indent == null) options.indent = defaultToStringOptions$1.indent;
-    if (options.children == null) options.children = defaultToStringOptions$1.children;
+    if (options.indent == null) {
+      options.indent = defaultToStringOptions$1.indent;
+    }
+
+    if (options.children == null) {
+      options.children = defaultToStringOptions$1.children;
+    }
 
     if (options.children === false) {
       return this.at + " " + this.id + " {}";
@@ -1238,7 +1248,7 @@ var keyRegExp$1 = /@keyframes\s+/;
 var refRegExp = /\$([\w-]+)/g;
 
 var findReferencedKeyframe = function findReferencedKeyframe(val, keyframes) {
-  if (typeof val === 'string') {
+  if (typeof val === "string") {
     return val.replace(refRegExp, function (match, name) {
       if (name in keyframes) {
         return keyframes[name];
@@ -1267,13 +1277,17 @@ var jss_esm_replaceRef = function replaceRef(style, prop, keyframes) {
 
 var jss_esm_plugin = {
   onCreateRule: function onCreateRule(key, frames, options) {
-    return typeof key === 'string' && keyRegExp$1.test(key) ? new jss_esm_KeyframesRule(key, frames, options) : null;
+    return typeof key === "string" && keyRegExp$1.test(key) ? new jss_esm_KeyframesRule(key, frames, options) : null;
   },
   // Animation name ref replacer.
   onProcessStyle: function onProcessStyle(style, rule, sheet) {
-    if (rule.type !== 'style' || !sheet) return style;
-    if ('animation-name' in style) jss_esm_replaceRef(style, 'animation-name', sheet.keyframes);
-    if ('animation' in style) jss_esm_replaceRef(style, 'animation', sheet.keyframes);
+    if (rule.type !== "style" || !sheet) return style;
+
+    if ("animation-name" in style) {
+      jss_esm_replaceRef(style, "animation-name", sheet.keyframes);
+    }
+
+    if ("animation" in style) jss_esm_replaceRef(style, "animation", sheet.keyframes);
     return style;
   },
   onChangeValue: function onChangeValue(val, prop, rule) {
@@ -1284,10 +1298,10 @@ var jss_esm_plugin = {
     }
 
     switch (prop) {
-      case 'animation':
+      case "animation":
         return findReferencedKeyframe(val, sheet.keyframes);
 
-      case 'animation-name':
+      case "animation-name":
         return findReferencedKeyframe(val, sheet.keyframes);
 
       default:
@@ -1313,8 +1327,8 @@ var jss_esm_KeyframeRule = /*#__PURE__*/function (_BaseStyleRule) {
 
   var _proto = KeyframeRule.prototype;
   /**
-   * Generates a CSS string.
-   */
+  * Generates a CSS string.
+  */
 
   _proto.toString = function toString(options) {
     var sheet = this.options.sheet;
@@ -1330,7 +1344,7 @@ var jss_esm_KeyframeRule = /*#__PURE__*/function (_BaseStyleRule) {
 
 var pluginKeyframeRule = {
   onCreateRule: function onCreateRule(key, style, options) {
-    if (options.parent && options.parent.type === 'keyframes') {
+    if (options.parent && options.parent.type === "keyframes") {
       return new jss_esm_KeyframeRule(key, style, options);
     }
 
@@ -1340,8 +1354,8 @@ var pluginKeyframeRule = {
 
 var FontFaceRule = /*#__PURE__*/function () {
   function FontFaceRule(key, style, options) {
-    this.type = 'font-face';
-    this.at = '@font-face';
+    this.type = "font-face";
+    this.at = "@font-face";
     this.key = void 0;
     this.style = void 0;
     this.options = void 0;
@@ -1352,19 +1366,19 @@ var FontFaceRule = /*#__PURE__*/function () {
     this.options = options;
   }
   /**
-   * Generates a CSS string.
-   */
+  * Generates a CSS string.
+  */
 
 
   var _proto = FontFaceRule.prototype;
 
   _proto.toString = function toString(options) {
     if (Array.isArray(this.style)) {
-      var str = '';
+      var str = "";
 
       for (var index = 0; index < this.style.length; index++) {
         str += toCss(this.at, this.style[index]);
-        if (this.style[index + 1]) str += '\n';
+        if (this.style[index + 1]) str += "\n";
       }
 
       return str;
@@ -1385,8 +1399,8 @@ var pluginFontFaceRule = {
 
 var ViewportRule = /*#__PURE__*/function () {
   function ViewportRule(key, style, options) {
-    this.type = 'viewport';
-    this.at = '@viewport';
+    this.type = "viewport";
+    this.at = "@viewport";
     this.key = void 0;
     this.style = void 0;
     this.options = void 0;
@@ -1397,8 +1411,8 @@ var ViewportRule = /*#__PURE__*/function () {
     this.options = options;
   }
   /**
-   * Generates a CSS string.
-   */
+  * Generates a CSS string.
+  */
 
 
   var _proto = ViewportRule.prototype;
@@ -1412,13 +1426,13 @@ var ViewportRule = /*#__PURE__*/function () {
 
 var pluginViewportRule = {
   onCreateRule: function onCreateRule(key, style, options) {
-    return key === '@viewport' || key === '@-ms-viewport' ? new ViewportRule(key, style, options) : null;
+    return key === "@viewport" || key === "@-ms-viewport" ? new ViewportRule(key, style, options) : null;
   }
 };
 
 var SimpleRule = /*#__PURE__*/function () {
   function SimpleRule(key, value, options) {
-    this.type = 'simple';
+    this.type = "simple";
     this.key = void 0;
     this.value = void 0;
     this.options = void 0;
@@ -1429,8 +1443,8 @@ var SimpleRule = /*#__PURE__*/function () {
     this.options = options;
   }
   /**
-   * Generates a CSS string.
-   */
+  * Generates a CSS string.
+  */
   // eslint-disable-next-line no-unused-vars
 
 
@@ -1438,11 +1452,11 @@ var SimpleRule = /*#__PURE__*/function () {
 
   _proto.toString = function toString(options) {
     if (Array.isArray(this.value)) {
-      var str = '';
+      var str = "";
 
       for (var index = 0; index < this.value.length; index++) {
         str += this.key + " " + this.value[index] + ";";
-        if (this.value[index + 1]) str += '\n';
+        if (this.value[index + 1]) str += "\n";
       }
 
       return str;
@@ -1455,9 +1469,9 @@ var SimpleRule = /*#__PURE__*/function () {
 }();
 
 var keysMap = {
-  '@charset': true,
-  '@import': true,
-  '@namespace': true
+  "@charset": true,
+  "@import": true,
+  "@namespace": true
 };
 var pluginSimpleRule = {
   onCreateRule: function onCreateRule(key, value, options) {
@@ -1496,10 +1510,10 @@ var jss_esm_RuleList = /*#__PURE__*/function () {
     this.keyframes = options.keyframes;
   }
   /**
-   * Create and register rule.
-   *
-   * Will not render after Style Sheet was rendered the first time.
-   */
+  * Create and register rule.
+  *
+  * Will not render after Style Sheet was rendered the first time.
+  */
 
 
   var _proto = RuleList.prototype;
@@ -1550,48 +1564,48 @@ var jss_esm_RuleList = /*#__PURE__*/function () {
     var index = options.index === undefined ? this.index.length : options.index;
     this.index.splice(index, 0, rule);
     return rule;
-  }
+  };
   /**
-   * Get a rule.
-   */
-  ;
+  * Get a rule.
+  */
+
 
   _proto.get = function get(name) {
     return this.map[name];
-  }
+  };
   /**
-   * Delete a rule.
-   */
-  ;
+  * Delete a rule.
+  */
+
 
   _proto.remove = function remove(rule) {
     this.unregister(rule);
     delete this.raw[rule.key];
     this.index.splice(this.index.indexOf(rule), 1);
-  }
+  };
   /**
-   * Get index of a rule.
-   */
-  ;
+  * Get index of a rule.
+  */
+
 
   _proto.indexOf = function indexOf(rule) {
     return this.index.indexOf(rule);
-  }
+  };
   /**
-   * Run `onProcessRule()` plugins on every rule.
-   */
-  ;
+  * Run `onProcessRule()` plugins on every rule.
+  */
+
 
   _proto.process = function process() {
     var plugins = this.options.jss.plugins; // We need to clone array because if we modify the index somewhere else during a loop
     // we end up with very hard-to-track-down side effects.
 
     this.index.slice(0).forEach(plugins.onProcessRule, plugins);
-  }
+  };
   /**
-   * Register a rule in `.map`, `.classes` and `.keyframes` maps.
-   */
-  ;
+  * Register a rule in `.map`, `.classes` and `.keyframes` maps.
+  */
+
 
   _proto.register = function register(rule) {
     this.map[rule.key] = rule;
@@ -1602,11 +1616,11 @@ var jss_esm_RuleList = /*#__PURE__*/function () {
     } else if (rule instanceof jss_esm_KeyframesRule && this.keyframes) {
       this.keyframes[rule.name] = rule.id;
     }
-  }
+  };
   /**
-   * Unregister a rule.
-   */
-  ;
+  * Unregister a rule.
+  */
+
 
   _proto.unregister = function unregister(rule) {
     delete this.map[rule.key];
@@ -1617,18 +1631,18 @@ var jss_esm_RuleList = /*#__PURE__*/function () {
     } else if (rule instanceof jss_esm_KeyframesRule) {
       delete this.keyframes[rule.name];
     }
-  }
+  };
   /**
-   * Update the function values with a new data.
-   */
-  ;
+  * Update the function values with a new data.
+  */
+
 
   _proto.update = function update() {
     var name;
     var data;
     var options;
 
-    if (typeof (arguments.length <= 0 ? undefined : arguments[0]) === 'string') {
+    if (typeof (arguments.length <= 0 ? undefined : arguments[0]) === "string") {
       name = arguments.length <= 0 ? undefined : arguments[0]; // $FlowFixMe
 
       data = arguments.length <= 1 ? undefined : arguments[1]; // $FlowFixMe
@@ -1648,11 +1662,11 @@ var jss_esm_RuleList = /*#__PURE__*/function () {
         this.updateOne(this.index[index], data, options);
       }
     }
-  }
+  };
   /**
-   * Execute plugins, update rule props.
-   */
-  ;
+  * Execute plugins, update rule props.
+  */
+
 
   _proto.updateOne = function updateOne(rule, data, options) {
     if (options === void 0) {
@@ -1697,14 +1711,14 @@ var jss_esm_RuleList = /*#__PURE__*/function () {
         }
       }
     }
-  }
+  };
   /**
-   * Convert rules to a CSS string.
-   */
-  ;
+  * Convert rules to a CSS string.
+  */
+
 
   _proto.toString = function toString(options) {
-    var str = '';
+    var str = "";
     var sheet = this.options.sheet;
     var link = sheet ? sheet.options.link : false;
 
@@ -1713,7 +1727,7 @@ var jss_esm_RuleList = /*#__PURE__*/function () {
       var css = rule.toString(options); // No need to render an empty rule.
 
       if (!css && !link) continue;
-      if (str) str += '\n';
+      if (str) str += "\n";
       str += css;
     }
 
@@ -1757,8 +1771,8 @@ var jss_esm_StyleSheet = /*#__PURE__*/function () {
     this.rules.process();
   }
   /**
-   * Attach renderable to the render tree.
-   */
+  * Attach renderable to the render tree.
+  */
 
 
   var _proto = StyleSheet.prototype;
@@ -1770,23 +1784,23 @@ var jss_esm_StyleSheet = /*#__PURE__*/function () {
 
     if (!this.deployed) this.deploy();
     return this;
-  }
+  };
   /**
-   * Remove renderable from render tree.
-   */
-  ;
+  * Remove renderable from render tree.
+  */
+
 
   _proto.detach = function detach() {
     if (!this.attached) return this;
     if (this.renderer) this.renderer.detach();
     this.attached = false;
     return this;
-  }
+  };
   /**
-   * Add a rule to the current stylesheet.
-   * Will insert a rule also after the stylesheet has been rendered first time.
-   */
-  ;
+  * Add a rule to the current stylesheet.
+  * Will insert a rule also after the stylesheet has been rendered first time.
+  */
+
 
   _proto.addRule = function addRule(name, decl, options) {
     var queue = this.queue; // Plugins can create rules.
@@ -1817,22 +1831,22 @@ var jss_esm_StyleSheet = /*#__PURE__*/function () {
 
     this.deployed = false;
     return rule;
-  }
+  };
   /**
-   * Insert rule into the StyleSheet
-   */
-  ;
+  * Insert rule into the StyleSheet
+  */
+
 
   _proto.insertRule = function insertRule(rule) {
     if (this.renderer) {
       this.renderer.insertRule(rule);
     }
-  }
+  };
   /**
-   * Create and add rules.
-   * Will render also after Style Sheet was rendered the first time.
-   */
-  ;
+  * Create and add rules.
+  * Will render also after Style Sheet was rendered the first time.
+  */
+
 
   _proto.addRules = function addRules(styles, options) {
     var added = [];
@@ -1843,23 +1857,23 @@ var jss_esm_StyleSheet = /*#__PURE__*/function () {
     }
 
     return added;
-  }
+  };
   /**
-   * Get a rule by name.
-   */
-  ;
+  * Get a rule by name.
+  */
+
 
   _proto.getRule = function getRule(name) {
     return this.rules.get(name);
-  }
+  };
   /**
-   * Delete a rule by name.
-   * Returns `true`: if rule has been deleted from the DOM.
-   */
-  ;
+  * Delete a rule by name.
+  * Returns `true`: if rule has been deleted from the DOM.
+  */
+
 
   _proto.deleteRule = function deleteRule(name) {
-    var rule = typeof name === 'object' ? name : this.rules.get(name);
+    var rule = typeof name === "object" ? name : this.rules.get(name);
     if (!rule) return false;
     this.rules.remove(rule);
 
@@ -1868,29 +1882,29 @@ var jss_esm_StyleSheet = /*#__PURE__*/function () {
     }
 
     return true;
-  }
+  };
   /**
-   * Get index of a rule.
-   */
-  ;
+  * Get index of a rule.
+  */
+
 
   _proto.indexOf = function indexOf(rule) {
     return this.rules.indexOf(rule);
-  }
+  };
   /**
-   * Deploy pure CSS string to a renderable.
-   */
-  ;
+  * Deploy pure CSS string to a renderable.
+  */
+
 
   _proto.deploy = function deploy() {
     if (this.renderer) this.renderer.deploy();
     this.deployed = true;
     return this;
-  }
+  };
   /**
-   * Update the function values with a new data.
-   */
-  ;
+  * Update the function values with a new data.
+  */
+
 
   _proto.update = function update() {
     var _this$rules;
@@ -1898,20 +1912,20 @@ var jss_esm_StyleSheet = /*#__PURE__*/function () {
     (_this$rules = this.rules).update.apply(_this$rules, arguments);
 
     return this;
-  }
+  };
   /**
-   * Updates a single rule.
-   */
-  ;
+  * Updates a single rule.
+  */
+
 
   _proto.updateOne = function updateOne(rule, data, options) {
     this.rules.updateOne(rule, data, options);
     return this;
-  }
+  };
   /**
-   * Convert rules to a CSS string.
-   */
-  ;
+  * Convert rules to a CSS string.
+  */
+
 
   _proto.toString = function toString(options) {
     return this.rules.toString(options);
@@ -1931,8 +1945,8 @@ var PluginsRegistry = /*#__PURE__*/function () {
 
   var _proto = PluginsRegistry.prototype;
   /**
-   * Call `onCreateRule` hooks and return an object if returned by a hook.
-   */
+  * Call `onCreateRule` hooks and return an object if returned by a hook.
+  */
 
   _proto.onCreateRule = function onCreateRule(name, decl, options) {
     for (var i = 0; i < this.registry.onCreateRule.length; i++) {
@@ -1941,11 +1955,11 @@ var PluginsRegistry = /*#__PURE__*/function () {
     }
 
     return null;
-  }
+  };
   /**
-   * Call `onProcessRule` hooks.
-   */
-  ;
+  * Call `onProcessRule` hooks.
+  */
+
 
   _proto.onProcessRule = function onProcessRule(rule) {
     if (rule.isProcessed) return;
@@ -1957,42 +1971,42 @@ var PluginsRegistry = /*#__PURE__*/function () {
 
     if (rule.style) this.onProcessStyle(rule.style, rule, sheet);
     rule.isProcessed = true;
-  }
+  };
   /**
-   * Call `onProcessStyle` hooks.
-   */
-  ;
+  * Call `onProcessStyle` hooks.
+  */
+
 
   _proto.onProcessStyle = function onProcessStyle(style, rule, sheet) {
     for (var i = 0; i < this.registry.onProcessStyle.length; i++) {
       // $FlowFixMe
       rule.style = this.registry.onProcessStyle[i](rule.style, rule, sheet);
     }
-  }
+  };
   /**
-   * Call `onProcessSheet` hooks.
-   */
-  ;
+  * Call `onProcessSheet` hooks.
+  */
+
 
   _proto.onProcessSheet = function onProcessSheet(sheet) {
     for (var i = 0; i < this.registry.onProcessSheet.length; i++) {
       this.registry.onProcessSheet[i](sheet);
     }
-  }
+  };
   /**
-   * Call `onUpdate` hooks.
-   */
-  ;
+  * Call `onUpdate` hooks.
+  */
+
 
   _proto.onUpdate = function onUpdate(data, rule, sheet, options) {
     for (var i = 0; i < this.registry.onUpdate.length; i++) {
       this.registry.onUpdate[i](data, rule, sheet, options);
     }
-  }
+  };
   /**
-   * Call `onChangeValue` hooks.
-   */
-  ;
+  * Call `onChangeValue` hooks.
+  */
+
 
   _proto.onChangeValue = function onChangeValue(value, prop, rule) {
     var processedValue = value;
@@ -2002,16 +2016,16 @@ var PluginsRegistry = /*#__PURE__*/function () {
     }
 
     return processedValue;
-  }
+  };
   /**
-   * Register a plugin.
-   */
-  ;
+  * Register a plugin.
+  */
+
 
   _proto.use = function use(newPlugin, options) {
     if (options === void 0) {
       options = {
-        queue: 'external'
+        queue: "external"
       };
     }
 
@@ -2056,8 +2070,8 @@ var jss_esm_SheetsRegistry = /*#__PURE__*/function () {
 
   var _proto = SheetsRegistry.prototype;
   /**
-   * Register a Style Sheet.
-   */
+  * Register a Style Sheet.
+  */
 
   _proto.add = function add(sheet) {
     var registry = this.registry;
@@ -2076,35 +2090,35 @@ var jss_esm_SheetsRegistry = /*#__PURE__*/function () {
         return;
       }
     }
-  }
+  };
   /**
-   * Reset the registry.
-   */
-  ;
+  * Reset the registry.
+  */
+
 
   _proto.reset = function reset() {
     this.registry = [];
-  }
+  };
   /**
-   * Remove a Style Sheet.
-   */
-  ;
+  * Remove a Style Sheet.
+  */
+
 
   _proto.remove = function remove(sheet) {
     var index = this.registry.indexOf(sheet);
     this.registry.splice(index, 1);
-  }
+  };
   /**
-   * Convert all attached sheets to a CSS string.
-   */
-  ;
+  * Convert all attached sheets to a CSS string.
+  */
+
 
   _proto.toString = function toString(_temp) {
     var _ref = _temp === void 0 ? {} : _temp,
         attached = _ref.attached,
         options = Object(objectWithoutPropertiesLoose["a" /* default */])(_ref, ["attached"]);
 
-    var css = '';
+    var css = "";
 
     for (var i = 0; i < this.registry.length; i++) {
       var sheet = this.registry[i];
@@ -2113,7 +2127,7 @@ var jss_esm_SheetsRegistry = /*#__PURE__*/function () {
         continue;
       }
 
-      if (css) css += '\n';
+      if (css) css += "\n";
       css += sheet.toString(options);
     }
 
@@ -2124,8 +2138,8 @@ var jss_esm_SheetsRegistry = /*#__PURE__*/function () {
     key: "index",
 
     /**
-     * Current highest index number.
-     */
+    * Current highest index number.
+    */
     get: function get() {
       return this.registry.length === 0 ? 0 : this.registry[this.registry.length - 1].options.index;
     }
@@ -2145,8 +2159,8 @@ var sheets = new jss_esm_SheetsRegistry();
 /* eslint-disable */
 // https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 
-var globalThis = typeof window != 'undefined' && window.Math == Math ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
-var ns = '2f1acc6c3a606b082e5eef5e54414ffb';
+var globalThis = typeof window != "undefined" && window.Math == Math ? window : typeof self != "undefined" && self.Math == Math ? self : Function("return this")();
+var ns = "2f1acc6c3a606b082e5eef5e54414ffb";
 if (globalThis[ns] == null) globalThis[ns] = 0; // Bundle may contain multiple JSS versions at the same time. In order to identify
 // the current version with just one short number and use it for classes generation
 // we use a counter. Also it is more accurate, because user can manually reevaluate
@@ -2173,8 +2187,8 @@ var createGenerateId = function createGenerateId(options) {
        false ? undefined : void 0;
     }
 
-    var jssId = '';
-    var prefix = '';
+    var jssId = "";
+    var prefix = "";
 
     if (sheet) {
       if (sheet.options.classNamePrefix) {
@@ -2188,10 +2202,10 @@ var createGenerateId = function createGenerateId(options) {
 
     if (options.minify) {
       // Using "c" because a number can't be the first char in a class name.
-      return "" + (prefix || 'c') + moduleId + jssId + ruleCounter;
+      return "" + (prefix || "c") + moduleId + jssId + ruleCounter;
     }
 
-    return prefix + rule.key + "-" + moduleId + (jssId ? "-" + jssId : '') + "-" + ruleCounter;
+    return prefix + rule.key + "-" + moduleId + (jssId ? "-" + jssId : "") + "-" + ruleCounter;
   };
 };
 /**
@@ -2221,7 +2235,7 @@ function getPropertyValue(cssRule, prop) {
     return cssRule.style.getPropertyValue(prop);
   } catch (err) {
     // IE may throw if property is unknown.
-    return '';
+    return "";
   }
 }
 /**
@@ -2236,8 +2250,8 @@ function setProperty(cssRule, prop, value) {
     if (Array.isArray(value)) {
       cssValue = toCssValue(value, true);
 
-      if (value[value.length - 1] === '!important') {
-        cssRule.style.setProperty(prop, cssValue, 'important');
+      if (value[value.length - 1] === "!important") {
+        cssRule.style.setProperty(prop, cssValue, "important");
         return true;
       }
     } // Support CSSTOM.
@@ -2290,7 +2304,7 @@ function setSelector(cssRule, selectorText) {
 
 
 var getHead = memoize(function () {
-  return document.querySelector('head');
+  return document.querySelector("head");
 });
 /**
  * Find attached sheet with an index higher than the passed one.
@@ -2374,7 +2388,7 @@ function findPrevNode(options) {
 
   var insertionPoint = options.insertionPoint;
 
-  if (insertionPoint && typeof insertionPoint === 'string') {
+  if (insertionPoint && typeof insertionPoint === "string") {
     var comment = findCommentNode(insertionPoint);
 
     if (comment) {
@@ -2406,11 +2420,17 @@ function insertStyle(style, options) {
   } // Works with iframes and any node types.
 
 
-  if (insertionPoint && typeof insertionPoint.nodeType === 'number') {
+  if (insertionPoint && typeof insertionPoint.nodeType === "number") {
     // https://stackoverflow.com/questions/41328728/force-casting-in-flow
     var insertionPointElement = insertionPoint;
     var parentNode = insertionPointElement.parentNode;
-    if (parentNode) parentNode.insertBefore(style, insertionPointElement.nextSibling);else  false ? undefined : void 0;
+
+    if (parentNode) {
+      parentNode.insertBefore(style, insertionPointElement.nextSibling);
+    } else {
+       false ? undefined : void 0;
+    }
+
     return;
   }
 
@@ -2423,7 +2443,7 @@ function insertStyle(style, options) {
 
 var getNonce = memoize(function () {
   var node = document.querySelector('meta[property="csp-nonce"]');
-  return node ? node.getAttribute('content') : null;
+  return node ? node.getAttribute("content") : null;
 });
 
 var _insertRule = function insertRule(container, rule, index) {
@@ -2435,11 +2455,11 @@ var _insertRule = function insertRule(container, rule, index) {
   }
 
   try {
-    if ('insertRule' in container) {
+    if ("insertRule" in container) {
       var c = container;
       c.insertRule(rule, index);
     } // Keyframes rule.
-    else if ('appendRule' in container) {
+    else if ("appendRule" in container) {
         var _c = container;
 
         _c.appendRule(rule);
@@ -2453,11 +2473,11 @@ var _insertRule = function insertRule(container, rule, index) {
 };
 
 var createStyle = function createStyle() {
-  var el = document.createElement('style'); // Without it, IE will have a broken source order specificity if we
+  var el = document.createElement("style"); // Without it, IE will have a broken source order specificity if we
   // insert rules after we insert the style tag.
   // It seems to kick-off the source order specificity algorithm.
 
-  el.textContent = '\n';
+  el.textContent = "\n";
   return el;
 };
 
@@ -2481,15 +2501,15 @@ var DomRenderer = /*#__PURE__*/function () {
         element = _ref.element;
 
     this.element = element || createStyle();
-    this.element.setAttribute('data-jss', '');
-    if (media) this.element.setAttribute('media', media);
-    if (meta) this.element.setAttribute('data-meta', meta);
+    this.element.setAttribute("data-jss", "");
+    if (media) this.element.setAttribute("media", media);
+    if (meta) this.element.setAttribute("data-meta", meta);
     var nonce = getNonce();
-    if (nonce) this.element.setAttribute('nonce', nonce);
+    if (nonce) this.element.setAttribute("nonce", nonce);
   }
   /**
-   * Insert style element into render tree.
-   */
+  * Insert style element into render tree.
+  */
 
 
   var _proto = DomRenderer.prototype;
@@ -2506,20 +2526,20 @@ var DomRenderer = /*#__PURE__*/function () {
       this.hasInsertedRules = false;
       this.deploy();
     }
-  }
+  };
   /**
-   * Remove style element from render tree.
-   */
-  ;
+  * Remove style element from render tree.
+  */
+
 
   _proto.detach = function detach() {
     var parentNode = this.element.parentNode;
     if (parentNode) parentNode.removeChild(this.element);
-  }
+  };
   /**
-   * Inject CSS string into element.
-   */
-  ;
+  * Inject CSS string into element.
+  */
+
 
   _proto.deploy = function deploy() {
     var sheet = this.sheet;
@@ -2531,21 +2551,21 @@ var DomRenderer = /*#__PURE__*/function () {
     }
 
     this.element.textContent = "\n" + sheet.toString() + "\n";
-  }
+  };
   /**
-   * Insert RuleList into an element.
-   */
-  ;
+  * Insert RuleList into an element.
+  */
+
 
   _proto.insertRules = function insertRules(rules, nativeParent) {
     for (var i = 0; i < rules.index.length; i++) {
       this.insertRule(rules.index[i], i, nativeParent);
     }
-  }
+  };
   /**
-   * Insert a rule into element.
-   */
-  ;
+  * Insert a rule into element.
+  */
+
 
   _proto.insertRule = function insertRule(rule, index, nativeParent) {
     if (nativeParent === void 0) {
@@ -2556,7 +2576,7 @@ var DomRenderer = /*#__PURE__*/function () {
       var parent = rule;
       var latestNativeParent = nativeParent;
 
-      if (rule.type === 'conditional' || rule.type === 'keyframes') {
+      if (rule.type === "conditional" || rule.type === "keyframes") {
         // We need to render the container without children first.
         latestNativeParent = _insertRule(nativeParent, parent.toString({
           children: false
@@ -2590,11 +2610,11 @@ var DomRenderer = /*#__PURE__*/function () {
     this.hasInsertedRules = true;
     rule.renderable = nativeRule;
     return nativeRule;
-  }
+  };
   /**
-   * Delete a rule.
-   */
-  ;
+  * Delete a rule.
+  */
+
 
   _proto.deleteRule = function deleteRule(cssRule) {
     var sheet = this.element.sheet;
@@ -2602,11 +2622,11 @@ var DomRenderer = /*#__PURE__*/function () {
     if (index === -1) return false;
     sheet.deleteRule(index);
     return true;
-  }
+  };
   /**
-   * Get index of a CSS Rule.
-   */
-  ;
+  * Get index of a CSS Rule.
+  */
+
 
   _proto.indexOf = function indexOf(cssRule) {
     var cssRules = this.element.sheet.cssRules;
@@ -2616,24 +2636,24 @@ var DomRenderer = /*#__PURE__*/function () {
     }
 
     return -1;
-  }
+  };
   /**
-   * Generate a new CSS rule and replace the existing one.
-   *
-   * Only used for some old browsers because they can't set a selector.
-   */
-  ;
+  * Generate a new CSS rule and replace the existing one.
+  *
+  * Only used for some old browsers because they can't set a selector.
+  */
+
 
   _proto.replaceRule = function replaceRule(cssRule, rule) {
     var index = this.indexOf(cssRule);
     if (index === -1) return false;
     this.element.sheet.deleteRule(index);
     return this.insertRule(rule, index);
-  }
+  };
   /**
-   * Get all rules elements.
-   */
-  ;
+  * Get all rules elements.
+  */
+
 
   _proto.getRules = function getRules() {
     return this.element.sheet.cssRules;
@@ -2663,17 +2683,17 @@ var jss_esm_Jss = /*#__PURE__*/function () {
 
     for (var i = 0; i < plugins.length; i++) {
       this.plugins.use(plugins[i], {
-        queue: 'internal'
+        queue: "internal"
       });
     }
 
     this.setup(options);
   }
   /**
-   * Prepares various options, applies plugins.
-   * Should not be used twice on the same instance, because there is no plugins
-   * deduplication logic.
-   */
+  * Prepares various options, applies plugins.
+  * Should not be used twice on the same instance, because there is no plugins
+  * deduplication logic.
+  */
 
 
   var _proto = Jss.prototype;
@@ -2695,20 +2715,22 @@ var jss_esm_Jss = /*#__PURE__*/function () {
       this.generateId = this.options.createGenerateId(this.options.id);
     }
 
-    if (options.insertionPoint != null) this.options.insertionPoint = options.insertionPoint;
+    if (options.insertionPoint != null) {
+      this.options.insertionPoint = options.insertionPoint;
+    }
 
-    if ('Renderer' in options) {
+    if ("Renderer" in options) {
       this.options.Renderer = options.Renderer;
     } // eslint-disable-next-line prefer-spread
 
 
     if (options.plugins) this.use.apply(this, options.plugins);
     return this;
-  }
+  };
   /**
-   * Create a Style Sheet.
-   */
-  ;
+  * Create a Style Sheet.
+  */
+
 
   _proto.createStyleSheet = function createStyleSheet(styles, options) {
     if (options === void 0) {
@@ -2718,7 +2740,7 @@ var jss_esm_Jss = /*#__PURE__*/function () {
     var _options = options,
         index = _options.index;
 
-    if (typeof index !== 'number') {
+    if (typeof index !== "number") {
       index = sheets.index === 0 ? 0 : sheets.index + 1;
     }
 
@@ -2731,22 +2753,22 @@ var jss_esm_Jss = /*#__PURE__*/function () {
     }));
     this.plugins.onProcessSheet(sheet);
     return sheet;
-  }
+  };
   /**
-   * Detach the Style Sheet and remove it from the registry.
-   */
-  ;
+  * Detach the Style Sheet and remove it from the registry.
+  */
+
 
   _proto.removeStyleSheet = function removeStyleSheet(sheet) {
     sheet.detach();
     sheets.remove(sheet);
     return this;
-  }
+  };
   /**
-   * Create a rule without a Style Sheet.
-   * [Deprecated] will be removed in the next major version.
-   */
-  ;
+  * Create a rule without a Style Sheet.
+  * [Deprecated] will be removed in the next major version.
+  */
+
 
   _proto.createRule = function createRule$1(name, style, options) {
     if (style === void 0) {
@@ -2758,7 +2780,7 @@ var jss_esm_Jss = /*#__PURE__*/function () {
     } // Enable rule without name for inline styles.
 
 
-    if (typeof name === 'object') {
+    if (typeof name === "object") {
       // $FlowIgnore
       return this.createRule(undefined, name, style);
     } // $FlowIgnore
@@ -2776,11 +2798,11 @@ var jss_esm_Jss = /*#__PURE__*/function () {
     var rule = createRule(name, style, ruleOptions);
     if (rule) this.plugins.onProcessRule(rule);
     return rule;
-  }
+  };
   /**
-   * Register plugin. Passed function will be invoked with a rule instance.
-   */
-  ;
+  * Register plugin. Passed function will be invoked with a rule instance.
+  */
+
 
   _proto.use = function use() {
     var _this = this;
@@ -2809,10 +2831,10 @@ function getDynamicStyles(styles) {
     var value = styles[key];
     var type = typeof value;
 
-    if (type === 'function') {
+    if (type === "function") {
       if (!to) to = {};
       to[key] = value;
-    } else if (type === 'object' && value !== null && !Array.isArray(value)) {
+    } else if (type === "object" && value !== null && !Array.isArray(value)) {
       var extracted = getDynamicStyles(value);
 
       if (extracted) {
@@ -2904,7 +2926,7 @@ var jss_esm_SheetsManager = /*#__PURE__*/function () {
  */
 
 
-var hasCSSTOMSupport = typeof CSS !== 'undefined' && CSS && 'number' in CSS;
+var hasCSSTOMSupport = typeof CSS !== "undefined" && CSS && "number" in CSS;
 /**
  * Creates a new instance of Jss.
  */
@@ -11123,4 +11145,4 @@ exports.navigateTo = navigateTo;
 /***/ })
 
 },[[1141,7,5]]]);
-//# sourceMappingURL=app-72111d2b2b082bbca897.js.map
+//# sourceMappingURL=app-423a737bb3c9091bf74a.js.map

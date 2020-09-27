@@ -14,14 +14,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var NotFoundPage = function NotFoundPage(_ref) {
-  var data = _ref.data,
-      location = _ref.location;
-  var siteTitle = data.site.siteMetadata.title;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_components_layout__WEBPACK_IMPORTED_MODULE_1__[/* Layout */ "a"], {
-    location: location,
-    title: siteTitle
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_components_seo__WEBPACK_IMPORTED_MODULE_2__[/* SEO */ "a"], {
+var NotFoundPage = function NotFoundPage() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_components_layout__WEBPACK_IMPORTED_MODULE_1__[/* Layout */ "a"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_components_seo__WEBPACK_IMPORTED_MODULE_2__[/* SEO */ "a"], {
     title: "... offline"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("h1", null, "Maybe you are offline"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("p", null, "Check your internet connection"));
 };
@@ -58,4 +52,4 @@ var Layout = function Layout(_ref) {
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-offline-plugin-app-shell-fallback-tsx-c2071a815903b4c714cb.js.map
+//# sourceMappingURL=component---src-pages-offline-plugin-app-shell-fallback-tsx-52e1966a2d2a1867621c.js.map

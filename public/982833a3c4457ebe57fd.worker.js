@@ -398,14 +398,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const RendererModule = async () => ({
-  render: async (code, pastEvents) => {
-    console.log(react__WEBPACK_IMPORTED_MODULE_0___default.a, react_dom_server__WEBPACK_IMPORTED_MODULE_1___default.a);
-    const cc = new Function("props", "React", `return (${code})(props)`);
+  render: async (code, defaultState) => {
+    // console.log(React, ReactDOMServer);
+    const cc = new Function("props", "React", `${code}; return Component(props)`);
 
-    const Component = props => cc(props, react__WEBPACK_IMPORTED_MODULE_0___default.a);
+    const Component = props => cc(props, react__WEBPACK_IMPORTED_MODULE_0__);
 
-    return react_dom_server__WEBPACK_IMPORTED_MODULE_1___default.a.renderToString( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Component, {
-      pastEvents
+    return react_dom_server__WEBPACK_IMPORTED_MODULE_1___default.a.renderToString( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](Component, {
+      defaultState
     }));
   }
 });
@@ -424,4 +424,4 @@ module.exports = require("stream");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=2f6b58a14b6fdba35e1d.worker.js.map
+//# sourceMappingURL=982833a3c4457ebe57fd.worker.js.map

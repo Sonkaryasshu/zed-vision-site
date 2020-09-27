@@ -4685,7 +4685,6 @@ var worker_default = /*#__PURE__*/__webpack_require__.n(worker);
 
 // EXTERNAL MODULE: ./node_modules/react/index.js
 var react = __webpack_require__(2);
-var react_default = /*#__PURE__*/__webpack_require__.n(react);
 
 // EXTERNAL MODULE: ./node_modules/react-dom/server.browser.js
 var server_browser = __webpack_require__(6);
@@ -4705,24 +4704,24 @@ var RendererModule = /*#__PURE__*/function () {
           case 0:
             return _context2.abrupt("return", {
               render: function () {
-                var _render = _asyncToGenerator( /*#__PURE__*/regenerator_default.a.mark(function _callee(code, pastEvents) {
+                var _render = _asyncToGenerator( /*#__PURE__*/regenerator_default.a.mark(function _callee(code, defaultState) {
                   var cc, Component;
                   return regenerator_default.a.wrap(function _callee$(_context) {
                     while (1) {
                       switch (_context.prev = _context.next) {
                         case 0:
-                          console.log(react_default.a, server_browser_default.a);
-                          cc = new Function("props", "React", "return (" + code + ")(props)");
+                          // console.log(React, ReactDOMServer);
+                          cc = new Function("props", "React", code + "; return Component(props)");
 
                           Component = function Component(props) {
-                            return cc(props, react_default.a);
+                            return cc(props, react);
                           };
 
-                          return _context.abrupt("return", server_browser_default.a.renderToString( /*#__PURE__*/react_default.a.createElement(Component, {
-                            pastEvents: pastEvents
+                          return _context.abrupt("return", server_browser_default.a.renderToString( /*#__PURE__*/react["createElement"](Component, {
+                            defaultState: defaultState
                           })));
 
-                        case 4:
+                        case 3:
                         case "end":
                           return _context.stop();
                       }
@@ -4789,4 +4788,4 @@ addEventListener('message', function (e) {var _e$data = e.data,type = _e$data.ty
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=built-renderer.eb7323.worker.js.map
+//# sourceMappingURL=built-renderer.5d37f6.worker.js.map

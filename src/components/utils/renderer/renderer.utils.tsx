@@ -1,19 +1,19 @@
-import React from "react";
+import * as React from "react";
 import ReactDOMServer from "react-dom/server";
 
 export const RendererModule = async () => ({
-  render: async (code: string, pastEvents: any[]) => {
-    console.log(React, ReactDOMServer);
+  render: async (code: string, defaultState: any[]) => {
+    // console.log(React, ReactDOMServer);
 
     const cc = new Function(
       "props",
       "React",
-      `return (${code})(props)`,
+      `${code}; return Component(props)`,
     );
     const Component = (props: any) => cc(props, React);
 
     return ReactDOMServer.renderToString(
-      React.createElement(Component, { pastEvents }),
+      React.createElement(Component, { defaultState }),
     );
   },
 });

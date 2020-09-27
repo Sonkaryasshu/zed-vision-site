@@ -24,41 +24,43 @@ const CodeEditorWithFailBack: React.FC<
   </div>;
 
 const counter = `
-function Counter(){
-  const defaultState = { counter: 0, pastEvents: new Array<string>(0) };
+type DState = { counter: number; pastEvents: string[] };
 
-  const actions = {
-    reset: () => defaultState,
-    increment: (s = defaultState) => ({ ...s, counter: s.counter + 1 }),
-    decrement: (s = defaultState) => ({ ...s, counter: s.counter - 1 }),
-  };
+const actions = {
+  "+1": (s: DState) => ({ ...s, counter: s.counter + 1 }),
+  "-1": (s: DState) => ({ ...s, counter: s.counter - 1 }),
+};
 
+const Component: React.FC<{ defaultState: DState }> = ({ defaultState }) => {
   const [state, setState] = React.useState(defaultState);
 
-  const calculatedState = state.pastEvents.reduce((prevValue,currentValue) => actions[currentValue](prevValue), {...state});
+  const calculatedState = state.pastEvents.reduce(
+    (prevValue, currentValue) => actions[currentValue](prevValue),
+    { ...state },
+  );
 
   return <div>
-    <button onClick={update("decrement")}>-</button>
+    <button {...update("-1")}>-</button>
     {calculatedState.counter}
-    <button onClick={update("increment")}>+</button>
+    <button {...update("+1")}>+</button>
   </div>;
 
+  type ActionType = keyof typeof actions;
+
   function update(action: ActionType) {
-    return (e: React.MouseEvent) => {
-      e.stopPropagation();
-      setState({...state, pastEvents: [...state.pastEvents, action]});
+    return {
+      "data-onclick": String(action),
+      onClick: (e: React.MouseEvent) => {
+        e.stopPropagation();
+        setState({ ...state, pastEvents: [...state.pastEvents, action] });
+      },
     };
   }
-
-  type ActionType = keyof typeof actions;
-}
+};
 
 `;
 
-const pastEventsDefault = new Array(10).fill({
-  target: "+",
-  type: "click",
-});
+const defaultState = { counter: 57, pastEvents: new Array(10).fill("+1") };
 
 const ZedZoliPage = () => {
   const [renderedComponent, changeWorkerRenderedComponent] = React.useState(
@@ -68,8 +70,8 @@ const ZedZoliPage = () => {
       mainCode: ``,
       mainCodeHash: "",
       devCodeHash: "",
-      pastEvents: pastEventsDefault,
-      pastEventsHash: ``,
+      defaultState: defaultState,
+      defaultStateHash: ``,
       codeHash: ``,
       transformedHash: ``,
       transformedMainHash: ``,
@@ -94,13 +96,13 @@ const ZedZoliPage = () => {
 
       const transformedHash = await transform(codeHash);
       const transformedMainHash = await transform(mainCodeHash);
-      const pastEventsHash = await hash(renderedComponent.pastEvents);
+      const defaultStateHash = await hash(renderedComponent.defaultState);
       const transformedCode = await unHash(transformedHash);
 
-      const renderedHash = await render(transformedHash, pastEventsHash);
+      const renderedHash = await render(transformedHash, defaultStateHash);
       const renderedMainHash = await render(
         transformedMainHash,
-        pastEventsHash,
+        defaultStateHash,
       );
       const renderedContent = await unHash(renderedHash);
       const renderedContentMain = await unHash(renderedMainHash);
@@ -116,7 +118,7 @@ const ZedZoliPage = () => {
           transformedHash,
           transformedMainHash,
           transformedCode,
-          pastEventsHash,
+          defaultStateHash,
           renderedHash,
           renderedContent,
           renderedMainHash,
@@ -125,7 +127,7 @@ const ZedZoliPage = () => {
       );
     };
     if (typeof window !== "undefined") runner();
-  }, [code, renderedComponent.pastEvents]);
+  }, [code, renderedComponent.defaultState]);
 
   const Wrapper = (props: any) => {
     const ref = React.useRef(null);
@@ -133,14 +135,19 @@ const ZedZoliPage = () => {
     return <div
       ref={ref}
       onClick={(e: any) => {
-        if (e.target.type) {
+        const action = e.target.getAttribute("data-onclick");
+        console.log(action, renderedComponent.defaultState);
+        if (action) {
           changeWorkerRenderedComponent(
             {
               ...renderedComponent,
-              pastEvents: [
-                ...renderedComponent.pastEvents,
-                { target: e.target.innerHTML, type: "click" },
-              ],
+              defaultState: {
+                ...renderedComponent.defaultState,
+                pastEvents: [
+                  ...renderedComponent.defaultState.pastEvents,
+                  action,
+                ],
+              },
             },
           );
         }
@@ -163,7 +170,7 @@ const ZedZoliPage = () => {
         <Wrapper
           key={renderedComponent.renderedMainHash}
           code={renderedComponent.transformedCode}
-          pastEvents={renderedComponent.pastEvents}
+          defaultState={renderedComponent.defaultState}
           innerHTML={renderedComponent.renderedContentMain}
         />
       </div>}
@@ -176,13 +183,13 @@ const ZedZoliPage = () => {
           leftTitle={<Wrapper
             key={renderedComponent.renderedMainHash}
             code={renderedComponent.transformedCode}
-            pastEvents={renderedComponent.pastEvents}
+            defaultState={renderedComponent.defaultState}
             innerHTML={renderedComponent.renderedContentMain}
           />}
           rightTitle={<Wrapper
             key={renderedComponent.renderedHash}
             code={renderedComponent.transformedCode}
-            pastEvents={renderedComponent.pastEvents}
+            defaultState={renderedComponent.defaultState}
             innerHTML={renderedComponent.renderedContent}
           />}
           hideLineNumbers={true}

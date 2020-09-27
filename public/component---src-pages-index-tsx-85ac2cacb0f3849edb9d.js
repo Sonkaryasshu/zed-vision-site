@@ -31,14 +31,9 @@ var H3 = styled_components__WEBPACK_IMPORTED_MODULE_6__[/* default */ "b"].h3.wi
 })(["margin-bottom:", ";"], Object(_components_utils_typography__WEBPACK_IMPORTED_MODULE_5__[/* rhythm */ "a"])(1 / 4));
 
 var BlogIndex = function BlogIndex(_ref) {
-  var data = _ref.data,
-      location = _ref.location;
-  var siteTitle = data.site.siteMetadata.title;
+  var data = _ref.data;
   var edges = data.allMdx.edges;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_components_layout__WEBPACK_IMPORTED_MODULE_3__[/* Layout */ "a"], {
-    location: location,
-    title: siteTitle
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_components_seo__WEBPACK_IMPORTED_MODULE_4__[/* SEO */ "a"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_components_layout__WEBPACK_IMPORTED_MODULE_3__[/* Layout */ "a"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_components_seo__WEBPACK_IMPORTED_MODULE_4__[/* SEO */ "a"], {
     title: "This is Zed vision"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_components_bio__WEBPACK_IMPORTED_MODULE_2__[/* Bio */ "a"], null), edges.map(function (_ref2) {
     var node = _ref2.node;
@@ -61,4 +56,4 @@ var pageQuery = "497448492";
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-index-tsx-c7e16c63cece8683b9dc.js.map
+//# sourceMappingURL=component---src-pages-index-tsx-85ac2cacb0f3849edb9d.js.map

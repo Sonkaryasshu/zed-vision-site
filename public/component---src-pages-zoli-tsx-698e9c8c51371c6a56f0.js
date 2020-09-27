@@ -687,7 +687,7 @@ var insertStyles = function insertStyles(cache, serialized, isStringTag) {
 
 function insertWithoutScoping(cache, serialized) {
   if (cache.inserted[serialized.name] === undefined) {
-    return cache.insert('', serialized, cache.sheet, true);
+    return cache.insert("", serialized, cache.sheet, true);
   }
 }
 
@@ -778,7 +778,7 @@ var create_emotion_browser_esm_createEmotion = function createEmotion(options) {
 };
 
 var classnames = function classnames(args) {
-  var cls = '';
+  var cls = "";
 
   for (var i = 0; i < args.length; i++) {
     var arg = args[i];
@@ -786,19 +786,19 @@ var classnames = function classnames(args) {
     var toAdd = void 0;
 
     switch (typeof arg) {
-      case 'boolean':
+      case "boolean":
         break;
 
-      case 'object':
+      case "object":
         {
           if (Array.isArray(arg)) {
             toAdd = classnames(arg);
           } else {
-            toAdd = '';
+            toAdd = "";
 
             for (var k in arg) {
               if (arg[k] && k) {
-                toAdd && (toAdd += ' ');
+                toAdd && (toAdd += " ");
                 toAdd += k;
               }
             }
@@ -814,7 +814,7 @@ var classnames = function classnames(args) {
     }
 
     if (toAdd) {
-      cls && (cls += ' ');
+      cls && (cls += " ");
       cls += toAdd;
     }
   }
@@ -1211,24 +1211,24 @@ var RendererModule = /*#__PURE__*/function () {
           case 0:
             return _context2.abrupt("return", {
               render: function () {
-                var _render = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regenerator_default.a.mark(function _callee(code, pastEvents) {
+                var _render = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regenerator_default.a.mark(function _callee(code, defaultState) {
                   var cc, Component;
                   return regenerator_default.a.wrap(function _callee$(_context) {
                     while (1) {
                       switch (_context.prev = _context.next) {
                         case 0:
-                          console.log(react_default.a, server_browser_default.a);
-                          cc = new Function("props", "React", "return (" + code + ")(props)");
+                          // console.log(React, ReactDOMServer);
+                          cc = new Function("props", "React", code + "; return Component(props)");
 
                           Component = function Component(props) {
-                            return cc(props, react_default.a);
+                            return cc(props, react);
                           };
 
-                          return _context.abrupt("return", server_browser_default.a.renderToString( /*#__PURE__*/react_default.a.createElement(Component, {
-                            pastEvents: pastEvents
+                          return _context.abrupt("return", server_browser_default.a.renderToString( /*#__PURE__*/react["createElement"](Component, {
+                            defaultState: defaultState
                           })));
 
-                        case 4:
+                        case 3:
                         case "end":
                           return _context.stop();
                       }
@@ -1284,30 +1284,29 @@ var renderer_render = /*#__PURE__*/function () {
             renderer_loadedModule = _context.sent;
 
           case 4:
-            console.log("RENDER it");
-            _context.next = 7;
+            _context.next = 6;
             return sha_unHash(transformedCodeHash);
 
-          case 7:
+          case 6:
             code = _context.sent;
-            _context.next = 10;
+            _context.next = 9;
             return sha_unHash(pastEventsHash);
 
-          case 10:
+          case 9:
             pastEvents = _context.sent;
-            _context.next = 13;
+            _context.next = 12;
             return renderer_loadedModule.render(code, pastEvents);
 
-          case 13:
+          case 12:
             renderedString = _context.sent;
-            _context.next = 16;
+            _context.next = 15;
             return sha_hash(renderedString);
 
-          case 16:
+          case 15:
             renderedStringHash = _context.sent;
             return _context.abrupt("return", renderedStringHash);
 
-          case 18:
+          case 17:
           case "end":
             return _context.stop();
         }
@@ -1363,11 +1362,11 @@ var zoli_CodeEditorWithFailBack = function CodeEditorWithFailBack(_ref) {
   })));
 };
 
-var counter = "\nfunction Counter(){\n  const defaultState = { counter: 0, pastEvents: new Array<string>(0) };\n\n  const actions = {\n    reset: () => defaultState,\n    increment: (s = defaultState) => ({ ...s, counter: s.counter + 1 }),\n    decrement: (s = defaultState) => ({ ...s, counter: s.counter - 1 }),\n  };\n\n  const [state, setState] = React.useState(defaultState);\n\n  const calculatedState = state.pastEvents.reduce((prevValue,currentValue) => actions[currentValue](prevValue), {...state});\n\n  return <div>\n    <button onClick={update(\"decrement\")}>-</button>\n    {calculatedState.counter}\n    <button onClick={update(\"increment\")}>+</button>\n  </div>;\n\n  function update(action: ActionType) {\n    return (e: React.MouseEvent) => {\n      e.stopPropagation();\n      setState({...state, pastEvents: [...state.pastEvents, action]});\n    };\n  }\n\n  type ActionType = keyof typeof actions;\n}\n\n";
-var pastEventsDefault = new Array(10).fill({
-  target: "+",
-  type: "click"
-});
+var counter = "\ntype DState = { counter: number; pastEvents: string[] };\n\nconst actions = {\n  \"+1\": (s: DState) => ({ ...s, counter: s.counter + 1 }),\n  \"-1\": (s: DState) => ({ ...s, counter: s.counter - 1 }),\n};\n\nconst Component: React.FC<{ defaultState: DState }> = ({ defaultState }) => {\n  const [state, setState] = React.useState(defaultState);\n\n  const calculatedState = state.pastEvents.reduce(\n    (prevValue, currentValue) => actions[currentValue](prevValue),\n    { ...state },\n  );\n\n  return <div>\n    <button {...update(\"-1\")}>-</button>\n    {calculatedState.counter}\n    <button {...update(\"+1\")}>+</button>\n  </div>;\n\n  type ActionType = keyof typeof actions;\n\n  function update(action: ActionType) {\n    return {\n      \"data-onclick\": String(action),\n      onClick: (e: React.MouseEvent) => {\n        e.stopPropagation();\n        setState({ ...state, pastEvents: [...state.pastEvents, action] });\n      },\n    };\n  }\n};\n\n";
+var zoli_defaultState = {
+  counter: 57,
+  pastEvents: new Array(10).fill("+1")
+};
 
 var zoli_ZedZoliPage = function ZedZoliPage() {
   var _React$useState = react_default.a.useState({
@@ -1376,8 +1375,8 @@ var zoli_ZedZoliPage = function ZedZoliPage() {
     mainCode: "",
     mainCodeHash: "",
     devCodeHash: "",
-    pastEvents: pastEventsDefault,
-    pastEventsHash: "",
+    defaultState: zoli_defaultState,
+    defaultStateHash: "",
     codeHash: "",
     transformedHash: "",
     transformedMainHash: "",
@@ -1396,7 +1395,7 @@ var zoli_ZedZoliPage = function ZedZoliPage() {
   react_default.a.useEffect(function () {
     var runner = /*#__PURE__*/function () {
       var _ref2 = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regenerator_default.a.mark(function _callee() {
-        var devCodeHash, codeHash, mainCode, mainCodeHash, transformedHash, transformedMainHash, pastEventsHash, transformedCode, renderedHash, renderedMainHash, renderedContent, renderedContentMain;
+        var devCodeHash, codeHash, mainCode, mainCodeHash, transformedHash, transformedMainHash, defaultStateHash, transformedCode, renderedHash, renderedMainHash, renderedContent, renderedContentMain;
         return regenerator_default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -1420,22 +1419,22 @@ var zoli_ZedZoliPage = function ZedZoliPage() {
               case 11:
                 transformedMainHash = _context.sent;
                 _context.next = 14;
-                return sha_hash(renderedComponent.pastEvents);
+                return sha_hash(renderedComponent.defaultState);
 
               case 14:
-                pastEventsHash = _context.sent;
+                defaultStateHash = _context.sent;
                 _context.next = 17;
                 return sha_unHash(transformedHash);
 
               case 17:
                 transformedCode = _context.sent;
                 _context.next = 20;
-                return renderer_render(transformedHash, pastEventsHash);
+                return renderer_render(transformedHash, defaultStateHash);
 
               case 20:
                 renderedHash = _context.sent;
                 _context.next = 23;
-                return renderer_render(transformedMainHash, pastEventsHash);
+                return renderer_render(transformedMainHash, defaultStateHash);
 
               case 23:
                 renderedMainHash = _context.sent;
@@ -1458,7 +1457,7 @@ var zoli_ZedZoliPage = function ZedZoliPage() {
                   transformedHash: transformedHash,
                   transformedMainHash: transformedMainHash,
                   transformedCode: transformedCode,
-                  pastEventsHash: pastEventsHash,
+                  defaultStateHash: defaultStateHash,
                   renderedHash: renderedHash,
                   renderedContent: renderedContent,
                   renderedMainHash: renderedMainHash,
@@ -1479,19 +1478,21 @@ var zoli_ZedZoliPage = function ZedZoliPage() {
     }();
 
     if (typeof window !== "undefined") runner();
-  }, [code, renderedComponent.pastEvents]);
+  }, [code, renderedComponent.defaultState]);
 
   var Wrapper = function Wrapper(props) {
     var ref = react_default.a.useRef(null);
     return /*#__PURE__*/react_default.a.createElement("div", {
       ref: ref,
       onClick: function onClick(e) {
-        if (e.target.type) {
+        var action = e.target.getAttribute("data-onclick");
+        console.log(action, renderedComponent.defaultState);
+
+        if (action) {
           changeWorkerRenderedComponent(_objectSpread(_objectSpread({}, renderedComponent), {}, {
-            pastEvents: [].concat(Object(toConsumableArray["a" /* default */])(renderedComponent.pastEvents), [{
-              target: e.target.innerHTML,
-              type: "click"
-            }])
+            defaultState: _objectSpread(_objectSpread({}, renderedComponent.defaultState), {}, {
+              pastEvents: [].concat(Object(toConsumableArray["a" /* default */])(renderedComponent.defaultState.pastEvents), [action])
+            })
           }));
         }
       },
@@ -1510,7 +1511,7 @@ var zoli_ZedZoliPage = function ZedZoliPage() {
   }), !isChangeAvailable && /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement("h4", null, "Result"), /*#__PURE__*/react_default.a.createElement(Wrapper, {
     key: renderedComponent.renderedMainHash,
     code: renderedComponent.transformedCode,
-    pastEvents: renderedComponent.pastEvents,
+    defaultState: renderedComponent.defaultState,
     innerHTML: renderedComponent.renderedContentMain
   })), isChangeAvailable && /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement(lib_default.a, {
     oldValue: html_format_default()(renderedComponent.renderedContent),
@@ -1519,13 +1520,13 @@ var zoli_ZedZoliPage = function ZedZoliPage() {
     leftTitle: /*#__PURE__*/react_default.a.createElement(Wrapper, {
       key: renderedComponent.renderedMainHash,
       code: renderedComponent.transformedCode,
-      pastEvents: renderedComponent.pastEvents,
+      defaultState: renderedComponent.defaultState,
       innerHTML: renderedComponent.renderedContentMain
     }),
     rightTitle: /*#__PURE__*/react_default.a.createElement(Wrapper, {
       key: renderedComponent.renderedHash,
       code: renderedComponent.transformedCode,
-      pastEvents: renderedComponent.pastEvents,
+      defaultState: renderedComponent.defaultState,
       innerHTML: renderedComponent.renderedContent
     }),
     hideLineNumbers: true,
@@ -1641,7 +1642,7 @@ module.exports = addMethods;
 				var addMethods = __webpack_require__(241)
 				var methods = ["RendererWorker"]
 				module.exports = function() {
-					var w = new Worker(__webpack_require__.p + "built-renderer.eb7323.worker.js", { name: "built-renderer.[hash:6].worker.js" })
+					var w = new Worker(__webpack_require__.p + "built-renderer.5d37f6.worker.js", { name: "built-renderer.[hash:6].worker.js" })
 					addMethods(w, methods)
 					
 					return w
@@ -2079,7 +2080,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /* global define */
 (function () {
-  'use strict';
+  "use strict";
 
   var hasOwn = {}.hasOwnProperty;
 
@@ -2091,7 +2092,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
       if (!arg) continue;
       var argType = typeof arg;
 
-      if (argType === 'string' || argType === 'number') {
+      if (argType === "string" || argType === "number") {
         classes.push(arg);
       } else if (Array.isArray(arg) && arg.length) {
         var inner = classNames.apply(null, arg);
@@ -2099,7 +2100,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
         if (inner) {
           classes.push(inner);
         }
-      } else if (argType === 'object') {
+      } else if (argType === "object") {
         for (var key in arg) {
           if (hasOwn.call(arg, key) && arg[key]) {
             classes.push(key);
@@ -2108,7 +2109,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
       }
     }
 
-    return classes.join(' ');
+    return classes.join(" ");
   }
 
   if ( true && module.exports) {
@@ -4614,4 +4615,4 @@ var Layout = function Layout(_ref) {
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-zoli-tsx-273056613d3d208f5fe6.js.map
+//# sourceMappingURL=component---src-pages-zoli-tsx-698e9c8c51371c6a56f0.js.map

@@ -8,7 +8,7 @@ const ZPage = () =>
     <SEO title="404: Not Found" />
 
     <h1>lll</h1>
-    <CounterTS />
+    <CounterTS defaultState={{ counter: 0, pastEvents: [] }} />
   </Layout>;
 
 export default ZPage;

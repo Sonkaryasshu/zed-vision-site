@@ -26,34 +26,21 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { Object(defineProperty["a" /* default */])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
-function CounterTS() {
-  var defaultState = {
-    counter: 0,
-    pastEvents: new Array(0)
-  };
-  var actions = {
-    reset: function reset() {
-      return defaultState;
-    },
-    increment: function increment(s) {
-      if (s === void 0) {
-        s = defaultState;
-      }
+var actions = {
+  "+1": function _(s) {
+    return _objectSpread(_objectSpread({}, s), {}, {
+      counter: s.counter + 1
+    });
+  },
+  "-1": function _(s) {
+    return _objectSpread(_objectSpread({}, s), {}, {
+      counter: s.counter - 1
+    });
+  }
+};
 
-      return _objectSpread(_objectSpread({}, s), {}, {
-        counter: s.counter + 1
-      });
-    },
-    decrement: function decrement(s) {
-      if (s === void 0) {
-        s = defaultState;
-      }
-
-      return _objectSpread(_objectSpread({}, s), {}, {
-        counter: s.counter - 1
-      });
-    }
-  };
+var Counter_Component = function Component(_ref) {
+  var defaultState = _ref.defaultState;
 
   var _React$useState = react_default.a.useState(defaultState),
       state = _React$useState[0],
@@ -62,22 +49,22 @@ function CounterTS() {
   var calculatedState = state.pastEvents.reduce(function (prevValue, currentValue) {
     return actions[currentValue](prevValue);
   }, _objectSpread({}, state));
-  return /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement("button", {
-    onClick: update("decrement")
-  }, "-"), calculatedState.counter, /*#__PURE__*/react_default.a.createElement("button", {
-    onClick: update("increment")
-  }, "+"));
+  return /*#__PURE__*/react_default.a.createElement("div", null, /*#__PURE__*/react_default.a.createElement("button", update("-1"), "-"), calculatedState.counter, /*#__PURE__*/react_default.a.createElement("button", update("+1"), "+"));
 
   function update(action) {
-    return function (e) {
-      e.stopPropagation();
-      setState(_objectSpread(_objectSpread({}, state), {}, {
-        pastEvents: [].concat(Object(toConsumableArray["a" /* default */])(state.pastEvents), [action])
-      }));
+    return {
+      "data-onclick": String(action),
+      onClick: function onClick(e) {
+        e.stopPropagation();
+        setState(_objectSpread(_objectSpread({}, state), {}, {
+          pastEvents: [].concat(Object(toConsumableArray["a" /* default */])(state.pastEvents), [action])
+        }));
+      }
     };
   }
-}
-;
+};
+
+var CounterTS = Counter_Component;
 // EXTERNAL MODULE: ./src/components/layout.tsx
 var layout = __webpack_require__(77);
 
@@ -93,7 +80,12 @@ var seo = __webpack_require__(102);
 var zzz_ZPage = function ZPage() {
   return /*#__PURE__*/react_default.a.createElement(layout["a" /* Layout */], null, /*#__PURE__*/react_default.a.createElement(seo["a" /* SEO */], {
     title: "404: Not Found"
-  }), /*#__PURE__*/react_default.a.createElement("h1", null, "lll"), /*#__PURE__*/react_default.a.createElement(CounterTS, null));
+  }), /*#__PURE__*/react_default.a.createElement("h1", null, "lll"), /*#__PURE__*/react_default.a.createElement(CounterTS, {
+    defaultState: {
+      counter: 0,
+      pastEvents: []
+    }
+  }));
 };
 
 /* harmony default export */ var zzz = __webpack_exports__["default"] = (zzz_ZPage);
@@ -127,4 +119,4 @@ var Layout = function Layout(_ref) {
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-zzz-tsx-35ddf4e634d7bb2f0d25.js.map
+//# sourceMappingURL=component---src-pages-zzz-tsx-6ec9468f9616012e9370.js.map

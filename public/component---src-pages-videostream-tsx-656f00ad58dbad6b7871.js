@@ -1157,13 +1157,13 @@ function isArray(arg) {
     return Array.isArray(arg);
   }
 
-  return objectToString(arg) === '[object Array]';
+  return objectToString(arg) === "[object Array]";
 }
 
 exports.isArray = isArray;
 
 function isBoolean(arg) {
-  return typeof arg === 'boolean';
+  return typeof arg === "boolean";
 }
 
 exports.isBoolean = isBoolean;
@@ -1181,19 +1181,19 @@ function isNullOrUndefined(arg) {
 exports.isNullOrUndefined = isNullOrUndefined;
 
 function isNumber(arg) {
-  return typeof arg === 'number';
+  return typeof arg === "number";
 }
 
 exports.isNumber = isNumber;
 
 function isString(arg) {
-  return typeof arg === 'string';
+  return typeof arg === "string";
 }
 
 exports.isString = isString;
 
 function isSymbol(arg) {
-  return typeof arg === 'symbol';
+  return typeof arg === "symbol";
 }
 
 exports.isSymbol = isSymbol;
@@ -1205,38 +1205,38 @@ function isUndefined(arg) {
 exports.isUndefined = isUndefined;
 
 function isRegExp(re) {
-  return objectToString(re) === '[object RegExp]';
+  return objectToString(re) === "[object RegExp]";
 }
 
 exports.isRegExp = isRegExp;
 
 function isObject(arg) {
-  return typeof arg === 'object' && arg !== null;
+  return typeof arg === "object" && arg !== null;
 }
 
 exports.isObject = isObject;
 
 function isDate(d) {
-  return objectToString(d) === '[object Date]';
+  return objectToString(d) === "[object Date]";
 }
 
 exports.isDate = isDate;
 
 function isError(e) {
-  return objectToString(e) === '[object Error]' || e instanceof Error;
+  return objectToString(e) === "[object Error]" || e instanceof Error;
 }
 
 exports.isError = isError;
 
 function isFunction(arg) {
-  return typeof arg === 'function';
+  return typeof arg === "function";
 }
 
 exports.isFunction = isFunction;
 
 function isPrimitive(arg) {
-  return arg === null || typeof arg === 'boolean' || typeof arg === 'number' || typeof arg === 'string' || typeof arg === 'symbol' || // ES6 symbol
-  typeof arg === 'undefined';
+  return arg === null || typeof arg === "boolean" || typeof arg === "number" || typeof arg === "string" || typeof arg === "symbol" || // ES6 symbol
+  typeof arg === "undefined";
 }
 
 exports.isPrimitive = isPrimitive;
@@ -2309,13 +2309,13 @@ var querystring = __webpack_require__(324);
 var url = __webpack_require__(236);
 
 var isStream = function isStream(o) {
-  return o !== null && typeof o === 'object' && typeof o.pipe === 'function';
+  return o !== null && typeof o === "object" && typeof o.pipe === "function";
 };
 
 function simpleGet(opts, cb) {
   opts = Object.assign({
     maxRedirects: 10
-  }, typeof opts === 'string' ? {
+  }, typeof opts === "string" ? {
     url: opts
   } : opts);
   cb = once(cb);
@@ -2341,32 +2341,42 @@ function simpleGet(opts, cb) {
   }
 
   var headers = {
-    'accept-encoding': 'gzip, deflate'
+    "accept-encoding": "gzip, deflate"
   };
-  if (opts.headers) Object.keys(opts.headers).forEach(function (k) {
-    return headers[k.toLowerCase()] = opts.headers[k];
-  });
+
+  if (opts.headers) {
+    Object.keys(opts.headers).forEach(function (k) {
+      return headers[k.toLowerCase()] = opts.headers[k];
+    });
+  }
+
   opts.headers = headers;
   var body;
 
   if (opts.body) {
     body = opts.json && !isStream(opts.body) ? JSON.stringify(opts.body) : opts.body;
   } else if (opts.form) {
-    body = typeof opts.form === 'string' ? opts.form : querystring.stringify(opts.form);
-    opts.headers['content-type'] = 'application/x-www-form-urlencoded';
+    body = typeof opts.form === "string" ? opts.form : querystring.stringify(opts.form);
+    opts.headers["content-type"] = "application/x-www-form-urlencoded";
   }
 
   if (body) {
-    if (!opts.method) opts.method = 'POST';
-    if (!isStream(body)) opts.headers['content-length'] = Buffer.byteLength(body);
-    if (opts.json && !opts.form) opts.headers['content-type'] = 'application/json';
+    if (!opts.method) opts.method = "POST";
+
+    if (!isStream(body)) {
+      opts.headers["content-length"] = Buffer.byteLength(body);
+    }
+
+    if (opts.json && !opts.form) {
+      opts.headers["content-type"] = "application/json";
+    }
   }
 
   delete opts.body;
   delete opts.form;
-  if (opts.json) opts.headers.accept = 'application/json';
+  if (opts.json) opts.headers.accept = "application/json";
   if (opts.method) opts.method = opts.method.toUpperCase();
-  var protocol = opts.protocol === 'https:' ? https : http; // Support http/https urls
+  var protocol = opts.protocol === "https:" ? https : http; // Support http/https urls
 
   var req = protocol.request(opts, function (res) {
     if (opts.followRedirects !== false && res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
@@ -2376,25 +2386,25 @@ function simpleGet(opts, cb) {
 
       res.resume(); // Discard response
 
-      if (opts.method === 'POST' && [301, 302].includes(res.statusCode)) {
-        opts.method = 'GET'; // On 301/302 redirect, change POST to GET (see #35)
+      if (opts.method === "POST" && [301, 302].includes(res.statusCode)) {
+        opts.method = "GET"; // On 301/302 redirect, change POST to GET (see #35)
 
-        delete opts.headers['content-length'];
-        delete opts.headers['content-type'];
+        delete opts.headers["content-length"];
+        delete opts.headers["content-type"];
       }
 
-      if (opts.maxRedirects-- === 0) return cb(new Error('too many redirects'));else return simpleGet(opts, cb);
+      if (opts.maxRedirects-- === 0) return cb(new Error("too many redirects"));else return simpleGet(opts, cb);
     }
 
-    var tryUnzip = typeof decompressResponse === 'function' && opts.method !== 'HEAD';
+    var tryUnzip = typeof decompressResponse === "function" && opts.method !== "HEAD";
     cb(null, tryUnzip ? decompressResponse(res) : res);
   });
-  req.on('timeout', function () {
+  req.on("timeout", function () {
     req.abort();
-    cb(new Error('Request timed out'));
+    cb(new Error("Request timed out"));
   });
-  req.on('error', cb);
-  if (isStream(body)) body.on('error', cb).pipe(req);else req.end(body);
+  req.on("error", cb);
+  if (isStream(body)) body.on("error", cb).pipe(req);else req.end(body);
   return req;
 }
 
@@ -2417,9 +2427,9 @@ simpleGet.concat = function (opts, cb) {
   });
 };
 
-['get', 'post', 'put', 'patch', 'head', 'delete'].forEach(function (method) {
+["get", "post", "put", "patch", "head", "delete"].forEach(function (method) {
   simpleGet[method] = function (opts, cb) {
-    if (typeof opts === 'string') opts = {
+    if (typeof opts === "string") opts = {
       url: opts
     };
     return simpleGet(Object.assign({
@@ -7418,14 +7428,14 @@ exports.decode.bytes = 8;
 /* WEBPACK VAR INJECTION */(function(Buffer) {/*! simple-concat. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
 module.exports = function (stream, cb) {
   var chunks = [];
-  stream.on('data', function (chunk) {
+  stream.on("data", function (chunk) {
     chunks.push(chunk);
   });
-  stream.once('end', function () {
+  stream.once("end", function () {
     if (cb) cb(null, Buffer.concat(chunks));
     cb = null;
   });
-  stream.once('error', function (err) {
+  stream.once("error", function (err) {
     if (cb) cb(err);
     cb = null;
   });
@@ -7560,7 +7570,7 @@ function toStreams2Buf(s) {
 }
 
 function toStreams2(s, opts) {
-  if (!s || typeof s === 'function' || s._readableState) return s;
+  if (!s || typeof s === "function" || s._readableState) return s;
   var wrap = new stream.Readable(opts).wrap(s);
 
   if (s.destroy) {
@@ -7589,13 +7599,13 @@ var MultiStream = /*#__PURE__*/function (_stream$Readable) {
     _this._current = null;
     _this._toStreams2 = opts && opts.objectMode ? toStreams2Obj : toStreams2Buf;
 
-    if (typeof streams === 'function') {
+    if (typeof streams === "function") {
       _this._queue = streams;
     } else {
       _this._queue = streams.map(_this._toStreams2);
 
       _this._queue.forEach(function (stream) {
-        if (typeof stream !== 'function') _this._attachErrorListener(stream);
+        if (typeof stream !== "function") _this._attachErrorListener(stream);
       });
     }
 
@@ -7631,14 +7641,14 @@ var MultiStream = /*#__PURE__*/function (_stream$Readable) {
       this.destroyed = true;
       if (this._current && this._current.destroy) this._current.destroy();
 
-      if (typeof this._queue !== 'function') {
+      if (typeof this._queue !== "function") {
         this._queue.forEach(function (stream) {
           if (stream.destroy) stream.destroy();
         });
       }
 
-      if (err) this.emit('error', err);
-      this.emit('close');
+      if (err) this.emit("error", err);
+      this.emit("close");
     }
   }, {
     key: "_next",
@@ -7647,7 +7657,7 @@ var MultiStream = /*#__PURE__*/function (_stream$Readable) {
 
       this._current = null;
 
-      if (typeof this._queue === 'function') {
+      if (typeof this._queue === "function") {
         this._queue(function (err, stream) {
           if (err) return _this2.destroy(err);
           stream = _this2._toStreams2(stream);
@@ -7659,7 +7669,7 @@ var MultiStream = /*#__PURE__*/function (_stream$Readable) {
       } else {
         var stream = this._queue.shift();
 
-        if (typeof stream === 'function') {
+        if (typeof stream === "function") {
           stream = this._toStreams2(stream());
 
           this._attachErrorListener(stream);
@@ -7695,16 +7705,16 @@ var MultiStream = /*#__PURE__*/function (_stream$Readable) {
 
       var onEnd = function onEnd() {
         _this3._current = null;
-        stream.removeListener('readable', onReadable);
-        stream.removeListener('end', onEnd);
-        stream.removeListener('close', onClose);
+        stream.removeListener("readable", onReadable);
+        stream.removeListener("end", onEnd);
+        stream.removeListener("close", onClose);
 
         _this3._next();
       };
 
-      stream.on('readable', onReadable);
-      stream.once('end', onEnd);
-      stream.once('close', onClose);
+      stream.on("readable", onReadable);
+      stream.once("end", onEnd);
+      stream.once("close", onClose);
     }
   }, {
     key: "_attachErrorListener",
@@ -7714,12 +7724,12 @@ var MultiStream = /*#__PURE__*/function (_stream$Readable) {
       if (!stream) return;
 
       var onError = function onError(err) {
-        stream.removeListener('error', onError);
+        stream.removeListener("error", onError);
 
         _this4.destroy(err);
       };
 
-      stream.once('error', onError);
+      stream.once("error", onError);
     }
   }]);
 
@@ -27227,4 +27237,4 @@ function once(emitter, name) {
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-videostream-tsx-a1b8b876714ab5d22313.js.map
+//# sourceMappingURL=component---src-pages-videostream-tsx-656f00ad58dbad6b7871.js.map

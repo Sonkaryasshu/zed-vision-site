@@ -14,7 +14,7 @@ export const render = async (
   if (!loadedModule) {
     loadedModule = await rendererW();
   }
-  console.log("RENDER it");
+
   const code = await unHash(transformedCodeHash);
   const pastEvents = await unHash(pastEventsHash);
 

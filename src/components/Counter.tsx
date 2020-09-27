@@ -1,30 +1,37 @@
 import React from "react";
 
-export function CounterTS(){
-  const defaultState = { counter: 0, pastEvents: new Array<string>(0) };
+type DState = { counter: number; pastEvents: string[] };
 
-  const actions = {
-    reset: () => defaultState,
-    increment: (s = defaultState) => ({ ...s, counter: s.counter + 1 }),
-    decrement: (s = defaultState) => ({ ...s, counter: s.counter - 1 }),
-  };
+const actions = {
+  "+1": (s: DState) => ({ ...s, counter: s.counter + 1 }),
+  "-1": (s: DState) => ({ ...s, counter: s.counter - 1 }),
+};
 
+const Component: React.FC<{ defaultState: DState }> = ({ defaultState }) => {
   const [state, setState] = React.useState(defaultState);
 
-  const calculatedState = state.pastEvents.reduce((prevValue,currentValue) => actions[currentValue](prevValue), {...state});
+  const calculatedState = state.pastEvents.reduce(
+    (prevValue, currentValue) => actions[currentValue](prevValue),
+    { ...state },
+  );
 
   return <div>
-    <button onClick={update("decrement")}>-</button>
+    <button {...update("-1")}>-</button>
     {calculatedState.counter}
-    <button onClick={update("increment")}>+</button>
+    <button {...update("+1")}>+</button>
   </div>;
 
+  type ActionType = keyof typeof actions;
+
   function update(action: ActionType) {
-    return (e: React.MouseEvent) => {
-      e.stopPropagation();
-      setState({...state, pastEvents: [...state.pastEvents, action]});
+    return {
+      "data-onclick": String(action),
+      onClick: (e: React.MouseEvent) => {
+        e.stopPropagation();
+        setState({ ...state, pastEvents: [...state.pastEvents, action] });
+      },
     };
   }
-
-  type ActionType = keyof typeof actions;
 };
+
+export const CounterTS = Component;

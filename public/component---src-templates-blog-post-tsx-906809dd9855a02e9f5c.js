@@ -21455,10 +21455,8 @@ var Hr = styled_components_browser_esm["b" /* default */].hr.withConfig({
 
 var blog_post_BlogPostTemplate = function BlogPostTemplate(_ref) {
   var data = _ref.data,
-      pageContext = _ref.pageContext,
-      location = _ref.location;
+      pageContext = _ref.pageContext;
   var post = data.mdx;
-  var siteTitle = data.site.siteMetadata.title;
   var previous = pageContext.previous,
       next = pageContext.next;
 
@@ -21468,10 +21466,7 @@ var blog_post_BlogPostTemplate = function BlogPostTemplate(_ref) {
     }, /*#__PURE__*/react["createElement"](gatsby_plugin_mdx["MDXRenderer"], null, post.body));
   };
 
-  return /*#__PURE__*/react["createElement"](react["Fragment"], null, /*#__PURE__*/react["createElement"](layout["a" /* Layout */], {
-    location: location,
-    title: siteTitle
-  }, /*#__PURE__*/react["createElement"](seo["a" /* SEO */], {
+  return /*#__PURE__*/react["createElement"](react["Fragment"], null, /*#__PURE__*/react["createElement"](layout["a" /* Layout */], null, /*#__PURE__*/react["createElement"](seo["a" /* SEO */], {
     title: post.frontmatter.title,
     description: post.frontmatter.description || post.excerpt
   }), /*#__PURE__*/react["createElement"]("header", null, /*#__PURE__*/react["createElement"](StyledHeader, null, post.frontmatter.title), /*#__PURE__*/react["createElement"](StyledDate, null, post.frontmatter.date)), /*#__PURE__*/react["createElement"](BlogPost, null), /*#__PURE__*/react["createElement"](Hr, null), /*#__PURE__*/react["createElement"]("footer", null, /*#__PURE__*/react["createElement"](bio["a" /* Bio */], null)), /*#__PURE__*/react["createElement"]("nav", null, /*#__PURE__*/react["createElement"]("ul", null, previous && /*#__PURE__*/react["createElement"]("li", null, /*#__PURE__*/react["createElement"](gatsby_browser_entry["Link"], {
@@ -21632,4 +21627,4 @@ SvgIcon_SvgIcon.muiName = 'SvgIcon';
 
 /***/ })
 ]]);
-//# sourceMappingURL=component---src-templates-blog-post-tsx-fabcbceccca643e67357.js.map
+//# sourceMappingURL=component---src-templates-blog-post-tsx-906809dd9855a02e9f5c.js.map
