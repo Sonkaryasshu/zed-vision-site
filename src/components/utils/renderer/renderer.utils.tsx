@@ -1,6 +1,6 @@
 import * as React from "react";
 import ReactDOMServer from "react-dom/server";
-import pretty from "pretty";
+// import pretty from "pretty";
 
 export const RendererModule = async () => ({
   render: async (code: string, props: any) => {
@@ -12,11 +12,10 @@ export const RendererModule = async () => ({
 
     const Component = (props: any) => cf(props, React);
 
-    return String(pretty(
+    return String(
       ReactDOMServer.renderToString(
         <Component {...props} />,
       ),
-      { ocd: true },
-    )).toString();
+    ).toString();
   },
 });

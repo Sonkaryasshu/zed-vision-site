@@ -18,14 +18,12 @@ const MonacoEditor = React.lazy(() => import("../components/monacoEditor"));
 const CodeEditorWithFailBack: React.FC<
   { code: string; changeCode: (code: string) => void }
 > = ({ code, changeCode }) =>
-  <div>
-    <React.Suspense fallback={<div>Loading...</div>}>
-      <MonacoEditor
-        value={code}
-        changeCode={(e) => changeCode(e)}
-      />
-    </React.Suspense>
-  </div>;
+  <React.Suspense fallback={<div>Loading...</div>}>
+    <MonacoEditor
+      value={code}
+      changeCode={changeCode}
+    />
+  </React.Suspense>;
 
 const counter = `
 type DState = { counter: number}
@@ -75,14 +73,20 @@ const Component: React.FC<Props> = ({ startState, pastEvents, onEvent }) => {
 `;
 
 const getComponent = (code: string, props: Props) => {
-  const componentFactory = new Function(
-    "props",
-    "React",
-    `${code}; return Component(props)`,
-  );
+  try {
+    const componentFactory = new Function(
+      "props",
+      "React",
+      `${code}; return Component(props)`,
+    );
 
-  const Component: React.FC<Props> = (props) => componentFactory(props, React);
-  return Component;
+    const Component: React.FC<Props> = (props) =>
+      componentFactory(props, React);
+    return Component;
+  } catch (e) {
+    console.log("ERROR", e);
+    return null;
+  }
 };
 
 type DState = { counter: number };
@@ -101,23 +105,32 @@ const defaultProps: Props = {
 const Wrapper: React.FC<
   {
     code: string;
+    message?: string;
+    renderHash?: string;
+    innerHTML: string;
     defaultProps: Props;
   }
 > = (
   {
     code,
+    innerHTML,
+    renderHash,
+    message,
     defaultProps,
   },
 ) => {
-  if (!code) return <div>Loading</div>;
+  if (!code || !renderHash) return <div>Error!</div>;
 
   const Component = getComponent(code, defaultProps);
 
-  return <Component
-    startState={defaultProps.startState}
-    pastEvents={defaultProps.pastEvents}
-    onEvent={defaultProps.onEvent}
-  />;
+  return <div>
+    {Component && <Component
+      startState={defaultProps.startState}
+      pastEvents={defaultProps.pastEvents}
+      onEvent={defaultProps.onEvent}
+    />}
+    <pre>{message}</pre>
+  </div>;
 };
 
 const ZedZoliPage = () => {
@@ -224,8 +237,18 @@ const ZedZoliPage = () => {
       {!isChangeAvailable && <div>
         <h4>Result</h4>
         <Wrapper
-          key={renderedComponent.mainCodeHash}
+          key={renderedComponent.codeHash}
+          renderHash={renderedComponent.renderedHash}
           code={renderedComponent.transformedCode}
+          innerHTML={renderedComponent.renderedContent}
+          message={`
+
+codeHash      ${renderedComponent.codeHash}
+renderedHash      ${renderedComponent.renderedHash}
+
+events        ${renderedComponent.defaultProps.pastEvents}
+eventsHash   ${renderedComponent.defaultStateHash}
+          `}
           defaultProps={{ ...renderedComponent.defaultProps, onEvent: onEvent }}
         />
       </div>}
@@ -238,7 +261,13 @@ const ZedZoliPage = () => {
           // renderContent={highlightSyntax}
           leftTitle={<Wrapper
             key={renderedComponent.codeHash}
+            renderHash={renderedComponent.renderedHash}
             code={renderedComponent.transformedCode}
+            message={`
+codeHash      ${renderedComponent.codeHash}
+events        ${renderedComponent.defaultProps.pastEvents}
+eventsHash   ${renderedComponent.defaultStateHash}
+          `}
             defaultProps={{
               ...renderedComponent.defaultProps,
               onEvent: onEvent,
@@ -247,6 +276,12 @@ const ZedZoliPage = () => {
           rightTitle={<Wrapper
             key={renderedComponent.mainCodeHash}
             code={renderedComponent.transformedMainCode}
+            renderHash={renderedComponent.renderedMainHash}
+            message={`
+codeHash      ${renderedComponent.mainCodeHash}
+events        ${renderedComponent.defaultProps.pastEvents}
+eventsHash   ${renderedComponent.defaultStateHash}
+          `}
             defaultProps={{
               ...renderedComponent.defaultProps,
               onEvent: onEvent,
