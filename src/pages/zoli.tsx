@@ -95,8 +95,9 @@ interface Props {
 const defaultProps: Props = {
   startState: { counter: 0 },
   pastEvents: new Array(10).fill("+1"),
-  onEvent: (action: string) => {},
+  onEvent: (action) => {},
 };
+
 const Wrapper: React.FC<
   {
     code: string;
@@ -108,42 +109,15 @@ const Wrapper: React.FC<
     defaultProps,
   },
 ) => {
-  // const ref = React.useRef(null);
-
   if (!code) return <div>Loading</div>;
 
   const Component = getComponent(code, defaultProps);
-
-  // const {state, setWrapState} = React.useState({hydrated: false, innerHTML});
-
-  // React.useEffect(() => {
-
-  //   if (!code) return;
-
-  //   if (state.hydrated)
-  //   setTimeout(
-  //     () =>{
-  //     const Component = getComponent(code, defaultProps);
-
-  //       ReactDOM.hydrate(<Component {...defaultProps} />,
-  //         ref.current,
-  //       );
-  //     }
-  //   );
-  // }, [code]);
 
   return <Component
     startState={defaultProps.startState}
     pastEvents={defaultProps.pastEvents}
     onEvent={defaultProps.onEvent}
-  /> // onClick={(e: any) => {
-  //   const action = e.target.getAttribute("data-onclick");
-  //   if (action) {
-  //     defaultProps.onEvent(action);
-  //   }
-  // }}
-  //  dangerouslySetInnerHTML={{ __html: state.innerHTML }}
-  ;
+  />;
 };
 
 const ZedZoliPage = () => {
@@ -217,14 +191,15 @@ const ZedZoliPage = () => {
     if (typeof window !== "undefined") runner();
   }, [code, renderedComponent.defaultProps]);
 
-  const isChangeAvailable =
+  const isChangeAvailable = renderedComponent.renderedContent &&
     renderedComponent.renderedMainHash !== renderedComponent.renderedHash;
 
+  const isError = !renderedComponent.renderedContent;
   const highlightSyntax = (str: string) =>
     <pre
       style={{ display: "inline" }}
       dangerouslySetInnerHTML={{
-        __html: Prism.highlight(str, Prism.languages["html"], "html"),
+        __html: Prism.highlight((str), Prism.languages["html"], "html"),
       }}
     />;
 
@@ -245,13 +220,14 @@ const ZedZoliPage = () => {
       {(typeof window !== "undefined") &&
         <CodeEditorWithFailBack code={code} changeCode={changeCode} />}
 
+      {isError && <h1>Error</h1>}
       {!isChangeAvailable && <div>
         <h4>Result</h4>
         <Wrapper
           key={renderedComponent.mainCodeHash}
           code={renderedComponent.transformedCode}
           defaultProps={{ ...renderedComponent.defaultProps, onEvent: onEvent }}
-        /> // innerHTML={renderedComponent.renderedContentMain}
+        />
       </div>}
 
       {isChangeAvailable && <div>
@@ -259,7 +235,7 @@ const ZedZoliPage = () => {
           oldValue={format(renderedComponent.renderedContent)}
           newValue={format(renderedComponent.renderedContentMain)}
           showDiffOnly={true}
-          renderContent={highlightSyntax}
+          // renderContent={highlightSyntax}
           leftTitle={<Wrapper
             key={renderedComponent.codeHash}
             code={renderedComponent.transformedCode}
@@ -267,8 +243,7 @@ const ZedZoliPage = () => {
               ...renderedComponent.defaultProps,
               onEvent: onEvent,
             }}
-          /> // innerHTML={renderedComponent.renderedContent}
-          }
+          />}
           rightTitle={<Wrapper
             key={renderedComponent.mainCodeHash}
             code={renderedComponent.transformedMainCode}
@@ -276,8 +251,7 @@ const ZedZoliPage = () => {
               ...renderedComponent.defaultProps,
               onEvent: onEvent,
             }}
-          /> // innerHTML={renderedComponent.renderedContentMain}
-          }
+          />}
           hideLineNumbers={true}
           splitView={true}
         />

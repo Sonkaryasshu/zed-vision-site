@@ -11,8 +11,11 @@ export const transform = async (codeHash: string) => {
     loadedModule = await transformW();
   }
   const code = await unHash(codeHash);
-
-  const transFormedCode = await loadedModule.transform(code);
-  const transformedCodeHash = await hash(transFormedCode);
-  return transformedCodeHash;
+  try {
+    const transFormedCode = await loadedModule.transform(code);
+    const transformedCodeHash = await hash(transFormedCode);
+    return transformedCodeHash;
+  } catch (e) {
+    console.log("Some babel error", e);
+  }
 };

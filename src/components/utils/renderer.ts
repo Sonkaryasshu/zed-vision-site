@@ -15,10 +15,15 @@ export const render = async (
     loadedModule = await rendererW();
   }
 
-  const code = await unHash(transformedCodeHash);
-  const defaultProps = await unHash(defaultPropsHash);
+  try {
+    const code = await unHash(transformedCodeHash);
+    const defaultProps = await unHash(defaultPropsHash);
 
-  const renderedString = await loadedModule.render(code, defaultProps);
-  const renderedStringHash = await hash(renderedString);
-  return renderedStringHash;
+    const renderedString = await loadedModule.render(code, defaultProps);
+    const renderedStringHash = await hash(renderedString);
+
+    return renderedStringHash;
+  } catch (e) {
+    console.log("Error in render", e);
+  }
 };
