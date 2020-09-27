@@ -23,46 +23,36 @@ const CodeEditorWithFailBack: React.FC<
     </React.Suspense>
   </div>;
 
+const counter = `
+function Counter(){
+  const defaultState = { counter: 0, pastEvents: new Array<string>(0) };
 
-const counter = `function Counter(props){
   const actions = {
-    decrease: state => ({ counter: state.counter - 1 }),  
-    double: state => ({ counter: state.counter * 2 }),
-    increase: state => ({ counter: state.counter + 1 }),
-    reset: state => ({ counter: 0 }),
-    sum: (state, index)=> ({ counter: index }),
-    _skip: state => ({ counter: state.counter }),
+    reset: () => defaultState,
+    increment: (s = defaultState) => ({ ...s, counter: s.counter + 1 }),
+    decrement: (s = defaultState) => ({ ...s, counter: s.counter - 1 }),
+  };
+
+  const [state, setState] = React.useState(defaultState);
+
+  const calculatedState = state.pastEvents.reduce((prevValue,currentValue) => actions[currentValue](prevValue), {...state});
+
+  return <div>
+    <button onClick={update("decrement")}>-</button>
+    {calculatedState.counter}
+    <button onClick={update("increment")}>+</button>
+  </div>;
+
+  function update(action: ActionType) {
+    return (e: React.MouseEvent) => {
+      e.stopPropagation();
+      setState({...state, pastEvents: [...state.pastEvents, action]});
+    };
   }
-  const pastEvents = props.pastEvents || []
-  
 
-  const [events, setEvents] = React.useState(pastEvents)
-
-  const state = events
-    .map(ev => {
-      const text = ev.target
-      if (text.includes("-")) return "decrease"
-      else if (text.includes("Reset")) return "reset"
-      else if (text.includes("SUM")) return "sum"
-      else if (text.includes("+")) return "increase"
-      else if (text.includes("x2")) return "double"
-      else return "_skip"
-    })
-    .reduce((state, ev, index) => actions[ev](state, index), { counter: 0 })
-    
-  const onClick = e =>
-    setEvents([...events, { type: "click", target: String(e.target.innerHTML) }])
-
-  return (
-    <div>
-      {state.counter!==0 && <><button onClick={e => onClick(e)}>Reset</button><br/></>}
-      {state.counter===0 && <><button onClick={e => onClick(e)}>Jump to all SUM!</button><br/></>}
-      <button onClick={e => onClick(e)}>-</button>
-      Counter {props.name}:<span>{state.counter}</span>
-      <button onClick={e => onClick(e)}>+</button>
-    </div>
-  )
+  type ActionType = keyof typeof actions;
 }
+
 `;
 
 const pastEventsDefault = new Array(10).fill({
@@ -70,8 +60,7 @@ const pastEventsDefault = new Array(10).fill({
   type: "click",
 });
 
-const ZedZoliPage = ( ) => {
-
+const ZedZoliPage = () => {
   const [renderedComponent, changeWorkerRenderedComponent] = React.useState(
     {
       code: ``,
@@ -160,73 +149,73 @@ const ZedZoliPage = ( ) => {
     />;
   };
 
-  const isChangeAvailable = renderedComponent.renderedMainHash !==renderedComponent.renderedHash ;
+  const isChangeAvailable =
+    renderedComponent.renderedMainHash !== renderedComponent.renderedHash;
 
   return (
     <Layout>
       <SEO title="Test Worker side rendering" />
       {(typeof window !== "undefined") &&
         <CodeEditorWithFailBack code={code} changeCode={changeCode} />}
-    
-        {!isChangeAvailable&& <div>
-          <h4>Result</h4>
-          <Wrapper
+
+      {!isChangeAvailable && <div>
+        <h4>Result</h4>
+        <Wrapper
+          key={renderedComponent.renderedMainHash}
+          code={renderedComponent.transformedCode}
+          pastEvents={renderedComponent.pastEvents}
+          innerHTML={renderedComponent.renderedContentMain}
+        />
+      </div>}
+
+      {isChangeAvailable && <div>
+        <ReactDiffViewer
+          oldValue={format(renderedComponent.renderedContent)}
+          newValue={format(renderedComponent.renderedContentMain)}
+          showDiffOnly={true}
+          leftTitle={<Wrapper
             key={renderedComponent.renderedMainHash}
             code={renderedComponent.transformedCode}
             pastEvents={renderedComponent.pastEvents}
             innerHTML={renderedComponent.renderedContentMain}
-          />
-        </div>}
+          />}
+          rightTitle={<Wrapper
+            key={renderedComponent.renderedHash}
+            code={renderedComponent.transformedCode}
+            pastEvents={renderedComponent.pastEvents}
+            innerHTML={renderedComponent.renderedContent}
+          />}
+          hideLineNumbers={true}
+          splitView={true}
+        />
 
-        {isChangeAvailable && <div>
-          <ReactDiffViewer
-            oldValue={format(renderedComponent.renderedContent)}
-            newValue={format(renderedComponent.renderedContentMain)}
-            showDiffOnly={true}
-            leftTitle={<Wrapper
-              key={renderedComponent.renderedMainHash}
-              code={renderedComponent.transformedCode}
-              pastEvents={renderedComponent.pastEvents}
-              innerHTML={renderedComponent.renderedContentMain}
-            />}
-            rightTitle={<Wrapper
-              key={renderedComponent.renderedHash}
-              code={renderedComponent.transformedCode}
-              pastEvents={renderedComponent.pastEvents}
-              innerHTML={renderedComponent.renderedContent}
-            />}
-            hideLineNumbers={true}
-            splitView={true}
-          />
-
-          <button
-            onClick={() =>
-              changeWorkerRenderedComponent(
-                {
-                  ...renderedComponent,
-                  mainCodeHash: renderedComponent.codeHash,
-                  renderedContentMain: renderedComponent.renderedContent,
-                  renderedMainHash: renderedComponent.renderedHash,
-                },
-              )}
-          >
-            Save change - as main code
-          </button>
-          <button
-            onClick={() => {
-              changeCode(renderedComponent.mainCode);
-              changeWorkerRenderedComponent({
+        <button
+          onClick={() =>
+            changeWorkerRenderedComponent(
+              {
                 ...renderedComponent,
-                code: renderedComponent.mainCode,
-              });
-            }}
-          >
-            Restore
-          </button>
-        </div>}
+                mainCodeHash: renderedComponent.codeHash,
+                renderedContentMain: renderedComponent.renderedContent,
+                renderedMainHash: renderedComponent.renderedHash,
+              },
+            )}
+        >
+          Save change - as main code
+        </button>
+        <button
+          onClick={() => {
+            changeCode(renderedComponent.mainCode);
+            changeWorkerRenderedComponent({
+              ...renderedComponent,
+              code: renderedComponent.mainCode,
+            });
+          }}
+        >
+          Restore
+        </button>
+      </div>}
     </Layout>
   );
 };
 
 export default ZedZoliPage;
-
