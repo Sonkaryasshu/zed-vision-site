@@ -133,7 +133,7 @@ var zzz_MyComponent = function MyComponent(_ref) {
 };
 function Page() {
   if (typeof window === "undefined") return /*#__PURE__*/react_default.a.createElement(Container, null, "Loading");
-  return /*#__PURE__*/react_default.a.createElement(Container, null, /*#__PURE__*/react_default.a.createElement(zzz_MyComponent, null), /*#__PURE__*/react_default.a.createElement(MyComponent2, null));
+  return /*#__PURE__*/react_default.a.createElement(Container, null, /*#__PURE__*/react_default.a.createElement(zzz_MyComponent, null));
 }
 
 /***/ }),
@@ -2443,4 +2443,4 @@ var steps = function steps(_steps, direction) {
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-zzz-tsx-0a3aed0ba0fc5c1a9590.js.map
+//# sourceMappingURL=component---src-pages-zzz-tsx-f7e89e1db278a855373f.js.map

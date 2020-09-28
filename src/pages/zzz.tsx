@@ -11,18 +11,18 @@ import {
 import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline";
 
 const Styled = styled.div`
-text-align: center;
-border-radius: 25px;
-width: 200px;
-height: 200px;
-display: flex;
+  text-align: center;
+  border-radius: 25px;
+  width: 200px;
+  height: 200px;
+  display: flex;
   place-content: center;
   place-items: center;
   margin: 0;
   padding: 0;
-background: rgb(255, 255, 255) none repeat scroll 0% 0%;
-user-select: none;
-box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 3px 0px, rgba(0, 0, 0, 0.06) 0px 10px 15px 0px;
+  background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+  user-select: none;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 3px 0px, rgba(0, 0, 0, 0.06) 0px 10px 15px 0px;
 `;
 
 const Container = styled.div`
@@ -80,6 +80,5 @@ export default function Page() {
   if (typeof window === "undefined") return <Container>Loading</Container>;
   return <Container>
     <MyComponent />
-    <MyComponent2 />
   </Container>;
 }
