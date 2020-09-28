@@ -51,10 +51,12 @@ const Sha256Writer: React.FC<{onNew:(hash: string)=>void}> = ({onNew})=>{
       <pre>{sha256Hash}</pre></DivContainer>;
 }; 
 
-export const MyComponent: React.FC<
-  { height?: number; width?: number; adjust: (x: number, y: number) => void }
-> = ({ height = 400, width = 400, adjust }) => {
+
+
+export const ShaContainer: React.FC = () => {
   const x = useMotionValue(0);
+
+  const [hashList, changeBoxes] = React.useState(["3, 5, 6, f, 2"]);
 
   const background = useTransform(
     x,
@@ -63,12 +65,13 @@ export const MyComponent: React.FC<
   );
 
   return (<>
-    <motion.div
+  {hashList.map((hash)=><div key="hash" >{hash}</div>)}
+    {/* <motion.div
       layout
       css={css`position: relative; height: ${height}px; width: ${width}px;`}
       style={{ background }}
     >
-    </motion.div>
+    </motion.div> */}
 
     <motion.div
       // layout
@@ -80,9 +83,9 @@ export const MyComponent: React.FC<
       // }
       dragConstraints={{
         top: 0,
-        bottom: height - 100,
+        bottom:  100,
         left: 0,
-        right: width - 100,
+        right: 100,
       }}
       style={{ position: "absolute", x }}
     >
@@ -108,18 +111,18 @@ const Container = styled.div`
 `;
 
 export default function Page() {
-  const [{ width, height }, changeSize] = React.useState(
-    { height: 600, width: 400 },
-  );
-  React.useEffect(() => {
-    setInterval(() => {
-      const x = Math.random() * 200 - 100;
-      const total = 600 * 400;
-      const newWith = Math.floor(width - x);
-      const newHeight = Math.floor(total / newWith);
-      changeSize({ height: newHeight, width: newWith });
-    }, 1000);
-  }, []);
+//   const [{ width, height }, changeSize] = React.useState(
+//     { height: 600, width: 400 },
+//   );
+//   React.useEffect(() => {
+//     setInterval(() => {
+//       const x = Math.random() * 200 - 100;
+//       const total = 600 * 400;
+//       const newWith = Math.floor(width - x);
+//       const newHeight = Math.floor(total / newWith);
+//       changeSize({ height: newHeight, width: newWith });
+//     }, 1000);
+//   }, []);
 
   return <>
     <Helmet>
@@ -134,16 +137,7 @@ export default function Page() {
     </Helmet>
     <Container>
       {typeof window !== "undefined"
-        ? <MyComponent
-          height={height}
-          width={width}
-          adjust={(x, y) => {
-            const total = width * height;
-            const newWith = width - x;
-            const newHeight = total / newWith;
-            changeSize({ height: newHeight, width: newWith });
-          }}
-        />
+        ? <ShaContainer/>
         : "Loading"}
     </Container>
   </>;

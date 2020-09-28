@@ -10,7 +10,7 @@ export const Sha256 = (hashTable = {}) => ({
 
     return shorterHash;
     function shortener(hash: string) {
-      for (let i = 4; i < 64; i++) {
+      for (let i = 1; i < 64; i++) {
         const shorterHash = hash.substr(0, i);
         if (hashTable[shorterHash] === undefined) {
           hashTable[shorterHash] = hash;
