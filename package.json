@@ -1,7 +1,7 @@
 {
   "name": "@zed-vision/zed-vision-site",
   "scripts": {
-    "esbuild": "esbuild ./esbuild/zoli.tsx --bundle '--define:process.env.NODE_ENV=\"development\"' --outfile=./esbuild/out.js",
+    "esbuild": "esbuild ./esbuild/index.jsx --bundle '--define:process.env.NODE_ENV=\"development\"' --outfile=./esbuild/out.js",
     "deploy": "deno fmt src && yarn install && yarn upgrade && yarn build && git add . && git commit -m deploy && amplify publish",
     "postinstall": "gatsby telemetry --disable",
     "build": "gatsby clean && cp -a ./static/. ./public && gatsby build --no-uglify ",
@@ -26,6 +26,7 @@
     "@material-ui/core": "4.11.0",
     "@material-ui/icons": "4.9.1",
     "@octokit/rest": "18.0.6",
+    "array-move": "^3.0.1",
     "framer-motion": "^2.7.5",
     "html-format": "^1.0.1",
     "polished": "3.6.7",

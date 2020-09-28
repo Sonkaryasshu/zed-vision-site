@@ -76,7 +76,7 @@ exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
   const config = getConfig();
   config.plugins.push(
     new MonacoWebpackPlugin({
-      languages: ["json", "javascript"],
+      languages: ["json", "javascript", "typescript"],
     }),
   );
   return config;
