@@ -1,28 +1,30 @@
-//@ts-ignore
-import { Sha256Worker } from "workerize-loader!./sha256/sha256.worker.js";
+import * as shaWorker from "./sha256/sha256.worker";
+const hashTable = {};
 
-const sha256Worker = typeof window === "object" && Sha256Worker;
+const { sha256 } = (shaWorker as any)() as typeof shaWorker;
 
-export const hash = async (str: string | object) => {
-  const moduleW = sha256Worker;
-  if (!moduleW) {
-    console.log("no module no transform");
-    return;
-  }
+ export const hash = async (input: string | object) => {
+    const strInput = typeof input !== "string" ? JSON.stringify(input) : input;
 
-  const store = await moduleW();
+    const hash = await sha256(strInput);
 
-  return store.hash(str);
-};
+    const shorterHash = shortener(hash);
 
-export const unHash = async (hash: string) => {
-  const moduleW = sha256Worker;
-  if (!moduleW) {
-    console.log("no module no transform");
-    return;
-  }
+    hashTable[hash] = input;
 
-  const store = await moduleW();
+    return shorterHash;
+    function shortener(hash: string) {
+      for (let i = 4; i < 64; i++) {
+        const shorterHash = hash.substr(0, i);
+        if (hashTable[shorterHash] === undefined) {
+          hashTable[shorterHash] = hash;
+          return shorterHash;
+        }
 
-  return store.unHash(hash);
-};
+        if (hashTable[shorterHash] === hash) return shorterHash;
+      }
+      return hash;
+    }
+  };
+  
+  export const unHash = async (hash: string) => hashTable[hashTable[hash]];

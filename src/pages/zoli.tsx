@@ -138,6 +138,7 @@ export default function Page() {
 
   const [renderedComponent, changeWorkerRenderedComponent] = React.useState(
     {
+      isError: false,
       code: ``,
       transformedCode: ``,
       mainCode: ``,
@@ -159,6 +160,7 @@ export default function Page() {
 
   React.useEffect(() => {
     const runner = async () => {
+      console.log("HEEEEyx");
       const runnerHash = await hash(renderedComponent);
       const devCodeHash = await hash(code);
       const codeHash = devCodeHash;
@@ -172,6 +174,10 @@ export default function Page() {
       const transformedHash = await transform(codeHash);
       const transformedMainHash = await transform(mainCodeHash);
       const defaultStateHash = await hash(renderedComponent.defaultProps);
+      if (!transformedHash) {
+        changeWorkerRenderedComponent({isError:true});
+        return;
+      }
       const transformedCode = await unHash(transformedHash);
 
       const transformedMainCode = await unHash(transformedMainHash);
