@@ -1,5 +1,5 @@
 //@ts-ignore
-import { TransformWorker } from "workerize-loader!./babel/babel.worker";
+import { TransformWorker } from "workerize-loader!./babel/babel.worker.js";
 
 import { hash, unHash } from "./sha";
 const transformW = typeof window === "object" && TransformWorker;
@@ -10,12 +10,12 @@ export const transform = async (codeHash: string) => {
   const code = await unHash(codeHash);
 
   try {
-    const module = transformW;
-    if (!module) {
+    const moduleW = transformW;
+    if (!moduleW) {
       console.log("no module no transform");
       return;
     }
-    const transFormedCode = await (await module()).transform(code);
+    const transFormedCode = await (await moduleW()).transform(code);
     console.log("TRANSFORMED: ", transFormedCode);
     const transformedCodeHash = await hash(transFormedCode);
     return transformedCodeHash;

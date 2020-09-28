@@ -854,7 +854,7 @@ module.exports = __webpack_require__(0);
 __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
-__webpack_require__.d(__webpack_exports__, "default", function() { return /* binding */ Sha256Worker; });
+__webpack_require__.d(__webpack_exports__, "Sha256Worker", function() { return /* binding */ Sha256Worker; });
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/regenerator/index.js
 var regenerator = __webpack_require__(1);
@@ -903,7 +903,7 @@ function _asyncToGenerator(fn) {
 
 
 
-var Sha256 = /*#__PURE__*/function () {
+var Sha256Module = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regenerator_default.a.mark(function _callee3(hashTable) {
     return regenerator_default.a.wrap(function _callee3$(_context3) {
       while (1) {
@@ -992,7 +992,7 @@ var Sha256 = /*#__PURE__*/function () {
     }, _callee3);
   }));
 
-  return function Sha256(_x) {
+  return function Sha256Module(_x) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -1031,20 +1031,12 @@ function _sha() {
   return _sha.apply(this, arguments);
 }
 // CONCATENATED MODULE: ./node_modules/workerize-loader/dist/rpc-worker-loader.js!./src/components/utils/sha256/sha256.worker.js
-const sha256_worker_hashTable = {};
 
 
-
-async function Sha256Worker() {
-  const shaStore = await Sha256(sha256_worker_hashTable);
-  return {
-    hash: (e) => shaStore.hash(e),
-    unHash: (e) => shaStore.unHash(e),
-  };
-}
+const Sha256Worker = async () => await Sha256Module();
 
 addEventListener('message', function (e) {var _e$data = e.data,type = _e$data.type,method = _e$data.method,id = _e$data.id,params = _e$data.params,f,p;if (type === 'RPC' && method) {if (f = __webpack_exports__[method]) {p = Promise.resolve().then(function () {return f.apply(__webpack_exports__, params);});} else {p = Promise.reject('No such method');}p.then(function (result) {postMessage({type: 'RPC',id: id,result: result});}).catch(function (e) {var error = {message: e};if (e.stack) {error.message = e.message;error.stack = e.stack;error.name = e.name;}postMessage({type: 'RPC',id: id,error: error});});}});postMessage({type: 'RPC',method: 'ready'});
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=built-sha256.5bea21.worker.js.map
+//# sourceMappingURL=built-sha256.aa0900.worker.js.map

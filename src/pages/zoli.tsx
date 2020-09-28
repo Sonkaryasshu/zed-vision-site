@@ -39,7 +39,6 @@ const Wrapper: React.FC<
   </div>;
 };
 
-
 const CodeEditorWithFailBack: React.FC<
   { code: string; changeCode: (code: string) => void }
 > = ({ code, changeCode }) =>

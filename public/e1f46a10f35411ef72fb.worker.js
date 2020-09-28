@@ -81,65 +81,76 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = "./node_modules/workerize-loader/dist/rpc-worker-loader.js!./src/components/utils/sha256/sha256.worker.js");
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/******/ ({
 
-var addMethods=__webpack_require__(1);var methods=["Sha256Worker"];module.exports=function(){var w=new Worker(__webpack_require__.p+"built-sha256.5bea21.worker.js",{name:"built-sha256.[hash:6].worker.js"});addMethods(w,methods);return w;};
+/***/ "./node_modules/workerize-loader/dist/rpc-worker-loader.js!./src/components/utils/sha256/sha256.worker.js":
+/*!****************************************************************************************************************!*\
+  !*** ./node_modules/workerize-loader/dist/rpc-worker-loader.js!./src/components/utils/sha256/sha256.worker.js ***!
+  \****************************************************************************************************************/
+/*! exports provided: Sha256Worker */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Sha256Worker", function() { return Sha256Worker; });
+/* harmony import */ var _sha256_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./sha256.utils */ "./src/components/utils/sha256/sha256.utils.ts");
+
+
+const Sha256Worker = async () => await Object(_sha256_utils__WEBPACK_IMPORTED_MODULE_0__["Sha256Module"])();
+
 addEventListener('message', function (e) {var _e$data = e.data,type = _e$data.type,method = _e$data.method,id = _e$data.id,params = _e$data.params,f,p;if (type === 'RPC' && method) {if (f = __webpack_exports__[method]) {p = Promise.resolve().then(function () {return f.apply(__webpack_exports__, params);});} else {p = Promise.reject('No such method');}p.then(function (result) {postMessage({type: 'RPC',id: id,result: result});}).catch(function (e) {var error = {message: e};if (e.stack) {error.message = e.message;error.stack = e.stack;error.name = e.name;}postMessage({type: 'RPC',id: id,error: error});});}});postMessage({type: 'RPC',method: 'ready'});
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports) {
 
-function addMethods(worker, methods) {
-  var c = 0;
-  var callbacks = {};
-  worker.addEventListener('message', function (e) {
-    var d = e.data;
-    if (d.type !== 'RPC') return;
+/***/ "./src/components/utils/sha256/sha256.utils.ts":
+/*!*****************************************************!*\
+  !*** ./src/components/utils/sha256/sha256.utils.ts ***!
+  \*****************************************************/
+/*! exports provided: Sha256Module */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-    if (d.id) {
-      var f = callbacks[d.id];
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Sha256Module", function() { return Sha256Module; });
+const Sha256Module = async (hashTable = {}) => ({
+  hash: async input => {
+    const strInput = typeof input !== "string" ? JSON.stringify(input) : input;
+    const hash = await sha256(strInput);
+    const shorterHash = shortener(hash);
+    hashTable[hash] = input;
+    return shorterHash;
 
-      if (f) {
-        delete callbacks[d.id];
+    function shortener(hash) {
+      for (let i = 4; i < 64; i++) {
+        const shorterHash = hash.substr(0, i);
 
-        if (d.error) {
-          f[1](Object.assign(Error(d.error.message), d.error));
-        } else {
-          f[0](d.result);
+        if (hashTable[shorterHash] === undefined) {
+          hashTable[shorterHash] = hash;
+          return shorterHash;
         }
+
+        if (hashTable[shorterHash] === hash) return shorterHash;
       }
-    } else {
-      var evt = document.createEvent('Event');
-      evt.initEvent(d.method, false, false);
-      evt.data = d.params;
-      worker.dispatchEvent(evt);
+
+      return hash;
     }
-  });
-  methods.forEach(function (method) {
-    worker[method] = function () {
-      var _arguments = arguments;
-      return new Promise(function (a, b) {
-        var id = ++c;
-        callbacks[id] = [a, b];
-        worker.postMessage({
-          type: 'RPC',
-          id: id,
-          method: method,
-          params: [].slice.call(_arguments)
-        });
-      });
-    };
-  });
+  },
+  unHash: async hash => hashTable[hashTable[hash]]
+});
+
+async function sha256(message) {
+  const msgBuffer = new TextEncoder().encode(message);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer)); // convert bytes to hex string
+
+  const hashHex = hashArray.map(b => ("00" + b.toString(16)).slice(-2)).join("");
+  return hashHex;
 }
 
-module.exports = addMethods;
-
 /***/ })
-/******/ ]);
-//# sourceMappingURL=9bdb09fb64322489d506.worker.js.map
+
+/******/ });
+//# sourceMappingURL=e1f46a10f35411ef72fb.worker.js.map

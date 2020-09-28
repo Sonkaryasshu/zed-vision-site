@@ -1,4 +1,4 @@
-export const Sha256 = async (hashTable = {}) => ({
+export const Sha256Module = async (hashTable = {}) => ({
   hash: async (input: string | object) => {
     const strInput = typeof input !== "string" ? JSON.stringify(input) : input;
 

@@ -891,7 +891,7 @@ var babel_worker = __webpack_require__(568);
 var transformW = typeof window === "object" && babel_worker["TransformWorker"];
 var transform = /*#__PURE__*/function () {
   var _ref = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regenerator_default.a.mark(function _callee(codeHash) {
-    var code, module, transFormedCode, transformedCodeHash;
+    var code, moduleW, transFormedCode, transformedCodeHash;
     return regenerator_default.a.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -910,9 +910,9 @@ var transform = /*#__PURE__*/function () {
           case 4:
             code = _context.sent;
             _context.prev = 5;
-            module = transformW;
+            moduleW = transformW;
 
-            if (module) {
+            if (moduleW) {
               _context.next = 10;
               break;
             }
@@ -922,7 +922,7 @@ var transform = /*#__PURE__*/function () {
 
           case 10:
             _context.next = 12;
-            return module();
+            return moduleW();
 
           case 12:
             _context.next = 14;
@@ -1412,23 +1412,40 @@ function Page() {
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(19);
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(97);
-/* harmony import */ var workerize_loader_sha256_sha256_worker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(230);
-/* harmony import */ var workerize_loader_sha256_sha256_worker__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(workerize_loader_sha256_sha256_worker__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var workerize_loader_sha256_sha256_worker_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(230);
+/* harmony import */ var workerize_loader_sha256_sha256_worker_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(workerize_loader_sha256_sha256_worker_js__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
 //@ts-ignore
 
-var sha256Worker = typeof window === "object" && workerize_loader_sha256_sha256_worker__WEBPACK_IMPORTED_MODULE_3___default()();
+var sha256Worker = typeof window === "object" && workerize_loader_sha256_sha256_worker_js__WEBPACK_IMPORTED_MODULE_3__["Sha256Worker"];
 var hash = /*#__PURE__*/function () {
   var _ref = Object(_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(str) {
+    var moduleW, store;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            return _context.abrupt("return", sha256Worker.hash(str));
+            moduleW = sha256Worker;
 
-          case 1:
+            if (moduleW) {
+              _context.next = 4;
+              break;
+            }
+
+            console.log("no module no transform");
+            return _context.abrupt("return");
+
+          case 4:
+            _context.next = 6;
+            return moduleW();
+
+          case 6:
+            store = _context.sent;
+            return _context.abrupt("return", store.hash(str));
+
+          case 8:
           case "end":
             return _context.stop();
         }
@@ -1442,13 +1459,30 @@ var hash = /*#__PURE__*/function () {
 }();
 var unHash = /*#__PURE__*/function () {
   var _ref2 = Object(_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(hash) {
+    var moduleW, store;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            return _context2.abrupt("return", sha256Worker.unHash(hash));
+            moduleW = sha256Worker;
 
-          case 1:
+            if (moduleW) {
+              _context2.next = 4;
+              break;
+            }
+
+            console.log("no module no transform");
+            return _context2.abrupt("return");
+
+          case 4:
+            _context2.next = 6;
+            return moduleW();
+
+          case 6:
+            store = _context2.sent;
+            return _context2.abrupt("return", store.unHash(hash));
+
+          case 8:
           case "end":
             return _context2.stop();
         }
@@ -1520,7 +1554,7 @@ module.exports = addMethods;
 				var addMethods = __webpack_require__(148)
 				var methods = ["Sha256Worker"]
 				module.exports = function() {
-					var w = new Worker(__webpack_require__.p + "9bdb09fb64322489d506.worker.js", { name: "[hash].worker.js" })
+					var w = new Worker(__webpack_require__.p + "cf45243f69e5f1aca8e9.worker.js", { name: "[hash].worker.js" })
 					addMethods(w, methods)
 					
 					return w
@@ -4535,4 +4569,4 @@ module.exports = Object.assign(exports.default, exports);
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-zoli-tsx-521a84212390faf09dda.js.map
+//# sourceMappingURL=component---src-pages-zoli-tsx-643cb9d300f077092170.js.map
