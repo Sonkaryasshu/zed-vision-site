@@ -104,6 +104,9 @@ const Component: React.FC<Props> = ({ startState, pastEvents, onEvent }) => {
 `;
 
 export const getComponent = (code: string, props: Props) => {
+// console.log()''
+
+
   try {
     const componentFactory = new Function(
       "props",
@@ -160,7 +163,6 @@ export default function Page() {
 
   React.useEffect(() => {
     const runner = async () => {
-      console.log("HEEEEyx");
       const runnerHash = await hash(renderedComponent);
       const devCodeHash = await hash(code);
       const codeHash = devCodeHash;
@@ -175,7 +177,7 @@ export default function Page() {
       const transformedMainHash = await transform(mainCodeHash);
       const defaultStateHash = await hash(renderedComponent.defaultProps);
       if (!transformedHash) {
-        changeWorkerRenderedComponent({isError:true});
+        changeWorkerRenderedComponent({...renderedComponent, isError:true});
         return;
       }
       const transformedCode = await unHash(transformedHash);

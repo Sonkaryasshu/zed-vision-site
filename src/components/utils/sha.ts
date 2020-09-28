@@ -27,4 +27,4 @@ const { sha256 } = (shaWorker as any)() as typeof shaWorker;
     }
   };
   
-  export const unHash = async (hash: string) => hashTable[hashTable[hash]];
+  export const unHash = async (hash: string) => hashTable[hashTable[hash]] || "Something is broken";

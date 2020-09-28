@@ -1,3 +1,8 @@
-import { TransformModule } from "./babel.utils";
+import { transform } from "@babel/standalone";
 
-export const TransformWorker = () => TransformModule();
+export async function WorkerTransform(code: string){
+    return transform(code, {
+      plugins: [],
+      presets: ["react", ["typescript", { isTSX: true, allExtensions: true }]],
+    }).code;
+  }

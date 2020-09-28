@@ -25,5 +25,6 @@ export const render = async (
     return renderedStringHash;
   } catch (e) {
     console.log("Error in render", e);
+    return "error in rendering";
   }
 };
