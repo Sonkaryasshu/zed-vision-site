@@ -1,21 +1,8 @@
 //@ts-ignore
-import { Sha256Worker } from "workerize-loader!./sha256/sha256.worker";
+import Sha256Worker from "workerize-loader!./sha256/sha256.worker";
 
-const sha256W = typeof window !== "undefined" && Sha256Worker;
+const sha256Worker = typeof window === "object" && Sha256Worker();
 
-let loadedModule: any = null;
+export const hash = async (str: string | object) => sha256Worker.hash(str);
 
-export const { hash, unHash } = {
-  hash: async (str: string | object) => {
-    if (!loadedModule) {
-      loadedModule = await sha256W;
-    }
-    return (await sha256W).hash(str);
-  },
-  unHash: async (hash: string) => {
-    if (!loadedModule) {
-      loadedModule = await sha256W  ;
-    }
-    return (await sha256W).unHash(hash);
-  },
-};
+export const unHash = async (hash: string) => sha256Worker.unHash(hash);

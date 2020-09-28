@@ -5,9 +5,40 @@ import { transform } from "../components/utils/babel";
 import { render } from "../components/utils/renderer";
 import ReactDiffViewer from "react-diff-viewer";
 import format from "html-format";
-import { Wrapper } from "./Wrapper";
 
 const MonacoEditor = React.lazy(() => import("../components/monacoEditor"));
+
+const Wrapper: React.FC<
+  {
+    code: string;
+    message?: string;
+    renderHash?: string;
+    innerHTML: string;
+    defaultProps: Props;
+  }
+> = (
+  {
+    code,
+    innerHTML,
+    renderHash,
+    message,
+    defaultProps,
+  },
+) => {
+  if (!code || !renderHash) {
+    return <div>Loading</div>;
+  }
+
+  const Component = getComponent(code, defaultProps);
+
+  return <div>
+    {Component && <Component
+      {...defaultProps}
+    />}
+    <pre>{message}</pre>
+  </div>;
+};
+
 
 const CodeEditorWithFailBack: React.FC<
   { code: string; changeCode: (code: string) => void }
