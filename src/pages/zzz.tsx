@@ -1,7 +1,7 @@
 import React from "react";
 import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline";
 import styled, { css } from "styled-components";
-import { hash, unHash } from "../components/utils/sha";
+import { hash } from "../components/utils/sha";
 // import { CounterTS } from "../components/Counter";
 import { Helmet } from "react-helmet";
 
@@ -39,17 +39,28 @@ width: 100%;
 max-height: 100%;
 `;
 
-const Sha256Writer: React.FC<{onNew:(hash: string)=>void}> = ({onNew})=>{
-  const [{text, sha256Hash}, changeText] = React.useState({text:"", sha256Hash:""});
+const Sha256Writer: React.FC<{ onNew: (hash: string) => void }> = (
+  { onNew },
+) => {
+  const [{ text, sha256Hash }, changeText] = React.useState(
+    { text: "", sha256Hash: "" },
+  );
   return <DivContainer>
     <p>Start to type</p>
-    <StyledTextArea rowsMin={3} rowsMax={3} onChange={async(e)=>{
-      const textContent = e.target.value;
-      const sha256Hash = await hash(textContent);
-      onNew(sha256Hash);
-      changeText({text:textContent, sha256Hash});}} value={text}></StyledTextArea>
-      <pre>{sha256Hash}</pre></DivContainer>;
-}; 
+    <StyledTextArea
+      rowsMin={3}
+      rowsMax={3}
+      onChange={async (e) => {
+        const textContent = e.target.value;
+        const sha256Hash = await hash(textContent);
+        onNew(sha256Hash);
+        changeText({ text: textContent, sha256Hash });
+      }}
+      value={text}
+    />
+    <pre>{sha256Hash}</pre>
+  </DivContainer>;
+};
 
 export const MyComponent: React.FC<
   { height?: number; width?: number; adjust: (x: number, y: number) => void }
@@ -88,7 +99,7 @@ export const MyComponent: React.FC<
     >
       <Styled>
         <ScopedCssBaseline>
-          <Sha256Writer onNew={(hash)=>console.log(hash)} /> 
+          <Sha256Writer onNew={(hash) => console.log(hash)} />
         </ScopedCssBaseline>
       </Styled>
     </motion.div>

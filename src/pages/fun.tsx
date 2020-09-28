@@ -8,7 +8,6 @@ import { Helmet } from "react-helmet";
 import {
   motion,
   useMotionValue,
-  useTransform,
 } from "framer-motion";
 import { TextareaAutosize } from "@material-ui/core";
 
@@ -39,63 +38,88 @@ width: 100%;
 max-height: 100%;
 `;
 
-const Sha256Writer: React.FC<{onNew:(hash: string)=>void}> = ({onNew})=>{
-  const [{text, sha256Hash}, changeText] = React.useState({text:"", sha256Hash:""});
+const Sha256Writer: React.FC<
+  { prevText: string; onNew: (hash: string) => void }
+> = (
+  { onNew, prevText },
+) => {
+  const [{ text }, changeText] = React.useState(
+    { text: prevText },
+  );
+
+  React.useEffect(() => {
+    changeText({ text: prevText });
+  }, [prevText]);
   return <DivContainer>
     <p>Start to type</p>
-    <StyledTextArea rowsMin={3} rowsMax={3} onChange={async(e)=>{
-      const textContent = e.target.value;
-      const sha256Hash = await hash(textContent);
-      onNew(sha256Hash);
-      changeText({text:textContent, sha256Hash});}} value={text}></StyledTextArea>
-      <pre>{sha256Hash}</pre></DivContainer>;
-}; 
-
-
+    <StyledTextArea
+      rowsMin={3}
+      rowsMax={3}
+      onChange={async (e) => {
+        const textContent = e.target.value;
+        const sha256Hash = await hash(textContent);
+        onNew(sha256Hash);
+        changeText({ text: textContent });
+      }}
+      value={text}
+    />
+  </DivContainer>;
+};
 
 export const ShaContainer: React.FC = () => {
   const x = useMotionValue(0);
 
-  const [hashList, changeBoxes] = React.useState(["3, 5, 6, f, 2"]);
-
-  const background = useTransform(
-    x,
-    [-100, 0, 100],
-    ["#ff008c", "#7700ff", "rgb(230, 255, 0)"],
+  const [hashList, changeBoxes] = React.useState<string[]>(
+    [],
   );
 
-  return (<>
-  {hashList.map((hash)=><div key="hash" >{hash}</div>)}
-    {/* <motion.div
-      layout
-      css={css`position: relative; height: ${height}px; width: ${width}px;`}
-      style={{ background }}
-    >
-    </motion.div> */}
+  const [{ locX, locY, activeText }, setCords] = React.useState(
+    { locX: 40, locY: 40, activeText: "" },
+  );
+
+  return (<div>
+    {hashList.map((hash) => {
+      const { locationX, locationY } = hashToCoordinates(hash);
+
+      return <div
+        onMouseEnter={(async () => {
+          const text = await unHash(hash);
+          const { locationX, locationY } = hashToCoordinates(hash);
+          setCords({ locX: locationX, locY: locationY, activeText: text });
+        })}
+        css={css
+          `font-size: small; display: inline-block; width:10px; height: 10px; border-radius: 5px; background: white; padding: 5px; top: ${locationY}%; left:${locationX}%; position: absolute`}
+        key={hash}
+      >
+      </div>;
+    })}
 
     <motion.div
-      // layout
-      drag={true}
-      dragElastic={0.5}
-      // dragListener={true}
-      // onDrag={
-      // (event, info) => {if (event.layerX<0) adjust(event.layerX, event.layerY);}
-      // }
-      dragConstraints={{
-        top: 0,
-        bottom:  100,
-        left: 0,
-        right: 100,
+      animate={{
+        x: locX * window.innerWidth / 105 - 100,
+        y: locY * window.innerHeight / 105 - 50,
+        scale: 1,
+        rotate: 0,
       }}
       style={{ position: "absolute", x }}
     >
       <Styled>
         <ScopedCssBaseline>
-          <Sha256Writer onNew={(hash)=>console.log(hash)} /> 
+          <Sha256Writer
+            prevText={activeText}
+            onNew={(hash) => {
+              const { locationY, locationX } = hashToCoordinates(hash);
+              setCords(
+                { locX: locationX, locY: locationY, activeText: activeText },
+              );
+              if (hashList.includes(hash)) return;
+              changeBoxes([...hashList, hash]);
+            }}
+          />
         </ScopedCssBaseline>
       </Styled>
     </motion.div>
-  </>);
+  </div>);
 };
 
 const Container = styled.div`
@@ -103,27 +127,12 @@ const Container = styled.div`
   width: 100vw;
   overflow: hidden;
   text-align: center;
-  display: flex;
-  place-content: center;
-  place-items: center;
+  display: relative;
   background: rgba(0, 85, 255, 1);
   perspective: 1000px;
 `;
 
 export default function Page() {
-//   const [{ width, height }, changeSize] = React.useState(
-//     { height: 600, width: 400 },
-//   );
-//   React.useEffect(() => {
-//     setInterval(() => {
-//       const x = Math.random() * 200 - 100;
-//       const total = 600 * 400;
-//       const newWith = Math.floor(width - x);
-//       const newHeight = Math.floor(total / newWith);
-//       changeSize({ height: newHeight, width: newWith });
-//     }, 1000);
-//   }, []);
-
   return <>
     <Helmet>
       <style type="text/css">
@@ -136,9 +145,29 @@ export default function Page() {
       </style>
     </Helmet>
     <Container>
-      {typeof window !== "undefined"
-        ? <ShaContainer/>
-        : "Loading"}
+      {typeof window !== "undefined" ? <ShaContainer /> : "Loading"}
     </Container>
   </>;
+}
+
+function hashToCoordinates(hash: string) {
+  const length = hash.length;
+  const size = 100 / Math.pow(4, length);
+
+  let locationX = 0;
+  let locationY = 0;
+
+  for (let i = 1; i <= hash.length; i++) {
+    let decNumber = parseInt(hash.substr(i - 1, 1), 16);
+
+    const multiplier = 100 / Math.pow(4, i);
+    locationY += (decNumber % 4) * multiplier;
+    // decNumber -= decNumber%4;
+    locationX += (Math.floor(decNumber / 4)) * multiplier;
+  }
+  return {
+    size,
+    locationX,
+    locationY,
+  };
 }
