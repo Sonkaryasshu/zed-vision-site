@@ -1,7 +1,5 @@
 import * as React from "react";
-import { Layout } from "../components/layout";
-import { SEO } from "../components/seo";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 // import { Frame } from "framer";
 
 // import ReactDOM from "react-dom";
@@ -165,8 +163,9 @@ const Wrapper: React.FC<
     <pre>{message}</pre>
   </div>;
 };
+export default function Page() {
+  if (typeof window === "undefined") return <div>Loading</div>;
 
-const ZedZoliPage = () => {
   const [renderedComponent, changeWorkerRenderedComponent] = React.useState(
     {
       code: ``,
@@ -265,29 +264,29 @@ const ZedZoliPage = () => {
       },
     );
 
-  return (
-    <Layout>
-      <SEO title="Test Worker side rendering" />
-      {(typeof window !== "undefined") &&
-        <CodeEditorWithFailBack code={code} changeCode={changeCode} />}
-
-      {isError && <h1>Error</h1>}
-      {!isChangeAvailable && <div>
-        <h4>Result</h4>
-        <StyledContainer>
-          <Wrapper
-            key={renderedComponent.codeHash}
-            renderHash={renderedComponent.renderedHash}
-            code={renderedComponent.transformedCode}
-            innerHTML={renderedComponent.renderedContent}
-            defaultProps={{
-              ...renderedComponent.defaultProps,
-              onEvent: onEvent,
-            }}
-          />
-        </StyledContainer>
-        <pre>
-          {`
+  return <div css={css`width: 100%;`}>
+    <div css={css`width: 40%; float:left;`}>
+      <CodeEditorWithFailBack code={code} changeCode={changeCode} />
+    </div>
+    <div css={css`width: 40%; float:left;`}>
+      <div>
+        {isError && <h1>Error</h1>}
+        {!isChangeAvailable && <div>
+          <h4>Result</h4>
+          <StyledContainer>
+            <Wrapper
+              key={renderedComponent.codeHash}
+              renderHash={renderedComponent.renderedHash}
+              code={renderedComponent.transformedCode}
+              innerHTML={renderedComponent.renderedContent}
+              defaultProps={{
+                ...renderedComponent.defaultProps,
+                onEvent: onEvent,
+              }}
+            />
+          </StyledContainer>
+          <pre>
+            {`
 
         codeHash      ${renderedComponent.codeHash}
         renderedHash      ${renderedComponent.renderedHash}
@@ -295,60 +294,25 @@ const ZedZoliPage = () => {
         events        ${renderedComponent.defaultProps.pastEvents}
         eventsHash   ${renderedComponent.defaultStateHash}
                   `}
-        </pre>
-      </div>}
+          </pre>
+        </div>}
 
-      {isChangeAvailable && <div>
-        {/* <MyComponent /> */}
+        {isChangeAvailable && <div>
+          {/* <MyComponent /> */}
 
-        <ReactDiffViewer
-          oldValue={format(renderedComponent.renderedContent)}
-          newValue={format(renderedComponent.renderedContentMain)}
-          showDiffOnly={true}
-          useDarkTheme={true}
-          // renderContent={highlightSyntax}
-          leftTitle={<>
-            <StyledContainer>
-              <Wrapper
-                key={renderedComponent.codeHash}
-                renderHash={renderedComponent.renderedHash}
-                innerHTML={renderedComponent.renderedContent}
-                code={renderedComponent.transformedCode}
-                defaultProps={{
-                  ...renderedComponent.defaultProps,
-                  onEvent: onEvent,
-                }}
-              />
-            </StyledContainer>
-            <pre>
-              {`
-            codeHash         ${renderedComponent.codeHash}
-            events           ${renderedComponent.defaultProps.pastEvents}
-            eventsHash       ${renderedComponent.defaultStateHash}
-                      `}
-            </pre>
-            <button
-              onClick={() =>
-                changeWorkerRenderedComponent(
-                  {
-                    ...renderedComponent,
-                    mainCodeHash: renderedComponent.codeHash,
-                    renderedContentMain: renderedComponent.renderedContent,
-                    renderedMainHash: renderedComponent.renderedHash,
-                  },
-                )}
-            >
-              Save change - as main code
-            </button>
-          </>}
-          rightTitle={<>
-            <div>
+          <ReactDiffViewer
+            oldValue={format(renderedComponent.renderedContent)}
+            newValue={format(renderedComponent.renderedContentMain)}
+            showDiffOnly={true}
+            useDarkTheme={true}
+            // renderContent={highlightSyntax}
+            leftTitle={<>
               <StyledContainer>
                 <Wrapper
-                  key={renderedComponent.mainCodeHash}
-                  code={renderedComponent.transformedMainCode}
-                  innerHTML={renderedComponent.renderedContentMain}
-                  renderHash={renderedComponent.renderedMainHash}
+                  key={renderedComponent.codeHash}
+                  renderHash={renderedComponent.renderedHash}
+                  innerHTML={renderedComponent.renderedContent}
+                  code={renderedComponent.transformedCode}
                   defaultProps={{
                     ...renderedComponent.defaultProps,
                     onEvent: onEvent,
@@ -357,30 +321,65 @@ const ZedZoliPage = () => {
               </StyledContainer>
               <pre>
                 {`
+            codeHash         ${renderedComponent.codeHash}
+            events           ${renderedComponent.defaultProps.pastEvents}
+            eventsHash       ${renderedComponent.defaultStateHash}
+                      `}
+              </pre>
+              <button
+                onClick={() =>
+                  changeWorkerRenderedComponent(
+                    {
+                      ...renderedComponent,
+                      mainCodeHash: renderedComponent.codeHash,
+                      renderedContentMain: renderedComponent.renderedContent,
+                      renderedMainHash: renderedComponent.renderedHash,
+                    },
+                  )}
+              >
+                Save change - as main code
+              </button>
+            </>}
+            rightTitle={<>
+              <div>
+                <StyledContainer>
+                  <Wrapper
+                    key={renderedComponent.mainCodeHash}
+                    code={renderedComponent.transformedMainCode}
+                    innerHTML={renderedComponent.renderedContentMain}
+                    renderHash={renderedComponent.renderedMainHash}
+                    defaultProps={{
+                      ...renderedComponent.defaultProps,
+                      onEvent: onEvent,
+                    }}
+                  />
+                </StyledContainer>
+                <pre>
+                  {`
             codeHash      ${renderedComponent.mainCodeHash}
             events        ${renderedComponent.defaultProps.pastEvents}
             eventsHash   ${renderedComponent.defaultStateHash}
                       `}
-              </pre>
-            </div>
-            <button
-              onClick={() => {
-                changeCode(renderedComponent.mainCode);
-                changeWorkerRenderedComponent({
-                  ...renderedComponent,
-                  code: renderedComponent.mainCode,
-                });
-              }}
-            >
-              Restore the the code to this version
-            </button>
-          </>}
-          hideLineNumbers={true}
-          splitView={true}
-        />
-      </div>}
-    </Layout>
-  );
-};
-
-export default ZedZoliPage;
+                </pre>
+              </div>
+              <button
+                onClick={() => {
+                  changeCode(renderedComponent.mainCode);
+                  changeWorkerRenderedComponent({
+                    ...renderedComponent,
+                    code: renderedComponent.mainCode,
+                  });
+                }}
+              >
+                Restore the the code to this version
+              </button>
+            </>}
+            hideLineNumbers={true}
+            splitView={true}
+          />
+        </div>}
+      </div>
+    </div>
+    <div css={css`clear:both`}></div>
+  </div>;
+}

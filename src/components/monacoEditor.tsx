@@ -7,7 +7,7 @@ const MonacoEditorComp: React.FC<
 > = ({ value, changeCode }) =>
   <MonacoEditor
     width="100%"
-    height="600px"
+    height="100vh"
     language="typescript"
     theme="vs-dark"
     value={value}
