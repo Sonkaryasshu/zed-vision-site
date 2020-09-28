@@ -41,6 +41,7 @@
     "docgen",
     "downlevel",
     "emotion",
+    "esbuild",
     "esnext",
     "facebox",
     "firstload",

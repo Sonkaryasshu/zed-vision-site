@@ -378,8 +378,9 @@ export default function Page() {
             splitView={true}
           />
         </div>}
-      </div>
     </div>
-    <div css={css`clear:both`}></div>
+  
+  </div>
+  <div css={css`clear:both`} />
   </div>;
 }

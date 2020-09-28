@@ -1,6 +1,7 @@
 {
   "name": "@zed-vision/zed-vision-site",
   "scripts": {
+    "esbuild": "esbuild ./esbuild/zoli.tsx --bundle '--define:process.env.NODE_ENV=\"development\"' --outfile=./esbuild/out.js",
     "deploy": "deno fmt src && yarn install && yarn upgrade && yarn build && git add . && git commit -m deploy && amplify publish",
     "postinstall": "gatsby telemetry --disable",
     "build": "gatsby clean && cp -a ./static/. ./public && gatsby build --no-uglify ",
@@ -83,6 +84,7 @@
     "@types/webtorrent": "0.107.2",
     "@typescript-eslint/eslint-plugin": "^4.2.0",
     "@typescript-eslint/parser": "4.2.0",
+    "esbuild": "^0.7.7",
     "eslint": "7.10.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-mdx": "1.8.2",
