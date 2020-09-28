@@ -1,6 +1,6 @@
 import * as WorkerBabelTransformer from "./babel/babel.worker";
 
-const { WorkerTransform } = (WorkerBabelTransformer as any)() as typeof WorkerBabelTransformer;
+const { WorkerTransform } = ((typeof window !== "undefined") && (WorkerBabelTransformer as any)()) as typeof WorkerBabelTransformer;
 
 
 import { hash, unHash } from "./sha";

@@ -1,7 +1,7 @@
 import * as shaWorker from "./sha256/sha256.worker";
 const hashTable = {};
 
-const { sha256 } = (shaWorker as any)() as typeof shaWorker;
+const { sha256 } = ((typeof window !== "undefined") && (shaWorker as any)()) as typeof shaWorker;
 
  export const hash = async (input: string | object) => {
     const strInput = typeof input !== "string" ? JSON.stringify(input) : input;
