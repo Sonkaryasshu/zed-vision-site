@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "lib": [
+      "webworker",
       "dom",
       "dom.iterable",
       "esnext"
@@ -31,6 +32,9 @@
     "declaration": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ]
   },
   "include": [
     "src"
