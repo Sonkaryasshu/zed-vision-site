@@ -1,8 +1,10 @@
-import * as RendererWorker  from "./renderer/renderer.worker";
+import * as RendererWorker from "./renderer/renderer.worker";
 
 import { hash, unHash } from "./sha";
 
-const {renderWorker} = ((typeof window !== "undefined") && (RendererWorker as any)() ) as typeof RendererWorker;
+const { renderWorker } =
+  ((typeof window !== "undefined") &&
+    (RendererWorker as any)()) as typeof RendererWorker;
 
 export const render = async (
   transformedCodeHash: string,

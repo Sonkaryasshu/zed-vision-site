@@ -40,11 +40,14 @@ const Wrapper: React.FC<
   const Component = getComponent(code, defaultProps);
 
   return <div>
-    {Component && <Component startState={{ counter: 0 }}
-    pastEvents={[]}
-    onEvent={(e) => {
-      console.log(e);
-    }} />}
+    {Component &&
+      <Component
+        startState={{ counter: 0 }}
+        pastEvents={[]}
+        onEvent={(e) => {
+          console.log(e);
+        }}
+      />}
     <pre>{message}</pre>
   </div>;
 };
@@ -125,7 +128,8 @@ export const getComponent = (code: string, props: Props) => {
       `try{${code}; return Counter(props)}catch(e){console.log(e); return ()=>React.createElement("div", null, "Error in render")}`,
     );
 
-    const Component: React.FC<Props> = (props) => componentFactory({...props, onEvent: ()=>{}}, React);
+    const Component: React.FC<Props> = (props) =>
+      componentFactory({ ...props, onEvent: () => {} }, React);
     return Component;
   } catch (e) {
     console.log("ERROR", e);
@@ -142,7 +146,7 @@ export interface Props {
 
 const defaultProps: Props = {
   startState: { counter: 0 },
-  pastEvents: new Array(10).fill("+1")
+  pastEvents: new Array(10).fill("+1"),
 };
 
 export default function Page() {
@@ -267,7 +271,7 @@ export default function Page() {
               code={renderedComponent.transformedCode}
               innerHTML={renderedComponent.renderedContent}
               defaultProps={{
-                ...renderedComponent.defaultProps
+                ...renderedComponent.defaultProps,
               }}
             />
           </StyledContainer>
