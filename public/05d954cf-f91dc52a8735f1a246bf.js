@@ -3878,10 +3878,19 @@ function addMotionValues(visualElement, prev, source, isStyle, props) {
       if (!visualElement.hasValue(key)) {
         visualElement.addValue(key, motionValue(value));
       } else if (value !== prev[key]) {
-        // If the MotionValue already exists, update it with the
-        // latest incoming value
-        var motion = visualElement.getValue(key);
-        motion.set(value);
+        if (isMotionValue(prev[key])) {
+          /**
+           * If the previous value was a MotionValue, and this value isn't,
+           * we want to create a new MotionValue rather than update one that's been removed.
+           */
+          visualElement.addValue(key, motionValue(value));
+        } else {
+          /**
+           * Otherwise, we just want to ensure the MotionValue is of the latest value.
+           */
+          var motion = visualElement.getValue(key);
+          motion.set(value);
+        }
       }
 
       foundMotionValue = true;
@@ -5164,51 +5173,6 @@ function addPointerEvent(target, eventName, handler, options) {
 function usePointerEvent(ref, eventName, handler, options) {
   return useDomEvent(ref, getPointerEventName(eventName), handler && wrapHandler(handler, eventName === "pointerdown"), options);
 }
-/** @public */
-
-
-var Point;
-
-(function (Point) {
-  /** @beta */
-  Point.subtract = function (a, b) {
-    return {
-      x: a.x - b.x,
-      y: a.y - b.y
-    };
-  };
-  /** @beta */
-
-
-  Point.relativeTo = function (idOrElem) {
-    var elem;
-
-    var getElem = function getElem() {
-      // Caching element here could be leaky because of React lifecycle
-      if (elem !== undefined) return elem;
-
-      if (typeof idOrElem === "string") {
-        elem = document.getElementById(idOrElem);
-      } else {
-        elem = idOrElem;
-      }
-
-      return elem;
-    };
-
-    return function (_a) {
-      var x = _a.x,
-          y = _a.y;
-      var localElem = getElem();
-      if (!localElem) return undefined;
-      var rect = localElem.getBoundingClientRect();
-      return {
-        x: x - rect.left - window.scrollX,
-        y: y - rect.top - window.scrollY
-      };
-    };
-  };
-})(Point || (Point = {}));
 /**
  * @internal
  */
@@ -5330,12 +5294,19 @@ function transformPoint(info, transformPagePoint) {
   } : info;
 }
 
+function subtractPoint(a, b) {
+  return {
+    x: a.x - b.x,
+    y: a.y - b.y
+  };
+}
+
 function getPanInfo(_a, history) {
   var point = _a.point;
   return {
     point: point,
-    delta: Point.subtract(point, lastDevicePoint(history)),
-    offset: Point.subtract(point, startDevicePoint(history)),
+    delta: subtractPoint(point, lastDevicePoint(history)),
+    offset: subtractPoint(point, startDevicePoint(history)),
     velocity: getVelocity$1(history, 0.1)
   };
 }
@@ -8911,4 +8882,4 @@ function useAnimatedState(initialState) {
 /***/ })
 
 }]);
-//# sourceMappingURL=05d954cf-3d069a12d053958622a5.js.map
+//# sourceMappingURL=05d954cf-f91dc52a8735f1a246bf.js.map

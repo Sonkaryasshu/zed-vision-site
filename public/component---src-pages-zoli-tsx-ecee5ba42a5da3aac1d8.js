@@ -912,26 +912,24 @@ var transform = /*#__PURE__*/function () {
 
           case 6:
             transFormedCode = _context.sent;
-            console.log("TRANSFORMED: ", transFormedCode);
-            _context.next = 10;
+            _context.next = 9;
             return Object(sha["a" /* hash */])(transFormedCode);
 
-          case 10:
+          case 9:
             transformedCodeHash = _context.sent;
             return _context.abrupt("return", transformedCodeHash);
 
-          case 14:
-            _context.prev = 14;
+          case 13:
+            _context.prev = 13;
             _context.t0 = _context["catch"](3);
-            console.log("Some babel error", _context.t0);
             return _context.abrupt("return", "Error in babel");
 
-          case 18:
+          case 16:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[3, 14]]);
+    }, _callee, null, [[3, 13]]);
   }));
 
   return function transform(_x) {
@@ -4685,4 +4683,4 @@ module.exports = Object.assign(exports.default, exports);
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-zoli-tsx-596ddd458db3c0264888.js.map
+//# sourceMappingURL=component---src-pages-zoli-tsx-ecee5ba42a5da3aac1d8.js.map

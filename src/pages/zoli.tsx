@@ -29,7 +29,13 @@ const Wrapper: React.FC<
   if (!code || !renderHash) {
     return <div>Loading</div>;
   }
-  <Counter startState={{counter:0}} pastEvents={[]} onEvent={(e)=>{console.log(e);}} />;
+  <Counter
+    startState={{ counter: 0 }}
+    pastEvents={[]}
+    onEvent={(e) => {
+      console.log(e);
+    }}
+  />;
 
   const Component = getComponent(code, defaultProps);
 
