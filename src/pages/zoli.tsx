@@ -5,7 +5,6 @@ import { transform } from "../components/utils/babel";
 import { render } from "../components/utils/renderer";
 import ReactDiffViewer from "react-diff-viewer";
 import format from "html-format";
-import { Counter } from "../components/Counter";
 
 const MonacoEditor = React.lazy(() => import("../components/monacoEditor"));
 
@@ -16,6 +15,7 @@ const Wrapper: React.FC<
     renderHash?: string;
     innerHTML: string;
     defaultProps: Props;
+    onEvent: (action: string) => void;
   }
 > = (
   {
@@ -24,29 +24,47 @@ const Wrapper: React.FC<
     renderHash,
     message,
     defaultProps,
+    onEvent,
   },
 ) => {
   if (!code || !renderHash) {
     return <div>Loading</div>;
   }
-  <Counter
-    startState={{ counter: 0 }}
-    pastEvents={[]}
-    onEvent={(e) => {
-      console.log(e);
-    }}
-  />;
+  // <Counter
+  //   startState={{ counter: 0 }}
+  //   pastEvents={[]}
+  //   onEvent={(e) => {
+  //     console.log(e);
+  //   }}
+  // />;
+
+  const getComponent = (code: string, props: Props) => {
+    // console.log()''
+
+    try {
+      const componentFactory = new Function(
+        "props",
+        "React",
+        `try{${code}; return Counter(props)}catch(e){console.log(e); return ()=>React.createElement("div", null, "Error in render")}`,
+      );
+
+      const Component: React.FC<Props> = (props) =>
+        componentFactory({ ...props, onEvent }, React);
+      return Component;
+    } catch (e) {
+      console.log("ERROR", e);
+      return null;
+    }
+  };
 
   const Component = getComponent(code, defaultProps);
 
   return <div>
     {Component &&
       <Component
-        startState={{ counter: 0 }}
-        pastEvents={[]}
-        onEvent={(e) => {
-          console.log(e);
-        }}
+        startState={defaultProps.startState}
+        pastEvents={defaultProps.pastEvents}
+        onEvent={onEvent}
       />}
     <pre>{message}</pre>
   </div>;
@@ -118,27 +136,8 @@ export const Counter: React.FC<Props> = ({ startState, pastEvents, onEvent }) =>
 };
 `;
 
-export const getComponent = (code: string, props: Props) => {
-  // console.log()''
-
-  try {
-    const componentFactory = new Function(
-      "props",
-      "React",
-      `try{${code}; return Counter(props)}catch(e){console.log(e); return ()=>React.createElement("div", null, "Error in render")}`,
-    );
-
-    const Component: React.FC<Props> = (props) =>
-      componentFactory({ ...props, onEvent: () => {} }, React);
-    return Component;
-  } catch (e) {
-    console.log("ERROR", e);
-    return null;
-  }
-};
-
 type DState = { counter: number };
-export interface Props {
+interface Props {
   startState: DState;
   pastEvents: string[];
   onEvent?: (action: string, hash: string) => void;
@@ -146,8 +145,10 @@ export interface Props {
 
 const defaultProps: Props = {
   startState: { counter: 0 },
-  pastEvents: new Array(10).fill("+1"),
+  pastEvents: new Array(1000).fill("+1"),
 };
+
+// defaultProps.pastEvents= defaultProps.pastEvents.map((x)=>Math.random()>0.4?`+1`:`-1`);
 
 export default function Page() {
   if (typeof window === "undefined") return <div>Loading</div>;
@@ -273,6 +274,7 @@ export default function Page() {
               defaultProps={{
                 ...renderedComponent.defaultProps,
               }}
+              onEvent={onEvent}
             />
           </StyledContainer>
           <pre>
@@ -305,8 +307,8 @@ export default function Page() {
                   code={renderedComponent.transformedCode}
                   defaultProps={{
                     ...renderedComponent.defaultProps,
-                    onEvent: onEvent,
                   }}
+                  onEvent={onEvent}
                 />
               </StyledContainer>
               <pre>
@@ -338,10 +340,8 @@ export default function Page() {
                     code={renderedComponent.transformedMainCode}
                     innerHTML={renderedComponent.renderedContentMain}
                     renderHash={renderedComponent.renderedMainHash}
-                    defaultProps={{
-                      ...renderedComponent.defaultProps,
-                      onEvent: onEvent,
-                    }}
+                    defaultProps={renderedComponent.defaultProps}
+                    onEvent={onEvent}
                   />
                 </StyledContainer>
                 <pre>
@@ -368,6 +368,60 @@ export default function Page() {
             splitView={true}
           />
         </div>}
+
+        <h2>Yooo</h2>
+        <button
+          onClick={async () => {
+            const player = document.getElementById("player");
+
+            console.log("START");
+            const hashArray = renderedComponent.defaultProps.pastEvents.map((
+              i,
+              k,
+            ) =>
+              hash(
+                {
+                  ...renderedComponent.defaultProps,
+                  pastEvents: renderedComponent.defaultProps.pastEvents.slice(
+                    0,
+                    k,
+                  ),
+                },
+              )
+            );
+
+            console.log("WAiting");
+            const done = await Promise.all(hashArray);
+
+            console.log("Done", done);
+
+            const renderded = await Promise.all(
+              done.map((h) => render(renderedComponent.transformedMainHash, h)),
+            );
+
+            console.log("DONE DONE", renderded);
+
+            let progress = 0;
+
+            setInterval(async () => {
+              const html = await unHash(renderded[progress++]);
+              player!.innerHTML = html;
+            }, 20);
+          }}
+        >
+          Render all the states
+        </button>
+
+        <div
+          id="player"
+          style={{
+            display: "block",
+            width: "200px",
+            height: "200px",
+            background: "red",
+          }}
+        >
+        </div>
       </div>
     </div>
     <div css={css`clear:both`} />
