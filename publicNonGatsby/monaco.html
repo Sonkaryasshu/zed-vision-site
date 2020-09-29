@@ -74,7 +74,9 @@
     document.body.appendChild(el)
     }
 
-    worker.postMessage(`type DState = { counter: number };
+    worker.postMessage(`
+    
+    type DState = { counter: number };
 
 const actions = {
   "+1": (s: DState) => ({ ...s, counter: s.counter + 1 }),
