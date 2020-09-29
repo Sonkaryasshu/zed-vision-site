@@ -28,5 +28,5 @@ export const hash = async (input: string | object) => {
   }
 };
 
-export const unHash = async (hash: string) =>
-  hashTable[hashTable[hash]] || "Something is broken";
+export const unHash = async (hash: string) => hashTable[hashTable[hash]] ;
+  

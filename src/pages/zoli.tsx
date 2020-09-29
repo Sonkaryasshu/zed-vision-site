@@ -40,9 +40,11 @@ const Wrapper: React.FC<
   const Component = getComponent(code, defaultProps);
 
   return <div>
-    {Component && <Component
-      {...defaultProps}
-    />}
+    {Component && <Component startState={{ counter: 0 }}
+    pastEvents={[]}
+    onEvent={(e) => {
+      console.log(e);
+    }} />}
     <pre>{message}</pre>
   </div>;
 };
@@ -105,7 +107,7 @@ export const Counter: React.FC<Props> = ({ startState, pastEvents, onEvent }) =>
       "data-onclick": String(action),
       onClick: (e: React.MouseEvent) => {
         e.stopPropagation();
-        onEvent(action);
+        onEvent && onEvent(action);
         setState({ ...state, pastEvents: [...state.pastEvents, action] });
       },
     };
@@ -123,8 +125,7 @@ export const getComponent = (code: string, props: Props) => {
       `try{${code}; return Counter(props)}catch(e){console.log(e); return ()=>React.createElement("div", null, "Error in render")}`,
     );
 
-    const Component: React.FC<Props> = (props) =>
-      componentFactory(props, React);
+    const Component: React.FC<Props> = (props) => componentFactory({...props, onEvent: ()=>{}}, React);
     return Component;
   } catch (e) {
     console.log("ERROR", e);
@@ -136,13 +137,12 @@ type DState = { counter: number };
 export interface Props {
   startState: DState;
   pastEvents: string[];
-  onEvent: (action: string, hash: string) => void;
+  onEvent?: (action: string, hash: string) => void;
 }
 
 const defaultProps: Props = {
   startState: { counter: 0 },
-  pastEvents: new Array(10).fill("+1"),
-  onEvent: (action, hash) => {},
+  pastEvents: new Array(10).fill("+1")
 };
 
 export default function Page() {
@@ -267,8 +267,7 @@ export default function Page() {
               code={renderedComponent.transformedCode}
               innerHTML={renderedComponent.renderedContent}
               defaultProps={{
-                ...renderedComponent.defaultProps,
-                onEvent: onEvent,
+                ...renderedComponent.defaultProps
               }}
             />
           </StyledContainer>
