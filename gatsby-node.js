@@ -77,6 +77,7 @@ exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
   config.plugins.push(
     new MonacoWebpackPlugin({
       languages: ["json", "javascript", "typescript"],
+      features: [ 'codeAction' , 'codelens' , 'colorDetector' ,'comment' , 'contextmenu' , 'coreCommands' , 'cursorUndo' , 'dnd' , 'find' , 'folding' ,'fontZoom' , 'format' , 'gotoError' , 'gotoLine' , 'gotoSymbol' , 'hover' ],
     }),
   );
   return config;
