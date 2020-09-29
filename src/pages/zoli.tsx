@@ -5,6 +5,124 @@ import { transform } from "../components/utils/babel";
 import { render } from "../components/utils/renderer";
 import ReactDiffViewer from "react-diff-viewer";
 import format from "html-format";
+import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline";
+
+import {
+  motion,
+  useMotionValue,
+  useTransform,
+} from "framer-motion";
+import { TextareaAutosize } from "@material-ui/core";
+
+const Styled = styled.div`
+  text-align: center;
+  border-radius: 12px;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  place-content: center;
+  place-items: center;
+  margin: 0;
+  padding: 0;
+  background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+  user-select: none;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 3px 0px, rgba(0, 0, 0, 0.06) 0px 10px 15px 0px;
+`;
+
+const DivContainer = styled.div`
+display: block;
+width: 150px;
+height: 150px;
+overflow: hidden;
+`;
+
+const StyledTextArea = styled(TextareaAutosize)`
+width: 100%;
+max-height: 100%;
+`;
+
+let iiiii = 0;
+
+const HtmlReplayer: React.FC<{ htmlArray: string[]; index: number }> = (
+  { htmlArray, index },
+) => {
+  const [html, setHtml] = React.useState("");
+
+  React.useEffect(() => {
+    setInterval(async () => {
+      const hhtml = await unHash(htmlArray[iiiii++ % htmlArray.length]);
+      setHtml(hhtml);
+    }, 10);
+
+    setHtml(htmlArray[index]);
+  }, []);
+
+  return <DivContainer>
+    {index}
+    <div dangerouslySetInnerHTML={{ __html: html }} />
+  </DivContainer>;
+};
+
+export const MyComponent: React.FC<
+  {
+    htmlArray: string[];
+    height?: number;
+    width?: number;
+    adjust: (x: number, y: number) => void;
+  }
+> = ({ height = 400, width = 400, adjust, htmlArray }) => {
+  const x = useMotionValue(0);
+
+  const background = useTransform(
+    x,
+    [-100, 0, 100],
+    ["#ff008c", "#7700ff", "rgb(230, 255, 0)"],
+  );
+
+  return (<>
+    <motion.div
+      layout
+      css={css`position: relative; height: ${height}px; width: ${width}px;`}
+      style={{ background }}
+    >
+    </motion.div>
+
+    <motion.div
+      // layout
+      drag={true}
+      dragElastic={0.5}
+      // dragListener={true}
+      // onDrag={
+      // (event, info) => {if (event.layerX<0) adjust(event.layerX, event.layerY);}
+      // }
+      dragConstraints={{
+        top: 0,
+        bottom: height - 100,
+        left: 0,
+        right: width - 100,
+      }}
+      style={{ position: "absolute", x }}
+    >
+      <Styled>
+        <ScopedCssBaseline>
+          <HtmlReplayer htmlArray={htmlArray} index={x.get()} />
+        </ScopedCssBaseline>
+      </Styled>
+    </motion.div>
+  </>);
+};
+
+const Container = styled.div`
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  place-content: center;
+  place-items: center;
+  background: rgba(0, 85, 255, 1);
+  perspective: 1000px;
+`;
 
 const MonacoEditor = React.lazy(() => import("../components/monacoEditor"));
 
@@ -256,6 +374,8 @@ export default function Page() {
       },
     );
 
+  const [htmlArray, setHtmlArray] = React.useState([] as string[]);
+
   return <div css={css`width: 100%;`}>
     <div css={css`width: 40%; float:left;`}>
       <CodeEditorWithFailBack code={code} changeCode={changeCode} />
@@ -372,9 +492,6 @@ export default function Page() {
         <h2>Yooo</h2>
         <button
           onClick={async () => {
-            const player = document.getElementById("player");
-
-            console.log("START");
             const hashArray = renderedComponent.defaultProps.pastEvents.map((
               i,
               k,
@@ -395,22 +512,25 @@ export default function Page() {
 
             console.log("Done", done);
 
-            const renderded = await Promise.all(
+            const rendered = await Promise.all(
               done.map((h) => render(renderedComponent.transformedMainHash, h)),
             );
 
-            console.log("DONE DONE", renderded);
-
-            let progress = 0;
-
-            setInterval(async () => {
-              const html = await unHash(renderded[progress++]);
-              player!.innerHTML = html;
-            }, 20);
+            setHtmlArray(rendered);
           }}
         >
           Render all the states
         </button>
+
+        {typeof window !== "undefined" && htmlArray.length > 0
+          ? <MyComponent
+            htmlArray={htmlArray}
+            height={300}
+            width={300}
+            adjust={(x, y) => {
+            }}
+          />
+          : "Loading"}
 
         <div
           id="player"

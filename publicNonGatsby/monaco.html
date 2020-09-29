@@ -14,6 +14,7 @@
     <div id="container" style="height:400px;border:1px solid black;">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.21.2/min/vs/loader.min.js"></script>
         <script>
+      
 
             require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.21.2/min/vs' } });
             window.MonacoEnvironment = { getWorkerUrl: () => proxy };
@@ -28,10 +29,12 @@
                 const editor = monaco.editor.create(document.getElementById('container'), {
                     value: `function x() {
   console.log("Hello world!");
-}`,
+}`,                 //onEvent:console.log,
+                    onDidChangeModel:(e=> console.log(2)),
                     language: 'typescript',
-                    theme: 'vs-dark'
+                    theme: 'vs-dark',
                 });
+              // editor.onDidChangeContent(console.log)
             });
         </script>
 </body>
@@ -52,10 +55,12 @@
     
     var worker = new Worker(URL.createObjectURL(blob));
 
+function register(editor){
 
-;
-
-
+  editor.onDidChangeContent((event) => {
+    console.log(event)
+  });
+}
     worker.onmessage = (m) => {
 
         const componentFactory = new Function(
