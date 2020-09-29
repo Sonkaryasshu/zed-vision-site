@@ -15,12 +15,10 @@ export const render = async (
     const defaultProps = await unHash(defaultPropsHash);
 
     const renderedString = await renderWorker(code, defaultProps);
-    console.log("STRING", renderedString);
     const renderedStringHash = await hash(renderedString);
 
     return renderedStringHash;
   } catch (e) {
-    console.log("Error in render", e);
     return "error in rendering";
   }
 };

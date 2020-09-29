@@ -973,26 +973,24 @@ var render = /*#__PURE__*/function () {
 
           case 10:
             renderedString = _context.sent;
-            console.log("STRING", renderedString);
-            _context.next = 14;
+            _context.next = 13;
             return Object(sha["a" /* hash */])(renderedString);
 
-          case 14:
+          case 13:
             renderedStringHash = _context.sent;
             return _context.abrupt("return", renderedStringHash);
 
-          case 18:
-            _context.prev = 18;
+          case 17:
+            _context.prev = 17;
             _context.t0 = _context["catch"](0);
-            console.log("Error in render", _context.t0);
             return _context.abrupt("return", "error in rendering");
 
-          case 22:
+          case 20:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 18]]);
+    }, _callee, null, [[0, 17]]);
   }));
 
   return function render(_x, _x2) {
@@ -4572,4 +4570,4 @@ module.exports = Object.assign(exports.default, exports);
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-zoli-tsx-3bcb47c769270ab41122.js.map
+//# sourceMappingURL=component---src-pages-zoli-tsx-133f0ef8f4b4f51a4794.js.map
