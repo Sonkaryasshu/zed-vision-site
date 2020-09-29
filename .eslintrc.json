@@ -18,6 +18,7 @@
   "rules": {
     "arrow-parens": "error",
     "react/prop-types": 0,
+    "react/react-in-jsx-scope": 0,
     "semi": "error",
     "react/no-unescaped-entities": 0
   },

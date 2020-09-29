@@ -1189,7 +1189,15 @@ var zoli_Wrapper = function Wrapper(_ref) {
   }
 
   /*#__PURE__*/
-  Object(jsx_runtime["jsx"])(Counter_Counter, zoli_objectSpread({}, defaultProps));
+  Object(jsx_runtime["jsx"])(Counter_Counter, {
+    startState: {
+      counter: 0
+    },
+    pastEvents: [],
+    onEvent: function onEvent(e) {
+      console.log(e);
+    }
+  });
 
   var Component = zoli_getComponent(code, defaultProps);
   return /*#__PURE__*/Object(jsx_runtime["jsxs"])("div", {
@@ -4677,4 +4685,4 @@ module.exports = Object.assign(exports.default, exports);
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-zoli-tsx-3f03e30b327475e29841.js.map
+//# sourceMappingURL=component---src-pages-zoli-tsx-596ddd458db3c0264888.js.map
