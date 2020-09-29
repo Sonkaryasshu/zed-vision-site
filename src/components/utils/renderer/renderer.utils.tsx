@@ -4,17 +4,17 @@ import ReactDOMServer from "react-dom/server";
 
 export const RendererModule = async () => ({
   render: async (code: string, props: any) => {
-    const cf = new Function(
+    const componentFactory = new Function(
       "props",
       "React",
-      `${code}; return Component(props)`,
+      `try{${code}; return Counter(props)}catch(e){console.log(e); return ()=>React.createElement("div", null, "Error in render")}`,
     );
 
-    const Component = (props: any) => cf(props, React);
+    const Counter = (props: any) => componentFactory(props, React);
 
     return String(
       ReactDOMServer.renderToString(
-        <Component {...props} />,
+        <Counter {...props} />,
       ),
     ).toString();
   },

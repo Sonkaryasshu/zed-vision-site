@@ -1,6 +1,6 @@
 import { transform } from "@babel/standalone";
 
-export const TransformModule= () => ({
+export const TransformModule = () => ({
   transform: (code: string) => {
     return transform(code, {
       plugins: [],

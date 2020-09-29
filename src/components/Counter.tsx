@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 type DState = { counter: number };
 
@@ -15,7 +15,9 @@ interface Props {
   onEvent: (action: string) => void;
 }
 
-const Component: React.FC<Props> = ({ startState, pastEvents, onEvent }) => {
+export const Counter: React.FC<Props> = (
+  { startState, pastEvents, onEvent },
+) => {
   const [state, setState] = React.useState({ startState, pastEvents });
 
   const calculatedState = state.pastEvents.reduce(
@@ -24,7 +26,6 @@ const Component: React.FC<Props> = ({ startState, pastEvents, onEvent }) => {
   );
 
   return <div>
-    <header>Counter App</header>
     <button {...update("-1")}>-</button>
     {calculatedState.counter}
     <button {...update("+1")}>+</button>
@@ -41,5 +42,3 @@ const Component: React.FC<Props> = ({ startState, pastEvents, onEvent }) => {
     };
   }
 };
-
-export const CounterTS = Component;

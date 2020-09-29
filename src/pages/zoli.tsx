@@ -5,6 +5,7 @@ import { transform } from "../components/utils/babel";
 import { render } from "../components/utils/renderer";
 import ReactDiffViewer from "react-diff-viewer";
 import format from "html-format";
+import { Counter } from "../components/Counter";
 
 const MonacoEditor = React.lazy(() => import("../components/monacoEditor"));
 
@@ -28,6 +29,7 @@ const Wrapper: React.FC<
   if (!code || !renderHash) {
     return <div>Loading</div>;
   }
+  <Counter {...defaultProps} />;
 
   const Component = getComponent(code, defaultProps);
 
@@ -60,6 +62,8 @@ const StyledContainer = styled.div`
 `;
 
 const counter = `
+import * as React from "react";
+
 type DState = { counter: number}
 
 const actions = {
@@ -75,7 +79,7 @@ interface Props {
     onEvent: (action: string)=>void 
 }
 
-const Component: React.FC<Props> = ({ startState, pastEvents, onEvent }) => {
+export const Counter: React.FC<Props> = ({ startState, pastEvents, onEvent }) => {
   const [state, setState] = React.useState({startState, pastEvents});
 
   const calculatedState = state.pastEvents.reduce(
@@ -104,14 +108,13 @@ const Component: React.FC<Props> = ({ startState, pastEvents, onEvent }) => {
 `;
 
 export const getComponent = (code: string, props: Props) => {
-// console.log()''
-
+  // console.log()''
 
   try {
     const componentFactory = new Function(
       "props",
       "React",
-      `${code}; return Component(props)`,
+      `try{${code}; return Counter(props)}catch(e){console.log(e); return ()=>React.createElement("div", null, "Error in render")}`,
     );
 
     const Component: React.FC<Props> = (props) =>
@@ -177,7 +180,7 @@ export default function Page() {
       const transformedMainHash = await transform(mainCodeHash);
       const defaultStateHash = await hash(renderedComponent.defaultProps);
       if (!transformedHash) {
-        changeWorkerRenderedComponent({...renderedComponent, isError:true});
+        changeWorkerRenderedComponent({ ...renderedComponent, isError: true });
         return;
       }
       const transformedCode = await unHash(transformedHash);
