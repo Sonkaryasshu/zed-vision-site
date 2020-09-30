@@ -2,134 +2,105 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <title>Monaco editor</title>
-    <link rel="stylesheet" data-name="vs/editor/editor.main"
-        href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.21.2/min/vs/editor/editor.main.min.css">
-    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <meta charset="utf-8">
+  <title>Monaco editor</title>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 </head>
 
 <body>
-    <div id="container" style="height:400px;border:1px solid black;">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.21.2/min/vs/loader.min.js"></script>
-        <script>
-      
-
-            require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.21.2/min/vs' } });
-            window.MonacoEnvironment = { getWorkerUrl: () => proxy };
-            const proxy = URL.createObjectURL(
-                new Blob([`
-    self.MonacoEnvironment = {
-        baseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.21.2/min'
-    };
-    importScripts('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.21.2/min/vs/base/worker/workerMain.min.js');
-`], { type: 'text/javascript' }));
-            require(["vs/editor/editor.main"], function () {
-                const editor = monaco.editor.create(document.getElementById('container'), {
-                    value: `function x() {
-  console.log("Hello world!");
-}`,                 //onEvent:console.log,
-                    onDidChangeModel:(e=> console.log(2)),
-                    language: 'typescript',
-                    theme: 'vs-dark',
-                });
-              // editor.onDidChangeContent(console.log)
-            });
-        </script>
-</body>
-
-<div id="root"></div>
-<script>
+  <div id="container" style="height:400px;border:1px solid black;"></div>
+  <div id="root"></div>
+  <script>
 
     const blob = new Blob([`
     importScripts('https://unpkg.com/@babel/standalone@7.11.6/babel.min.js');
 
     self.onmessage=(message)=>{
-        postMessage(Babel.transform(message.data, {
+      const translatedMessage = Babel.transform(message.data, {
     plugins: [],
     presets: ["react", ["typescript", { isTSX: true, allExtensions: true }]],
-  }).code)
+  }).code;
+  
+        postMessage(translatedMessage.replace('value: ""', 'value: \`' + message.data + '\`'))
     }
-    `],{type: 'application/javascript'})
-    
+    `], { type: 'application/javascript' })
+
     var worker = new Worker(URL.createObjectURL(blob));
 
-function register(editor){
 
-  editor.onDidChangeContent((event) => {
-    console.log(event)
-  });
-}
     worker.onmessage = (m) => {
 
-        const componentFactory = new Function(
-      "props",
-      "React",
-      `try{${m.data}; return Counter(props)}catch(e){console.log(e); return ()=>React.createElement("div", null, "Error in render")}`,
-    );
+      const componentFactory = new Function(
+        "props",
+        "React",
+        `try{${m.data}; return MonacoEditor(props)}catch(e){console.log(e); return ()=>React.createElement("div", null, "Error in render")}`,
+      );
 
-    const Counter = (props) => componentFactory(props, React);
+      const MonacoEditor = (props) => componentFactory(props, React);
 
 
-    const el = document.createElement("div");
+      const el = document.createElement("div");
 
-    ReactDOM.render(React.createElement(Counter, {startState: {counter:0}, pastEvents: [], onEvent: ()=>{}}), el);
+      ReactDOM.render(React.createElement(MonacoEditor, { startState: { counter: 0 }, pastEvents: [], onEvent: () => { } }), el);
 
-    document.body.appendChild(el)
+      document.body.appendChild(el)
     }
 
     worker.postMessage(`
-    
-    type DState = { counter: number };
-
-const actions = {
-  "+1": (s: DState) => ({ ...s, counter: s.counter + 1 }),
-  "-1": (s: DState) => ({ ...s, counter: s.counter - 1 }),
+type MonacoEditorProps = {
+  width?: string;
+  height?: string;
 };
 
-type ActionType = keyof typeof actions;
-
-interface Props {
-  startState: DState;
-  pastEvents: string[];
-  onEvent: (action: string) => void;
-}
-
-const Counter: React.FC<Props> = (
-  { startState, pastEvents, onEvent },
-) => {
-  const [state, setState] = React.useState({ startState, pastEvents });
-
-  const calculatedState = state.pastEvents.reduce(
-    (prevValue, currentValue) => actions[currentValue](prevValue),
-    startState,
-  );
-
-  return <div>
-    <button {...update("-1")}>-</button>
-    {calculatedState.counter}
-    <button {...update("+1")}>+</button>
-  </div>;
-
-
-  function update(action: ActionType) {
-    return {
-      "data-onclick": String(action),
-      onClick: (e: React.MouseEvent) => {
-        e.stopPropagation();
-        onEvent(action);
-        setState({ ...state, pastEvents: [...state.pastEvents, action] });
-      },
+const MonacoEditor: React.FC<MonacoEditorProps> = ({
+  width = "600px",
+  height = "400px",
+  // value = "",
+  // language = "javascript",
+  // theme = null,
+  // options = {},
+  // overrideServices = {},
+  // editorDidMount = () => {},
+  // editorWillMount = () => {},
+  // onChange = () => {},
+}) => {
+  React.useEffect(() => {
+    if (typeof window === "undefined") return;
+    const init = async () => {
+      await startMonaco({ element: "container" });
     };
-  }
-}
+    init();
+  });
+
+  return <div id="container" style={{ width, height }} />;
+};
+
+      async function startMonaco({version="0.21.2",element}) {
+      const vsPath = 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/'+version+'/min/vs';
+      await loadScript('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/'+version+'/min/vs/loader.min.js');
+
+      require.config({ paths: { 'vs': vsPath } });
+      
+      require(["vs/editor/editor.main"], function () {
+        const editor = monaco.editor.create(document.getElementById('container'), {
+          value: "",
+          language: 'typescript',
+          theme: 'vs-dark'
+        });
+      });
+    }
+    function loadScript(src) {
+      return new Promise(function (resolve, reject) {
+        var s;
+        s = document.createElement('script');
+        s.src = src;
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    }
   `)
+  </script>
 
-    const el = document.createElement("div");
-
-    ReactDOM.render(React.createElement("div", null, "Ello"), el);
-
-    document.body.appendChild(el)
-</script>
 </html>
