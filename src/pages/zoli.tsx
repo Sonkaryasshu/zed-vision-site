@@ -36,11 +36,6 @@ height: 150px;
 overflow: hidden;
 `;
 
-const StyledTextArea = styled(TextareaAutosize)`
-width: 100%;
-max-height: 100%;
-`;
-
 let iiiii = 0;
 
 const HtmlReplayer: React.FC<{ htmlArray: string[]; index: number }> = (
@@ -112,17 +107,17 @@ export const MyComponent: React.FC<
   </>);
 };
 
-const Container = styled.div`
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  text-align: center;
-  display: flex;
-  place-content: center;
-  place-items: center;
-  background: rgba(0, 85, 255, 1);
-  perspective: 1000px;
-`;
+// const Container = styled.div`
+//   height: 100vh;
+//   width: 100vw;
+//   overflow: hidden;
+//   text-align: center;
+//   display: flex;
+//   place-content: center;
+//   place-items: center;
+//   background: rgba(0, 85, 255, 1);
+//   perspective: 1000px;
+// `;
 
 const MonacoEditor = React.lazy(() => import("../components/monacoEditor"));
 

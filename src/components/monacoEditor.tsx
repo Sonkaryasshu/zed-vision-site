@@ -1,6 +1,6 @@
 import React from "react";
 
-import MonacoEditor from "react-monaco-editor";
+import {MonacoEditor} from "react-cdn-monaco-editor";
 
 const MonacoEditorComp: React.FC<
   { value: string; changeCode: (code: string) => void }
@@ -9,9 +9,7 @@ const MonacoEditorComp: React.FC<
     width="100%"
     height="100vh"
     language="typescript"
-    theme="vs-dark"
     value={value}
-    options={{}}
     onChange={(e) => changeCode(e)}
   />;
 
