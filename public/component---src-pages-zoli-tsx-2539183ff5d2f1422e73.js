@@ -4518,10 +4518,12 @@ function Page() {
   return /*#__PURE__*/Object(jsx_runtime["jsxs"])(_StyledDiv, {
     children: [/*#__PURE__*/Object(jsx_runtime["jsx"])(_StyledDiv2, {
       children: /*#__PURE__*/Object(jsx_runtime["jsx"])(editor_MonacoEditor, {
-        value: code,
+        width: "100%",
+        height: "100vh",
+        value: renderdComponent.mainCode,
         language: "typescript",
         onChange: changeCode
-      }, "editor")
+      })
     }), /*#__PURE__*/Object(jsx_runtime["jsx"])(_StyledDiv3, {
       children: /*#__PURE__*/Object(jsx_runtime["jsxs"])("div", {
         children: [isError && /*#__PURE__*/Object(jsx_runtime["jsx"])("h1", {
@@ -4690,4 +4692,4 @@ module.exports = _nonIterableSpread;
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-zoli-tsx-95ad9b92c02a27754c47.js.map
+//# sourceMappingURL=component---src-pages-zoli-tsx-2539183ff5d2f1422e73.js.map

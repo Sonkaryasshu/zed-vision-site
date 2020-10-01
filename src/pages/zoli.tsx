@@ -364,7 +364,7 @@ export default function Page() {
       <MonacoEditor
         width="100%"
         height="100vh"
-        value={code}
+        value={renderdComponent.mainCode}
         language="typescript"
         onChange={changeCode}
       />
