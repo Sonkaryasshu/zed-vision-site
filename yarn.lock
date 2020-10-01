@@ -4532,9 +4532,9 @@ css-what@2.1:
   integrity sha512-a+EPoD+uZiNfh+5fxw2nO9QwFa6nJe2Or35fGY6Ipw1R3R4AGz1d1TEZrCegvw2YTmZ0jXirGYlzxxpYSHwpEg==
 
 css-what@^3.2.1:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/css-what/-/css-what-3.4.0.tgz#f8d042a1ebb31a8251e64d2a0f0ec3fee9a05267"
-  integrity sha512-HA4iK1F5BEjbfSAguPk03XboiTvzS0tsqkoSJhkZVf52TgigRpIRGXtvSGRVgHcr1ln1Ubqx2flxKFwtY3kX9A==
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/css-what/-/css-what-3.4.1.tgz#81cb70b609e4b1351b1e54cbc90fd9c54af86e2e"
+  integrity sha512-wHOppVDKl4vTAOWzJt5Ek37Sgd9qq1Bmj/T1OjvicWbU5W7ru7Pqbn0Jdqii3Drx/h+dixHKXNhZYx7blthL7g==
 
 cssesc@^3.0.0:
   version "3.0.0"
@@ -6177,9 +6177,9 @@ form-data@^3.0.0:
     mime-types "^2.1.12"
 
 formik@^2.0.8:
-  version "2.1.6"
-  resolved "https://registry.yarnpkg.com/formik/-/formik-2.1.6.tgz#f723bfccb2c7abec886aa6a4930b360d20f1a0b3"
-  integrity sha512-m9DcxlZw/58p4xuhH3dzUzQWaC4dig0RKX7yNQOJt4VRhXn7p+YRrs3o17r3YwzvOLua3zC53VMbfupLsDwO5w==
+  version "2.1.7"
+  resolved "https://registry.yarnpkg.com/formik/-/formik-2.1.7.tgz#40bd04e59b242176d0a17c701830f1536cd7506b"
+  integrity sha512-n1wviIh0JsvHqj9PufNvOV+fS7mFwh9FfMxxTMnTrKR/uVYMS06DKaivXBlJdDF0qEwTcPHxSmIQ3deFHL3Hsg==
   dependencies:
     deepmerge "^2.1.1"
     hoist-non-react-statics "^3.3.0"
@@ -11204,10 +11204,10 @@ rc@^1.2.7, rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-cdn-monaco-editor@0.45.0:
-  version "0.45.0"
-  resolved "https://registry.yarnpkg.com/react-cdn-monaco-editor/-/react-cdn-monaco-editor-0.45.0.tgz#d808284702b55cf0fa27c7028dd8b5f139a0f7e2"
-  integrity sha512-xRhCDcQxKFoPCCCq2/PZzEb4AZTiCU4IsaCvOr/RmKbWB7EHB6HRFA6GiTECFRzxkjF1F7BchCI9bvCSd8+CSg==
+react-cdn-monaco-editor@0.48.0:
+  version "0.48.0"
+  resolved "https://registry.yarnpkg.com/react-cdn-monaco-editor/-/react-cdn-monaco-editor-0.48.0.tgz#9c5fe0cfa07b8e15bae3bacc1c82f627d258f8b4"
+  integrity sha512-ul4myEmQwjc+DgdJYTkzaz+1U5Ao56SSnNMNm2uLOLjFNDOC4DI5m0kYZZGi9lu9uqoRKJKvnUed8qNER2AS3w==
 
 react-circular-progressbar@^2.0.0:
   version "2.0.3"

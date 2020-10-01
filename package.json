@@ -29,7 +29,7 @@
     "polished": "3.6.7",
     "prismjs": "^1.21.0",
     "react": "17.0.0-rc.2",
-    "react-cdn-monaco-editor": "0.45.0",
+    "react-cdn-monaco-editor": "0.48.0",
     "react-diff-viewer": "^3.1.1",
     "react-dom": "17.0.0-rc.2",
     "react-helmet": "6.1.0",
