@@ -257,9 +257,9 @@ export default function Page() {
   const [renderedComponent, changeWorkerRenderedComponent] = React.useState(
     {
       isError: false,
-      code: ``,
+      code: counter,
       transformedCode: ``,
-      mainCode: ``,
+      mainCode: counter,
       mainCodeHash: "",
       devCodeHash: "",
       defaultProps,

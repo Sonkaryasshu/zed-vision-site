@@ -4353,9 +4353,9 @@ function Page() {
 
   var _React$useState2 = react["useState"]({
     isError: false,
-    code: "",
+    code: counter,
     transformedCode: "",
-    mainCode: "",
+    mainCode: counter,
     mainCodeHash: "",
     devCodeHash: "",
     defaultProps: zoli_defaultProps,
@@ -4692,4 +4692,4 @@ module.exports = _nonIterableSpread;
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-zoli-tsx-62fbab2917cd95d8e217.js.map
+//# sourceMappingURL=component---src-pages-zoli-tsx-f8833098ece21d715f09.js.map
