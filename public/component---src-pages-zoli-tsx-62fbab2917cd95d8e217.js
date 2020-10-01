@@ -4520,7 +4520,7 @@ function Page() {
       children: /*#__PURE__*/Object(jsx_runtime["jsx"])(editor_MonacoEditor, {
         width: "100%",
         height: "100vh",
-        value: renderdComponent.mainCode,
+        value: renderedComponent.mainCode,
         language: "typescript",
         onChange: changeCode
       })
@@ -4692,4 +4692,4 @@ module.exports = _nonIterableSpread;
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-zoli-tsx-2539183ff5d2f1422e73.js.map
+//# sourceMappingURL=component---src-pages-zoli-tsx-62fbab2917cd95d8e217.js.map
