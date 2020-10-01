@@ -12,7 +12,7 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
-import { TextareaAutosize } from "@material-ui/core";
+import { MonacoEditor } from "react-cdn-monaco-editor";
 
 const Styled = styled.div`
   text-align: center;
@@ -119,8 +119,6 @@ export const MyComponent: React.FC<
 //   perspective: 1000px;
 // `;
 
-const MonacoEditor = React.lazy(() => import("../components/monacoEditor"));
-
 const Wrapper: React.FC<
   {
     code: string;
@@ -182,16 +180,6 @@ const Wrapper: React.FC<
     <pre>{message}</pre>
   </div>;
 };
-
-const CodeEditorWithFailBack: React.FC<
-  { code: string; changeCode: (code: string) => void }
-> = ({ code, changeCode }) =>
-  <React.Suspense fallback={<div>Loading...</div>}>
-    <MonacoEditor
-      value={code}
-      changeCode={changeCode}
-    />
-  </React.Suspense>;
 
 const StyledContainer = styled.div`
   background: white;
@@ -373,7 +361,13 @@ export default function Page() {
 
   return <div css={css`width: 100%;`}>
     <div css={css`width: 40%; float:left;`}>
-      <CodeEditorWithFailBack code={code} changeCode={changeCode} />
+      <MonacoEditor
+        width="100%"
+        height="100vh"
+        value={code}
+        language="typescript"
+        onChange={changeCode}
+      />
     </div>
     <div css={css`width: 40%; float:left;`}>
       <div>
