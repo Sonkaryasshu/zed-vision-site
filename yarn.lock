@@ -6202,7 +6202,7 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
-framer-motion@^2.7.6:
+framer-motion@^2.7.7:
   version "2.7.7"
   resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-2.7.7.tgz#678e10cb9a6ba7a8a4645fc414a4ab6bc03eadd8"
   integrity sha512-mAoU31M2XQ9Itxxxlqpac5NARuxSE/LML9rxHV7esbKwre5KIvTN34/C78gXmco5U9HHlxh4C2FiWcgmEviZnw==
@@ -11204,10 +11204,10 @@ rc@^1.2.7, rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-cdn-monaco-editor@0.44.0:
-  version "0.44.0"
-  resolved "https://registry.yarnpkg.com/react-cdn-monaco-editor/-/react-cdn-monaco-editor-0.44.0.tgz#17f1d80e467bce8d0e4df5957899dcdcd14984cb"
-  integrity sha512-lWw9G4hu0DoPppg0X6wrt+a+dZ00yF1bCtBoL4KDgyQTJPQzmvgZItR9JJG29H81fzO6XalsBtWAF3aTWSd/ug==
+react-cdn-monaco-editor@0.45.0:
+  version "0.45.0"
+  resolved "https://registry.yarnpkg.com/react-cdn-monaco-editor/-/react-cdn-monaco-editor-0.45.0.tgz#d808284702b55cf0fa27c7028dd8b5f139a0f7e2"
+  integrity sha512-xRhCDcQxKFoPCCCq2/PZzEb4AZTiCU4IsaCvOr/RmKbWB7EHB6HRFA6GiTECFRzxkjF1F7BchCI9bvCSd8+CSg==
 
 react-circular-progressbar@^2.0.0:
   version "2.0.3"
