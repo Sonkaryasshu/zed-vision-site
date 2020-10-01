@@ -118,14 +118,13 @@ export const CodeBox: React.FC<{
   // const isChangeAvailable = renderedComponent.renderedContent &&
   // renderedComponent.renderedMainHash !== renderedComponent.renderedHash;
 
-  const isError = !renderedComponent.renderedContent;
   return <Container>
     {!!title && <Header>{title}</Header>}
     <CodeContainer>
       <MonacoEditor
         width="100%"
         height="100%"
-        value={starterCode}
+        value={code}
         onChange={changeCode}
       />
     </CodeContainer>
@@ -133,6 +132,14 @@ export const CodeBox: React.FC<{
       <pre>
         {renderedComponent.errorMessage.toString()}
       </pre>
+      <button
+        onClick={async () => {
+          const code = await unHash(renderedComponent.codeHash);
+          changeCode(code);
+        }}
+      >
+        Restore to the last working version
+      </button>
     </ErrorContainer>}
 
     {!renderedComponent.isError && <ResultContainer>
