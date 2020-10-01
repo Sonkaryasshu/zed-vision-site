@@ -1,6 +1,4 @@
 const path = require(`path`);
-const fs = require("fs").promises;
-const glob = require("glob");
 const { createFilePath } = require(`gatsby-source-filesystem`);
 
 exports.createPages = async ({ graphql, actions }) => {
@@ -63,12 +61,4 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       value,
     });
   }
-};
-
-exports.onCreateWebpackConfig = ({ actions }) => {
-  actions.setWebpackConfig({
-    node: {
-      fs: "empty",
-    },
-  });
 };

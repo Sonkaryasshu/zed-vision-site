@@ -22,15 +22,12 @@
   "dependencies": {
     "@ampproject/worker-dom": "^0.27.3",
     "@babel/preset-typescript": "^7.10.4",
-    "@babel/standalone": "^7.11.6",
     "@material-ui/core": "4.11.0",
     "@material-ui/icons": "4.9.1",
     "@octokit/rest": "18.0.6",
-    "array-move": "^3.0.1",
     "framer-motion": "^2.7.6",
     "html-format": "^1.0.1",
     "polished": "3.6.7",
-    "pretty": "^2.0.0",
     "prismjs": "^1.21.0",
     "react": "17.0.0-rc.2",
     "react-cdn-monaco-editor": "0.44.0",
@@ -42,10 +39,7 @@
     "react-typography": "0.16.19",
     "typography": "0.16.19",
     "typography-theme-wordpress-2016": "0.16.19",
-    "uuid": "8.3.0",
-    "vfile-message": "2.0.4",
-    "videostream": "3.2.1",
-    "webtorrent": "0.108.6"
+    "uuid": "8.3.0"
   },
   "homepage": "https://www.zed.vision",
   "keywords": [
@@ -73,7 +67,6 @@
     "@babel/plugin-syntax-jsx": "7.10.4",
     "@mdx-js/mdx": "1.6.18",
     "@mdx-js/react": "1.6.18",
-    "@types/babel__standalone": "^7.1.3",
     "@types/mdx-js__react": "^1.5.3",
     "@types/prismjs": "^1.16.1",
     "@types/react": "16.9.49",

@@ -10,10 +10,8 @@ export const render = async (
   defaultPropsHash: string,
 ) => {
   try {
-    console.log(transformedCodeHash, defaultPropsHash);
     const code = await unHash(transformedCodeHash);
     const defaultProps = await unHash(defaultPropsHash);
-
     const renderedString = await renderWorker(code, defaultProps);
     const renderedStringHash = await hash(renderedString);
 
