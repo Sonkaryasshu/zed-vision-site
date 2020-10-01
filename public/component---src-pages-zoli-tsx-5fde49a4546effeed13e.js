@@ -4323,7 +4323,7 @@ var zoli_defaultProps = {
   startState: {
     counter: 0
   },
-  pastEvents: new Array(1000).fill("+1")
+  pastEvents: new Array(8).fill("+1")
 }; // defaultProps.pastEvents= defaultProps.pastEvents.map((x)=>Math.random()>0.4?`+1`:`-1`);
 
 var _StyledDiv = Object(styled_components_browser_esm["b" /* default */])("div").withConfig({
@@ -4692,4 +4692,4 @@ module.exports = _nonIterableSpread;
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-zoli-tsx-f8833098ece21d715f09.js.map
+//# sourceMappingURL=component---src-pages-zoli-tsx-5fde49a4546effeed13e.js.map

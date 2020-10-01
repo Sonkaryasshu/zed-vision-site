@@ -246,7 +246,7 @@ interface Props {
 
 const defaultProps: Props = {
   startState: { counter: 0 },
-  pastEvents: new Array(1000).fill("+1"),
+  pastEvents: new Array(8).fill("+1"),
 };
 
 // defaultProps.pastEvents= defaultProps.pastEvents.map((x)=>Math.random()>0.4?`+1`:`-1`);
