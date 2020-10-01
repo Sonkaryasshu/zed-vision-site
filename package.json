@@ -1,10 +1,9 @@
 {
   "name": "@zed-vision/zed-vision-site",
   "scripts": {
-    "esbuild": "esbuild ./esbuild/index.jsx --bundle '--define:process.env.NODE_ENV=\"development\"' --outfile=./esbuild/out.js",
     "deploy": "deno fmt src && yarn install && yarn upgrade && yarn build && git add . && git commit -m deploy && amplify publish",
     "postinstall": "gatsby telemetry --disable",
-    "build": "gatsby clean && cp -a ./static/. ./public && gatsby build --no-uglify ",
+    "build": "gatsby clean && cp -a ./static/. ./public && gatsby build",
     "start": "yarn generate-certs && yarn gatsby develop --host 0.0.0.0 --https --cert-file .certs/localhost.cert --key-file .certs/localhost.key",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
