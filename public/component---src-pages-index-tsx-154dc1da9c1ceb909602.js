@@ -71,4 +71,3 @@ var pageQuery = "497448492";
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-index-tsx-154dc1da9c1ceb909602.js.map
