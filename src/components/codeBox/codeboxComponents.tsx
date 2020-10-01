@@ -42,8 +42,9 @@ export const ResultComponent: React.FC<
     htmlArray: string[];
     height?: number;
     width?: number;
+    onEvent: (srt: string) => void;
   }
-> = ({ height = "100%", width = "100%", htmlArray }) => {
+> = ({ height = "100%", width = "100%", htmlArray, onEvent }) => {
   const x = useMotionValue(0);
 
   const background = useTransform(
@@ -79,9 +80,7 @@ export const ResultComponent: React.FC<
           <HtmlPlayer
             htmlArray={htmlArray}
             index={x.get()}
-            onEvent={(str) => {
-              console.log(str);
-            }}
+            onEvent={(str) => onEvent(str)}
           />
         </ResultBox>
       </motion.div>

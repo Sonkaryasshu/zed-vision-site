@@ -30,13 +30,14 @@ export const CodeBox: React.FC<{
       mainCode: starterCode,
       mainCodeHash: "",
       devCodeHash: "",
-      defaultProps,
-      defaultStateHash: ``,
+      startState: defaultProps.startState,
+      pastEvents: defaultProps.pastEvents,
       codeHash: ``,
       transformedMainCode: ``,
       transformedHash: ``,
       transformedMainHash: ``,
       renderedHash: ``,
+      defaultStateHash: ``,
       renderedContent: ``,
       renderedMainHash: ``,
       renderedContentMain: ``,
@@ -69,7 +70,12 @@ export const CodeBox: React.FC<{
         return;
       }
       const transformedMainHash = await transform(mainCodeHash);
-      const defaultStateHash = await hash(renderedComponent.defaultProps);
+      const defaultStateHash = await hash(
+        {
+          startState: renderedComponent.startState,
+          pastEvents: renderedComponent.pastEvents,
+        },
+      );
       if (!transformedHash) {
         changeWorkerRenderedComponent({ ...renderedComponent, isError: true });
         return;
@@ -113,7 +119,7 @@ export const CodeBox: React.FC<{
       }
     };
     runner();
-  }, [code, renderedComponent.defaultProps]);
+  }, [code, renderedComponent.pastEvents]);
 
   // const isChangeAvailable = renderedComponent.renderedContent &&
   // renderedComponent.renderedMainHash !== renderedComponent.renderedHash;
@@ -143,7 +149,17 @@ export const CodeBox: React.FC<{
     </ErrorContainer>}
 
     {!renderedComponent.isError && <ResultContainer>
-      <ResultComponent htmlArray={[renderedComponent.renderedContent]} />
+      <ResultComponent
+        htmlArray={[renderedComponent.renderedContent]}
+        onEvent={(ev: string) => {
+          changeWorkerRenderedComponent(
+            {
+              ...renderedComponent,
+              pastEvents: [...renderedComponent.pastEvents, ev],
+            },
+          );
+        }}
+      />
     </ResultContainer>}
   </Container>;
 };
