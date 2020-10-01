@@ -7,6 +7,7 @@ import { counterExample, defaultProps } from "./example";
 import {
   Container,
   ResultContainer,
+  ErrorContainer,
   CodeContainer,
   Header,
 } from "./styledCodeBoxComps";
@@ -23,6 +24,7 @@ export const CodeBox: React.FC<{
   const [renderedComponent, changeWorkerRenderedComponent] = React.useState(
     {
       isError: false,
+      errorMessage: ``,
       code: starterCode,
       transformedCode: ``,
       mainCode: starterCode,
@@ -54,7 +56,18 @@ export const CodeBox: React.FC<{
         ? renderedComponent.mainCodeHash
         : devCodeHash;
 
-      const transformedHash = await transform(codeHash);
+      let transformedHash;
+
+      try {
+        transformedHash = await transform(codeHash);
+      } catch (e) {
+        const errorMessage = await unHash(e);
+        changeWorkerRenderedComponent(
+          { ...renderedComponent, isError: true, errorMessage },
+        );
+
+        return;
+      }
       const transformedMainHash = await transform(mainCodeHash);
       const defaultStateHash = await hash(renderedComponent.defaultProps);
       if (!transformedHash) {
@@ -79,6 +92,8 @@ export const CodeBox: React.FC<{
         changeWorkerRenderedComponent(
           {
             ...renderedComponent,
+            isError: false,
+            errorMessage: "",
             code,
             devCodeHash,
             mainCode,
@@ -100,13 +115,10 @@ export const CodeBox: React.FC<{
     runner();
   }, [code, renderedComponent.defaultProps]);
 
-  const isChangeAvailable = renderedComponent.renderedContent &&
-    renderedComponent.renderedMainHash !== renderedComponent.renderedHash;
+  // const isChangeAvailable = renderedComponent.renderedContent &&
+  // renderedComponent.renderedMainHash !== renderedComponent.renderedHash;
 
   const isError = !renderedComponent.renderedContent;
-
-  console.log(renderedComponent.renderedContent);
-
   return <Container>
     {!!title && <Header>{title}</Header>}
     <CodeContainer>
@@ -117,9 +129,14 @@ export const CodeBox: React.FC<{
         onChange={changeCode}
       />
     </CodeContainer>
+    {renderedComponent.isError && <ErrorContainer>
+      <pre>
+        {renderedComponent.errorMessage.toString()}
+      </pre>
+    </ErrorContainer>}
 
-    <ResultContainer>
+    {!renderedComponent.isError && <ResultContainer>
       <ResultComponent htmlArray={[renderedComponent.renderedContent]} />
-    </ResultContainer>
+    </ResultContainer>}
   </Container>;
 };

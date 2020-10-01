@@ -38,7 +38,7 @@ overflow: hidden;
 
 let iiiii = 0;
 
-const HtmlReplayer: React.FC<{ htmlArray: string[]; index: number }> = (
+const HtmlPlayer: React.FC<{ htmlArray: string[]; index: number }> = (
   { htmlArray, index },
 ) => {
   const [html, setHtml] = React.useState("");
@@ -100,7 +100,7 @@ export const MyComponent: React.FC<
     >
       <Styled>
         <ScopedCssBaseline>
-          <HtmlReplayer htmlArray={htmlArray} index={x.get()} />
+          <HtmlPlayer htmlArray={htmlArray} index={x.get()} />
         </ScopedCssBaseline>
       </Styled>
     </motion.div>

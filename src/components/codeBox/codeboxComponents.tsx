@@ -5,8 +5,8 @@ import {
   ResultBoxContainer,
 } from "./styledCodeBoxComps";
 
-export const HtmlReplayer: React.FC<
-  { htmlArray: string[]; index: number; onEvent: (str: string) => {} }
+export const HtmlPlayer: React.FC<
+  { htmlArray: string[]; index: number; onEvent: (str: string) => void }
 > = (
   { htmlArray, onEvent = () => {} },
 ) => {
@@ -76,7 +76,7 @@ export const ResultComponent: React.FC<
         style={{ position: "absolute", x }}
       >
         <ResultBox>
-          <HtmlReplayer
+          <HtmlPlayer
             htmlArray={htmlArray}
             index={x.get()}
             onEvent={(str) => {

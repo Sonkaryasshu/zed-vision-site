@@ -28,6 +28,19 @@ export const ResultContainer = styled.div`
     height: 220px;
 `;
 
+export const ErrorContainer = styled.div`
+    display: block;
+    width: 100%;
+    padding: 10px;
+    color: white;
+    background: red;
+    height: 220px;
+    pre{
+        font-size: 1em;
+        line-height: 1;
+    }
+`;
+
 export const ResultBox = styled.div`
   text-align: center;
   border-radius: 12px;
