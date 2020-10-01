@@ -173,41 +173,57 @@ function calcAngularFreq(undampedFreq, dampingRatio) {
   return undampedFreq * Math.sqrt(1 - dampingRatio * dampingRatio);
 }
 
+var durationKeys = ["duration", "bounce"];
+var physicsKeys = ["stiffness", "damping", "mass"];
+
+function isSpringType(options, keys) {
+  return keys.some(function (key) {
+    return options[key] !== undefined;
+  });
+}
+
+function getSpringOptions(options) {
+  var springOptions = Object(tslib__WEBPACK_IMPORTED_MODULE_0__[/* __assign */ "a"])({
+    velocity: 0.0,
+    stiffness: 100,
+    damping: 10,
+    mass: 1.0,
+    isResolvedFromDuration: false
+  }, options);
+
+  if (!isSpringType(options, physicsKeys) && isSpringType(options, durationKeys)) {
+    var derived = findSpring(options);
+    springOptions = Object(tslib__WEBPACK_IMPORTED_MODULE_0__[/* __assign */ "a"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__[/* __assign */ "a"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__[/* __assign */ "a"])({}, springOptions), derived), {
+      velocity: 0.0,
+      mass: 1.0
+    });
+    springOptions.isResolvedFromDuration = true;
+  }
+
+  return springOptions;
+}
+
 function spring(_a) {
   var _b = _a.from,
       from = _b === void 0 ? 0.0 : _b,
       _c = _a.to,
       to = _c === void 0 ? 1.0 : _c,
-      _d = _a.velocity,
-      velocity = _d === void 0 ? 0.0 : _d,
-      _e = _a.stiffness,
-      stiffness = _e === void 0 ? 100 : _e,
-      _f = _a.damping,
-      damping = _f === void 0 ? 10 : _f,
-      _g = _a.mass,
-      mass = _g === void 0 ? 1.0 : _g,
-      _h = _a.restSpeed,
-      restSpeed = _h === void 0 ? 2 : _h,
+      _d = _a.restSpeed,
+      restSpeed = _d === void 0 ? 2 : _d,
       restDelta = _a.restDelta,
-      duration = _a.duration,
-      bounce = _a.bounce;
-  var isResolvedFromDuration = false;
+      options = Object(tslib__WEBPACK_IMPORTED_MODULE_0__[/* __rest */ "d"])(_a, ["from", "to", "restSpeed", "restDelta"]);
+
   var state = {
     done: false,
     value: from
   };
 
-  if (duration !== undefined || bounce !== undefined) {
-    isResolvedFromDuration = true;
-    var derived = findSpring({
-      duration: duration,
-      bounce: bounce
-    });
-    stiffness = derived.stiffness;
-    damping = derived.damping;
-    velocity = 0.0;
-    mass = 1.0;
-  }
+  var _e = getSpringOptions(options),
+      stiffness = _e.stiffness,
+      damping = _e.damping,
+      mass = _e.mass,
+      velocity = _e.velocity,
+      isResolvedFromDuration = _e.isResolvedFromDuration;
 
   var resolveSpring = zero;
   var resolveVelocity = zero;
@@ -257,7 +273,7 @@ function spring(_a) {
         var isBelowDisplacementThreshold = Math.abs(to - current) <= restDelta;
         state.done = isBelowVelocityThreshold && isBelowDisplacementThreshold;
       } else {
-        state.done = t >= duration;
+        state.done = t >= options.duration;
       }
 
       state.value = state.done ? to : current;
@@ -1246,7 +1262,7 @@ var steps = function steps(_steps, direction) {
 
 /***/ }),
 
-/***/ 18:
+/***/ 20:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -2001,15 +2017,15 @@ try {
 
 /***/ }),
 
-/***/ 21:
+/***/ 24:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(18);
+module.exports = __webpack_require__(20);
 
 
 /***/ }),
 
-/***/ 22:
+/***/ 25:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2058,11 +2074,11 @@ function _asyncToGenerator(fn) {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return hash; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return unHash; });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(21);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(24);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(18);
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(20);
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(22);
+/* harmony import */ var _babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(25);
 /* harmony import */ var _sha256_sha256_worker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(162);
 /* harmony import */ var _sha256_sha256_worker__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_sha256_sha256_worker__WEBPACK_IMPORTED_MODULE_3__);
 
@@ -3266,4 +3282,4 @@ var complex = {
 /***/ })
 
 }]);
-//# sourceMappingURL=715f5546e37d2c505584ca6adcdb057a0e15a901-bf9bd3c5d2f742184edf.js.map
+//# sourceMappingURL=715f5546e37d2c505584ca6adcdb057a0e15a901-6dad12efe9f486ace3b2.js.map

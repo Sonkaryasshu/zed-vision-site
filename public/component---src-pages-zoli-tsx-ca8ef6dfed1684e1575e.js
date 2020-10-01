@@ -3843,20 +3843,20 @@ __webpack_require__.d(__webpack_exports__, "MyComponent", function() { return /*
 __webpack_require__.d(__webpack_exports__, "default", function() { return /* binding */ Page; });
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js + 2 modules
-var toConsumableArray = __webpack_require__(19);
+var toConsumableArray = __webpack_require__(18);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/defineProperty.js
 var defineProperty = __webpack_require__(8);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/regenerator/index.js
-var regenerator = __webpack_require__(21);
+var regenerator = __webpack_require__(24);
 var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
 
 // EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
-var runtime = __webpack_require__(18);
+var runtime = __webpack_require__(20);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js
-var asyncToGenerator = __webpack_require__(22);
+var asyncToGenerator = __webpack_require__(25);
 
 // EXTERNAL MODULE: ./node_modules/react/jsx-runtime.js
 var jsx_runtime = __webpack_require__(2);
@@ -4057,9 +4057,6 @@ var framer_motion_es = __webpack_require__(54);
 
 // CONCATENATED MODULE: ./node_modules/react-cdn-monaco-editor/lib/editor.js
 
-
-
-
 var editor_MonacoEditor = function MonacoEditor(_ref) {
   var _ref$width = _ref.width,
       width = _ref$width === void 0 ? "600px" : _ref$width,
@@ -4073,41 +4070,14 @@ var editor_MonacoEditor = function MonacoEditor(_ref) {
       onChange = _ref$onChange === void 0 ? function (_code) {} : _ref$onChange;
   react_default.a.useEffect(function () {
     if (typeof window === "undefined") return;
-
-    var init = /*#__PURE__*/function () {
-      var _ref2 = Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regenerator_default.a.mark(function _callee() {
-        var monaco;
-        return regenerator_default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return startMonaco({
-                  element: "container",
-                  value: value,
-                  language: language,
-                  onChange: onChange
-                });
-
-              case 2:
-                monaco = _context.sent;
-                console.log(monaco);
-
-              case 4:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }));
-
-      return function init() {
-        return _ref2.apply(this, arguments);
-      };
-    }();
-
-    init();
-  });
+    console.log("START MONACOOOO");
+    startMonaco({
+      element: "container",
+      value: value,
+      language: language,
+      onChange: onChange
+    });
+  }, [value, language]);
   return react_default.a.createElement("div", {
     id: "container",
     style: {
@@ -4117,24 +4087,18 @@ var editor_MonacoEditor = function MonacoEditor(_ref) {
   });
 };
 
-var startMonaco = function startMonaco(_ref3) {
-  var _ref3$version = _ref3.version,
-      version = _ref3$version === void 0 ? "0.21.2" : _ref3$version,
-      _ref3$element = _ref3.element,
-      element = _ref3$element === void 0 ? "container" : _ref3$element,
-      _ref3$value = _ref3.value,
-      value = _ref3$value === void 0 ? "" : _ref3$value,
-      _ref3$language = _ref3.language,
-      language = _ref3$language === void 0 ? "typescript" : _ref3$language,
-      _ref3$onChange = _ref3.onChange,
-      onChange = _ref3$onChange === void 0 ? function (_code) {} : _ref3$onChange;
-  return new Function("version", "element", "value", "language", "onChange", "\nconst startMonaco = async ({version, element, value, language, onChange}) => {\n  const vsPath = 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/".concat(version, "/min/vs';\n  await loadScript('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/").concat(version, "/min/vs/loader.min.js');\n\n  require.config({ paths: { 'vs': vsPath } });\n  \n  require([\"vs/editor/editor.main\"], function () {\n    const editor = monaco.editor.create(document.getElementById(\"container\"), {\n      value: `").concat(value, "`,\n      language: `").concat(language, "`,\n      theme: 'vs-dark'\n    });\n\n    editor.onDidChangeModelContent((event)=>(").concat(onChange, ")(editor.getValue()))\n  });\n}\n\nreturn startMonaco({version, element, value, language, onChange})\nfunction loadScript(src) {\n  return new Promise(function (resolve, reject) {\n    var s;\n    s = document.createElement('script');\n    s.src = src;\n    s.onload = resolve;\n    s.onerror = reject;\n    document.head.appendChild(s);\n  });\n}\n"))({
-    version: version,
-    element: element,
-    value: value,
-    language: language,
-    onChange: onChange
-  });
+var startMonaco = function startMonaco(_ref2) {
+  var _ref2$version = _ref2.version,
+      version = _ref2$version === void 0 ? "0.21.2" : _ref2$version,
+      _ref2$element = _ref2.element,
+      element = _ref2$element === void 0 ? "container" : _ref2$element,
+      _ref2$value = _ref2.value,
+      value = _ref2$value === void 0 ? "" : _ref2$value,
+      _ref2$language = _ref2.language,
+      language = _ref2$language === void 0 ? "typescript" : _ref2$language,
+      _ref2$onChange = _ref2.onChange,
+      onChange = _ref2$onChange === void 0 ? function (_code) {} : _ref2$onChange;
+  return new Function("version", "element", "value", "language", "onChange", "\nconst startMonaco = async ({version, element, value, language}) => {\n  const vsPath = 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/".concat(version, "/min/vs';\n  await loadScript('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/").concat(version, "/min/vs/loader.min.js');\n\n  require.config({ paths: { 'vs': vsPath } });\n  \n  require([\"vs/editor/editor.main\"], function () {\n    const editor = monaco.editor.create(document.getElementById(\"container\"), {\n      value: `").concat(value, "`,\n      language: `").concat(language, "`,\n      theme: 'vs-dark'\n    });\n\n    editor.onDidChangeModelContent((event)=>onChange(editor.getValue()))\n  });\n}\n\nreturn startMonaco({version, element, value, language})\nfunction loadScript(src) {\n  return new Promise(function (resolve, reject) {\n    var s;\n    s = document.createElement('script');\n    s.src = src;\n    s.onload = resolve;\n    s.onerror = reject;\n    document.head.appendChild(s);\n  });\n}\n"))(version, element, value, language, onChange);
 };
 // CONCATENATED MODULE: ./node_modules/react-cdn-monaco-editor/lib/index.js
 
@@ -4677,4 +4641,4 @@ function Page() {
 /***/ })
 
 }]);
-//# sourceMappingURL=component---src-pages-zoli-tsx-e12e95680a7767a2d68f.js.map
+//# sourceMappingURL=component---src-pages-zoli-tsx-ca8ef6dfed1684e1575e.js.map

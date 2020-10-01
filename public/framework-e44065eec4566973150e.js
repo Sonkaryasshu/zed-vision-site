@@ -503,20 +503,7 @@ module.exports = ReactPropTypesSecret;
 
 /***/ }),
 
-/***/ 2:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-if (true) {
-  module.exports = __webpack_require__(125);
-} else {}
-
-
-/***/ }),
-
-/***/ 20:
+/***/ 19:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -531,6 +518,19 @@ if (false) { var throwOnDirectAccess, ReactIs; } else {
   // http://fb.me/prop-types-in-prod
   module.exports = __webpack_require__(137)();
 }
+
+
+/***/ }),
+
+/***/ 2:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+if (true) {
+  module.exports = __webpack_require__(125);
+} else {}
 
 
 /***/ }),
@@ -571,4 +571,4 @@ if (true) {
 /***/ })
 
 }]);
-//# sourceMappingURL=framework-f137679c797eae9175ad.js.map
+//# sourceMappingURL=framework-e44065eec4566973150e.js.map

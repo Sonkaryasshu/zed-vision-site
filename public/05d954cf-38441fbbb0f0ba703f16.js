@@ -1705,15 +1705,9 @@ function isNear(value, target, maxDistance) {
 
   return Object(popmotion__WEBPACK_IMPORTED_MODULE_2__[/* distance */ "n"])(value, target) < maxDistance;
 }
-/**
- * Calculate the translate needed to be applied to source to get target
- */
 
-
-function calcTranslate(source, target, origin) {
-  var sourcePoint = Object(popmotion__WEBPACK_IMPORTED_MODULE_2__[/* mix */ "u"])(source.min, source.max, origin);
-  var targetPoint = Object(popmotion__WEBPACK_IMPORTED_MODULE_2__[/* mix */ "u"])(target.min, target.max, origin);
-  return targetPoint - sourcePoint;
+function calcLength(axis) {
+  return axis.max - axis.min;
 }
 /**
  * Calculate a transform origin relative to the source axis, between 0-1, that results
@@ -1723,8 +1717,8 @@ function calcTranslate(source, target, origin) {
 
 function calcOrigin(source, target) {
   var origin = 0.5;
-  var sourceLength = source.max - source.min;
-  var targetLength = target.max - target.min;
+  var sourceLength = calcLength(source);
+  var targetLength = calcLength(target);
 
   if (targetLength > sourceLength) {
     origin = Object(popmotion__WEBPACK_IMPORTED_MODULE_2__[/* progress */ "w"])(target.min, target.max - sourceLength, source.min);
@@ -1743,13 +1737,11 @@ function calcOrigin(source, target) {
 
 
 function updateAxisDelta(delta, source, target, origin) {
-  var sourceLength = source.max - source.min;
-  var targetLength = target.max - target.min;
   delta.origin = origin === undefined ? calcOrigin(source, target) : origin;
   delta.originPoint = Object(popmotion__WEBPACK_IMPORTED_MODULE_2__[/* mix */ "u"])(source.min, source.max, delta.origin);
-  delta.scale = targetLength / sourceLength;
+  delta.scale = calcLength(target) / calcLength(source);
   if (isNear(delta.scale, 1, 0.0001)) delta.scale = 1;
-  delta.translate = calcTranslate(source, target, delta.origin);
+  delta.translate = Object(popmotion__WEBPACK_IMPORTED_MODULE_2__[/* mix */ "u"])(target.min, target.max, delta.origin) - delta.originPoint;
   if (isNear(delta.translate)) delta.translate = 0;
 }
 /**
@@ -8882,4 +8874,4 @@ function useAnimatedState(initialState) {
 /***/ })
 
 }]);
-//# sourceMappingURL=05d954cf-f068351b864b7316aaf5.js.map
+//# sourceMappingURL=05d954cf-38441fbbb0f0ba703f16.js.map
