@@ -11125,10 +11125,5 @@ function styles_withStyles_withStyles(stylesOrCreator, options) {
 
 /***/ })
 
-<<<<<<< HEAD:public/app-5b521e6681264cdde87b.js
 },[[677,6,18]]]);
 //# sourceMappingURL=app-5b521e6681264cdde87b.js.map
-=======
-},[[672,6,17]]]);
-//# sourceMappingURL=app-898d747aed1141c650b8.js.map
->>>>>>> 6126c9b8b3f15725c1982f814a4931e99a1c5e6c:public/app-898d747aed1141c650b8.js

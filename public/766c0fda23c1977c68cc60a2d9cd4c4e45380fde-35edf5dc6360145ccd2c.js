@@ -105,7 +105,6 @@ var runtime = (function (exports) {
     IteratorPrototype = NativeIteratorPrototype;
   }
 
-<<<<<<< HEAD:public/766c0fda23c1977c68cc60a2d9cd4c4e45380fde-234d89bdecb93453866f.js
   var Gp = GeneratorFunctionPrototype.prototype =
     Generator.prototype = Object.create(IteratorPrototype);
   GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
@@ -125,59 +124,6 @@ var runtime = (function (exports) {
       });
     });
   }
-=======
-var durationKeys = ["duration", "bounce"];
-var physicsKeys = ["stiffness", "damping", "mass"];
-
-function isSpringType(options, keys) {
-  return keys.some(function (key) {
-    return options[key] !== undefined;
-  });
-}
-
-function getSpringOptions(options) {
-  var springOptions = Object(tslib__WEBPACK_IMPORTED_MODULE_0__[/* __assign */ "a"])({
-    velocity: 0.0,
-    stiffness: 100,
-    damping: 10,
-    mass: 1.0,
-    isResolvedFromDuration: false
-  }, options);
-
-  if (!isSpringType(options, physicsKeys) && isSpringType(options, durationKeys)) {
-    var derived = findSpring(options);
-    springOptions = Object(tslib__WEBPACK_IMPORTED_MODULE_0__[/* __assign */ "a"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__[/* __assign */ "a"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__[/* __assign */ "a"])({}, springOptions), derived), {
-      velocity: 0.0,
-      mass: 1.0
-    });
-    springOptions.isResolvedFromDuration = true;
-  }
-
-  return springOptions;
-}
-
-function spring(_a) {
-  var _b = _a.from,
-      from = _b === void 0 ? 0.0 : _b,
-      _c = _a.to,
-      to = _c === void 0 ? 1.0 : _c,
-      _d = _a.restSpeed,
-      restSpeed = _d === void 0 ? 2 : _d,
-      restDelta = _a.restDelta,
-      options = Object(tslib__WEBPACK_IMPORTED_MODULE_0__[/* __rest */ "d"])(_a, ["from", "to", "restSpeed", "restDelta"]);
-
-  var state = {
-    done: false,
-    value: from
-  };
-
-  var _e = getSpringOptions(options),
-      stiffness = _e.stiffness,
-      damping = _e.damping,
-      mass = _e.mass,
-      velocity = _e.velocity,
-      isResolvedFromDuration = _e.isResolvedFromDuration;
->>>>>>> 6126c9b8b3f15725c1982f814a4931e99a1c5e6c:public/715f5546e37d2c505584ca6adcdb057a0e15a901-6dad12efe9f486ace3b2.js
 
   exports.isGeneratorFunction = function(genFun) {
     var ctor = typeof genFun === "function" && genFun.constructor;
@@ -242,21 +188,11 @@ function spring(_a) {
 
     var previousPromise;
 
-<<<<<<< HEAD:public/766c0fda23c1977c68cc60a2d9cd4c4e45380fde-234d89bdecb93453866f.js
     function enqueue(method, arg) {
       function callInvokeWithMethodAndArg() {
         return new PromiseImpl(function(resolve, reject) {
           invoke(method, arg, resolve, reject);
         });
-=======
-      if (!isResolvedFromDuration) {
-        var currentVelocity = resolveVelocity(t) * 1000;
-        var isBelowVelocityThreshold = Math.abs(currentVelocity) <= restSpeed;
-        var isBelowDisplacementThreshold = Math.abs(to - current) <= restDelta;
-        state.done = isBelowVelocityThreshold && isBelowDisplacementThreshold;
-      } else {
-        state.done = t >= options.duration;
->>>>>>> 6126c9b8b3f15725c1982f814a4931e99a1c5e6c:public/715f5546e37d2c505584ca6adcdb057a0e15a901-6dad12efe9f486ace3b2.js
       }
 
       return previousPromise =
@@ -1000,41 +936,57 @@ function calcAngularFreq(undampedFreq, dampingRatio) {
   return undampedFreq * Math.sqrt(1 - dampingRatio * dampingRatio);
 }
 
+var durationKeys = ["duration", "bounce"];
+var physicsKeys = ["stiffness", "damping", "mass"];
+
+function isSpringType(options, keys) {
+  return keys.some(function (key) {
+    return options[key] !== undefined;
+  });
+}
+
+function getSpringOptions(options) {
+  var springOptions = Object(tslib__WEBPACK_IMPORTED_MODULE_0__[/* __assign */ "a"])({
+    velocity: 0.0,
+    stiffness: 100,
+    damping: 10,
+    mass: 1.0,
+    isResolvedFromDuration: false
+  }, options);
+
+  if (!isSpringType(options, physicsKeys) && isSpringType(options, durationKeys)) {
+    var derived = findSpring(options);
+    springOptions = Object(tslib__WEBPACK_IMPORTED_MODULE_0__[/* __assign */ "a"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__[/* __assign */ "a"])(Object(tslib__WEBPACK_IMPORTED_MODULE_0__[/* __assign */ "a"])({}, springOptions), derived), {
+      velocity: 0.0,
+      mass: 1.0
+    });
+    springOptions.isResolvedFromDuration = true;
+  }
+
+  return springOptions;
+}
+
 function spring(_a) {
   var _b = _a.from,
       from = _b === void 0 ? 0.0 : _b,
       _c = _a.to,
       to = _c === void 0 ? 1.0 : _c,
-      _d = _a.velocity,
-      velocity = _d === void 0 ? 0.0 : _d,
-      _e = _a.stiffness,
-      stiffness = _e === void 0 ? 100 : _e,
-      _f = _a.damping,
-      damping = _f === void 0 ? 10 : _f,
-      _g = _a.mass,
-      mass = _g === void 0 ? 1.0 : _g,
-      _h = _a.restSpeed,
-      restSpeed = _h === void 0 ? 2 : _h,
+      _d = _a.restSpeed,
+      restSpeed = _d === void 0 ? 2 : _d,
       restDelta = _a.restDelta,
-      duration = _a.duration,
-      bounce = _a.bounce;
-  var isResolvedFromDuration = false;
+      options = Object(tslib__WEBPACK_IMPORTED_MODULE_0__[/* __rest */ "d"])(_a, ["from", "to", "restSpeed", "restDelta"]);
+
   var state = {
     done: false,
     value: from
   };
 
-  if (duration !== undefined || bounce !== undefined) {
-    isResolvedFromDuration = true;
-    var derived = findSpring({
-      duration: duration,
-      bounce: bounce
-    });
-    stiffness = derived.stiffness;
-    damping = derived.damping;
-    velocity = 0.0;
-    mass = 1.0;
-  }
+  var _e = getSpringOptions(options),
+      stiffness = _e.stiffness,
+      damping = _e.damping,
+      mass = _e.mass,
+      velocity = _e.velocity,
+      isResolvedFromDuration = _e.isResolvedFromDuration;
 
   var resolveSpring = zero;
   var resolveVelocity = zero;
@@ -1084,7 +1036,7 @@ function spring(_a) {
         var isBelowDisplacementThreshold = Math.abs(to - current) <= restDelta;
         state.done = isBelowVelocityThreshold && isBelowDisplacementThreshold;
       } else {
-        state.done = t >= duration;
+        state.done = t >= options.duration;
       }
 
       state.value = state.done ? to : current;
@@ -3203,8 +3155,4 @@ var complex = {
 /***/ })
 
 }]);
-<<<<<<< HEAD:public/766c0fda23c1977c68cc60a2d9cd4c4e45380fde-234d89bdecb93453866f.js
-//# sourceMappingURL=766c0fda23c1977c68cc60a2d9cd4c4e45380fde-234d89bdecb93453866f.js.map
-=======
-//# sourceMappingURL=715f5546e37d2c505584ca6adcdb057a0e15a901-6dad12efe9f486ace3b2.js.map
->>>>>>> 6126c9b8b3f15725c1982f814a4931e99a1c5e6c:public/715f5546e37d2c505584ca6adcdb057a0e15a901-6dad12efe9f486ace3b2.js
+//# sourceMappingURL=766c0fda23c1977c68cc60a2d9cd4c4e45380fde-35edf5dc6360145ccd2c.js.map

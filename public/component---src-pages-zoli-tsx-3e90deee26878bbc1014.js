@@ -4655,8 +4655,4 @@ var _createEmotion = create_emotion_browser_esm(),
 /***/ })
 
 }]);
-<<<<<<< HEAD:public/component---src-pages-zoli-tsx-3e90deee26878bbc1014.js
 //# sourceMappingURL=component---src-pages-zoli-tsx-3e90deee26878bbc1014.js.map
-=======
-//# sourceMappingURL=component---src-pages-zoli-tsx-ca8ef6dfed1684e1575e.js.map
->>>>>>> 6126c9b8b3f15725c1982f814a4931e99a1c5e6c:public/component---src-pages-zoli-tsx-ca8ef6dfed1684e1575e.js
