@@ -34,7 +34,7 @@ worker.onmessage = async (message: any) => {
 export const transform = async (codeHash: string) => {
   const code = await unHash(codeHash);
 
-  if (typeof cache[codeHash] === "string") return cache[codeHash];
+  if (typeof cache[codeHash] === "string") return cache[codeHash] as string;
   if (typeof cache[codeHash] === "undefined") {
     worker.postMessage({ hash: codeHash, code });
     const returnPromise = new Promise<string>((resolve, reject) => {

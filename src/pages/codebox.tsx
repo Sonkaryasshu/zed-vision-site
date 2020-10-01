@@ -9,6 +9,6 @@ export default function Page() {
     <SEO title="Code Box" />
     <h1>Code box</h1>
     <p>Lets see!</p>
-    <CodeBox />
+    <CodeBox title="Example1 :)" />
   </Layout>;
 }
