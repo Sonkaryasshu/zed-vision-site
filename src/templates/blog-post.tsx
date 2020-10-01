@@ -8,14 +8,14 @@ import { rhythm, scale } from "../components/utils/typography";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import styled from "styled-components";
 
-import { CodeEditor } from "../components/codeEditor/CodeEditor";
+import { CodeBox } from "../components/codeBox/CodeBox";
 import { MDXProvider } from "@mdx-js/react";
 
 const components = {
   pre: function PreComp(props: any) {
     return <div {...props} />;
   },
-  code: CodeEditor,
+  code: CodeBox,
 };
 
 const StyledHeader = styled.h1`

@@ -104,6 +104,7 @@ export const CodeBox: React.FC<{
   className?: string;
   title?: string;
 }> = ({ live, toRender, className, title }) => {
+  if (typeof window === undefined) return <pre>Loading</pre>;
   const [renderedComponent, changeWorkerRenderedComponent] = React.useState(
     {
       isError: false,
