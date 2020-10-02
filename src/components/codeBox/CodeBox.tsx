@@ -44,6 +44,9 @@ export const CodeBox: React.FC<{
     },
   );
   const [code, changeCode] = React.useState(starterCode);
+  const [htmlArray, setHtmlArray] = React.useState<string[]>(
+    [],
+  );
 
   React.useEffect(() => {
     const runner = async () => {
@@ -95,6 +98,9 @@ export const CodeBox: React.FC<{
       const runnerHash2 = await hash(renderedComponent);
 
       if (runnerHash === runnerHash2) {
+        if (htmlArray.length === 0 || renderedContent !== htmlArray[0]) {
+          setHtmlArray([renderedContent, ...htmlArray]);
+        }
         changeWorkerRenderedComponent(
           {
             ...renderedComponent,
@@ -117,16 +123,10 @@ export const CodeBox: React.FC<{
           },
         );
       }
-      if (renderedComponent.renderedContent !== htmlArray[0]) {
-        setHtmlArray([renderedComponent.renderedContent, ...htmlArray]);
-      }
     };
     runner();
   }, [code, renderedComponent.pastEvents]);
 
-  const [htmlArray, setHtmlArray] = React.useState(
-    [renderedComponent.renderedContent],
-  );
   // const isChangeAvailable = renderedComponent.renderedContent &&
   // renderedComponent.renderedMainHash !== renderedComponent.renderedHash;
 
@@ -155,8 +155,11 @@ export const CodeBox: React.FC<{
     </ErrorContainer>}
 
     {!renderedComponent.isError && <ResultContainer>
-      <ResultComponent
+      {renderedComponent.renderedHash}
+      {htmlArray.length && <ResultComponent
+        key={renderedComponent.renderedHash}
         htmlArray={htmlArray}
+        pastEvents={renderedComponent.pastEvents}
         onEvent={(ev: string) => {
           changeWorkerRenderedComponent(
             {
@@ -165,7 +168,7 @@ export const CodeBox: React.FC<{
             },
           );
         }}
-      />
+      />}
     </ResultContainer>}
   </Container>;
 };

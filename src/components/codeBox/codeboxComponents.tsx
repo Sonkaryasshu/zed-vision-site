@@ -42,6 +42,7 @@ export const ResultComponent: React.FC<
   {
     htmlArray: string[];
     height?: number;
+    pastEvents: string[];
     width?: number;
     onEvent: (srt: string) => void;
   }
@@ -79,8 +80,14 @@ export const ResultComponent: React.FC<
           let newIndex = Math.floor(
             (htmlArray.length * (event.clientX - 200)) / 1000,
           );
-          if (newIndex < 0) newIndex = 0;
-          if (newIndex > htmlArray.length - 1) newIndex = htmlArray.length - 1;
+          if (newIndex < 0) {
+            setIndexToShow(0);
+            return;
+          }
+          if (newIndex > htmlArray.length - 1) {
+            setIndexToShow(htmlArray.length - 1);
+            return;
+          }
           setIndexToShow(newIndex);
         }}
         // if (event.layerX<0) adjust(event.layerX, event.layerY);}
