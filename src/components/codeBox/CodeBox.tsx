@@ -117,10 +117,16 @@ export const CodeBox: React.FC<{
           },
         );
       }
+      if (renderedComponent.renderedContent !== htmlArray[0]) {
+        setHtmlArray([renderedComponent.renderedContent, ...htmlArray]);
+      }
     };
     runner();
   }, [code, renderedComponent.pastEvents]);
 
+  const [htmlArray, setHtmlArray] = React.useState(
+    [renderedComponent.renderedContent],
+  );
   // const isChangeAvailable = renderedComponent.renderedContent &&
   // renderedComponent.renderedMainHash !== renderedComponent.renderedHash;
 
@@ -150,7 +156,7 @@ export const CodeBox: React.FC<{
 
     {!renderedComponent.isError && <ResultContainer>
       <ResultComponent
-        htmlArray={[renderedComponent.renderedContent]}
+        htmlArray={htmlArray}
         onEvent={(ev: string) => {
           changeWorkerRenderedComponent(
             {
