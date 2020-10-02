@@ -27,6 +27,7 @@ export const HtmlPlayer: React.FC<
   console.log("HTML Array", htmlArray);
 
   return <ResultBoxContainer>
+    <p>{indexToShow}</p>
     <div
       onClick={(e: any) => {
         const clickEvent = e.target.getAttribute("data-onclick");
@@ -74,7 +75,7 @@ export const ResultComponent: React.FC<
         // dragListener={true}
         onDrag={(event: any, info) => {
           // const htmlArray = new Array(100).fill(100);
-          console.log(event.clientX - 200);
+          // console.log(event.clientX - 200);
           let newIndex = Math.floor(
             (htmlArray.length * (event.clientX - 200)) / 1000,
           );

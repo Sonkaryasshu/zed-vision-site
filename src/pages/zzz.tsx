@@ -1,5 +1,4 @@
 import React from "react";
-import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline";
 import styled, { css } from "styled-components";
 import { hash } from "../components/utils/sha";
 // import { CounterTS } from "../components/Counter";
@@ -10,8 +9,6 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
-import { TextareaAutosize } from "@material-ui/core";
-
 const Styled = styled.div`
   text-align: center;
   border-radius: 12px;
@@ -34,7 +31,7 @@ height: 150px;
 overflow: hidden;
 `;
 
-const StyledTextArea = styled(TextareaAutosize)`
+const StyledTextArea = styled.textarea`
 width: 100%;
 max-height: 100%;
 `;
@@ -48,8 +45,6 @@ const Sha256Writer: React.FC<{ onNew: (hash: string) => void }> = (
   return <DivContainer>
     <p>Start to type</p>
     <StyledTextArea
-      rowsMin={3}
-      rowsMax={3}
       onChange={async (e) => {
         const textContent = e.target.value;
         const sha256Hash = await hash(textContent);
@@ -98,9 +93,7 @@ export const MyComponent: React.FC<
       style={{ position: "absolute", x }}
     >
       <Styled>
-        <ScopedCssBaseline>
-          <Sha256Writer onNew={(hash) => console.log(hash)} />
-        </ScopedCssBaseline>
+        <Sha256Writer onNew={(hash) => console.log(hash)} />
       </Styled>
     </motion.div>
   </>);

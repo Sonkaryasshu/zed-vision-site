@@ -1,17 +1,17 @@
-import * as React from "react";
+import React from "react";
 import styled, { css } from "styled-components";
 import { hash, unHash } from "../components/utils/sha";
 import { transform } from "../components/utils/babel";
 import { render } from "../components/utils/renderer";
 import ReactDiffViewer from "react-diff-viewer";
 import format from "html-format";
-import ScopedCssBaseline from "@material-ui/core/ScopedCssBaseline";
 
 import {
   motion,
   useMotionValue,
   useTransform,
 } from "framer-motion";
+
 import { MonacoEditor } from "react-cdn-monaco-editor";
 
 const Styled = styled.div`
@@ -99,9 +99,7 @@ export const MyComponent: React.FC<
       style={{ position: "absolute", x }}
     >
       <Styled>
-        <ScopedCssBaseline>
-          <HtmlPlayer htmlArray={htmlArray} index={x.get()} />
-        </ScopedCssBaseline>
+        <HtmlPlayer htmlArray={htmlArray} index={x.get()} />
       </Styled>
     </motion.div>
   </>);
